@@ -1,0 +1,34 @@
+/**
+ * Fonts SCSS
+ */
+
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i');
+
+
+
+/* Fonts Variable */
+$roboto-regular: 'Roboto Regular';
+$roboto-bold: 'roboto Bold';
+$roboto-bold-italic: 'roboto Italic';
+
+
+
+
+@font-face {
+  font-family: $roboto-regular;
+  src: $roboto-regular;
+}
+@font-face {
+  font-family: $roboto-bold;
+  src: $roboto-bold;
+}
+@font-face {
+  font-family: $roboto-bold-italic;
+  src: $roboto-bold-italic;
+}
+
+body {
+  ion-app.app-root {
+    font-family: 'Roboto', sans-serif;
+  }
+}

@@ -1,0 +1,33 @@
+page-promocao {
+    .box-size{
+        position: relative;
+        box-sizing: content-box;    
+        width: 95%;
+        height: 180px;
+    }
+    div.absolute{
+        position: absolute;
+        bottom: 0px;
+        font-size: 20px;
+        right: 0;
+        padding: 10px;
+        
+        
+    }
+    div.absolute-2{
+        position: absolute;
+        top: 0px;
+        font-size: 20px;
+        right: 0;
+        padding: 10px; 
+    }
+
+    .overlay {
+        top: 0;
+        bottom:0;
+        height: 100%;
+        position: absolute;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+      }
+}

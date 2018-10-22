@@ -1,0 +1,41 @@
+
+<ion-header>
+
+  <ion-navbar color="secondary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title text-center>Promoção</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="onSearch()">
+        <ion-icon name="ios-search-outline"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content margin-top class="gray-bg">
+  <ion-list  class="card-background-page">
+    
+      <ion-card class="card box-size">
+            <img src="assets/imgs/frutaseverduras.jpg" class="overlay" alt="">
+            <div class="absolute">
+                <ion-icon class="icon-model" name="ios-heart-outline"></ion-icon>
+            </div> 
+            <div class="absolute-2">
+              <p style="color:black"><small>Válido até 13/10/2018</small></p>
+            </div>          
+      </ion-card>
+      <ion-card class="card box-size">
+          <img src="assets/imgs/frutaseverduras.jpg" class="overlay" alt="">
+          <div class="absolute">
+              <ion-icon class="icon-model" name="ios-heart-outline"></ion-icon>
+          </div> 
+          <div class="absolute-2">
+            <p style="color:black"><small>Válido até 13/10/2018</small></p>
+          </div>
+    </ion-card>
+  </ion-list>
+</ion-content>

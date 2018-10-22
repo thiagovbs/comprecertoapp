@@ -1,0 +1,42 @@
+page-sugestao {
+/*     .card-header{
+        background-color: map-get($colors, primary);
+        color: #fff;
+        
+    }
+    .card-content {
+        
+        height: 0px !important;
+    } */
+
+    .expand-wrapper {
+        transition: 0.2s linear;
+        height: 0;
+    }   
+
+    .item-margin{
+        margin-top:-10px;
+    }
+ 
+    .expanded{
+        height:200px !important;
+    }
+
+    .ion-item{
+        background-color: color($colors, gray);
+    }
+    .input-form{
+        
+        width: 100%;
+        padding: 5px;
+        border:1px solid rgba(0, 0, 0, 0.141);
+        background-color: #fff;
+    }
+    .input-form::-webkit-input-placeholder{
+        font-size: 14px;
+        color: rgba(0, 0, 0, 0.541);
+      }
+      .btn-sugestao{
+          width: 30%;
+      }
+}

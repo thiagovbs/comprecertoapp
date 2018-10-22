@@ -1,0 +1,45 @@
+page-cadastro {
+
+
+    .socialLogin {
+        
+        margin:0 auto;
+        width: 70%;
+        text-align: center;
+      }
+      .facebook{
+          
+        text-transform: initial;
+        background-color: #3b5998;
+        padding: 30px;
+        border-radius: 10px;
+      }
+      .google{
+        margin-top:100px;
+        text-transform: initial;
+        background-color: #d13d35;
+        padding: 30px;
+        border-radius: 10px;
+      }
+      .register{
+        text-transform: initial;
+        padding: 30px;
+        border-radius: 10px;
+      }
+      .container-logo {
+        display: inline-block;
+        width: 100%;
+        margin: 20px 0;
+        img {
+          max-width: 250px;
+        }
+      }
+      .overlay {
+        top: 0;
+        bottom:0;
+        position: absolute;
+        width: 100%;
+        font-size: 1.5em;
+        background: rgba(0, 0, 0, 0.7);
+      }
+}

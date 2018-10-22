@@ -1,0 +1,37 @@
+<ion-header>
+
+  <ion-navbar color="secondary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title text-center>Compre Certo</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="onSearch()">
+        <ion-icon name="ios-search-outline"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <!--list of posts-->
+  <ion-list class="list-full-border">
+    <ion-item  *ngFor="let supermercado of supermercados; let i = index" text-wrap>
+      <ion-thumbnail item-left>
+        <img class="img-rounded" src="{{ supermercado.thumb }}" alt="">
+      </ion-thumbnail>
+      <div>
+        <div>{{ supermercado.title }}</div>
+        <p class="text-sm" ion-text color="light-dark">{{supermercado.desc}}</p>
+        <a (click)="onClick(supermercado)">
+            <span class="pull-right">
+               <ion-icon [class.star-gold]="teste" name="ios-notifications-outline"></ion-icon>
+            </span>
+          </a> 
+      </div>
+     
+      
+    </ion-item>
+  </ion-list>
+</ion-content>

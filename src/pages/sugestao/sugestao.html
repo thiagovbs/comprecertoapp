@@ -1,0 +1,111 @@
+
+
+<ion-header>
+
+    <ion-navbar color="secondary">
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title text-center>Sugestão</ion-title>
+      <ion-buttons end>
+        <button ion-button (click)="onSearch()">
+          <ion-icon name="ios-search-outline"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  <ion-content class="gray-bg">
+      <ion-list >
+          <ion-item  class="gray-bg"  margin-top >
+            <ion-row (click)="expandItem(item)">
+              <ion-col col-10>
+                <h3 style="white-space: pre-wrap;">{{item.text}}
+                </h3>
+              </ion-col>
+              <ion-col col-2>
+                <span class="pull-right">
+                  <ion-icon [name]="item.expanded ? 'ios-arrow-down' : 'ios-arrow-forward'">
+                  </ion-icon>
+                </span>
+              </ion-col>
+            </ion-row>
+              <div class="expand-wrapper" [class.expanded]="item.expanded">
+                  <ion-item class="gray-bg" no-lines style="margin-top:-10px;">
+                      <input class="input-form" type="text" placeholder="Supermercado*"/>
+                  </ion-item>
+                  <ion-item class="gray-bg" no-lines style="margin-top:-10px;">
+                      <input class="input-form" type="text" placeholder="Estado*"/>
+                  </ion-item>
+                  <ion-item class="gray-bg" no-lines style="margin-top:-10px;">
+                      <input class="input-form" type="text" placeholder="Cidade*"/>
+                  </ion-item>
+                  <ion-item class="gray-bg">
+                      <button ion-button class="pull-right btn-sugestao">Enviar </button>
+                  </ion-item>
+              </div>
+            </ion-item>
+
+            <ion-item class="gray-bg"  margin-top >
+                <ion-row (click)="expandItem(item2)">
+                  <ion-col col-10>
+                    <h3 style="white-space: pre-wrap;">{{item2.text}}
+                    </h3>
+                  </ion-col>
+                  <ion-col col-2>
+                    <span class="pull-right">
+                      <ion-icon [name]="item2.expanded ? 'ios-arrow-down' : 'ios-arrow-forward'"
+                        >
+                      </ion-icon>
+                    </span>
+                  </ion-col>
+                </ion-row>
+                  <div class="expand-wrapper" [class.expanded]="item2.expanded">
+                    <form>
+                      <ion-item class="gray-bg" no-lines style="margin-top:-10px;">
+                          <input class="input-form" type="text" placeholder="Supermercado*"/>
+                      </ion-item>
+                      <ion-item no-lines class="gray-bg" no-lines style="margin-top:-10px;">
+                          <input class="input-form" type="text" placeholder="Estado*"/>
+                      </ion-item>
+                     
+                      <ion-item no-lines class="gray-bg">
+                          <button ion-button class="pull-right btn-sugestao">Enviar </button>
+                      </ion-item>
+                      
+                    </form>
+                  </div>
+                </ion-item>
+
+                <ion-item class="gray-bg"  margin-top >
+                    <ion-row (click)="expandItem(item3)">
+                      <ion-col col-10>
+                        <h3 style="white-space: pre-wrap;">{{item3.text}}
+                        </h3>
+                      </ion-col>
+                      <ion-col col-2>
+                        <span class="pull-right">
+                          <ion-icon [name]="item3.expanded ? 'ios-arrow-down' : 'ios-arrow-forward'"
+                            >
+                          </ion-icon>
+                        </span>
+                      </ion-col>
+                    </ion-row>
+                      <div class="expand-wrapper" [class.expanded]="item3.expanded">
+                        <form>
+                          <ion-item class="gray-bg" no-lines style="margin-top:-10px;">
+                              <textarea rows="5" class="input-form" type="text" placeholder="Mensagem*"></textarea>
+                          </ion-item>
+                         
+                          <ion-item class="gray-bg">
+                              <button ion-button class="pull-right btn-sugestao">Enviar </button>
+                          </ion-item>
+                          
+                        </form>
+                      </div>
+                    </ion-item>
+      </ion-list>
+
+      
+    </ion-content>

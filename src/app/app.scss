@@ -1,0 +1,329 @@
+// http://ionicframework.com/docs/theming/
+
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+// http://ionicframework.com/docs/v2/theming/
+
+// App Shared Imports
+// --------------------------------------------------
+// These are the imports which make up the design of this app.
+// By default each design mode includes these shared imports.
+// App Shared Sass variables belong in app.variables.scss.
+
+// import pages css
+
+// end import pages css
+
+// global styles
+
+.primary-bg {
+    background-color: color($colors, secondary);
+  }
+  
+  .secondary-bg {
+    background-color: color($colors,favorite );
+  }
+  
+  .gray-bg {
+    background-color: color($colors, gray);
+  }
+  
+  .light-bg {
+    background-color: color($colors, light);
+  }
+
+  .remove-bg {
+    background-color: color($colors, danger);
+  }
+  
+  
+  .padding-xs {
+    padding: 10px;
+  }
+  
+  .pull-left {
+    float: left;
+  }
+  
+  .pull-right {
+    float: right;
+  }
+  
+  .rlt {
+    position: relative;
+  }
+  
+  .clear {
+    clear: both;
+  }
+  
+  .round {
+    border-radius: 3px;
+  }
+  
+  .full-width {
+    width: 100%;
+  }
+  
+  .uppercase {
+    text-transform: uppercase;
+  }
+  
+  // text size
+  .text-2x {
+    font-size: 2em;
+  }
+  
+  .text-1x {
+    font-size: 1em;
+  }
+  
+  .text-sm {
+    font-size: 0.7em;
+  }
+  
+  // profile picture style
+  img.profile-picture {
+    width: 7em;
+    height: 7em;
+    margin-top: 0.75em;
+    border-radius: 50%;
+  }
+  
+  // card style
+  .card {
+    height:25%;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  }
+  
+  // list style
+  .list-no-border {
+  
+    .item:first-child {
+      border: none;
+    }
+    .item:last-child {
+      border: none;
+    }
+  
+    .item-inner {
+      border: none;
+    }
+  }
+  
+  .list-full-border {
+    @extend .list-no-border;
+  
+    .item,
+    .item:first-child,
+    .item:last-child {
+      border-bottom: 1px solid color($colors, border-color);
+  
+      .item-inner {
+        border: none;
+      }
+    }
+  }
+  
+  .list-ios[no-margin],
+  .list-md[no-margin],
+  .list-wp[no-margin] {
+    margin: 0;
+  }
+  
+  .list-ios[margin],
+  .list-md[margin],
+  .list-wp[margin] {
+    margin: 16px;
+  }
+  
+  // item style
+  .item.no-border {
+  
+    .item-inner {
+      border: none;
+    }
+  }
+  
+  // style for auth pages
+  .auth-bg {
+    background: url("../assets/imgs/inicial.png") no-repeat center;
+    background-size: 100% 100%;
+  
+    .scroll-content {
+      justify-content: center;
+  
+      .login-content {
+        height: 100%;
+  
+        .list-form {
+          padding: 0;
+          margin-bottom: 0;
+  
+          ion-item {
+            background: none;
+            padding: 0;
+  
+            &:first-child {
+              border-top: none;
+            }
+  
+            &:after {
+              display: none;
+            }
+  
+            ion-label {
+              font-size: 1em;
+              color: color($colors, light);
+            }
+  
+            input {
+              color: color($colors, light);
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  // list items style
+  .list-items {
+    .item-menu {
+      position: relative;
+  
+      img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+  
+      .overlay {
+        bottom: 0;
+        padding: 10px;
+        position: absolute;
+        width: 100%;
+        font-size: 1.5em;
+        background: rgba(0, 0, 0, 0.7);
+      }
+    }
+  }
+
+  // cart button group
+  .item-button-group {
+    border-bottom: 1px solid color($colors, border-color);
+  
+    button {
+      margin: 0;
+      border-radius: 0;
+  
+      .text-2x {
+        font-size: 2em;
+      }
+    }
+  }
+  
+  .shadow-row{
+    background-color: rgba(32, 32, 32, 0.1);
+    border-radius:20px; 
+    height: 20px;
+    
+}
+
+
+
+  .button-qty{ 
+    font-size: 12px;
+    
+    border-radius: 20px;
+    height: 20px;
+    padding: 6px;
+  }
+  // user profile
+  .profile-cover {
+    padding-top: 1em;
+    min-height: 260px;
+    background: url("../assets/img/bg.jpg") no-repeat center;
+    background-size: 100% auto;
+  
+    .profile-picture {
+      width: 80px;
+      height: 80px;
+    }
+  }
+  
+  // input style
+  ion-label[stacked] {
+    font-size: 1.6rem;
+  }
+  
+  // fix slider bug
+  ion-slides[pager] {
+  
+    .swiper-pagination {
+      display: block !important;
+    }
+  }
+  
+  .swiper-pagination-bullet {
+    background: color($colors, light)
+  }
+
+  .btn-sacola{
+    width: 100%;
+    font-size:9px !important;
+    border-radius: 10px;
+    height: 20px !important;
+    
+}
+
+  .btn-sacola-remove{
+    width: 100%;
+    max-height: 20px !important;
+    font-size: 9px !important;
+    border-radius: 10px;
+    padding: 10px !important;
+    background-color: color($colors, danger);
+  }
+
+  .thumb-image{
+    margin-top:10px;
+    margin-left:-10px;
+    height: 90px !important;
+    min-width: 95px !important;
+}
+
+.menu-2{
+  height: 35px;
+  width: 100%;
+  white-space: nowrap;
+  background-color: color($colors, secondary);    
+  
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 10px;
+}
+
+li {
+    color:#f8f8f8;
+    font-size: 0.78em;
+    display: inline;
+    padding: 7px 10px;
+    
+}
+li.active{
+  border-bottom: 3px solid #f8f8f8;
+}
+}

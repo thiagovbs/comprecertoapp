@@ -1,0 +1,9 @@
+<svg width="32" height="34" viewBox="0 0 32 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Group">
+<path id="Rectangle 2" fill-rule="evenodd" clip-rule="evenodd" d="M1 10C1 5.58172 4.58172 2 9 2H23C27.4183 2 31 5.58172 31 10V24C31 28.4183 27.4183 32 23 32H9C4.58172 32 1 28.4183 1 24V10Z" stroke="#00695C" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Oval" fill-rule="evenodd" clip-rule="evenodd" d="M10 14C11.6569 14 13 12.6569 13 11C13 9.34315 11.6569 8 10 8C8.34315 8 7 9.34315 7 11C7 12.6569 8.34315 14 10 14Z" stroke="#00695C" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Line" d="M16.8643 11H24.3643" stroke="#00695C" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Line Copy" d="M16.8643 23H24.3643" stroke="#00695C" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Oval Copy" fill-rule="evenodd" clip-rule="evenodd" d="M10 26C11.6569 26 13 24.6569 13 23C13 21.3431 11.6569 20 10 20C8.34315 20 7 21.3431 7 23C7 24.6569 8.34315 26 10 26Z" stroke="#00695C" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</svg>

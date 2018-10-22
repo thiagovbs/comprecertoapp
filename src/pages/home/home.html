@@ -1,0 +1,41 @@
+<ion-header>
+
+  <ion-navbar color="secondary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title text-center>Compre Certo</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="onSearch()">
+        <ion-icon name="ios-search-outline"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+ 
+</ion-header>
+
+<ion-content class=" gray-bg" >
+    <ion-scroll scrollX="true" class="menu-2" >
+        <ul>
+          <a><li class="active">Todos os Mercados</li></a> 
+          <a><li>Mercado 1</li></a> 
+          <a><li>Mercado 2</li></a> 
+          <a><li>Mercado 3</li></a> 
+          <a><li>Mercado 4</li></a> 
+          <a><li>Mercado 5</li></a> 
+          <a><li>Mercado 6</li></a> 
+          <a><li>Mercado 7</li></a> 
+          <a><li>Mercado 8</li></a> 
+          <a><li>Mercado 9</li></a> 
+        </ul> 
+    </ion-scroll>
+
+  <ion-list  class="card-background-page">
+      <ion-card class="card" *ngFor="let categoria of categorias" (click)="onSubCategoria(categoria)">
+          <img [src]="categoria.imagem"/>
+          
+        </ion-card>
+  </ion-list>
+ 
+</ion-content>
+

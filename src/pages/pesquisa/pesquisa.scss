@@ -1,0 +1,27 @@
+page-pesquisa {
+
+    .item-search{
+        background:transparent;
+        width: 85%;
+        margin: 0 auto;
+    }
+    
+    ::placeholder {
+        color: #fff !important;
+        opacity: 0.4; /* Firefox */
+    }
+    
+    :-ms-input-placeholder { /* Internet Explorer 10-11 */
+       color: #fff !important;
+    }
+    
+    ::-ms-input-placeholder { /* Microsoft Edge */
+       color: #fff !important;
+    }
+
+    .text-type{
+        font-size: .9em;
+        color:#fff;
+        
+    }
+}

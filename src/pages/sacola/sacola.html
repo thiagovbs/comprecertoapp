@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-navbar color="secondary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title text-center>Compre Certo</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="onSearch()">
+        <ion-icon name="ios-search-outline"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+  <!-- Lista dos produtos separados por mercado e categorias -->
+  <ion-content style="margin-top:-14px;"  class="cart gray-bg">     
+        <div class="ng-for">
+          
+          <!-- Fazer um ngFor para percorrer as categorias e pegar uma categoria específica 
+          e jogar dentro do sacola-item para lá percorrer os items dessa categoria -->
+          <div text-center  class="secondary-bg">
+            <p style="color:#fff"><small>Carnes e Pescados</small></p>
+          </div>
+          <ion-list style="margin-top:-13px;">
+              <sacola-item></sacola-item>
+          </ion-list>
+        </div>
+  </ion-content>
+<!--Footer button-->
+<ion-footer class="cart-footer">
+    <ion-item style="max-height:20px;">
+        <div item-left >
+          <h2>Valor Total</h2>
+        </div>
+        <div class="pull-right" >
+            <span ion-text color="primary" style="font-size:15px">R$ 80,00</span>
+        </div>
+      </ion-item>
+  </ion-footer>
