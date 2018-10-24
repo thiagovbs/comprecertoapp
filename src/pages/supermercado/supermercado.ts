@@ -1,13 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, List} from 'ionic-angular';
+import { IonicPage, NavController} from 'ionic-angular';
 import { SupermercadoService } from '../../services/supermercado.service';
-
-/**
- * Generated class for the SupermercadoPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({

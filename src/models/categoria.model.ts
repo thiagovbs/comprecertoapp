@@ -1,4 +1,4 @@
-export interface categoriaModel{
+export interface Categoria{
     id:string,
     nome:string,
     imagem:string,    

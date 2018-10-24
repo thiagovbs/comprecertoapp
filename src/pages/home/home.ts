@@ -15,7 +15,16 @@ export class HomePage {
   }
 
   ionViewDidLoad() {
-    this.categorias = this.categoriaService.getAll()
+
+    this.categoriaService.findAll()
+    .subscribe(response =>{
+      console.log(response);
+    },
+    error =>{
+      console.log(error);
+    })
+
+    //this.categorias = this.categoriaService.getAll()
     
   }
 

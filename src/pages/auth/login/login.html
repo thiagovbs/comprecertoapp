@@ -5,22 +5,28 @@
     
       <!-- Logo -->
       <div padding text-center style="padding-top:80px;">
-        <img src="assets/imgs/logomarca.svg"  height="150" alt="">
+        <img src="assets/imgs/logomarca.svg"  height="120" alt="">
       </div>
-      <form >
+      <form #form="ngForm" novalidate>
         <div class="socialLogin" padding>
-          <ion-item style="background:transparent">
-            <ion-label color="primary" class="size" floating>Digite seu email</ion-label>
-            <ion-input style="font-size: .80em"></ion-input>
+          <ion-item class="bg-transparent size">
+            <ion-label floating>Digite seu login</ion-label>
+            <ion-input name="username" ngModel required></ion-input>
           </ion-item>
-          <ion-item style="background:transparent">
-            <ion-label color="primary" class="size" floating>Digite sua senha</ion-label>
-            <ion-input type="password" style="font-size: .80em"></ion-input>
+          <ion-item class="bg-transparent size">
+            <ion-label  floating>Digite sua senha</ion-label>
+            <ion-input type="password" name="password" required ngModel></ion-input>
           </ion-item>
+          
           <button ion-button block 
           style="width:100%; float:center"
-          class="register" color="secondary" (click)="entrar()" margin-top>
+          class="register" color="secondary" [disabled]="!form.valid" (click)="loggar()" margin-top>
             Entrar
+          </button>
+          <button ion-button block 
+          style="width:100%; float:center"
+          class="register" color="secondary" (click)="cadastrar()" margin-top>
+            Cadastrar
           </button>
         </div>
       </form> 
