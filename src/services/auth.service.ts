@@ -1,34 +1,49 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders} from "@angular/common/http";
 import { UserLogin } from "../models/userLogin";
-import { Observable } from "rxjs/Rx";
+
 import { API_CONFIG } from "../config/api.config";
+import { AlertController} from "ionic-angular";
+
 
 
 @Injectable()
 export class AuthService{
 
-    constructor(public http:HttpClient){
+    jwtPayload: any;
+
+    constructor(public http:HttpClient,
+                private alertCtrl:AlertController,
+                ){
         
     }
-
+    userLogin: UserLogin;
 
     autenticar(userLogin:UserLogin){
-
-         const httpOptions = {
-            headers: new HttpHeaders({
-              'Content-Type':  'application/x-www-form-urlencoded',
-              'Authorization': 'Basic " + (angular + ":" + @ngul@r0)',
-            })
-          };
-
-          console.log(httpOptions) 
-
-        //let data= "username"+userLogin.username+"&password="+userLogin.password+"&grant_type=password";
-        
-        return this.http.post(`${API_CONFIG.authUrl}`,userLogin,  {
-            observe:'response',
-            responseType:'text'
-        });
+        const hds = new HttpHeaders({
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization': 'Basic YW5ndWxhcjpAbmd1bEByMA=='
+          });
+          const body = `username=${userLogin.username}&password=${userLogin.password}&grant_type=password`;
+        return  this.http.post(API_CONFIG.authUrl, body, {headers: hds, withCredentials:true})
+          
     }
+
+    public armazenarToken(token: string) {
+        localStorage.setItem('token', token);
+      }
+
+      private getToken() {
+        console.log(localStorage.getItem('token'));
+        return localStorage.getItem('token');
+      }
+
+      logout() {
+        this.limparAccessToken();
+      }
+
+      limparAccessToken() {
+        localStorage.removeItem('token');
+        this.jwtPayload = null;
+      }
 }

@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule} from '@angular/common/http';
 
 
 
@@ -14,7 +14,7 @@ import { CategoriaService } from '../services/categoria.service';
 import { AuthService } from '../services/auth.service';
 import { UsuarioService } from '../services/usuario.service';
 import {IonicStorageModule} from '@ionic/storage'
-import { InterceptorProvider } from '../providers/interceptor/interceptor';
+import {  ErrorInterceptorsProvider } from '../providers/interceptor/interceptor';
 
 //Components
 
@@ -41,8 +41,8 @@ import { InterceptorProvider } from '../providers/interceptor/interceptor';
 
     UsuarioService,
     CategoriaService,
-    AuthService,
-    {provide:HTTP_INTERCEPTORS, useClass:InterceptorProvider, multi:true},
+    ErrorInterceptorsProvider,
+    AuthService
   ]
 })
 export class AppModule {}

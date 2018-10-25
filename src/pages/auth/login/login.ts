@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, MenuController } from 'ionic-angular';
+import { IonicPage, NavController, MenuController, AlertController } from 'ionic-angular';
 import { UserLogin } from '../../../models/userLogin';
 import { AuthService } from '../../../services/auth.service';
 
@@ -14,26 +14,29 @@ export class LoginPage {
 
   login:UserLogin;
   
-  
-
-  constructor(public navCtrl: NavController,
-              public menu:MenuController,
-              public authService:AuthService) {
+  constructor(private navCtrl: NavController,
+              private menu:MenuController,
+              private authService:AuthService,
+              private alertCtrl:AlertController) {
     this.login ={username:"",
-                password:"",
-                acessToken:""
-              }
+                password:""  }
               
   
   }
 
-  loggar(){
-    this.authService.autenticar(this.login)
-    .subscribe(response =>{
-      console.log("ok");
-      console.log(response.headers.get('Authorization'));
-    }); 
-
+  loggar(){ 
+    this.authService.autenticar(this.login).
+    subscribe((data:any) =>{
+      this.authService.armazenarToken(data['access_token']);
+      this.navCtrl.setRoot('HomePage')
+    },error =>{
+      let alert = this.alertCtrl.create({
+          title: 'Erro',
+          message: "Usuário não encontrado",
+          buttons: ['OK']
+      });
+      alert.present();
+      });
   }
   
 

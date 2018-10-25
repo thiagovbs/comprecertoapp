@@ -1,53 +1,46 @@
-import {HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HTTP_INTERCEPTORS, HttpHeaders } from '@angular/common/http';
+import { Injectable, Injector } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
-import {_throw} from 'rxjs/observable/throw';
-import {catchError} from 'rxjs/operators';
+
+
 import { AlertController } from 'ionic-angular';
-import {Storage} from '@ionic/storage';
+import { AuthService } from '../../services/auth.service';
+
+
+
+
 @Injectable()
 export class InterceptorProvider implements HttpInterceptor{
 
-  constructor(private storage: Storage, private alertCtrl:AlertController) {
+  constructor(private alertCtrl:AlertController, private injector:Injector) {
   }
 
-  intercept(request:HttpRequest<any>, next:HttpHandler):Observable<HttpEvent<any>>{
-    let promise = this.storage.get('my_token');
+  intercept(request:HttpRequest<any>, next:HttpHandler):Observable<HttpEvent<any>> {
 
-    return Observable.fromPromise(promise)
-    .mergeMap(token =>{
-      let clonedReq = this.addToken(request,token);
-      return next.handle(clonedReq).pipe(
-        //display error for the specific status
-        catchError(error => {
-          let msg = error.message;
-          let alert =this.alertCtrl.create({
-            title: error.name,
-            message: msg,
-            buttons:['OK']
-          });
-          alert.present();
-
-          //pass the error to the caller of the function
-          return _throw(error);
-        })
-      );
-    })
-  }
-
-  private addToken(request:HttpRequest<any>, token:any){
-    if(token){
-      let clone:HttpRequest<any>;
-      clone = request.clone({
-        setHeaders:{
-          Accept:'application/json',
-          'Content-Type':'application/json',
-          Authorization:`Bearer ${token}`
-
+  
+      return next.handle(request).catch((error) =>{
+        let errorObj = error;
+        if(errorObj.error){
+          errorObj = errorObj.error;
         }
+        if(!errorObj.status){      
+          errorObj = JSON.parse(errorObj);
+        }
+        let alert = this.alertCtrl.create({
+          title: error.name,
+          message: "Requisição foi falha",
+          buttons: ['OK']
       });
-      return clone;
+      alert.present();
+      
+        return Observable.throw(error);
+  
+      }) as any
     }
-    return request;
   }
+ 
+export const ErrorInterceptorsProvider ={
+  provide: HTTP_INTERCEPTORS,
+  useClass: InterceptorProvider,
+  multi: true
 }

@@ -11,11 +11,11 @@
         <div class="socialLogin" padding>
           <ion-item class="bg-transparent size">
             <ion-label floating>Digite seu login</ion-label>
-            <ion-input name="username" ngModel required></ion-input>
+            <ion-input name="username" required [(ngModel)]="login.username"></ion-input>
           </ion-item>
           <ion-item class="bg-transparent size">
             <ion-label  floating>Digite sua senha</ion-label>
-            <ion-input type="password" name="password" required ngModel></ion-input>
+            <ion-input type="password" name="password" required [(ngModel)]="login.password"></ion-input>
           </ion-item>
           
           <button ion-button block 

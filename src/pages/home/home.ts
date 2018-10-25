@@ -16,15 +16,15 @@ export class HomePage {
 
   ionViewDidLoad() {
 
-    this.categoriaService.findAll()
+/*     this.categoriaService.findAll()
     .subscribe(response =>{
       console.log(response);
     },
     error =>{
       console.log(error);
-    })
+    }) */
 
-    //this.categorias = this.categoriaService.getAll()
+    this.categorias = this.categoriaService.getAll()
     
   }
 
