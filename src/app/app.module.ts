@@ -10,7 +10,7 @@ import { MyApp } from './app.component';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { CategoriaService } from '../services/categoria.service';
-
+import { Facebook} from '@ionic-native/facebook';
 import { AuthService } from '../services/auth.service';
 import { UsuarioService } from '../services/usuario.service';
 import {IonicStorageModule} from '@ionic/storage'
@@ -38,7 +38,7 @@ import {  ErrorInterceptorsProvider } from '../providers/interceptor/interceptor
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-
+    Facebook,
     UsuarioService,
     CategoriaService,
     ErrorInterceptorsProvider,

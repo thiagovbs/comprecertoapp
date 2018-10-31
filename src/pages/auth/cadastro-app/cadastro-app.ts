@@ -1,5 +1,5 @@
 import { Component, ContentChild } from '@angular/core';
-import { IonicPage, NavController, MenuController } from 'ionic-angular';
+import { IonicPage, NavController, MenuController, AlertController } from 'ionic-angular';
 import { FormGroup, FormBuilder, FormControlName, Validators, AbstractControl } from '@angular/forms';
 import { Usuario } from '../../../models/usuario';
 import { UsuarioService } from '../../../services/usuario.service';
@@ -29,8 +29,9 @@ export class CadastroAppPage {
 
   constructor(public navCtrl: NavController,
               public menu:MenuController,
-              public formBuilder:FormBuilder,
-              public usuarioService:UsuarioService) {
+              private formBuilder:FormBuilder,
+              private usuarioService:UsuarioService,
+              private alertCtrl: AlertController) {
 
       this.cadastroForm = this.formBuilder.group({
         nome:this.formBuilder.control('',[Validators.required, Validators.minLength(3)]),
@@ -63,7 +64,7 @@ export class CadastroAppPage {
       nome:"",
       email:"",
       login:"",
-      dtNascimento: new Date(),
+      dtNascimento: 0,
       senha:"",
       sexo:"",
     }
@@ -75,6 +76,8 @@ export class CadastroAppPage {
     let nome_form = this.cadastroForm.controls['nome'].value;
     let sexo_form = this.cadastroForm.controls['sexo'].value;
     let dtNascimento_form = this.cadastroForm.controls['dtNascimento'].value;
+    let dt_Nascimento = new Date(dtNascimento_form) 
+    var milliseconds = dt_Nascimento.getTime(); 
     let email_form = this.cadastroForm.controls['email'].value;
     let senha_form = this.cadastroForm.controls['senha'].value;
     let login_form = email_form.substring(0, email_form.lastIndexOf("@"));
@@ -83,15 +86,25 @@ export class CadastroAppPage {
       nome: nome_form,
       email: email_form,
       login: login_form,
-      dtNascimento: new Date(dtNascimento_form),
+      dtNascimento: milliseconds,
       senha: senha_form,
       sexo: sexo_form
     }
     this.usuarioService.cadastrarUsuario(this.usuario)
-    
     .subscribe(response =>{
-        console.log(response.headers.get('Authorization'));
+      console.log(response.status)
+      if(response.status){
+        let alert = this.alertCtrl.create({
+          title: 'Parabéns',
+          subTitle: 'Cadastro criado com sucesso',
+          buttons: ['OK']
+        });
+          alert.present();
+          this.navCtrl.push('LoginPage');
+      }
     },
-    error =>{});
+    error =>{
+      
+    });
   }
 }
