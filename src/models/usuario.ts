@@ -1,10 +1,11 @@
 export interface Usuario{
+    token:string
     nome:string
     email:string,
     login: string,
-    dtNascimento?: number,
     senha?:string,
+    dtNascimento?: number,
     sexo?:string,
-    permissoes?:string,
-    usuarioMercadoPushs?:string;
+    
+    
 }

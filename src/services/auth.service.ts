@@ -3,7 +3,9 @@ import { HttpClient, HttpHeaders} from "@angular/common/http";
 import { UserLogin } from "../models/userLogin";
 
 import { API_CONFIG } from "../config/api.config";
-import { AlertController} from "ionic-angular";
+import { Usuario } from "../models/usuario";
+import { UsuarioService } from "./usuario.service";
+
 
 
 
@@ -12,9 +14,7 @@ export class AuthService{
 
     jwtPayload: any;
 
-    constructor(public http:HttpClient,
-                private alertCtrl:AlertController,
-                ){
+    constructor(public http:HttpClient, public usuarioService: UsuarioService){
         
     }
     userLogin: UserLogin;
@@ -29,21 +29,20 @@ export class AuthService{
           
     }
 
-    public armazenarToken(token: string) {
-        localStorage.setItem('token', token);
-      }
+    successfullLogin(authorizationValue: string, userLogged:Usuario){
+        
+        let token_user = authorizationValue.substring(7);
+        let user:Usuario={
+            token:token_user,
+            nome: userLogged.nome,
+            email: userLogged.email,
+            login: userLogged.login
+        };
+        this.usuarioService.setLocalUser(user);
+    }
 
-      private getToken() {
-        console.log(localStorage.getItem('token'));
-        return localStorage.getItem('token');
-      }
+    logout(){
+        this.usuarioService.setLocalUser(null);
+    }
 
-      logout() {
-        this.limparAccessToken();
-      }
-
-      limparAccessToken() {
-        localStorage.removeItem('token');
-        this.jwtPayload = null;
-      }
 }

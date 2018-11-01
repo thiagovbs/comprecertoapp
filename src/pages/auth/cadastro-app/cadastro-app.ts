@@ -61,6 +61,7 @@ export class CadastroAppPage {
   ionViewWillEnter(){
 
     this.usuario = {
+      token:null,
       nome:"",
       email:"",
       login:"",
@@ -83,6 +84,7 @@ export class CadastroAppPage {
     let login_form = email_form.substring(0, email_form.lastIndexOf("@"));
      
     this.usuario ={
+      token:null,
       nome: nome_form,
       email: email_form,
       login: login_form,

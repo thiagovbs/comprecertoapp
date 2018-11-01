@@ -11,10 +11,12 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { CategoriaService } from '../services/categoria.service';
 import { Facebook} from '@ionic-native/facebook';
+import { GooglePlus } from '@ionic-native/google-plus';
 import { AuthService } from '../services/auth.service';
 import { UsuarioService } from '../services/usuario.service';
 import {IonicStorageModule} from '@ionic/storage'
 import {  ErrorInterceptorsProvider } from '../providers/interceptor/interceptor';
+import { AuthInterceptorsProvider } from '../providers/interceptor/auth.interceptor';
 
 //Components
 
@@ -39,9 +41,11 @@ import {  ErrorInterceptorsProvider } from '../providers/interceptor/interceptor
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Facebook,
+    GooglePlus,
+    AuthInterceptorsProvider,
+    ErrorInterceptorsProvider,
     UsuarioService,
     CategoriaService,
-    ErrorInterceptorsProvider,
     AuthService
   ]
 })

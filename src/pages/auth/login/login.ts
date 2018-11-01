@@ -27,7 +27,7 @@ export class LoginPage {
   loggar(){ 
     this.authService.autenticar(this.login).
     subscribe((data:any) =>{
-      this.authService.armazenarToken(data['access_token']);
+      this.authService.successfullLogin(data.access_token, data.user)
       this.navCtrl.setRoot('HomePage')
     },error =>{
       let alert = this.alertCtrl.create({

@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, MenuController } from 'ionic-angular';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 import { Usuario } from '../../../models/usuario';
+import { GooglePlus } from '@ionic-native/google-plus';
+
+import { HttpClient } from '@angular/common/http';
 
 @IonicPage()
 @Component({
@@ -12,7 +15,9 @@ export class CadastroPage {
 
   constructor(public navCtrl: NavController,
               public menu:MenuController,
-              private fb:Facebook) {
+              private fb:Facebook,
+              private googlePlus: GooglePlus,
+              private http: HttpClient) {
   }
 
   user:Usuario
@@ -25,6 +30,8 @@ export class CadastroPage {
     this.menu.swipeEnable(false);
   }
 
+
+  //Login Pelo Facebook
   fbLogin(){
     this.fb.login(['public_profile','user_friends','email'])
     .then((res:FacebookLoginResponse) =>{
@@ -32,6 +39,7 @@ export class CadastroPage {
         this.fb.api('me?fields=id,name,email', [])
         .then(profile => {
           this.user = {
+            token: null,
             email: profile['email'],
             nome: profile['name'],
             login: profile['email'],
@@ -48,7 +56,31 @@ export class CadastroPage {
       }
       
     }).catch(e => console.log('erro para logar no facebook', e))
+  }
 
-    
+
+  //Login pelo Google Plus
+  googleLogin(){
+    this.googlePlus.login({
+    })
+    .then(res => {
+      this.getData(res.accessToken);
+    })
+    .catch(err => console.error(err));
+  }
+
+  
+  getData(token){
+    this.http.get('https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token='+ token)
+    .subscribe((data:any) => {
+      console.log(data);
+      this.user={
+        token: token,
+        nome: data.name,
+        login:data.email,
+        senha:data.id,
+        email:data.email
+      }
+    })
   }
 }

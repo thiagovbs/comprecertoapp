@@ -1,10 +1,7 @@
-import {HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HTTP_INTERCEPTORS, HttpHeaders } from '@angular/common/http';
+import {HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { Injectable, Injector } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
-
-
-import { AlertController } from 'ionic-angular';
-import { AuthService } from '../../services/auth.service';
+import { UsuarioService } from '../../services/usuario.service';
 
 
 
@@ -12,32 +9,26 @@ import { AuthService } from '../../services/auth.service';
 @Injectable()
 export class InterceptorProvider implements HttpInterceptor{
 
-  constructor(private alertCtrl:AlertController, private injector:Injector) {
+  constructor(private usuarioService:UsuarioService) {
   }
 
   intercept(request:HttpRequest<any>, next:HttpHandler):Observable<HttpEvent<any>> {
 
-  
-      return next.handle(request).catch((error) =>{
-        let errorObj = error;
-        if(errorObj.error){
-          errorObj = errorObj.error;
+      return next.handle(request)
+      .catch((error, caught) =>{
+        let erroObj = error;
+        if(erroObj.error){
+          erroObj = erroObj.error;
         }
-        if(!errorObj.status){      
-          errorObj = JSON.parse(errorObj);
+        if(!erroObj.status){
+          erroObj = JSON.parse(erroObj)
         }
-        let alert = this.alertCtrl.create({
-          title: error.name,
-          message: "Requisição foi falha",
-          buttons: ['OK']
-      });
-      alert.present();
+        console.log("Erro Interceptado pelo Interceptor");
+        return Observable.throw(erroObj);
+      }) as any  
       
-        return Observable.throw(error);
-  
-      }) as any
-    }
   }
+}
  
 export const ErrorInterceptorsProvider ={
   provide: HTTP_INTERCEPTORS,
