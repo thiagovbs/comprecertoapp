@@ -5,24 +5,24 @@ page-cadastro {
         
         margin:0 auto;
         width: 70%;
-        text-align: center;
       }
       .facebook{
-          
         text-transform: initial;
-        background-color: #3b5998;
+        background-color: rgba(59, 89, 152,0.80);
         padding: 30px;
         border-radius: 10px;
+
       }
       .google{
         margin-top:100px;
         text-transform: initial;
-        background-color: #d13d35;
+        background-color: rgba(209, 61, 53, 0.80);
         padding: 30px;
         border-radius: 10px;
       }
       .register{
         text-transform: initial;
+        background-color: rgba(2, 125, 110, 0.80);
         padding: 30px;
         border-radius: 10px;
       }
@@ -42,4 +42,17 @@ page-cadastro {
         font-size: 1.5em;
         background: rgba(0, 0, 0, 0.7);
       }
+
+      .span-cadastro{
+        margin-top:5px;
+        font-variant:small-caps; 
+        float: right;
+        font-size: 12px;
+        color: #eee;
+      }
+      
+      ion-icon{
+        padding-right: 1.5em !important;
+      }
+      
 }

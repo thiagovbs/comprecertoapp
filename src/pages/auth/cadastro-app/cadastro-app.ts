@@ -5,6 +5,8 @@ import { Usuario } from '../../../models/usuario';
 import { UsuarioService } from '../../../services/usuario.service';
 
 
+
+
 @IonicPage()
 @Component({
   selector: 'page-cadastro-app',
@@ -59,18 +61,9 @@ export class CadastroAppPage {
 
 
   ionViewWillEnter(){
-
-    this.usuario = {
-      token:null,
-      nome:"",
-      email:"",
-      login:"",
-      dtNascimento: 0,
-      senha:"",
-      sexo:"",
-    }
     this.menu.swipeEnable(false);
     }
+
 
 
   SubmitForm(){
@@ -109,4 +102,5 @@ export class CadastroAppPage {
       
     });
   }
+
 }

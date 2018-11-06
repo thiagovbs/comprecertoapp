@@ -43,10 +43,11 @@ import { AuthInterceptorsProvider } from '../providers/interceptor/auth.intercep
     Facebook,
     GooglePlus,
     AuthInterceptorsProvider,
+    AuthService,
     ErrorInterceptorsProvider,
     UsuarioService,
     CategoriaService,
-    AuthService
+    
   ]
 })
 export class AppModule {}

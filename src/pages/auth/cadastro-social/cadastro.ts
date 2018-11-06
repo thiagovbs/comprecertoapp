@@ -5,6 +5,8 @@ import { Usuario } from '../../../models/usuario';
 import { GooglePlus } from '@ionic-native/google-plus';
 
 import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../../../services/auth.service';
+import { UsuarioService } from '../../../services/usuario.service';
 
 @IonicPage()
 @Component({
@@ -17,7 +19,9 @@ export class CadastroPage {
               public menu:MenuController,
               private fb:Facebook,
               private googlePlus: GooglePlus,
-              private http: HttpClient) {
+              private http: HttpClient,
+              private authService:AuthService,
+              private userService:UsuarioService) {
   }
 
   user:Usuario
@@ -83,4 +87,30 @@ export class CadastroPage {
       }
     })
   }
+
+
+  //Ao entrar na tela, verificar se o usuário tem o token no localStorage
+  ionViewDidEnter(){
+    
+    //If que verifica se o localStorage está null ou não
+    if(this.userService.getLocalUser() !== null){
+      this.authService.refreshToken().
+      subscribe((data:any) =>{
+      console.log("ok")
+      this.navCtrl.setRoot('HomePage')
+      },error =>{
+     
+      });
+    }else{
+      console.log("Não está loggado")
+    }
+    
+  }
+
+  cadastrar(){
+    this.navCtrl.push('CadastroAppPage')
+  }
+
+
+
 }

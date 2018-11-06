@@ -3,6 +3,8 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+import { AuthService } from '../services/auth.service';
+
 
 
 
@@ -17,7 +19,8 @@ export class MyApp {
 
   pages: Array<{title: string, component: any, icon:string}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
+              private authService:AuthService) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -55,6 +58,7 @@ export class MyApp {
     }
 
     sair(){
+      this.authService.logout();
       this.nav.setRoot('CadastroPage');
     }
 }

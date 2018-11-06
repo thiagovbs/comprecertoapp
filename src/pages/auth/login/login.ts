@@ -18,6 +18,7 @@ export class LoginPage {
               private menu:MenuController,
               private authService:AuthService,
               private alertCtrl:AlertController) {
+                
     this.login ={username:"",
                 password:""  }
               
@@ -27,7 +28,7 @@ export class LoginPage {
   loggar(){ 
     this.authService.autenticar(this.login).
     subscribe((data:any) =>{
-      this.authService.successfullLogin(data.access_token, data.user)
+      this.authService.successfullLogin(data.access_token, data.user, data.refresh_token)
       this.navCtrl.setRoot('HomePage')
     },error =>{
       let alert = this.alertCtrl.create({
@@ -39,15 +40,8 @@ export class LoginPage {
       });
   }
   
-
   ionViewWillEnter(){
     this.menu.swipeEnable(false);
   }
-
-  cadastrar(){
-    this.navCtrl.push('CadastroAppPage')
-  }
-
-
   
 }
