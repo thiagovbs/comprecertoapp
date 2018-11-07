@@ -1,4 +1,4 @@
-import {HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HTTP_INTERCEPTORS, HttpHeaders} from '@angular/common/http';
+import {HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HTTP_INTERCEPTORS, HttpHeaders, HttpErrorResponse} from '@angular/common/http';
 import { Injectable} from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { UsuarioService } from '../../services/usuario.service';
@@ -8,33 +8,52 @@ import { AuthService } from '../../services/auth.service';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor{
 
-  constructor(private usuarioService:UsuarioService, authService:AuthService) {
+  constructor(private usuarioService:UsuarioService, private authService:AuthService) {
   }
 
   intercept(request:HttpRequest<any>, next:HttpHandler):Observable<HttpEvent<any>> {
     
+    
 
-
-    let localUser = this.usuarioService.getLocalUser();
+    let token = this.usuarioService.getLocalUser();
     let N  = API_CONFIG.baseUrl.length;
     let requestToAPI = request.url.substring(0,N) == API_CONFIG.baseUrl
+
     
-    
-    if(localUser &&  requestToAPI){
-      
-      const hds = new HttpHeaders({
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': 'Basic aW9uaWM6MTBuMWMw'
-      });
-        console.log("usuario loggado");
-        const authReq = request.clone({headers: hds});
-        console.log(authReq);
-        return next.handle(authReq);   
+    if(token &&  requestToAPI){   
+        const authReq = request.clone(
+          {
+            headers: request.headers.set('Authorization', 'Bearer ' + token.accessToken)
+          });
+        return next.handle(authReq)
+                    .catch(error =>{
+                        if( error instanceof HttpErrorResponse){
+                          switch ((<HttpErrorResponse>error).status){
+                            case 401:
+                            return this.getAccessToken(request, next);
+                          }
+                        }
+                    });
+ 
     }
-    else{
+    else{  
         return next.handle(request);
     }   
   }
+  
+ getAccessToken(req:HttpRequest<any>, next:HttpHandler):Observable<any>{
+    return this.authService.getAccessToken(this.usuarioService.getLocalUser().refreshToken).switchMap(
+      resp =>{
+        //this.usuarioService.getLocalUser().accessToken = resp.access_token;
+        console.log(resp);
+        return next.handle(req);
+        /* return next.handle(req.clone({
+          headers: req.headers.set('Authorization', 'Bearer ' + token)
+        })) */
+      }
+    );
+  } 
+
 }
  
 export const AuthInterceptorsProvider ={

@@ -43,18 +43,6 @@ export class InterceptorProvider implements HttpInterceptor{
     this.usuarioService.setLocalUser(null);
   }
 
-/*   handle401(){
-    let alert = this.alertCrtl.create({
-      title:'Erro de autenticação',
-      message: 'Usuário e/ou senha incorretos',
-      enableBackdropDismiss:false,
-      buttons:[
-        {text:'Ok'}
-      ]
-    })
-    alert.present();
-  } */
-
   handleDefaultError(erro){
   let alert = this.alertCrtl.create({
       title:'Erro'+ erro.status + ': ' + erro.erro,

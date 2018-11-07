@@ -15,12 +15,12 @@ export class SacolaItemComponent {
 
 
 
-  constructor(public sacolaService:SacolaService) {
+  constructor() {
   }
 
-  AddItem(item){
+/*   AddItem(item){
     console.log(item);
     //this.sacolaService.aumentaQnt(item);
-  }
+  } */
 
 }

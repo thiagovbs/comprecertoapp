@@ -17,6 +17,7 @@ import { UsuarioService } from '../services/usuario.service';
 import {IonicStorageModule} from '@ionic/storage'
 import {  ErrorInterceptorsProvider } from '../providers/interceptor/interceptor';
 import { AuthInterceptorsProvider } from '../providers/interceptor/auth.interceptor';
+import { SupermercadoService } from '../services/supermercado.service';
 
 //Components
 
@@ -47,6 +48,7 @@ import { AuthInterceptorsProvider } from '../providers/interceptor/auth.intercep
     ErrorInterceptorsProvider,
     UsuarioService,
     CategoriaService,
+    SupermercadoService
     
   ]
 })

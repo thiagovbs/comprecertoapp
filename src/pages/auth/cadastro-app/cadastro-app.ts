@@ -77,7 +77,8 @@ export class CadastroAppPage {
     let login_form = email_form.substring(0, email_form.lastIndexOf("@"));
      
     this.usuario ={
-      token:null,
+      accessToken:null,
+      refreshToken:null,
       nome: nome_form,
       email: email_form,
       login: login_form,

@@ -1,12 +1,10 @@
 export interface Usuario{
-    token:string
-    refresh_token?:string
-    nome:string
+    accessToken:string,
+    refreshToken:string,
+    nome:string,
     email:string,
     login: string,
     senha?:string,
     dtNascimento?: number,
-    sexo?:string,
-    
-    
+    sexo?:string    
 }

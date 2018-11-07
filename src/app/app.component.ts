@@ -4,6 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { AuthService } from '../services/auth.service';
+import { UsuarioService } from '../services/usuario.service';
 
 
 
@@ -14,13 +15,16 @@ import { AuthService } from '../services/auth.service';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = 'CadastroPage';
-  
 
+  rootPage: any;
   pages: Array<{title: string, component: any, icon:string}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
-              private authService:AuthService) {
+    constructor(public platform: Platform, 
+              public statusBar: StatusBar, 
+              public splashScreen: SplashScreen,
+              private authService:AuthService,
+              private userService:UsuarioService) {
+
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -35,7 +39,18 @@ export class MyApp {
       
     ];
 
+    if(this.userService.getLocalUser() !== null){
+      this.rootPage = "HomePage";
+    }else{
+      this.rootPage = 'CadastroPage';
+    }
+
   }
+
+
+ 
+
+
 
   initializeApp() {
     this.platform.ready().then(() => {
