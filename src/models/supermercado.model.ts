@@ -1,3 +1,9 @@
+export interface Supermercado{
+  id:string,
+  title:string,
+  desc:string
+}
+
 export let SUPERMERCADOS = [
     {
       id: 1,

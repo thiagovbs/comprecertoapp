@@ -2,7 +2,7 @@
   <ion-content class="menu-left">
 
     <!-- User profile -->
-    <div text-center padding-top padding-bottom class="primary-bg menu-left">
+    <div text-center class="padding-nav primary-bg menu-left ">
       <a menuClose (click)="viewMyProfile()">
         <img class="profile-picture" src="assets/imgs/adam.jpg">
         <h4 ion-text color="light">Philipe Amorim</h4>
@@ -13,13 +13,16 @@
           <ion-icon item-left><img [src]="p.icon" height="20" alt=""></ion-icon>
         {{p.title}}
       </button>
+      <button menuClose ion-item (click)="alcanceAlert()">
+        <ion-icon item-left name="ios-wifi-outline" style="color:#009b89"></ion-icon>
+         Alcance
+    </button>
       <button menuClose ion-item (click)="sair()">
-          <ion-icon item-left name="ios-log-out-outline" style="color:#81b5ae"></ion-icon>
+          <ion-icon item-left name="ios-log-out-outline" style="color:#009b89"></ion-icon>
         Sair
       </button>
     </ion-list>
   </ion-content>
-
 </ion-menu>
 
 <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->

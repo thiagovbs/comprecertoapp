@@ -18,6 +18,7 @@ import {IonicStorageModule} from '@ionic/storage'
 import {  ErrorInterceptorsProvider } from '../providers/interceptor/interceptor';
 import { AuthInterceptorsProvider } from '../providers/interceptor/auth.interceptor';
 import { SupermercadoService } from '../services/supermercado.service';
+import { AlcanceComponent } from '../components/alcance/alcance';
 
 //Components
 
@@ -25,17 +26,19 @@ import { SupermercadoService } from '../services/supermercado.service';
 @NgModule({
   declarations: [
     MyApp,
-    
+    AlcanceComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp
+    MyApp,
+    AlcanceComponent
   ],
   providers: [
     StatusBar,
@@ -44,10 +47,10 @@ import { SupermercadoService } from '../services/supermercado.service';
     Facebook,
     GooglePlus,
     AuthInterceptorsProvider,
-    AuthService,
     ErrorInterceptorsProvider,
-    UsuarioService,
     CategoriaService,
+    AuthService,
+    UsuarioService,
     SupermercadoService
     
   ]

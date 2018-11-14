@@ -9,10 +9,12 @@ import { SupermercadoService } from '../../services/supermercado.service';
 })
 export class SupermercadoPage {
 
-  teste:boolean= false;
+  activeStar: Array<boolean> = [];
   
   // list of posts
   supermercados: [{desc:string,id:number,thumb:string, title:string}];
+  
+  ativar:boolean = false;
 
   constructor(public navCtrl: NavController, public supermercadoService:SupermercadoService) {
     
@@ -20,10 +22,18 @@ export class SupermercadoPage {
 
   ionViewDidLoad() {
     
+/*     this.supermercadoService.findAll().subscribe(response =>{
+      console.log(response);
+    }, erro =>{}) */
     this.supermercados = this.supermercadoService.getAll();
     
   }
 
+  ActiveMercado(mercado, i){
+    
+    this.activeStar[i]=!this.activeStar[i]
+    
+  }
 
   onSearch(){
     this.navCtrl.push('PesquisaPage')

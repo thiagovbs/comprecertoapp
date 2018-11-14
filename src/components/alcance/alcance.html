@@ -1,0 +1,47 @@
+<ion-grid style="background-color: #eee; max-height: 180px;" >
+  <ion-row>
+    <ion-col>
+        <label style="font-size: 1.0em">Alcance</label>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col col-2 >
+      <label for="Estado" class="lbl_eselect">Estado</label>
+      <ion-item class="select-model">
+          <ion-select #mySelect class="resize2">
+              <ion-option>RJ</ion-option>
+              <ion-option>SP</ion-option>
+              <ion-option>MG</ion-option>
+              <ion-option>RS</ion-option>
+              <ion-option>ES</ion-option>
+          </ion-select>
+      </ion-item>
+    </ion-col>
+    
+    <ion-col col-4>
+        <label for="Estado" class="lbl_eselect">Cidade</label>
+        <ion-item class="select-model">
+          <ion-select class="resize">
+              <ion-option>Rio de Janeiro</ion-option>
+              <ion-option>São Paulo</ion-option>
+              <ion-option>Minas Gerais</ion-option>
+          </ion-select>
+        </ion-item>
+    </ion-col>
+    <ion-col col-4>
+        <label for="Estado" class="lbl_eselect">Bairro</label>
+        <ion-item class="select-model">
+          <ion-select class="resize">
+              <ion-option>Tijuca</ion-option>
+              <ion-option>Vila Isabel</ion-option>
+              <ion-option>Minas Gerais</ion-option>
+          </ion-select>
+        </ion-item>
+    </ion-col>
+    <ion-col col-2 margin-top text-center>
+        <button ion-button icon-only style="background:transparent; width:2.6em; height: 2.0em;" >
+            <ion-icon name="compass" color="secondary"></ion-icon>
+          </button>
+    </ion-col>
+  </ion-row>
+</ion-grid>

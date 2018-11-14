@@ -20,7 +20,7 @@ export class LoginPage {
               private alertCtrl:AlertController) {
                 
     this.login ={username:"",
-                 password:""  }
+                 password:""}
               
   
   }
@@ -28,17 +28,10 @@ export class LoginPage {
   loggar(){ 
     this.authService.autenticar(this.login).
     subscribe((data:any) =>{
-      console.log(data)
       this.authService.successfullLogin(data);
       this.navCtrl.setRoot('HomePage')
     },error =>{
-      let alert = this.alertCtrl.create({
-          title: 'Erro',
-          message: error.message,
-          buttons: ['OK']
-      });
-      alert.present();
-      });
+    });
   }
   
   ionViewWillEnter(){

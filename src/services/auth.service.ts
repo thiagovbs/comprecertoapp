@@ -5,6 +5,7 @@ import { UserLogin } from "../models/userLogin";
 import { API_CONFIG } from "../config/api.config";
 import { Usuario } from "../models/usuario";
 import { UsuarioService } from "./usuario.service";
+import { Observable } from "rxjs";
 
 
 
@@ -44,13 +45,13 @@ export class AuthService{
     }
 
     getAccessToken(refreshToken){
-
+        
         const hds = new HttpHeaders({
             'Content-Type': 'application/x-www-form-urlencoded',
             'Authorization': 'Basic aW9uaWM6MTBuMWMw'
           });
         const body = `refresh_token=${refreshToken}&grant_type=refresh_token`;
-        return  this.http.post(API_CONFIG.authUrl, body, {headers: hds, withCredentials:true})     
+        return  this.http.post(API_CONFIG.authUrl, body, {headers: hds, withCredentials:true})          
     }
 
 }

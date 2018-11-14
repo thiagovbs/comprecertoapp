@@ -1,10 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, AlertController, PopoverController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { AuthService } from '../services/auth.service';
 import { UsuarioService } from '../services/usuario.service';
+import { AlcanceComponent } from '../components/alcance/alcance';
+
 
 
 
@@ -23,21 +25,10 @@ export class MyApp {
               public statusBar: StatusBar, 
               public splashScreen: SplashScreen,
               private authService:AuthService,
-              private userService:UsuarioService) {
+              private userService:UsuarioService,
+              public popoverCtrl: PopoverController) {
 
     this.initializeApp();
-
-    // used for an example of ngFor and navigation
-    this.pages = [
-      { title: 'Home', component: 'HomePage', icon:'assets/icon/home.svg' },
-      { title: 'Minha Sacola', component: 'SacolaPage' , icon:'assets/icon/minha-sacola.svg'},
-      { title: 'Supermercados', component: 'SupermercadoPage', icon:'assets/icon/supermercado.svg'},
-      { title: 'Alcance', component: 'HomePage', icon:'assets/icon/alcance.svg' },
-      { title: 'Sugestões', component: 'SugestaoPage', icon:'assets/icon/sugestao.svg'},
-      { title: 'Promoção', component: 'PromocaoPage', icon:'assets/icon/promocao.svg'},
-      { title: 'Política de privacidade', component: 'PoliticaPrivacidadePage', icon:'assets/icon/politica-privacidade.svg'}
-      
-    ];
 
     if(this.userService.getLocalUser() !== null){
       this.rootPage = "HomePage";
@@ -45,12 +36,17 @@ export class MyApp {
       this.rootPage = 'CadastroPage';
     }
 
+    // used for an example of ngFor and navigation
+    this.pages = [
+      { title: 'Home', component: 'HomePage', icon:'assets/icon/home.svg' },
+      { title: 'Minha Sacola', component: 'SacolaPage' , icon:'assets/icon/minha-sacola.svg'},
+      { title: 'Supermercados', component: 'SupermercadoPage', icon:'assets/icon/supermercado.svg'},
+      { title: 'Sugestões', component: 'SugestaoPage', icon:'assets/icon/sugestao.svg'},
+      { title: 'Promoção', component: 'PromocaoPage', icon:'assets/icon/promocao.svg'},
+      { title: 'Política de privacidade', component: 'PoliticaPrivacidadePage', icon:'assets/icon/politica-privacidade.svg'}
+      
+    ];
   }
-
-
- 
-
-
 
   initializeApp() {
     this.platform.ready().then(() => {
@@ -70,6 +66,11 @@ export class MyApp {
     // view my profile
     viewMyProfile() {
       this.nav.setRoot('HomePage');
+    }
+
+    alcanceAlert(){
+      let popover = this.popoverCtrl.create(AlcanceComponent, {showBackdrop: true, cssClass:"custom-popover"});
+      popover.present();
     }
 
     sair(){

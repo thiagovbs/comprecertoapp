@@ -93,7 +93,10 @@
   .text-sm {
     font-size: 0.7em;
   }
-  
+  .padding-nav{
+    padding-bottom: 6px;
+    padding-top:6px; 
+  }
   // profile picture style
   img.profile-picture {
     width: 7em;
@@ -332,3 +335,45 @@ button{
   font-size: 13px !important;
   font-weight: 400 !important;  
 }
+
+ion-alert {
+  &.alert-warning {
+    .alert-head {
+      background: map-get($colors, warning);
+      color: #fff;
+      margin-bottom: 10px;
+    }
+  }
+  &.alert-danger {
+    .alert-head {
+      background: map-get($colors, danger);
+      color: #fff;
+      margin-bottom: 10px;
+    }
+  }
+  &.alert-success {
+    .alert-head {
+      padding: 14px 14px 10px;      
+      color: map-get($colors, dark) ;
+      
+    }
+    .alert-title{
+      font-size: 0.8em;
+      font-weight: 500;
+    }
+  }
+
+}
+.popover-content{
+  top: 57.5px !important;
+  left: 0px !important;
+}
+
+ion-popover{
+  ion-backdrop
+  {
+  	opacity: 0.4;
+  }
+}
+
+

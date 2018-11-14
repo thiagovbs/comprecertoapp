@@ -52,22 +52,26 @@ $colors: (
 // App iOS Variables
 // --------------------------------------------------
 // iOS only Sass variables can go here
-
-
-
+$alert-ios-background-color: #F7F9FC;
+$alert-ios-border-radius:10px;
+$alert-ios-button-background-color: transparent;
+$popover-ios-width: 101%;
 
 // App Material Design Variables
 // --------------------------------------------------
 // Material Design only Sass variables can go here
+$alert-md-background-color:#F7F9FC;
+$alert-md-border-radius:10px;
+$alert-md-button-background-color: transparent;
 
 
-
-
+$popover-md-width: 101%; 
 // App Windows Variables
 // --------------------------------------------------
 // Windows only Sass variables can go here
+$popover-wp-width: 101%;
 
-
+//ios
 
 
 // App Theme
