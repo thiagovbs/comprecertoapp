@@ -1,10 +1,23 @@
 export interface Supermercado{
   id:string,
-  title:string,
-  desc:string
+  email:string,
+  nomeFantasia:string,
+  slogan?:string,
+  fativo:boolean,
+  fdestaque:boolean,
+  fsuperdestaque:boolean,
+  logo?:string,
+  //mercadoLocalidades?:[],
+  //mercadoPushs?:[],
+  //mercadoServicos?:[],
+  telefones:string,
+  dtCriacao:number,
+  dtAlteracao?:number,
+  cnpj:number,
+  title:string
 }
 
-export let SUPERMERCADOS = [
+/* export let SUPERMERCADOS = [
     {
       id: 1,
       title: 'Pão de Açucar',
@@ -43,4 +56,4 @@ export let SUPERMERCADOS = [
     },
     
   ]
-  
+   */

@@ -15,10 +15,12 @@ import { GooglePlus } from '@ionic-native/google-plus';
 import { AuthService } from '../services/auth.service';
 import { UsuarioService } from '../services/usuario.service';
 import {IonicStorageModule} from '@ionic/storage'
-import {  ErrorInterceptorsProvider } from '../providers/interceptor/interceptor';
+import {ErrorInterceptorsProvider } from '../providers/interceptor/interceptor';
 import { AuthInterceptorsProvider } from '../providers/interceptor/auth.interceptor';
 import { SupermercadoService } from '../services/supermercado.service';
 import { AlcanceComponent } from '../components/alcance/alcance';
+import { SubCategoriaService } from '../services/subcategorias.service';
+import { InfoSignPopoverComponent } from '../components/info-sign-popover/info-sign-popover';
 
 //Components
 
@@ -26,7 +28,8 @@ import { AlcanceComponent } from '../components/alcance/alcance';
 @NgModule({
   declarations: [
     MyApp,
-    AlcanceComponent
+    AlcanceComponent,
+    InfoSignPopoverComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +41,8 @@ import { AlcanceComponent } from '../components/alcance/alcance';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    AlcanceComponent
+    AlcanceComponent,
+    InfoSignPopoverComponent
   ],
   providers: [
     StatusBar,
@@ -51,7 +55,8 @@ import { AlcanceComponent } from '../components/alcance/alcance';
     CategoriaService,
     AuthService,
     UsuarioService,
-    SupermercadoService
+    SupermercadoService,
+    SubCategoriaService
     
   ]
 })

@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform, AlertController, PopoverController } from 'ionic-angular';
+import { Nav, Platform, PopoverController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -69,7 +69,7 @@ export class MyApp {
     }
 
     alcanceAlert(){
-      let popover = this.popoverCtrl.create(AlcanceComponent, {showBackdrop: true, cssClass:"custom-popover"});
+      let popover = this.popoverCtrl.create(AlcanceComponent, {showBackdrop: true, cssClass:'custom-popover'});
       popover.present();
     }
 

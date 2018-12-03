@@ -3,17 +3,17 @@ import { Injectable, Injector} from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { UsuarioService } from '../../services/usuario.service';
 import { AlertController } from 'ionic-angular';
-import { AuthService } from '../../services/auth.service';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/switchMap';
+import { AuthService } from '../../services/auth.service';
 
 @Injectable()
 export class InterceptorProvider implements HttpInterceptor{
 
   constructor(
               private alertCrtl:AlertController,
-              private injector: Injector,
+              private authService:AuthService,
               private usuarioService: UsuarioService) {
   }
 
@@ -32,9 +32,9 @@ export class InterceptorProvider implements HttpInterceptor{
         if(erroObj instanceof HttpErrorResponse){
           
           switch(erroObj.status){
-            case 401:
-            this.accessToken(request,next);  
-            break;      
+            /* case 401:
+            return this.getNewAccessToken(request,next)
+            //break; */
             case 400:
             this.userFail();
             break;
@@ -50,18 +50,22 @@ export class InterceptorProvider implements HttpInterceptor{
       }) as any  
   }
 
-  accessToken(req: HttpRequest<any>,next:HttpHandler){
-    
-    
-    const authService = this.injector.get(AuthService);
-    const refresh_token =this.usuarioService.getLocalUser().refreshToken;
-    
-  authService.getAccessToken(refresh_token).subscribe(respo =>{
-      console.log(respo);
-    },erro=>{
-      
-    })
+  //refresh token pelo access token
+  getNewAccessToken(req:HttpRequest<any>, next:HttpHandler):Observable<any>{
+    const refreshToken  = this.usuarioService.getLocalUser().refreshToken;
+    const test = this.authService.getAccessToken(refreshToken).switchMap(
+      resp =>{
+        console.log(resp)
+        //this.usuarioService.getLocalUser().accessToken = resp.accessToken;
+        return next.handle(req.clone({
+          setHeaders:
+          {Authorization: 'Bearer ' + this.usuarioService.getLocalUser().accessToken}
+        }))
+      }
+    )
+    return test;  
   }
+  
 
   //Erro ao Loggar
   userFail(){

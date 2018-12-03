@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { NavController, IonicPage,  } from 'ionic-angular';
 import { CategoriaService } from '../../services/categoria.service';
 import { UsuarioService } from '../../services/usuario.service';
+import { Categoria } from '../../models/categoria.model';
+import { SupermercadoService } from '../../services/supermercado.service';
+import { Supermercado } from '../../models/supermercado.model';
 
 
 
@@ -12,23 +15,35 @@ import { UsuarioService } from '../../services/usuario.service';
 })
 export class HomePage {
 
-  categorias:Array<any>= [];
+  categorias: Categoria[];
+  mercados: Supermercado[];
 
   constructor(public navCtrl: NavController,
-              private categoriaService:CategoriaService) {
+              private categoriaService:CategoriaService,
+              private mercadoService:SupermercadoService) {
   }
 
   ionViewDidLoad() {
+
+    //Carregando as Categorias
     this.categoriaService.findAll()
      .subscribe(response =>{
       this.categorias = response;
-    }, error=>{
       
-    }) 
+    }, error=>{})
+    
+    //Carregando os Mercados
+    this.mercadoService.findAll()
+    .subscribe(response =>{
+     this.mercados = response;
+     console.log(this.mercados);
+   }, erro =>{}) 
   }
 
   onSubCategoria(item){
-    this.navCtrl.push("SubcategoriaPage");
+    this.navCtrl.push("SubcategoriaPage", {
+      catNome: item.nome
+    });
   }
 
   

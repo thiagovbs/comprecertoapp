@@ -1,8 +1,10 @@
 export interface Categoria{
-    id:string,
-    nome:string,
-    imagem:string,    
-    
+    idCategoria:string,
+    dtAlteracao?:number,
+    fAtivo?:boolean,
+    dtCriacao?:number,
+    unidadesMedida?:string[],
+    nome:string,    
 }
 
 export let CATEGORIA = [

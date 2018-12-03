@@ -336,6 +336,7 @@ button{
   font-weight: 400 !important;  
 }
 
+ //ALERTS
 ion-alert {
   &.alert-warning {
     .alert-head {
@@ -364,12 +365,15 @@ ion-alert {
   }
 
 }
+
 .popover-content{
   top: 57.5px !important;
+  
   left: 0px !important;
 }
 
 ion-popover{
+  
   ion-backdrop
   {
   	opacity: 0.4;

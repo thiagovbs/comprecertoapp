@@ -77,8 +77,8 @@ export class CadastroAppPage {
     let login_form = email_form.substring(0, email_form.lastIndexOf("@"));
      
     this.usuario ={
-      accessToken:null,
-      refreshToken:null,
+      accessToken: null,
+      refreshToken: null,
       nome: nome_form,
       email: email_form,
       login: login_form,
@@ -86,6 +86,7 @@ export class CadastroAppPage {
       senha: senha_form,
       sexo: sexo_form
     }
+    
     this.usuarioService.cadastrarUsuario(this.usuario)
     .subscribe(response =>{
       console.log(response.status)
@@ -100,7 +101,6 @@ export class CadastroAppPage {
       }
     },
     error =>{
-      
     });
   }
 

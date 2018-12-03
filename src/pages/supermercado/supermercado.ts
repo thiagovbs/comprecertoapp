@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController} from 'ionic-angular';
 import { SupermercadoService } from '../../services/supermercado.service';
+import { Supermercado } from '../../models/supermercado.model';
 
 @IonicPage()
 @Component({
@@ -12,7 +13,7 @@ export class SupermercadoPage {
   activeStar: Array<boolean> = [];
   
   // list of posts
-  supermercados: [{desc:string,id:number,thumb:string, title:string}];
+  supermercados: Supermercado;
   
   ativar:boolean = false;
 
@@ -22,17 +23,16 @@ export class SupermercadoPage {
 
   ionViewDidLoad() {
     
-/*     this.supermercadoService.findAll().subscribe(response =>{
-      console.log(response);
-    }, erro =>{}) */
-    this.supermercados = this.supermercadoService.getAll();
-    
+     this.supermercadoService.findAll()
+     .subscribe(response =>{
+      this.supermercados = response;
+    }, erro =>{}) 
+  
+
   }
 
   ActiveMercado(mercado, i){
-    
     this.activeStar[i]=!this.activeStar[i]
-    
   }
 
   onSearch(){

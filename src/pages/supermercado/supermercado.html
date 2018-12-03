@@ -6,7 +6,7 @@
     </button>
     <ion-title text-center>Compre Certo</ion-title>
     <ion-buttons end>
-      <button ion-button (click)="onSearch()">
+      <button ion-button (click)="onSearch()" class="back-button-md">
         <ion-icon name="ios-search-outline"></ion-icon>
       </button>
     </ion-buttons>
@@ -19,11 +19,14 @@
   <ion-list class="list-full-border">
     <ion-item  *ngFor="let supermercado of supermercados; let i = index " text-wrap>
       <ion-thumbnail item-left>
-        <img class="img-rounded" src="{{ supermercado.thumb }}" alt="">
+        <div *ngIf="supermercado.logo !== null">
+            <img class="img-rounded" src="{{ supermercado.logo }}" alt="">
+        </div>
+        <img class="img-rounded" src="assets/imgs/no-image.png" alt="">
       </ion-thumbnail>
       <div>
-        <div>{{ supermercado.title }}</div>
-        <p class="text-sm" ion-text color="light-dark">{{supermercado.desc}}</p>
+        <div>{{ supermercado.nomeFantasia }}</div>
+        <p class="text-sm" ion-text color="light-dark">{{supermercado.mercadoLocalidades}}</p>
         <a (click)="ActiveMercado(supermercado, i)">
             <span class="pull-right" [class.star-gold]="activeStar[i]">
                <ion-icon  name="ios-notifications-outline"></ion-icon>

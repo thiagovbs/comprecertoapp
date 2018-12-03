@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { SubCategoriaService } from '../../services/subcategorias.service';
 
 
 
@@ -10,11 +11,19 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class SubcategoriaPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  categoriaNome:string
+
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              private subcategoriaService:SubCategoriaService) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SubcategoriaPage');
+    this.categoriaNome = this.navParams.get('catNome')
+
+    this.subcategoriaService.findSubCategorias().subscribe( (response:any) =>{
+      console.log(response);
+    },error=>{})
   }
 
   

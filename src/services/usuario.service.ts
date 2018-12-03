@@ -12,7 +12,8 @@ export class UsuarioService{
     constructor(public http:HttpClient){
     }
 
-    cadastrarUsuario(usuario:Usuario){        
+    cadastrarUsuario(usuario:Usuario){  
+        console.log(usuario)      
        return this.http.post(`${API_CONFIG.baseUrl}/usuarios`,usuario,{
            observe:'response',
            responseType:'text'

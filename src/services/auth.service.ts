@@ -5,7 +5,6 @@ import { UserLogin } from "../models/userLogin";
 import { API_CONFIG } from "../config/api.config";
 import { Usuario } from "../models/usuario";
 import { UsuarioService } from "./usuario.service";
-import { Observable } from "rxjs";
 
 
 
@@ -35,7 +34,8 @@ export class AuthService{
             accessToken:data.access_token,
             nome: data.user.nome,
             email: data.user.email,
-            login: data.user.login
+            login: data.user.login,
+            sexo: data.user.sexo
         }; 
         this.usuarioService.setLocalUser(user);
     }

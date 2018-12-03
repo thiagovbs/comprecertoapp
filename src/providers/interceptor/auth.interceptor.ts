@@ -28,7 +28,7 @@ export class AuthInterceptor implements HttpInterceptor{
     if(token && requestToAPI){   
       console.log("Usuário logado")    
         const authReq = request.clone({
-          responseType:'text',
+          responseType:'json',
           setHeaders: {Authorization: 'Bearer ' + token.accessToken}
         }) 
         return next.handle(authReq)
