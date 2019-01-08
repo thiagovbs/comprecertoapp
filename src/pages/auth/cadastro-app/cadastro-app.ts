@@ -1,7 +1,7 @@
 import { Component, ContentChild } from '@angular/core';
 import { IonicPage, NavController, MenuController, AlertController } from 'ionic-angular';
 import { FormGroup, FormBuilder, FormControlName, Validators, AbstractControl } from '@angular/forms';
-import { Usuario } from '../../../models/usuario';
+import { Usuario, Permissao } from '../../../models/usuario';
 import { UsuarioService } from '../../../services/usuario.service';
 
 
@@ -26,7 +26,7 @@ export class CadastroAppPage {
   ];
 
   usuario:Usuario;
-
+  permissao:Permissao;
 
 
   constructor(public navCtrl: NavController,
@@ -76,17 +76,20 @@ export class CadastroAppPage {
     let senha_form = this.cadastroForm.controls['senha'].value;
     let login_form = email_form.substring(0, email_form.lastIndexOf("@"));
      
+    this.permissao ={
+      descricao: "Usuario"
+    }
+
     this.usuario ={
-      accessToken: null,
-      refreshToken: null,
       nome: nome_form,
       email: email_form,
       login: login_form,
       dtNascimento: milliseconds,
       senha: senha_form,
-      sexo: sexo_form
+      sexo: sexo_form,
+      permissoes:[this.permissao]
     }
-    
+
     this.usuarioService.cadastrarUsuario(this.usuario)
     .subscribe(response =>{
       console.log(response.status)

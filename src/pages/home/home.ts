@@ -5,6 +5,7 @@ import { UsuarioService } from '../../services/usuario.service';
 import { Categoria } from '../../models/categoria.model';
 import { SupermercadoService } from '../../services/supermercado.service';
 import { Supermercado } from '../../models/supermercado.model';
+import { Observable } from 'rxjs';
 
 
 
@@ -15,7 +16,7 @@ import { Supermercado } from '../../models/supermercado.model';
 })
 export class HomePage {
 
-  categorias: Categoria[];
+  categorias:Observable<Categoria[]>;
   mercados: Supermercado[];
 
   constructor(public navCtrl: NavController,
@@ -26,26 +27,22 @@ export class HomePage {
   ionViewDidLoad() {
 
     //Carregando as Categorias
-    this.categoriaService.findAll()
-     .subscribe(response =>{
-      this.categorias = response;
-      
-    }, error=>{})
-    
+    this.categorias = this.categoriaService.categorias;
+
     //Carregando os Mercados
     this.mercadoService.findAll()
     .subscribe(response =>{
      this.mercados = response;
-     console.log(this.mercados);
+     
    }, erro =>{}) 
+
   }
 
-  onSubCategoria(item){
+  onSubCategoria(item:Categoria){
     this.navCtrl.push("SubcategoriaPage", {
-      catNome: item.nome
+      cat: item
     });
   }
-
   
   onSearch(){
     this.navCtrl.push('PesquisaPage')

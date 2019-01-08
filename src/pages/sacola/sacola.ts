@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { CarrinhoItem } from '../../models/carrinho-item.model';
+import { CarrinhoService } from '../../services/carrinho.service';
 
 
 @IonicPage()
@@ -7,14 +9,26 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   selector: 'page-sacola',
   templateUrl: 'sacola.html',
 })
-export class SacolaPage {
+export class SacolaPage{
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+
+  produtos:CarrinhoItem[];
+
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams,
+              private carrinhoService:CarrinhoService) {
   }
 
+
+  ionViewWillEnter() {
+    this.produtos = this.carrinhoService.items;
+    console.log(this.produtos.length)
+  }
 
   onSearch(){
     this.navCtrl.push('PesquisaPage')
   }
+
+  
 
 }

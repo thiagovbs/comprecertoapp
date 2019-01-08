@@ -1,19 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { CarrinhoItem } from '../../models/carrinho-item.model';
 
 @Component({
   selector: 'sacola-item',
   templateUrl: 'sacola-item.html'
 })
-export class SacolaItemComponent {
+export class SacolaItemComponent implements OnInit{
 
-
+@Input() itens:CarrinhoItem[];
 
   constructor() {
   }
 
-/*   AddItem(item){
-    console.log(item);
-    //this.sacolaService.aumentaQnt(item);
-  } */
+  ngOnInit(){
+    console.log(this.itens)
+  }
 
 }

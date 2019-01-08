@@ -1,10 +1,15 @@
 export interface Usuario{
-    accessToken:string,
-    refreshToken:string,
+    accessToken?:string,
+    refreshToken?:string,
     nome:string,
     email:string,
     login: string,
     senha?:string,
     dtNascimento?: number,
-    sexo?:string    
+    sexo?:string 
+    permissoes?:Array<Permissao>
+}
+
+export interface Permissao{
+    descricao:string;
 }

@@ -23,7 +23,7 @@
     </ion-scroll>
 
   <ion-list  class="card-background-page">
-      <ion-card class="card" *ngFor="let categoria of categorias" (click)="onSubCategoria(categoria)">
+      <ion-card class="card" *ngFor="let categoria of categorias | async" (click)="onSubCategoria(categoria)">
           <!-- <img [src]="categoria.imagem"/> -->
           <p>{{categoria.nome}}</p>
           

@@ -1,13 +1,17 @@
+import { Subcategoria } from "./subcategoria.model";
+
 export interface Categoria{
     idCategoria:string,
     dtAlteracao?:number,
     fAtivo?:boolean,
     dtCriacao?:number,
     unidadesMedida?:string[],
-    nome:string,    
+    nome:string,  
+    subcategorias?:Array<Subcategoria>,  
 }
 
-export let CATEGORIA = [
+
+/* export let CATEGORIA = [
     {
         id:1,
         nome: "Carnes e pescados",
@@ -54,4 +58,4 @@ export let CATEGORIA = [
         nome: "Dispensa",
         imagem: "assets/imgs/Despensa_Prancheta 1.jpg"
     }
-]
+] */

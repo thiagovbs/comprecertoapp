@@ -1,90 +1,44 @@
-
 <ion-header>
-    <ion-navbar color="secondary">
-      <ion-title text-center >{{categoriaNome}}</ion-title>   
-      <ion-buttons end>
-        <button ion-button  class="back-button-md" (click)="onSearch()">
-          <ion-icon name="ios-search-outline"></ion-icon>
-        </button>
-      </ion-buttons>
-    </ion-navbar>
-  
-  </ion-header>
+  <ion-navbar color="secondary">
+    <ion-title text-center>{{categoriaNome}}</ion-title>
+    <ion-buttons end>
+      <button ion-button class="back-button-md" (click)="onSearch()">
+        <ion-icon name="ios-search-outline"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
 <!-- Lista das subcategorias por mercado -->
-  <ion-content  class="gray-bg">
-      <ion-scroll scrollX="true" class="menu-2" >
-          <ul>
-            <a><li class="active">Todos</li></a> 
-            <a><li>Produto 1</li></a> 
-            <a><li>Produto 2</li></a> 
-            <a><li>Produto 3</li></a> 
-            <a><li>Produto 4</li></a> 
-            <a><li>Produto 5</li></a> 
-            <a><li>Produto 6</li></a> 
-            <a><li>Produto 7</li></a> 
-            <a><li>Produto 8</li></a> 
-            <a><li>Produto 9</li></a> 
-          </ul> 
-      </ion-scroll>
+<ion-content class="gray-bg">
+  <ion-toolbar class="barsubprodutos">
+    <ion-scroll scrollX="true" class="menu-2">
+      <ion-segment scrollX="true" class="segment" color="primary" [(ngModel)]="subcategoriaNome">
+        <ion-segment-button value="Todos" class="segment-button" (click)="onTodosProdutos()">
+          Todos
+        </ion-segment-button>
+        <ion-segment-button *ngFor="let sub of subcategorias" (click)="onSubCategoria(sub.nome)" value="{{sub.nome}}">
+          {{sub.nome}}
+        </ion-segment-button>
+      </ion-segment>
+    </ion-scroll>
+  </ion-toolbar>
 
-    <ion-list class="list-full-border">
-      <!-- Exemplo de subcategoria --> 
-      <ion-item class="card">
-        <produto-item></produto-item>
-      </ion-item>       
-      <!-- Exemplo de mercado pela subcategoria -->
-      <ion-item>
-        <div item-left >
-          <p>imagem</p>
-        </div>
-        <div class="pull-right">
-          <p>icone</p>
-        </div>
-      </ion-item>
-      <!-- Exemplo de subcategoria -->
-      <ion-item class="card">
-          <produto-item></produto-item>
-      </ion-item>       
-     <!-- Exemplo de mercado pela subcategoria -->     
-      <ion-item>
-        <div item-left >
-          <p>imagem</p>
-        </div>
-        <div class="pull-right">
-          <p>icone</p>
-        </div>
-      </ion-item>
+  <ion-list class="list-full-border" *ngIf="subcategoriaNome === 'Todos' && produtos">
+    <!-- Exemplo de produto -->
+    <produto-item [produto-itens]="produtos" [mercado-itens]="mercado"></produto-item>
+    <!-- Exemplo de produto -->
+  </ion-list>
 
-      <!-- Exemplo de subcategoria --> 
-      <ion-item class="card">
-          <produto-item></produto-item>
-      </ion-item>   
-      <!-- Exemplo de mercado pela subcategoria -->
-      <ion-item>
-        <div item-left >
-          <p>imagem</p>
-        </div>
-        <div class="pull-right">
-          <p>icone</p>
-        </div>
-      </ion-item>
-      <!-- fim sub categoria -->
-        
-      <!-- Exemplo de subcategoria --> 
-      <ion-item class="card">
-        <produto-item></produto-item>
-      </ion-item>   
-      <!-- Exemplo de mercado pela subcategoria -->
-      <ion-item>
-        <div item-left >
-          <p>imagem</p>
-        </div>
-        <div class="pull-right">
-          <p>icone</p>
-        </div>
-      </ion-item>
-        <!-- fim sub categoria -->
-      </ion-list>
-    </ion-content>
-    
- 
+  <ion-list class="list-full-border" *ngIf="subcategoriaNome !== 'Todos' && filterProdutos">
+    <!-- Exemplo de produto -->
+    <produto-item [produto-itens]="filterProdutos"></produto-item>
+    <!-- Exemplo de produto -->
+  </ion-list>
+
+  <ion-list class="list-full-border" *ngIf="!produtos || !filterProdutos">
+    <ion-item class="card">
+      <h3 text-center>Não existem produtos nessa sessão</h3>
+    </ion-item>
+  </ion-list>
+</ion-content>

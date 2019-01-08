@@ -302,17 +302,32 @@
 
   .thumb-image{
     margin-top:10px;
-    margin-left:-10px;
-    height: 90px !important;
-    min-width: 95px !important;
+    margin-left:-6px;
+    height: 100px !important;
+    min-width: 85px !important;
 }
 
 .menu-2{
-  height: 35px;
+  height: 32px;
   width: 100%;
-  white-space: nowrap;
-  background-color: color($colors, secondary);    
-  
+  background-color: color($colors, secondary);  
+  margin-top: -2px;  
+
+  .segment{
+    display: block;
+	  overflow-x: scroll;
+    white-space: nowrap;
+    
+    .segment-button{
+      color:#f8f8f8;
+      font-size: 0.80em;
+      display: inline;
+      padding: 3px 8px;
+      
+    }
+  }
+
+
   ul {
     list-style-type: none;
     margin: 0;
@@ -379,5 +394,8 @@ ion-popover{
   	opacity: 0.4;
   }
 }
+
+
+
 
 

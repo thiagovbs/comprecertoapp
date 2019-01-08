@@ -21,7 +21,7 @@ import { ProdutoItemComponent } from './produto-item/produto-item';
 	exports:[
 		BtnQntProdutoComponent,
 		SacolaItemComponent,
-    ProdutoItemComponent,
+        ProdutoItemComponent,
     
 	]
 })

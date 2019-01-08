@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { SubCategoriaService } from '../../services/subcategorias.service';
+import { Subcategoria } from '../../models/subcategoria.model';
+import { Produto } from '../../models/produto.model';
+import { Categoria } from '../../models/categoria.model';
+import { Supermercado } from '../../models/supermercado.model';
 
 
 
@@ -11,23 +15,63 @@ import { SubCategoriaService } from '../../services/subcategorias.service';
 })
 export class SubcategoriaPage {
 
-  categoriaNome:string
+  categoria: Categoria;
+  categoriaNome: string;
+
+  subcategoriaNome: string = 'Todos';
+  subcategorias: Subcategoria[];
+
+  produtos: Produto[];
+  filterProdutos: Produto[] = [];
+
+  mercado:Supermercado[];
 
   constructor(public navCtrl: NavController,
-              public navParams: NavParams,
-              private subcategoriaService:SubCategoriaService) {
+    public navParams: NavParams,
+    private subcategoriaService: SubCategoriaService) {
   }
 
-  ionViewDidLoad() {
-    this.categoriaNome = this.navParams.get('catNome')
+  ionViewWillEnter() {
+    //retorna as categorias da pagina home
+    this.categoria = this.navParams.get('cat');
+    this.categoriaNome = this.categoria.nome;
 
-    this.subcategoriaService.findSubCategorias().subscribe( (response:any) =>{
-      console.log(response);
-    },error=>{})
+    //listando as subcategorias
+    this.subcategorias = this.categoria.subcategorias;
+
+    //listar os produtos pela categoria
+    this.subcategoriaService.findProdutosPorSubCategorias(this.categoria.idCategoria)
+      .subscribe((resp: Produto[]) => {
+        this.produtos = resp;
+        if (this.produtos.length === 0) {
+          this.produtos = undefined;
+          
+        }
+      }, erro => { })
   }
 
-  
-  onSearch(){
+  onSubCategoria(sub: string): Produto[] {
+    this.subcategoriaNome = sub;
+    //ao clicar no botão onSubCategoria o filterProdutos do html vai estar falso e o
+    //conteúdo da div não vai aparecer quando houver uma subcategoria sem produto
+    this.filterProdutos = undefined
+
+    //verifica se há produtos dentro da categoria
+    if (this.produtos) {
+      //Filtro de produto por subcategorias
+      this.filterProdutos = this.produtos.filter((prod: Produto) => prod.subcategoria.nome === sub);
+      if (this.filterProdutos.length === 0) {
+        this.filterProdutos = undefined;
+      }
+    }
+    return this.filterProdutos;
+  }
+
+  onTodosProdutos(): Produto[] {
+      return this.produtos
+  }
+
+  onSearch() {
     this.navCtrl.push('PesquisaPage')
   }
 

@@ -11,4 +11,9 @@ export class SubCategoriaService{
     findSubCategorias():Observable<any>{
         return this.http.get<any>(`${API_CONFIG.baseUrl}/subcategorias`)
     }
+
+
+    findProdutosPorSubCategorias(categoriaId):Observable<any>{
+        return this.http.get<any>(`${API_CONFIG.baseUrl}/produtos/categoria/${categoriaId}`);
+    }
 }

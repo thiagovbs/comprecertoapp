@@ -21,6 +21,7 @@ import { SupermercadoService } from '../services/supermercado.service';
 import { AlcanceComponent } from '../components/alcance/alcance';
 import { SubCategoriaService } from '../services/subcategorias.service';
 import { InfoSignPopoverComponent } from '../components/info-sign-popover/info-sign-popover';
+import { CarrinhoService } from '../services/carrinho.service';
 
 //Components
 
@@ -52,6 +53,7 @@ import { InfoSignPopoverComponent } from '../components/info-sign-popover/info-s
     GooglePlus,
     AuthInterceptorsProvider,
     ErrorInterceptorsProvider,
+    CarrinhoService,
     CategoriaService,
     AuthService,
     UsuarioService,
