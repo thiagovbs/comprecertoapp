@@ -1,18 +1,17 @@
 import {HttpInterceptor, HttpRequest, HttpHandler,
    HttpEvent, HTTP_INTERCEPTORS,
    HttpUserEvent, HttpResponse,
-   HttpProgressEvent, HttpHeaderResponse, HttpSentEvent, HttpErrorResponse} from '@angular/common/http';
+   HttpProgressEvent, HttpHeaderResponse, HttpSentEvent} from '@angular/common/http';
 import { Injectable} from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { UsuarioService } from '../../services/usuario.service';
 import { API_CONFIG } from '../../config/api.config';
-import { AuthService } from '../../services/auth.service';
 
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor{
 
-  constructor(private usuarioService:UsuarioService, private authService:AuthService) {
+  constructor(private usuarioService:UsuarioService) {
   }
 
   intercept(request:HttpRequest<any>, next:HttpHandler):Observable<HttpEvent<any> |

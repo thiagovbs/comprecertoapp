@@ -5,6 +5,7 @@ import { Subcategoria } from '../../models/subcategoria.model';
 import { Produto } from '../../models/produto.model';
 import { Categoria } from '../../models/categoria.model';
 import { Supermercado } from '../../models/supermercado.model';
+import { CarrinhoItem } from '../../models/carrinho-item.model';
 
 
 
@@ -25,6 +26,7 @@ export class SubcategoriaPage {
   filterProdutos: Produto[] = [];
 
   mercado:Supermercado[];
+
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,

@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Produto } from '../../models/produto.model';
 import { Supermercado } from '../../models/supermercado.model';
 import { CarrinhoService } from '../../services/carrinho.service';
+import { CarrinhoItem } from '../../models/carrinho-item.model';
 
 @Component({
   selector: 'produto-item',
@@ -10,55 +11,56 @@ import { CarrinhoService } from '../../services/carrinho.service';
 export class ProdutoItemComponent implements OnInit {
 
   @Input('produto-itens') produtos: Produto[];
-  @Input('mercado-itens') mercado: Supermercado
+  @Input('mercado-itens') mercado: Supermercado;
 
-  qtd_produto: number = 1;
-  produto: Produto;
+  carrinhoItems: CarrinhoItem[]
+  carrinhoItem: CarrinhoItem
+  
+
+  foundItem:CarrinhoItem
+
 
   constructor(private carrinhoService: CarrinhoService) {
-
+    this.carrinhoItem = carrinhoService.carrinhoItem
   }
 
   ngOnInit() {
 
+    if (this.items().length !== 0) {
+    }
   }
 
-  //retorna os produtos do carrinho
   items(): any[] {
     return this.carrinhoService.items;
   }
 
   //diminui a quantidade de produtos
-  diminuiQnt(item: Produto) {
-    this.qtd_produto = this.qtd_produto - 1;
+  diminuiQnt(item: Produto): void {
+    
+    console.log("Esse é o Item"+ item)
+    this.carrinhoService.diminuiQnt(item);
 
+  }
+
+  RemoveProdutoCarrinho(){
+    this.carrinhoService.removeItem(this.foundItem)
   }
 
   //aumenta quantidade de produtos
   aumentaQnt(item: Produto) {
-    this.qtd_produto = this.qtd_produto + 1;
+     this.carrinhoService.addItem(item);
   }
 
   //adiciona produto no carrinho
-  addCarrinho(item: Produto) {
-    this.verificaProdutoNoCarrinho(item)
+  addCarrinho(item: Produto): void {
+    
     this.carrinhoService.addItem(item);
   }
 
-  //Verifica produto para alterar a tela 
-  verificaProdutoNoCarrinho(item: Produto): boolean {
-    let achouItem: boolean = true;
-    let verificaItems = this.items();
-
-    let foundItem = verificaItems.find((produtoItem) => produtoItem.produto.idProduto === item.idProduto)
-    if (foundItem) {
-      achouItem = true;
-      return achouItem;
-    }
-    achouItem = false;
-    return achouItem;
+  //Verifica se produto existe no carrinho para alterar a tela 
+  verificaProdutoNoCarrinho(item: Produto):boolean {
+    this.foundItem = this.items().find((produtoItem) => produtoItem.produto.idProduto === item.idProduto)
+    return this.foundItem ? true : false;
   }
-
-
 
 }

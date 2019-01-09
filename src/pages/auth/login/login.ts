@@ -16,8 +16,7 @@ export class LoginPage {
   
   constructor(private navCtrl: NavController,
               private menu:MenuController,
-              private authService:AuthService,
-              private alertCtrl:AlertController) {
+              private authService:AuthService) {
                 
     this.login ={username:"",
                  password:""}

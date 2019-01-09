@@ -2,9 +2,8 @@ import { Produto } from "./produto.model";
 
 export class CarrinhoItem{
 
-    constructor(public produto:Produto){}
+    
+    constructor(public produto:Produto, public quantidade:number = 1){
 
-    value():number{
-        return this.produto.quantidade * 1;
     }
 }
