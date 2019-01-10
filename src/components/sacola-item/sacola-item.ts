@@ -16,23 +16,17 @@ export class SacolaItemComponent implements OnInit{
   }
 
   ngOnInit(){
-    //this.quantidadeItems = this.carrinhoService.quantidadeItems; 
     console.log(this.itens)
+    
   }
 
     //diminui a quantidade de produtos
     diminuiQnt(item:CarrinhoItem) {
-      console.log(item)
-      //this.qtd_produto.quantidade = this.qtd_produto.quantidade - 1;
-  
+      this.carrinhoService.diminuiQntCarrinho(item);
     }
   
     //aumenta quantidade de produtos
-    aumentaQnt(item:Produto) {
-      this.carrinhoService.addItem(item);
-      //this.quantidadeItems = this.carrinhoService.quantidadeItems;  
+    aumentaQnt(item:CarrinhoItem) {
+      this.carrinhoService.aumentaQnt(item);
     }
-
-  
-
 }

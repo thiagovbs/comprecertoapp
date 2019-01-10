@@ -1,16 +1,26 @@
 
+<button ion-button class="pull-right btn-sacola-remove"
+(click)="RemoveProdutoCarrinho()">
+  Remover
+</button>
 <ion-row class="pull-right shadow-row">
-  <ion-col col-5 class="pull-left"  style=" top:-9px; left: -10px">
-      <button ion-button color="primary" class="button-qty pull-right">
-          <ion-icon name="add"></ion-icon>
-        </button>
-  </ion-col>
-  <ion-col col-2 text-center style="top:-2px; right:4px">
-    <p style="font-size:0.75em;">12</p>
-  </ion-col>
-  <ion-col col-5 class="pull-right" style="top:-9px; right: -6px">
-      <button ion-button color="danger" class="button-qty pull-right">
-          <ion-icon name="remove"></ion-icon>
-        </button>
-  </ion-col>
+   <ion-col col-5 class="pull-left" style=" top:-9px; left: -10px">
+       <button ion-button color="primary"
+               class="button-qty pull-right" 
+               (click)="emitAddevent(produto)">
+           <ion-icon name="add"></ion-icon>
+       </button>
+   </ion-col>
+   <ion-col col-2 text-center style="top:-2px; right:4px">
+       <p style="font-size:0.75em;">
+           {{itemFound ? itemFound.quantidade : 1}}</p>
+   </ion-col>
+   <ion-col col-5 class="pull-right" style="top:-9px; right: -6px">
+       <button ion-button 
+               color="danger" 
+               (click)="emitSubEvent(produto)" 
+               class="button-qty pull-right">
+           <ion-icon name="remove"></ion-icon>
+       </button>
+   </ion-col>
 </ion-row>

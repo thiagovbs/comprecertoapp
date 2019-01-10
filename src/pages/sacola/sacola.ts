@@ -22,7 +22,6 @@ export class SacolaPage{
 
   ionViewWillEnter() {
     this.produtos = this.carrinhoService.items;
-    console.log(this.produtos.length)
   }
 
   onSearch(){

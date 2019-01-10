@@ -26,7 +26,10 @@
 
   <ion-list class="list-full-border" *ngIf="subcategoriaNome === 'Todos' && produtos">
     <!-- Exemplo de produto -->
-    <produto-item [produto-itens]="produtos" [mercado-itens]="mercado"></produto-item>
+    <produto-item [produto-itens]="produtos"
+                  [nomeCategoria]="categoriaNome" 
+                  [mercado-itens]="mercado">
+    </produto-item>
     <!-- Exemplo de produto -->
   </ion-list>
 

@@ -15,11 +15,6 @@
 <!-- Lista dos produtos separados por mercado e categorias -->
 <ion-content style="margin-top:-14px;" class="cart gray-bg">
   <div *ngIf="produtos">
-    <!-- Fazer um ngFor para percorrer as categorias e pegar uma categoria específica 
-          e jogar dentro do sacola-item para lá percorrer os items dessa categoria -->
-    <div text-center class="secondary-bg">
-      <p style="color:#fff"><small>Carnes e Pescados</small></p>
-    </div>
       <sacola-item [itens]="produtos"></sacola-item>
   </div>
 </ion-content>
