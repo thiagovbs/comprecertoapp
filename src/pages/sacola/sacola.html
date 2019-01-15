@@ -13,9 +13,14 @@
 </ion-header>
 
 <!-- Lista dos produtos separados por mercado e categorias -->
-<ion-content style="margin-top:-14px;" class="cart gray-bg">
+<ion-content class="cart gray-bg" style="margin-top:-14px">
   <div *ngIf="produtos">
-      <sacola-item [itens]="produtos"></sacola-item>
+    <div *ngFor="let cat of categorias">
+      <div text-center class="secondary-bg">
+        <p style="color:#fff; font-size:0.98em !important;"><small>{{cat}}</small></p>
+      </div>
+      <sacola-item [items]="produtos" [categoria]="cat"></sacola-item>
+    </div>
   </div>
 </ion-content>
 <!--Footer button-->

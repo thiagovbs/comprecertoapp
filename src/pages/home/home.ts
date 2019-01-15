@@ -48,4 +48,7 @@ export class HomePage {
     this.navCtrl.push('PesquisaPage')
   }
 
+  
+
+
 }

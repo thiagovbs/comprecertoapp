@@ -8,11 +8,12 @@ import { ProdutoItemComponent } from './produto-item/produto-item';
 
 
 
+
 @NgModule({
 	declarations: [
 		BtnQntProdutoComponent,
 		SacolaItemComponent,
-    ProdutoItemComponent,
+    	ProdutoItemComponent,
     
 		],
 	imports: [
@@ -22,7 +23,6 @@ import { ProdutoItemComponent } from './produto-item/produto-item';
 		BtnQntProdutoComponent,
 		SacolaItemComponent,
         ProdutoItemComponent,
-    
 	]
 })
 export class ComponentsModule {}

@@ -17,7 +17,6 @@ export class ProdutoItemComponent implements OnInit {
   carrinhoItems: CarrinhoItem[]
   carrinhoItem: CarrinhoItem
   
-
   foundItem:CarrinhoItem
 
 

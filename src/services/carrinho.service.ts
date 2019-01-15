@@ -1,7 +1,7 @@
-import { Injectable } from "@angular/core";
+import { Injectable, EventEmitter } from "@angular/core";
 import { Produto } from "../models/produto.model";
 import { CarrinhoItem } from "../models/carrinho-item.model";
-import { AlertController } from "ionic-angular";
+import { AlertController, Events } from "ionic-angular";
 
 @Injectable()
 export class CarrinhoService {
@@ -11,12 +11,8 @@ export class CarrinhoService {
     carrinhoItem: CarrinhoItem
     produto: Produto;
 
-    constructor(private ctrlAlert: AlertController) {
-        //inicializando o carrinho
-        this.carrinhoItem = {
-            produto: this.produto,
-            quantidade: 1
-        }
+    constructor(private ctrlAlert: AlertController,public events: Events) {
+    
     }
 
     //deleta todos os produtos da lista
@@ -59,11 +55,13 @@ export class CarrinhoService {
     }
 
     //deleta o produto da lista
-    removeItem(item: CarrinhoItem) {
+    removeItem(item: CarrinhoItem) {   
         this.items.splice(this.items.indexOf(item), 1);
+        this.events.publish('deletar');
     }
 
     diminuiQntCarrinho(item: CarrinhoItem) {
+        console.log(item.quantidade)
         if (item.quantidade <= 1) {
             this.removeItem(item)
         }

@@ -77,4 +77,5 @@ export class SubcategoriaPage {
     this.navCtrl.push('PesquisaPage')
   }
 
+  
 }

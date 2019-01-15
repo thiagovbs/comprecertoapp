@@ -13,13 +13,15 @@ export class BtnQntProdutoComponent{
   
   @Output() add = new EventEmitter<any>()
   @Output() sub = new EventEmitter<any>()
-
+  @Output() remove = new EventEmitter<any>()
   constructor(private carrinhoService: CarrinhoService) {
   }
 
+
+
   //aumenta quantidade de produtos
-  emitAddevent(item: Produto) {
-      this.add.emit(item)
+  emitAddevent() {
+      this.add.emit()
    }
 
    emitSubEvent(){
@@ -27,7 +29,6 @@ export class BtnQntProdutoComponent{
   }
 
    RemoveProdutoCarrinho(){
-    console.log(this.itemFound)
     this.carrinhoService.removeItem(this.itemFound)
   }
 }
