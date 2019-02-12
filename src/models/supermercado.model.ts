@@ -1,5 +1,5 @@
 export interface Supermercado{
-  id:string,
+  id:number,
   email:string,
   nomeFantasia:string,
   slogan?:string,

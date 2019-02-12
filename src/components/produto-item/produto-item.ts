@@ -25,6 +25,7 @@ export class ProdutoItemComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.nomeCategoria)
   }
 
   //retorna todos os items no carrinho
@@ -36,11 +37,6 @@ export class ProdutoItemComponent implements OnInit {
   diminuiQnt(item: Produto): void {
     console.log("Esse é o Item"+ item)
     this.carrinhoService.diminuiQnt(item);
-  }
-
-  //remove o produto do carrinho
-  RemoveProdutoCarrinho(){
-    this.carrinhoService.removeItem(this.foundItem)
   }
 
   //aumenta quantidade de cada produto

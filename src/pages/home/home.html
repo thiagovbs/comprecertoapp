@@ -5,30 +5,31 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title text-center>Compre Certo</ion-title>
-    <ion-buttons end >
-      <button ion-button  class="back-button-md" (click)="onSearch()">
+    <ion-buttons end>
+      <button ion-button class="back-button-md" (click)="onSearch()">
         <ion-icon name="ios-search-outline"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
- 
+
 </ion-header>
 
-<ion-content class=" gray-bg" >
-    <ion-scroll scrollX="true" class="menu-2" >
-        <ul >
-          <a><li class="active" >Mais baratos</li></a> 
-          <a><li *ngFor="let mercado of mercados">{{mercado.nomeFantasia}}</li></a> 
-        </ul> 
-    </ion-scroll>
+<ion-content class="gray-bg">
+  <ion-scroll scrollX="true" class="menu-2">
+    <ul>
+      <a (click)="onMaisBarato('BARATOS')">
+        <li class="active">Mais baratos</li>
+      </a>
+      <a *ngFor="let mercado of mercados" (click)="onMercados(mercado)">
+        <li>{{mercado.nomeFantasia}}</li>
+      </a>
+    </ul>
+  </ion-scroll>
 
-  <ion-list  class="card-background-page">
-      <ion-card class="card" *ngFor="let categoria of categorias | async" (click)="onSubCategoria(categoria)">
-          <!-- <img [src]="categoria.imagem"/> -->
-          <p>{{categoria.nome}}</p>
-          
-        </ion-card>
+  <ion-list class="card-background-page" no-padding no-margin>
+    <ion-card class="card" *ngFor="let categoria of categorias | async" (click)="onSubCategoria(categoria)">
+      <img  src="{{bucketS3}}/cat{{categoria.idCategoria}}.jpg" />
+    </ion-card>
   </ion-list>
- 
-</ion-content>
 
+</ion-content>

@@ -39,6 +39,7 @@
                       <!-- Quando o produto estiver no carrinho -->  
                         <div *ngIf="verificaProdutoNoCarrinho(produto)">
                             <btn-qnt-produto 
+                                [nomePage]="'Produtos'"
                                 [itemFound]="foundItem" 
                                 (add)="aumentaQnt(produto)"
                                 (sub)="diminuiQnt(produto)"></btn-qnt-produto>

@@ -7,7 +7,8 @@ export interface Categoria{
     dtCriacao?:number,
     unidadesMedida?:string[],
     nome:string,  
-    subcategorias?:Array<Subcategoria>,  
+    subcategorias?:Array<Subcategoria>, 
+    imagemUrl?:string 
 }
 
 

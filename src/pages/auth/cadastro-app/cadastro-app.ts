@@ -1,5 +1,5 @@
 import { Component, ContentChild } from '@angular/core';
-import { IonicPage, NavController, MenuController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, MenuController, AlertController, LoadingController, Loading } from 'ionic-angular';
 import { FormGroup, FormBuilder, FormControlName, Validators, AbstractControl } from '@angular/forms';
 import { Usuario, Permissao } from '../../../models/usuario';
 import { UsuarioService } from '../../../services/usuario.service';
@@ -33,7 +33,8 @@ export class CadastroAppPage {
               public menu:MenuController,
               private formBuilder:FormBuilder,
               private usuarioService:UsuarioService,
-              private alertCtrl: AlertController) {
+              private alertCtrl: AlertController,
+              public loadingCtrl: LoadingController) {
 
       this.cadastroForm = this.formBuilder.group({
         nome:this.formBuilder.control('',[Validators.required, Validators.minLength(3)]),
@@ -43,6 +44,7 @@ export class CadastroAppPage {
         senha:this.formBuilder.control('', [Validators.required, Validators.minLength(3)]),
         confirmSenha:this.formBuilder.control('',[Validators.required])
     },{validator:CadastroAppPage.equalTo})
+    
   }
 
   static equalTo(group:AbstractControl):{[key:string]:boolean}{
@@ -77,8 +79,10 @@ export class CadastroAppPage {
     let login_form = email_form.substring(0, email_form.lastIndexOf("@"));
      
     this.permissao ={
-      descricao: "Usuario"
+      descricao: "USER"
     }
+
+    let loading: Loading = this.showLoading();
 
     this.usuario ={
       nome: nome_form,
@@ -93,6 +97,7 @@ export class CadastroAppPage {
     this.usuarioService.cadastrarUsuario(this.usuario)
     .subscribe(response =>{
       console.log(response.status)
+      loading.dismiss();
       if(response.status){
         let alert = this.alertCtrl.create({
           title: 'Parabéns',
@@ -104,7 +109,19 @@ export class CadastroAppPage {
       }
     },
     error =>{
+      loading.dismiss();
     });
+  }
+
+
+  
+  //metodo que retorna um loading na tela
+  private showLoading(): Loading {
+    let loading: Loading = this.loadingCtrl.create({
+      content: 'Aguarde...'
+    })
+    loading.present();
+    return loading;
   }
 
 }

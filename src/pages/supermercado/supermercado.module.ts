@@ -7,7 +7,7 @@ import { SupermercadoPage } from './supermercado';
     SupermercadoPage,
   ],
   imports: [
-    IonicPageModule.forChild(SupermercadoPage),
+    IonicPageModule.forChild(SupermercadoPage)
   ],
 })
 export class SupermercadoPageModule {}

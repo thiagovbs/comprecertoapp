@@ -1,13 +1,4 @@
 page-sugestao {
-/*     .card-header{
-        background-color: map-get($colors, primary);
-        color: #fff;
-        
-    }
-    .card-content {
-        
-        height: 0px !important;
-    } */
 
     .expand-wrapper {
         transition: 0.2s linear;
@@ -19,7 +10,10 @@ page-sugestao {
     }
  
     .expanded{
-        height:200px !important;
+        height:250px !important;
+    }
+    .expandedplus{
+        height: 180px !important;
     }
 
     .ion-item{

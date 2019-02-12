@@ -28,8 +28,11 @@
                             <p><small>Válido até: 13/10/2019</small></p>
                         </div>
                         <div style="margin-top:50px;">
-                            <btn-qnt-produto [itemFound]="item"
-                             (add)="aumentaQnt(item)" (sub)="diminuiQnt(item)"></btn-qnt-produto>
+                            <btn-qnt-produto
+                            [nomePage]="'Sacola'" 
+                            [itemFound]="item"
+                             (add)="aumentaQnt(item)"
+                             (sub)="diminuiQnt(item)"></btn-qnt-produto>
                         </div>
                     </ion-col>
                 </ion-row>

@@ -1,5 +1,4 @@
-import { Component, Input, EventEmitter, Output } from '@angular/core';
-import { Produto } from '../../models/produto.model';
+import { Component, Input, EventEmitter, Output, OnInit } from '@angular/core';
 import { CarrinhoService } from '../../services/carrinho.service';
 import { CarrinhoItem } from '../../models/carrinho-item.model';
 
@@ -7,20 +6,24 @@ import { CarrinhoItem } from '../../models/carrinho-item.model';
   selector: 'btn-qnt-produto',
   templateUrl: 'btn-qnt-produto.html'
 })
-export class BtnQntProdutoComponent{
+export class BtnQntProdutoComponent implements OnInit {
 
   @Input() itemFound:CarrinhoItem
+  @Input() nomePage:string
   
   @Output() add = new EventEmitter<any>()
   @Output() sub = new EventEmitter<any>()
-  @Output() remove = new EventEmitter<any>()
+  
   constructor(private carrinhoService: CarrinhoService) {
   }
 
-
+  ngOnInit() {
+    console.log(this.nomePage)
+  }
 
   //aumenta quantidade de produtos
   emitAddevent() {
+      console.log(this.itemFound)
       this.add.emit()
    }
 
@@ -29,6 +32,12 @@ export class BtnQntProdutoComponent{
   }
 
    RemoveProdutoCarrinho(){
-    this.carrinhoService.removeItem(this.itemFound)
+     if(this.nomePage =="Sacola"){
+      this.carrinhoService.removeItemCarrinho(this.itemFound)
+      
+     }else{
+      this.carrinhoService.removeItem(this.itemFound)
+     }
+    
   }
 }

@@ -2,18 +2,16 @@ alcance {
 
     .select-model{
         border-radius: 10px;
-        font-size: 1.2rem;
+        font-size: 1.0rem;
         min-height: 0 !important;
         margin-top:6px;
         padding-left: 0px; 
+        color:#000;
         
     }
     .select-text {
-        min-width: 60px;
+        min-width: 64px;
         
-    }
-    .label-md {
-     margin: 3px 10px 3px 10px !important;
     }
 
     .select-md .select-icon {
@@ -22,12 +20,12 @@ alcance {
 
     .resize{
         max-width: 15% !important;
-        padding: 5px 80px 5px 15px;
+        padding: 4px 80px 0px 15px;
     }
 
     .resize2{
         max-width: 15% !important;
-        padding: 5px 60px 5px 6px;
+        padding: 4px 60px 0px 6px;
 
         .select-text{
             min-width: 20px !important;
@@ -36,7 +34,12 @@ alcance {
 
     .lbl_eselect{
         font-size: 0.8em;
+        font-weight: 400;
+        color:#ededed
     }
 
+    .hide{
+        color: #fff;
+    }
 
 }

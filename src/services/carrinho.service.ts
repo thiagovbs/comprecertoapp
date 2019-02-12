@@ -1,4 +1,4 @@
-import { Injectable, EventEmitter } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { Produto } from "../models/produto.model";
 import { CarrinhoItem } from "../models/carrinho-item.model";
 import { AlertController, Events } from "ionic-angular";
@@ -11,8 +11,8 @@ export class CarrinhoService {
     carrinhoItem: CarrinhoItem
     produto: Produto;
 
-    constructor(private ctrlAlert: AlertController,public events: Events) {
-    
+    constructor(private ctrlAlert: AlertController, public events: Events) {
+
     }
 
     //deleta todos os produtos da lista
@@ -21,7 +21,7 @@ export class CarrinhoService {
     }
 
     //adiciona item no carrinhoItem
-    addItem(item: Produto, nomeCategoria?:string) {
+    addItem(item: Produto, nomeCategoria?: string) {
         let foundItem = this.items.find((carditem) => carditem.produto.idProduto === item.idProduto);
         if (foundItem) {
             this.aumentaQnt(foundItem);
@@ -32,39 +32,36 @@ export class CarrinhoService {
 
     //aumenta a quantidade se o carrinho possuir o produto
     aumentaQnt(item: CarrinhoItem): number {
-        console.log(item.produto.quantidade + "+" + item.quantidade)
-        if (item.quantidade >= item.produto.quantidade) {
-
-            this.ctrlAlert.create({
-                title: 'Quantidade Excedida',
-                message: 'Não há mais produtos no estoque',
-                enableBackdropDismiss: false,
-                buttons: [
-                    { text: 'Ok' }
-                ]
-            }).present()
-            return item.quantidade
-        }
         return item.quantidade = item.quantidade + 1;
     }
 
     //diminui a quantidade se o carrinho possuir o produto
     diminuiQnt(item: Produto) {
         let foundItem = this.items.find((carditem: CarrinhoItem) => carditem.produto.idProduto === item.idProduto);
-        this.diminuiQntCarrinho(foundItem);
+        console.log(foundItem.quantidade)
+        if (foundItem.quantidade <= 1) {
+            this.removeItem(foundItem)
+        }
+        return foundItem.quantidade = foundItem.quantidade - 1;
     }
 
     //deleta o produto da lista
-    removeItem(item: CarrinhoItem) {   
+    removeItem(item: CarrinhoItem) {
+        this.items.splice(this.items.indexOf(item), 1);
+        //this.events.publish('deletar');
+    }
+
+    //deleta o produto da lista
+    removeItemCarrinho(item: CarrinhoItem) {
         this.items.splice(this.items.indexOf(item), 1);
         this.events.publish('deletar');
     }
 
     diminuiQntCarrinho(item: CarrinhoItem) {
-        console.log(item.quantidade)
         if (item.quantidade <= 1) {
-            this.removeItem(item)
+            this.removeItemCarrinho(item)
         }
         return item.quantidade = item.quantidade - 1;
+       
     }
 }

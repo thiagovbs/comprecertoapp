@@ -17,16 +17,18 @@
 
   <!--list of posts-->
   <ion-list class="list-full-border">
-    <ion-item  *ngFor="let supermercado of supermercados; let i = index " text-wrap>
-      <ion-thumbnail item-left>
-        <div *ngIf="supermercado.logo !== null">
-            <img class="img-rounded" src="{{ supermercado.logo }}" alt="">
-        </div>
-        <img class="img-rounded" src="assets/imgs/no-image.png" alt="">
+    <ion-item  *ngFor="let supermercado of supermercados; let i = index " text-wrap (click)="onMercado(supermercado)">
+      <ion-thumbnail item-left style="margin-top:15px">
+        <!-- <div *ngIf="supermercado.logo !== null">
+            <img class="img-rounded" src="{{bucketS3}}/mercado1.jpg" alt="">
+        </div> -->
+        <img class="img-rounded" 
+            style="height:70px; width:70px" 
+            src="{{bucketS3}}/mercado{{supermercado.idMercado}}.jpg" alt="">
       </ion-thumbnail>
       <div>
         <div>{{ supermercado.nomeFantasia }}</div>
-        <p class="text-sm" ion-text color="light-dark">{{supermercado.mercadoLocalidades}}</p>
+        <p class="text-sm" ion-text color="light-dark">Localidades</p>
         <a (click)="ActiveMercado(supermercado, i)">
             <span class="pull-right" [class.star-gold]="activeStar[i]">
                <ion-icon  name="ios-notifications-outline"></ion-icon>

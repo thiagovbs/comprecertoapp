@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-angular';
 import { SubCategoriaService } from '../../services/subcategorias.service';
 import { Subcategoria } from '../../models/subcategoria.model';
 import { Produto } from '../../models/produto.model';
 import { Categoria } from '../../models/categoria.model';
 import { Supermercado } from '../../models/supermercado.model';
-import { CarrinhoItem } from '../../models/carrinho-item.model';
 
+import { AlcanceService } from '../../services/alcance.service';
+import { AlcanceComponent } from '../../components/alcance/alcance';
 
 
 @IonicPage()
@@ -28,14 +29,18 @@ export class SubcategoriaPage {
   mercado:Supermercado[];
 
 
-  constructor(public navCtrl: NavController,
+  constructor(
+    private alcanceService: AlcanceService,
+    public navCtrl: NavController,
     public navParams: NavParams,
-    private subcategoriaService: SubCategoriaService) {
+    private subcategoriaService: SubCategoriaService,
+    private popoverCtrl: PopoverController) {
   }
 
   ionViewWillEnter() {
     //retorna as categorias da pagina home
     this.categoria = this.navParams.get('cat');
+    console.log(this.categoria)
     this.categoriaNome = this.categoria.nome;
 
     //listando as subcategorias
@@ -46,11 +51,24 @@ export class SubcategoriaPage {
       .subscribe((resp: Produto[]) => {
         this.produtos = resp;
         if (this.produtos.length === 0) {
-          this.produtos = undefined;
-          
+          this.produtos = undefined; 
         }
       }, erro => { })
   }
+
+    //Impedir que a página abra sem o alcance settado
+    ionViewCanEnter():boolean{
+      let retornoAlcance:boolean =false;
+      if(this.alcanceService.getLocaAlcance()){
+        retornoAlcance = true;
+      }
+      else{
+        let popover = this.popoverCtrl.create(AlcanceComponent, { showBackdrop: true, cssClass: 'custom-popover' });
+        popover.present();
+      }
+      
+      return retornoAlcance
+    }
 
   onSubCategoria(sub: string): Produto[] {
     this.subcategoriaNome = sub;

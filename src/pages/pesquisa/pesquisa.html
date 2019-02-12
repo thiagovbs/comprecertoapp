@@ -1,14 +1,12 @@
-
-
 <ion-header>
 
-  <ion-navbar color="secondary" >
-   
-      <ion-item class="item-search" >
-        <ion-input class="text-type"  floating type="text" placeholder="Pesquisar"></ion-input>
-      </ion-item>
+  <ion-navbar color="secondary">
+
+    <ion-item class="item-search">
+      <ion-input class="text-type" (input)="filterItems($event)" floating type="text" placeholder="Pesquisar"></ion-input>
+    </ion-item>
     <ion-buttons end>
-      <button ion-button (click)="onSearch()" class="back-button-md">
+      <button ion-button class="back-button-md">
         <ion-icon name="ios-funnel-outline"></ion-icon>
       </button>
     </ion-buttons>
@@ -16,7 +14,22 @@
 
 </ion-header>
 
-
 <ion-content margin-top class="gray-bg">
+  <ion-list *ngIf="searchTerm">
+    <ion-item class="item-title" *ngIf="filterMercados.length !==0" no-lines>
+      <h2 style=" font-size:0.88em; color:#fff">Supermercados</h2>
+    </ion-item>
+    <div *ngIf="filterMercados.length ===0">
+      <ion-item class="item-title" no-lines>
+        <h2 style=" font-size:0.88em; color:#fff">Não existem mercados com esse nome</h2>
+      </ion-item>
+    </div>
+    <div *ngIf="filterMercados.length !==0">
+      <button ion-item *ngFor="let mercado of filterMercados">
+        <h2>{{mercado.nomeFantasia}}</h2>
+      </button>
+    </div>
+
+  </ion-list>
 
 </ion-content>

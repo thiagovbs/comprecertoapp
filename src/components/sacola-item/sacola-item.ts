@@ -23,16 +23,12 @@ export class SacolaItemComponent implements OnInit {
     //Evento do botão de deletar, para dar um reaload na página
     this.events.subscribe('deletar', () => {
       this.navCtrl.setRoot(this.navCtrl.getActive().component);
-
     })
 
-
-    console.log("entrei no onOnit do sacola-item")
     this.items = this.items.filter((carrinho) => {
       return carrinho.categoriaNome.toUpperCase() == this.categoria ? this.items : ''
     })
   }
-
 
   //diminui a quantidade de produtos
   diminuiQnt(item: CarrinhoItem) {
@@ -44,6 +40,5 @@ export class SacolaItemComponent implements OnInit {
     this.carrinhoService.aumentaQnt(item);
 
   }
-
  
 }

@@ -5,6 +5,7 @@ import { UserLogin } from "../models/userLogin";
 import { API_CONFIG } from "../config/api.config";
 import { Usuario } from "../models/usuario";
 import { UsuarioService } from "./usuario.service";
+import { AlcanceService } from "./alcance.service";
 
 
 
@@ -12,7 +13,9 @@ import { UsuarioService } from "./usuario.service";
 @Injectable()
 export class AuthService{
 
-    constructor(public http:HttpClient, public usuarioService: UsuarioService){
+    constructor(public http:HttpClient,
+                public usuarioService: UsuarioService,
+                public alcanceService:AlcanceService){
         
     }
 
@@ -42,6 +45,7 @@ export class AuthService{
 
     logout(){
         this.usuarioService.setLocalUser(null);
+        this.alcanceService.setLocalAlcance(null);
     }
 
     getAccessToken(refreshToken){

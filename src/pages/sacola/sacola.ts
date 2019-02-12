@@ -22,12 +22,6 @@ export class SacolaPage implements OnInit {
     public viewCtrl: ViewController,
     public appCtrl: App) {
 
-
-    //Evento do botão de deletar, para dar um reaload na página
-    this.events.subscribe('deletar', () => {
-      this.navCtrl.setRoot('SacolaPage');
-    })
-
   }
 
   ngOnInit() {

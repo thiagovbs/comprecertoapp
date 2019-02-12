@@ -38,10 +38,4 @@
     <produto-item [produto-itens]="filterProdutos"></produto-item>
     <!-- Exemplo de produto -->
   </ion-list>
-
-  <ion-list class="list-full-border" *ngIf="!produtos || !filterProdutos">
-    <ion-item class="card">
-      <h3 text-center>Não existem produtos nessa sessão</h3>
-    </ion-item>
-  </ion-list>
 </ion-content>

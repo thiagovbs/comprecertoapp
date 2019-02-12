@@ -20,6 +20,7 @@ export class UsuarioService{
        });
     }
 
+    //Pegar o usuário ativo no localstorage
     getLocalUser():Usuario{
         let user = localStorage.getItem(STORAGE_KEYS.localUser);
         if(user === null){
@@ -30,6 +31,7 @@ export class UsuarioService{
     }
 
 
+    //Settar o usuário no localStorage
     setLocalUser(obj:Usuario){ 
         if(obj === null){
             localStorage.removeItem(STORAGE_KEYS.localUser)

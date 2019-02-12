@@ -31,9 +31,10 @@ export class MyApp {
     this.initializeApp();
 
     if(this.userService.getLocalUser() !== null){
+      
       this.rootPage = "HomePage";
     }else{
-      this.rootPage = 'CadastroPage';
+      this.rootPage = "CadastroPage";
     }
 
     // used for an example of ngFor and navigation
@@ -42,7 +43,7 @@ export class MyApp {
       { title: 'Minha Sacola', component: 'SacolaPage' , icon:'assets/icon/minha-sacola.svg'},
       { title: 'Supermercados', component: 'SupermercadoPage', icon:'assets/icon/supermercado.svg'},
       { title: 'Sugestões', component: 'SugestaoPage', icon:'assets/icon/sugestao.svg'},
-      { title: 'Promoção', component: 'PromocaoPage', icon:'assets/icon/promocao.svg'},
+      { title: 'Cupons', component: 'PromocaoPage', icon:'assets/icon/promocao.svg'},
       { title: 'Política de privacidade', component: 'PoliticaPrivacidadePage', icon:'assets/icon/politica-privacidade.svg'}
       
     ];
