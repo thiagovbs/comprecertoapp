@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { IonicPage, NavController, NavParams, Events, ViewController, App } from 'ionic-angular';
 import { CarrinhoItem } from '../../models/carrinho-item.model';
 import { CarrinhoService } from '../../services/carrinho.service';

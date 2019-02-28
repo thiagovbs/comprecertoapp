@@ -22,12 +22,12 @@ export class CadastroAppPage {
   sexoList = [
     {nome: 'Masculino', value: 'M'},
     {nome: 'Feminino', value: 'F'},
+    {nome: 'Outro', value: 'O'},
     
   ];
 
   usuario:Usuario;
   permissao:Permissao;
-
 
   constructor(public navCtrl: NavController,
               public menu:MenuController,
@@ -55,22 +55,19 @@ export class CadastroAppPage {
       return undefined;
     }
     if(senha.value !== confirmSenha.value){
-      
       return {senhaNaoCompara:true}
     }
     return undefined;
   }
 
-
   ionViewWillEnter(){
     this.menu.swipeEnable(false);
     }
 
-
-
   SubmitForm(){
     let nome_form = this.cadastroForm.controls['nome'].value;
     let sexo_form = this.cadastroForm.controls['sexo'].value;
+    console.log(sexo_form)
     let dtNascimento_form = this.cadastroForm.controls['dtNascimento'].value;
     let dt_Nascimento = new Date(dtNascimento_form) 
     var milliseconds = dt_Nascimento.getTime(); 

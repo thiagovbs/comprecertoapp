@@ -19,8 +19,8 @@ export class AuthService{
         
     }
 
-    
     autenticar(userLogin:UserLogin){
+        console.log(userLogin)
         const hds = new HttpHeaders({
             'Content-Type': 'application/x-www-form-urlencoded',
             'Authorization': 'Basic aW9uaWM6MTBuMWMw'

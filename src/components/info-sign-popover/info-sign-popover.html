@@ -1,39 +1,37 @@
-
-<ion-content class=" gray-bg" style="background-color: #f8fff8;height: 100%" >
+<ion-content class=" gray-bg" style="background-color: #f8fff8;height: 100%">
   <div padding text-center style="padding-top:40px;">
-    <img src="assets/imgs/logomarca.svg"  height="120" alt="">
+    <img src="assets/imgs/logomarca.svg" height="120" alt="">
   </div>
-<ion-grid >
-  <ion-row>
-    <ion-col text-center>
-      <strong><label style="font-size: 1.2em; color:#1f1e1e" >Complete seu cadastro</label></strong> 
-    </ion-col>
-    <form novalidate [formGroup]="cadastroForm" (ngSubmit)="SubmitMaisInfoForm()">
-    <ion-row  radio-group >  
-        <ion-item class="bg-transparent" no-lines >
-            <label for="sexo" class="size" >Informe seu sexo:</label>
-        </ion-item>
-      <ion-col col-12 *ngFor="let sexo of sexoList">
-        <ion-item class="bg-transparent size" style="margin-top:-15px;"  no-lines>
-          <ion-label>{{sexo.nome}}</ion-label>
-          <ion-radio value="{{sexo.value}}"></ion-radio>
-        </ion-item>
+  <ion-grid>
+    <ion-row>
+      <ion-col text-center>
+        <strong><label style="font-size: 1.2em; color:#1f1e1e">Complete seu cadastro</label></strong>
       </ion-col>
+      <form novalidate [formGroup]="cadastroPopUpForm" (ngSubmit)="SubmitMaisInfoForm()">
+        <ion-row radio-group formControlName="sexo">
+          <ion-item class="bg-transparent" no-lines>
+            <label for="sexo" class="size">Informe seu sexo:</label>
+          </ion-item>
+          <ion-col col-12 *ngFor="let sexo of sexoList">
+            <ion-item class="bg-transparent size" style="margin-top:-15px;" no-lines>
+              <ion-label>{{sexo.nome}}</ion-label>
+              <ion-radio value="{{sexo.value}}"></ion-radio>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-col col-12>
+          <ion-item class="bg-transparent size">
+            <ion-label style="color:#000">Informe sua data de nascimento:</ion-label>
+            <ion-datetime displayFormat="DD/MM/YYYY" autocomplete="off" pickerFormat="MMMM-YYYY-DD"
+              formControlName="dtNascimento"></ion-datetime>
+          </ion-item>
+        </ion-col>
+        <button ion-button block style="width:100%; float:center" class="register" color="secondary" margin-top
+          [disabled]="!cadastroPopUpForm.valid">
+          <ion-icon name="ios-create-outline" style="margin-right: 12px;">
+          </ion-icon> Confirmar
+        </button>
+      </form>
     </ion-row>
-    <ion-col col-12>
-        <ion-item class="bg-transparent size">
-          <ion-label style="color:#000">Informe sua data de nascimento:</ion-label>
-          <ion-datetime displayFormat="DD/MM/YYYY"
-                        autocomplete="off"
-                        pickerFormat="MMMM-YYYY-DD" formControlName="dtNascimento"></ion-datetime>
-        </ion-item>
-    </ion-col>
-    <button ion-button block style="width:100%; float:center"
-    class="register" color="secondary" margin-top  [disabled]="!cadastroForm.valid">
-     <ion-icon  name="ios-create-outline"  style="margin-right: 12px;">
-     </ion-icon> Confirmar
-   </button>
-  </form>
-  </ion-row>
-</ion-grid>
+  </ion-grid>
 </ion-content>

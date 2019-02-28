@@ -11,57 +11,57 @@ import { UsuarioService } from '../../services/usuario.service';
 export class InfoSignPopoverComponent {
 
 
-  cadastroForm: FormGroup 
+  cadastroPopUpForm: FormGroup
   @ContentChild(FormControlName) control: FormControlName;
 
-  user:Usuario
-  
-  faceId:string
-  faceEmail:string
-  faceNome:string
-
+  user: Usuario
+  faceId: string
+  faceEmail: string
+  faceNome: string
 
   sexoList = [
     {nome: 'Masculino', value: 'M'},
     {nome: 'Feminino', value: 'F'},
-    {nome: 'Outro', value: 'N'}
+    {nome: 'Outro', value: 'O'},
     
   ];
 
-  constructor(private navCntl:NavController,
-              private formBuilder:FormBuilder,
-              private params: NavParams,
-              private usuarioService:UsuarioService
-              ) {
+  constructor(private navCntl: NavController,
+    private formBuilder: FormBuilder,
+    private params: NavParams,
+    private usuarioService: UsuarioService
+  ) {
 
-    this.cadastroForm = this.formBuilder.group({
+    this.cadastroPopUpForm = this.formBuilder.group({
       sexo: this.formBuilder.control(false, [Validators.required]),
-      dtNascimento:this.formBuilder.control('',[Validators.required])
+      dtNascimento: this.formBuilder.control('', [Validators.required])
     })
 
-      //Informação não nula
-      this.faceId = "";
-      this.faceEmail = "";
-      this.faceNome = "";
+    //Informação não nula
+    this.faceId = "";
+    this.faceEmail = "";
+    this.faceNome = "";
   }
 
-  ionViewWillEnter(){
+  ionViewWillEnter() {
     let face = this.params.get('usuario');
     this.faceId = face.id;
     this.faceNome = face.name;
     this.faceEmail = face.email;
-    
+    console.log(this.faceId)
+
   }
 
-  SubmitMaisInfoForm(){
-    let sexo_form = this.cadastroForm.controls['sexo'].value;
-    let dtNascimento_form = this.cadastroForm.controls['dtNascimento'].value;
-    let dt_Nascimento = new Date(dtNascimento_form) 
-    var milliseconds = dt_Nascimento.getTime(); 
-    
+  SubmitMaisInfoForm() {
+    let sexo_form = this.cadastroPopUpForm.controls['sexo'].value;
+    console.log(sexo_form)
+    let dtNascimento_form = this.cadastroPopUpForm.controls['dtNascimento'].value;
+    let dt_Nascimento = new Date(dtNascimento_form)
+    var milliseconds = dt_Nascimento.getTime();
+
     //preenchendo o usuário com todas as informações para seu cadastro
-    this.user ={
-      accessToken:null,
+    this.user = {
+      accessToken: null,
       refreshToken: null,
       nome: this.faceNome,
       email: this.faceEmail,
@@ -72,9 +72,9 @@ export class InfoSignPopoverComponent {
     }
 
     this.usuarioService.cadastrarUsuario(this.user)
-    .subscribe(response =>{
-      this.navCntl.setRoot('HomePage');
-    },erro =>{})
+      .subscribe(response => {
+        this.navCntl.setRoot('HomePage');
+      }, erro => { })
   }
 
 }

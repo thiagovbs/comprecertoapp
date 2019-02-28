@@ -45,25 +45,21 @@ export class CadastroPage {
       if(res.status ==='connected'){
         this.fb.api('me?fields=id,name,email', [])
         .then(profile => {
-          
           this.userLogin ={
             username: profile.email,
             password: profile.id
           }
-          if( this.LoggarFacebook(this.userLogin)){
-
+          if(this.loggarFacebookOuGmail(this.userLogin)){
             //loggar usuário
-           
+            this.navCtrl.setRoot('HomePage');       
           }else{
             this.AddModalAlert(profile);
-          }
-          
+          }    
         });
         //this.navCtrl.setRoot('HomePage');
       }else{
         alert('failed');
-      }
-      
+      }     
     }).catch(e => console.log('erro para logar no facebook', e))
   }
 
@@ -73,26 +69,21 @@ export class CadastroPage {
     this.googlePlus.login({
     })
     .then(res => {
-      this.getData(res.accessToken);
+      this.userLogin ={
+        username: res.email,
+        password: res.userId
+      }
+      
+      if(this.loggarFacebookOuGmail(this.userLogin)){
+        //loggar usuário
+        this.navCtrl.setRoot('HomePage');       
+      }else{
+        this.AddModalAlert(res);
+      }    
     })
     .catch(err => console.error(err));
   }
   
-  //pegando o usuário pelo Google Plus
-  getData(token){
-    this.http.get('https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token='+ token)
-    .subscribe((data:any) => {
-      this.user={
-        accessToken: null,
-        refreshToken: null,
-        nome: data.name,
-        login:data.email,
-        senha:data.id,
-        email:data.email,
-      }
-    })
-  }
-
   cadastrar(){
     this.navCtrl.push('CadastroAppPage')
   }
@@ -104,11 +95,10 @@ export class CadastroPage {
   }
 
   //Função que retorna um boolean pra verficar se o usuário consegue ou n loggar no sistema
-  LoggarFacebook(userLogin):boolean{
+  loggarFacebookOuGmail(userLogin):boolean{
     this.authService.autenticar(userLogin).subscribe(response =>{
-      console.log(response);
-    },error=>{})
-    
+      
+    })
     return this.login;
   }
 
