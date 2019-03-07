@@ -3,18 +3,17 @@
     <ion-title text-center>{{mercadoNome}}</ion-title>
     <ion-buttons end>
       <button ion-button class="back-button-md" (click)="onSearch()">
-        <ion-icon name="ios-search-outline"></ion-icon>
+        <ion-icon class="search-icon" name="ios-search-outline"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
-
+</ion-header>
 
   <ion-content class="gray-bg">
-    <ion-list class="list-full-border">
-      <!-- <produto-item [produto-itens]="produtos"
-                    [nomeCategoria]="categoriaNome" 
-                    [mercado-itens]="mercado">
-      </produto-item> -->
+    <ion-list class="card-background-page" no-padding no-margin>
+      <ion-card class="card" *ngFor="let categoria of categorias | async" (click)="onSubCategoria(categoria)">
+        <img src="{{bucketS3}}/cat{{categoria.idCategoria}}.jpg" />
+      </ion-card>
     </ion-list>
 
   </ion-content>

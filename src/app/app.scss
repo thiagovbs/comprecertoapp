@@ -162,7 +162,7 @@
   
   // style for auth pages
   .auth-bg {
-    background: url("../assets/imgs/inicial.png") no-repeat center;
+    background: url("../assets/imgs/LoginCompreCertoapp-08.jpg") no-repeat center;
     background-size: 100% 100%;
   
     .scroll-content {
@@ -308,11 +308,12 @@
     min-width: 85px !important;
 }
 
+//Segundo menu
 .menu-2{
   height: 32px;
   width: 100%;
   background-color: color($colors, secondary);  
-  margin-top: -2px;  
+  margin-top: -15px;  
 
   .segment{
     display: block;
@@ -321,14 +322,15 @@
     
     .segment-button{
       color:#f8f8f8;
-      font-size: 0.80em;
+      font-size: 0.85em;
       display: inline;
-      padding: 3px 8px;
-      
+      padding: 3px 8px; 
     }
+
   }
-
-
+  .segment-md-primary .segment-button.activated, .segment-md-primary .segment-button.segment-activated {
+    border-color: #e9e3e3  
+  }
   ul {
     list-style-type: none;
     margin: 0;
@@ -346,6 +348,10 @@ li.active{
   border-bottom: 3px solid #f8f8f8;
   }
 }
+.toolbar-ios .segment-ios {
+   top: 5px !important;
+}
+//fim menu 2
 
 button{
   font-size: 13px !important;
@@ -382,21 +388,51 @@ ion-alert {
 
 }
 
+.popover-ios .popover-content{
+  top: 50px !important;
+}
+
 .popover-content{
   top: 57.5px !important;
-  
   left: 0px !important;
 }
 
-ion-popover{
-  
+.popover-md{ 
   ion-backdrop
   {
   	opacity: 0.4;
   }
 }
 
+.popover-ios{
+  ion-backdrop
+  {
+  	opacity: 0.4 !important;
+  }
+  .select-ios {
+    height: 18px;
+  }
+  .select-ios .select-icon {
+    display: none;
+  }
+}
 
+.toolbar-md{
+  padding: 0 !important;
+}
 
+.search-icon{
+  font-size: 1.5em;
+  font-weight: 700;
+}
+
+/* .bar-button-menutoggle-md ion-icon {
+  padding: 0 6px;
+  font-size: 2.3rem;
+  font-weight: 500;
+} */
+.toolbar-ios {
+  min-height: 70px;
+}
 
 

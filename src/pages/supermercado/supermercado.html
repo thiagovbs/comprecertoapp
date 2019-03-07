@@ -4,10 +4,10 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title text-center>Compre Certo</ion-title>
+    <ion-title text-center>Supermercados</ion-title>
     <ion-buttons end>
       <button ion-button (click)="onSearch()" class="back-button-md">
-        <ion-icon name="ios-search-outline"></ion-icon>
+        <ion-icon class="search-icon" name="ios-search-outline"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -28,12 +28,7 @@
       </ion-thumbnail>
       <div>
         <div>{{ supermercado.nomeFantasia }}</div>
-        <p class="text-sm" ion-text color="light-dark">Localidades</p>
-        <a (click)="ActiveMercado(supermercado, i)">
-            <span class="pull-right" [class.star-gold]="activeStar[i]">
-               <ion-icon  name="ios-notifications-outline"></ion-icon>
-            </span>
-          </a> 
+        <p class="text-sm" ion-text color="light-dark">Tijuca</p>
       </div>
     </ion-item>
   </ion-list>

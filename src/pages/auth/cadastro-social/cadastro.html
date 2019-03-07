@@ -1,27 +1,27 @@
 <ion-content class="auth-bg">
-  
+
   <div class="login-content">
     <div class="overlay">
       <!-- Logo -->
-      <div padding text-center style="padding-top:80px;">
-        <img src="assets/imgs/logomarca.svg"  height="150" alt="">
+      <div padding text-center style="padding-top:60px;">
+        <img src="assets/icon/Logo-Sheap-04.svg" height="120" alt="">
       </div>
       <div class="socialLogin" padding>
-        <button ion-button full class="google" icon-start (click)="googleLogin()">
-          <ion-icon name="logo-google" >
-          </ion-icon>Entrar com o Google+
-        </button>
         <button (click)="fbLogin()" ion-button full icon-start class="facebook">
-          <ion-icon name="logo-facebook" >
-          </ion-icon> Entrar com o Facebook
+          <ion-icon name="logo-facebook">
+          </ion-icon>Entrar com o Facebook
         </button>
-        <button ion-button full  class="register" icon-start (click)="entrar()">
-          <ion-icon   name="person" >
+        <button ion-button full class="google" icon-start (click)="googleLogin()">
+          <ion-icon name="logo-google">
+          </ion-icon>Entrar com o Google+ &nbsp;
+        </button>
+        <button ion-button full class="register" icon-start (click)="entrar()">
+          <ion-icon name="person">
           </ion-icon>Entrar com o seu E-mail
         </button>
-        <a class="span-cadastro" (click)="cadastrar()">Cadastre-se agora !</a> 
+        <a class="span-cadastro" (click)="cadastrar()">Cadastre-se agora !</a>
       </div>
     </div>
   </div>
-  
+
 </ion-content>

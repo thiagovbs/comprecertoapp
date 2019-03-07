@@ -1,13 +1,17 @@
-<ion-header>
+<ion-header no-border>
   <ion-navbar color="secondary">
-    <ion-title text-center>{{categoriaNome}}</ion-title>
+    <ion-title text-center style="margin-top:20px;max-height: 45px;"><span>MAIS BARATOS</span>
+      <bdo dir="rtl">
+        <p>{{categoriaNome}}</p>
+      </bdo>
+    </ion-title>
+    
     <ion-buttons end>
       <button ion-button class="back-button-md" (click)="onSearch()">
-        <ion-icon name="ios-search-outline"></ion-icon>
+        <ion-icon class="search-icon" name="ios-search-outline"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
-
 </ion-header>
 <!-- Lista das subcategorias por mercado -->
 <ion-content class="gray-bg">
@@ -26,9 +30,7 @@
 
   <ion-list class="list-full-border" *ngIf="subcategoriaNome === 'Todos' && produtos">
     <!-- Exemplo de produto -->
-    <produto-item [produto-itens]="produtos"
-                  [nomeCategoria]="categoriaNome" 
-                  [mercado-itens]="mercado">
+    <produto-item [produto-itens]="produtos" [nomeCategoria]="categoriaNome" [mercado-itens]="mercado">
     </produto-item>
     <!-- Exemplo de produto -->
   </ion-list>

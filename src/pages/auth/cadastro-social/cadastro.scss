@@ -8,8 +8,9 @@ page-cadastro {
       }
       .facebook{
         text-transform: initial;
-        background-color: rgba(59, 89, 152,0.80);
-        padding: 30px;
+        margin-top:90px;
+        background-color: rgba(0, 165, 189,0.75);
+        padding: 33px;
         border-radius: 10px;
 
       }
@@ -18,38 +19,30 @@ page-cadastro {
         background-color: rgba(59, 89, 152,0.80) !important;
       }
 
-      .google:active, .google:focus, .google:hover{
-        background-color: rgba(209, 61, 53, 0.80);
+      .google{
+        text-transform: initial;
+        background-color: rgba(209, 61, 53, 0.75) !important;
+        padding: 33px;
+        border-radius: 10px;
       }
 
-      .google{
-        margin-top:100px;
-        text-transform: initial;
-        background-color: rgba(209, 61, 53, 0.80);
-        padding: 30px;
-        border-radius: 10px;
+      .google:active, .google:focus, .google:hover{ 
+        background-color: rgba(255, 82, 79, 1);
       }
       .register{
         text-transform: initial;
-        background-color: rgba(2, 125, 110, 0.80);
-        padding: 30px;
+        background-color: rgba(0, 152, 128,0.75);
+        padding: 33px;
         border-radius: 10px;
       }
-      .container-logo {
-        display: inline-block;
-        width: 100%;
-        margin: 20px 0;
-        img {
-          max-width: 250px;
-        }
-      }
+
       .overlay {
         top: 0;
         bottom:0;
         position: absolute;
         width: 100%;
         font-size: 1.5em;
-        background: rgba(0, 0, 0, 0.7);
+        background: rgba(0, 0, 0, 0.65);
       }
 
       .span-cadastro{

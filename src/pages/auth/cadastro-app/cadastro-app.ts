@@ -67,7 +67,6 @@ export class CadastroAppPage {
   SubmitForm(){
     let nome_form = this.cadastroForm.controls['nome'].value;
     let sexo_form = this.cadastroForm.controls['sexo'].value;
-    console.log(sexo_form)
     let dtNascimento_form = this.cadastroForm.controls['dtNascimento'].value;
     let dt_Nascimento = new Date(dtNascimento_form) 
     var milliseconds = dt_Nascimento.getTime(); 

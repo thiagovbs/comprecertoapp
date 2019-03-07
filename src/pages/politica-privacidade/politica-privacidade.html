@@ -1,69 +1,32 @@
-
 <ion-header>
-
   <ion-navbar color="secondary">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title text-center>Politica de privacidade</ion-title>
+    <ion-title text-center>Configurações</ion-title>
     <ion-buttons end>
       <button ion-button (click)="onSearch()" class="back-button-md">
-        <ion-icon name="ios-search-outline"></ion-icon>
+        <ion-icon class="search-icon" name="ios-search-outline"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
-
 </ion-header>
 
+<ion-content padding class="light-bg">
 
-<ion-content padding class="about gray-bg">
-  <h2 ion-text color="dark">Compre Certo </h2>
-  <span ion-text color="dark">Endereço</span>
+  <button outline ion-item full class="politic-button" (click)="politicDetail()">
+    <ion-icon item-left style="margin:0;"> 
+      <img src="assets/icon/Politica-de-privacidade_Prancheta.svg" height="19"  alt="" >
+    </ion-icon>
+    Política de Privacidade
+  </button>
+  <button outline ion-item full class="politic-button" margin-top (click)="termoUsoDetail()">
+    <ion-icon item-left style="margin:0;">
+      <img src="assets/icon/Termo-de-uso_Prancheta.svg" height="15" alt="">
+    </ion-icon>
+    Termos de Uso
+  </button>
 
-  <h3>Sobre nós</h3>
 
-  <p ion-text color="dark">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-    industry's
-    standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make
-    a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
-    remaining essentially unchanged</p>
 
-  
-
-  <ion-list class="list-full-border">
-    <ion-item *ngFor="let day of days">
-      <div>{{ day.name }}</div>
-      <span light-dark>{{ day.hours }}</span>
-    </ion-item>
-  </ion-list>
-
-  <h3>Entre em contato</h3>
-
-  <ion-list class="list-full-border">
-    <ion-item>
-      <ion-icon name="call" item-left></ion-icon>
-      Ligue para nós
-    </ion-item>
-    <ion-item>
-      <ion-icon name="mail" item-left></ion-icon>
-      Envie e-mail
-    </ion-item>
-  
-  </ion-list>
-
-  <h4>Nossa Rede Social</h4>
-  <ion-list class="list-full-border">
-    <ion-item>
-      <ion-icon name="logo-facebook" item-left></ion-icon>
-      Nos visite no Facebook
-    </ion-item>
-    <ion-item>
-      <ion-icon name="logo-instagram" item-left></ion-icon>
-     Siga no Instagram
-    </ion-item>
-    <ion-item>
-      <ion-icon name="logo-twitter" item-left></ion-icon>
-      Siga no Twitter
-    </ion-item>
-  </ion-list>
 </ion-content>

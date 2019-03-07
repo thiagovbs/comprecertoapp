@@ -17,4 +17,11 @@ export class PoliticaPrivacidadePage {
     this.navCtrl.push('PesquisaPage')
   }
 
+  politicDetail(){
+    this.navCtrl.push('PoliticaPrivacidadeDetailPage')
+  }
+
+  termoUsoDetail(){
+    this.navCtrl.push('TermoUsoDetailPage')
+  }
 }

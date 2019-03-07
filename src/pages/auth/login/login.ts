@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, MenuController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, MenuController, Loading, LoadingController } from 'ionic-angular';
 import { UserLogin } from '../../../models/userLogin';
 import { AuthService } from '../../../services/auth.service';
 
@@ -16,7 +16,8 @@ export class LoginPage {
   
   constructor(private navCtrl: NavController,
               private menu:MenuController,
-              private authService:AuthService) {
+              private authService:AuthService,
+              public loadingCtrl: LoadingController) {
                 
     this.login ={username:"",
                  password:""}
@@ -25,16 +26,28 @@ export class LoginPage {
   }
 
   loggar(){ 
+    let loading: Loading = this.showLoading();
     this.authService.autenticar(this.login).
     subscribe((data:any) =>{
+      loading.dismiss();
       this.authService.successfullLogin(data);
       this.navCtrl.setRoot('HomePage')
     },error =>{
+      loading.dismiss();
     });
   }
   
   ionViewWillEnter(){
     this.menu.swipeEnable(false);
   }
+
+    //metodo que retorna um loading na tela
+    private showLoading(): Loading {
+      let loading: Loading = this.loadingCtrl.create({
+        content: 'Aguarde...'
+      })
+      loading.present();
+      return loading;
+    }
   
 }

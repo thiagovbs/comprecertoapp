@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController} from 'ionic-angular';
+import { IonicPage, NavController, PopoverController } from 'ionic-angular';
 import { SupermercadoService } from '../../services/supermercado.service';
 import { Supermercado } from '../../models/supermercado.model';
 import { API_CONFIG } from '../../config/api.config';
+import { AlcanceService } from '../../services/alcance.service';
+import { AlcanceComponent } from '../../components/alcance/alcance';
 
 @IonicPage()
 @Component({
@@ -11,38 +13,52 @@ import { API_CONFIG } from '../../config/api.config';
 })
 export class SupermercadoPage {
 
-  activeStar: Array<boolean> = [];
-  
   supermercados: Supermercado;
 
-  bucketS3:string
+  bucketS3: string
 
-  constructor(public navCtrl: NavController, public supermercadoService:SupermercadoService) {
-    
+  constructor(public navCtrl: NavController,
+    public supermercadoService: SupermercadoService,
+    private alcanceService: AlcanceService,
+    private popoverCtrl: PopoverController) {
+
   }
 
   ionViewDidLoad() {
-    
-     this.supermercadoService.findAll()
-     .subscribe(response =>{
-      this.supermercados = response;
-    }, erro =>{}) 
+
+    this.supermercadoService.findAll()
+      .subscribe(response => {
+        this.supermercados = response;
+        
+      }, erro => { })
 
     //imagens S3
     this.bucketS3 = API_CONFIG.s3Url;
   }
 
-  ActiveMercado(mercado, i){
-    this.activeStar[i]=!this.activeStar[i]
-  }
-
-  onMercado(supermercado:Supermercado){
+  onMercado(supermercado: Supermercado) {
+    console.log(supermercado)
     this.navCtrl.push("SupermercadoDetalhePage", {
       mercado: supermercado
+      
     });
   }
 
-  onSearch(){
+  onSearch() {
     this.navCtrl.push('PesquisaPage')
+  }
+
+  //Impedir que a página abra sem o alcance settado
+  ionViewCanEnter(): boolean {
+    let retornoAlcance: boolean = false;
+    if (this.alcanceService.getLocaAlcance()) {
+      retornoAlcance = true;
+    }
+    else {
+      let popover = this.popoverCtrl.create(AlcanceComponent, { showBackdrop: true, cssClass: 'custom-popover' });
+      popover.present();
+    }
+
+    return retornoAlcance
   }
 }

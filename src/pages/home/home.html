@@ -1,17 +1,17 @@
-<ion-header>
+<ion-header no-border>
 
   <ion-navbar color="secondary" text-center>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title text-center>Compre Certo</ion-title>
+    <ion-title text-center style="margin-top:5px"><img src="assets/icon/LogoSheapBranca-03.svg" height="50" alt="">
+    </ion-title>
     <ion-buttons end>
       <button ion-button class="back-button-md" (click)="onSearch()">
-        <ion-icon name="ios-search-outline"></ion-icon>
+        <ion-icon class="search-icon" name="ios-search-outline"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
-
 </ion-header>
 
 <ion-content class="gray-bg">
@@ -28,7 +28,7 @@
 
   <ion-list class="card-background-page" no-padding no-margin>
     <ion-card class="card" *ngFor="let categoria of categorias | async" (click)="onSubCategoria(categoria)">
-      <img  src="{{bucketS3}}/cat{{categoria.idCategoria}}.jpg" />
+      <img src="{{bucketS3}}/cat{{categoria.idCategoria}}.jpg" />
     </ion-card>
   </ion-list>
 

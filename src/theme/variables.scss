@@ -37,7 +37,7 @@ $background-color: #fff;
 
 $colors: (
   primary: #009b89,
-  secondary: #027d6e,
+  secondary: #00836D,
   danger: #f53d3d,
   light: #FFF,
   dark: #222,
@@ -53,9 +53,10 @@ $colors: (
 // --------------------------------------------------
 // iOS only Sass variables can go here
 $alert-ios-background-color: #F7F9FC;
-$alert-ios-border-radius:10px;
+$alert-ios-border-radius:5px;
 $alert-ios-button-background-color: transparent;
-$popover-ios-width: 101%;
+$popover-ios-width: 100%;
+$popover-ios-border-radius:0px;
 
 // App Material Design Variables
 // --------------------------------------------------
