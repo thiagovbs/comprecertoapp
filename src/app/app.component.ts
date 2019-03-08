@@ -6,6 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { AuthService } from '../services/auth.service';
 import { UsuarioService } from '../services/usuario.service';
 import { AlcanceComponent } from '../components/alcance/alcance';
+import { Usuario } from '../models/usuario';
 
 
 
@@ -20,6 +21,7 @@ export class MyApp {
 
   rootPage: any;
   pages: Array<{ title: string, component: any, icon: string }>;
+  user:Usuario;
 
   constructor(public platform: Platform,
     public statusBar: StatusBar,
@@ -29,9 +31,10 @@ export class MyApp {
     public popoverCtrl: PopoverController) {
 
     this.initializeApp();
+    this.user = this.userService.getLocalUser();
+      console.log(this.userService.getLocalUser())
 
     if (this.userService.getLocalUser() !== null) {
-
       this.rootPage = "HomePage";
     } else {
       this.rootPage = "CadastroPage";

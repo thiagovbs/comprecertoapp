@@ -3,18 +3,24 @@
 
     <!-- User profile -->
     <div text-center class="padding-nav primary-bg menu-left ">
-      <a menuClose (click)="viewMyProfile()">
-        <img class="profile-picture" src="assets/imgs/adam.jpg">
-        <h4 ion-text color="light">Philipe Amorim</h4>
-      </a>
+      <div *ngIf="user.sexo==='M'">
+        <a menuClose>
+          <img class="profile-picture" src="assets/icon/Profile-masculino_Prancheta.svg">
+          <h4 ion-text color="light">{{user.nome}}</h4>
+        </a>
+      </div>
+      <div *ngIf="user.sexo==='F'">
+          <img class="profile-picture" src="assets/icon/Profile-femenino_Prancheta.svg">
+          <h4 ion-text color="light">{{user.nome}}</h4>
+      </div>
     </div>
-    <ion-list class="list-full-border"> 
+    <ion-list class="list-full-border">
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-          <ion-icon item-left><img [src]="p.icon" height="20" alt=""></ion-icon>
+        <ion-icon item-left><img [src]="p.icon" height="20" alt=""></ion-icon>
         {{p.title}}
       </button>
       <button menuClose ion-item (click)="sair()" style="position: fixed;bottom: 0px;">
-          <ion-icon item-left name="ios-log-out-outline" style="color:#00836D; font-weight:600;" ></ion-icon>
+        <ion-icon item-left name="ios-log-out-outline" style="color:#00836D; font-weight:600;"></ion-icon>
         Sair
       </button>
     </ion-list>
