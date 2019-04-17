@@ -7,7 +7,7 @@ import { AuthService } from '../services/auth.service';
 import { UsuarioService } from '../services/usuario.service';
 import { AlcanceComponent } from '../components/alcance/alcance';
 import { Usuario } from '../models/usuario';
-
+import {Events} from 'ionic-angular';
 
 
 
@@ -21,25 +21,29 @@ export class MyApp {
 
   rootPage: any;
   pages: Array<{ title: string, component: any, icon: string }>;
-  user:Usuario;
+  user: Usuario;
 
   constructor(public platform: Platform,
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
     private authService: AuthService,
     private userService: UsuarioService,
-    public popoverCtrl: PopoverController) {
+    public popoverCtrl: PopoverController,
+    public events:Events) {
 
-    this.initializeApp();
-  
-    this.user = this.userService.getLocalUser();
+    this.user  =this.userService.getLocalUser();
+
     if (this.userService.getLocalUser() !== null) {
-       
-       this.rootPage = "HomePage";
-     } else {
-       this.rootPage = "CadastroPage";
-     }
+      this.rootPage = "HomePage";
+    } else {
+      this.rootPage = "CadastroPage";
+    }
 
+    events.subscribe('user:LoggedIn',()=>{
+      this.user =this.userService.getLocalUser();
+    })
+    
+    this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
@@ -50,12 +54,11 @@ export class MyApp {
       { title: 'Cupons', component: 'PromocaoPage', icon: 'assets/icon/Cupons-Icon.svg' },
       { title: 'Localidade', component: 'Localidade', icon: 'assets/icon/Localidade_Prancheta.svg' },
       { title: 'Configurações', component: 'PoliticaPrivacidadePage', icon: 'assets/icon/Termo-de-uso_Prancheta.svg' }
-
     ];
   }
 
   ionViewDidLoad() {
-   
+
   }
 
   initializeApp() {

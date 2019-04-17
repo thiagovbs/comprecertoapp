@@ -25,7 +25,7 @@ export class SupermercadoPage {
   }
 
   ionViewDidLoad() {
-    console.log(this.alcanceService.getLocaAlcance())
+    
     this.supermercadoService.findAll()
       .subscribe(response => {
         console.log(response)

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, MenuController, Loading, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, MenuController, Loading, LoadingController, Events } from 'ionic-angular';
 import { UserLogin } from '../../../models/userLogin';
 import { AuthService } from '../../../services/auth.service';
 
@@ -17,7 +17,8 @@ export class LoginPage {
   constructor(private navCtrl: NavController,
               private menu:MenuController,
               private authService:AuthService,
-              public loadingCtrl: LoadingController) {
+              public loadingCtrl: LoadingController,
+              private events:Events) {
                 
     this.login ={username:"",
                  password:""}
@@ -31,6 +32,7 @@ export class LoginPage {
     subscribe((data:any) =>{
       loading.dismiss();
       this.authService.successfullLogin(data);
+      this.events.publish('user:LoggedIn')
       this.navCtrl.setRoot('HomePage')
     },error =>{
       loading.dismiss();

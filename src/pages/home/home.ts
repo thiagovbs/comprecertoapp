@@ -10,6 +10,8 @@ import { API_CONFIG } from '../../config/api.config';
 import { AlcanceComponent } from '../../components/alcance/alcance';
 import { AlcanceService } from '../../services/alcance.service';
 import * as Lodash from "lodash";
+import { UsuarioService } from '../../services/usuario.service';
+import { Usuario } from '../../models/usuario';
 
 
 @IonicPage()
@@ -22,18 +24,18 @@ export class HomePage {
   categorias: Categoria[];
   mercados: Mercado[];
   bucketS3: string;
-  
+  user:Usuario;  
 
 
   constructor(public navCtrl: NavController,
     private alcanceService: AlcanceService,
     private categoriaService: CategoriaService,
     private mercadoService: SupermercadoService,
-    private popoverCtrl: PopoverController) {
+    private popoverCtrl: PopoverController,
+    private userService: UsuarioService) {
   }
 
   ionViewDidLoad() {
-
     //imagens S3
     this.bucketS3 = API_CONFIG.s3Url;
 
