@@ -32,9 +32,10 @@ export class MyApp {
 
     this.initializeApp();
     this.user = this.userService.getLocalUser();
-      console.log(this.userService.getLocalUser())
+      
 
     if (this.userService.getLocalUser() !== null) {
+      console.log(this.userService.getLocalUser())
       this.rootPage = "HomePage";
     } else {
       this.rootPage = "CadastroPage";

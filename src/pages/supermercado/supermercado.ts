@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, PopoverController } from 'ionic-angular';
 import { SupermercadoService } from '../../services/supermercado.service';
-import { Supermercado } from '../../models/supermercado.model';
+import { Mercado } from '../../models/supermercado.model';
 import { API_CONFIG } from '../../config/api.config';
 import { AlcanceService } from '../../services/alcance.service';
 import { AlcanceComponent } from '../../components/alcance/alcance';
@@ -13,7 +13,7 @@ import { AlcanceComponent } from '../../components/alcance/alcance';
 })
 export class SupermercadoPage {
 
-  supermercados: Supermercado;
+  supermercados: Mercado;
 
   bucketS3: string
 
@@ -25,9 +25,10 @@ export class SupermercadoPage {
   }
 
   ionViewDidLoad() {
-
+    console.log(this.alcanceService.getLocaAlcance())
     this.supermercadoService.findAll()
       .subscribe(response => {
+        console.log(response)
         this.supermercados = response;
         
       }, erro => { })
@@ -35,8 +36,9 @@ export class SupermercadoPage {
     //imagens S3
     this.bucketS3 = API_CONFIG.s3Url;
   }
+  
 
-  onMercado(supermercado: Supermercado) {
+  onMercado(supermercado: Mercado) {
     console.log(supermercado)
     this.navCtrl.push("SupermercadoDetalhePage", {
       mercado: supermercado

@@ -1,11 +1,11 @@
 <ion-header no-border>
   <ion-navbar color="secondary">
-    <ion-title text-center style="margin-top:20px;max-height: 45px;"><span>MAIS BARATOS</span>
+    <ion-title text-center ><span>MAIS BARATOS</span>
       <bdo dir="rtl">
         <p>{{categoriaNome}}</p>
       </bdo>
     </ion-title>
-    
+
     <ion-buttons end>
       <button ion-button class="back-button-md" (click)="onSearch()">
         <ion-icon class="search-icon" name="ios-search-outline"></ion-icon>
@@ -14,22 +14,24 @@
   </ion-navbar>
 </ion-header>
 <!-- Lista das subcategorias por mercado -->
-<ion-content class="gray-bg">
-  <ion-toolbar class="barsubprodutos">
-    <ion-scroll scrollX="true" class="menu-2">
-      <ion-segment scrollX="true" class="segment" color="primary" [(ngModel)]="subcategoriaNome">
-        <ion-segment-button value="Todos" class="segment-button" (click)="onTodosProdutos()">
-          Todos
-        </ion-segment-button>
-        <ion-segment-button *ngFor="let sub of subcategorias" (click)="onSubCategoria(sub.nome)" value="{{sub.nome}}">
-          {{sub.nome}}
-        </ion-segment-button>
-      </ion-segment>
-    </ion-scroll>
+<ion-content class="gray-bg" >
+  <ion-toolbar style="min-height:30px !important;">
+    <div class="barsubprodutos">
+      <ion-scroll scrollX="true" class="menu-2">
+        <ion-segment scrollX="true" class="segment" color="primary" [(ngModel)]="subcategoriaNome">
+          <ion-segment-button value="Todos" class="segment-button" (click)="onTodosProdutos()">
+            Todos
+          </ion-segment-button>
+          <ion-segment-button *ngFor="let sub of subcategorias" (click)="onSubCategoria(sub.nome)" value="{{sub.nome}}">
+            {{sub.nome}}
+          </ion-segment-button>
+        </ion-segment>
+      </ion-scroll>
+    </div>
   </ion-toolbar>
 
   <ion-list class="list-full-border" *ngIf="subcategoriaNome === 'Todos' && produtos">
-    <!-- Exemplo de produto -->
+    <!-- Exemplo de produto --> 
     <produto-item [produto-itens]="produtos" [nomeCategoria]="categoriaNome" [mercado-itens]="mercado">
     </produto-item>
     <!-- Exemplo de produto -->

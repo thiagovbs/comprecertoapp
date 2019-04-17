@@ -2,6 +2,7 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { CarrinhoItem } from '../../models/carrinho-item.model';
 import { CarrinhoService } from '../../services/carrinho.service';
 import { Events, NavController, App } from 'ionic-angular';
+import { API_CONFIG } from '../../config/api.config';
 
 
 @Component({
@@ -15,11 +16,14 @@ export class SacolaItemComponent implements OnInit {
 
   @Output() filterProdutos: EventEmitter<CarrinhoItem[]>;
 
+  bucketS3:string;
+
   constructor(private navCtrl: NavController,
     private carrinhoService: CarrinhoService,
     public events: Events, public appCtrl: App) {
   }
   ngOnInit() {
+    this.bucketS3 = API_CONFIG.s3Url;
     //Evento do botão de deletar, para dar um reaload na página
     this.events.subscribe('deletar', () => {
       this.navCtrl.setRoot(this.navCtrl.getActive().component);

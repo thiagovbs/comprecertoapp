@@ -44,4 +44,9 @@ export class SacolaPage implements OnInit {
     this.navCtrl.push('PesquisaPage')
   }
 
+  total():Number{
+    console.log(this.carrinhoService.total());
+    return this.carrinhoService.total();
+} 
+
 }

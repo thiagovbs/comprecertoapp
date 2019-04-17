@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { SupermercadoService } from '../../services/supermercado.service';
-import { Supermercado } from '../../models/supermercado.model';
+import { Mercado } from '../../models/supermercado.model';
 
 
 
@@ -12,8 +12,8 @@ import { Supermercado } from '../../models/supermercado.model';
 })
 export class PesquisaPage {
 
-  supermercados: Supermercado[]
-  filterMercados: Supermercado[]
+  supermercados: Mercado[]
+  filterMercados: Mercado[]
   searchTerm: string
 
   constructor(public navCtrl: NavController,
@@ -27,7 +27,7 @@ export class PesquisaPage {
     this.filterMercados = null;
 
     this.supermercadoService.findAll()
-      .subscribe((response: Supermercado[]) => {
+      .subscribe((response: Mercado[]) => {
         this.supermercados = response;
       }, erro => { })
   }
@@ -35,7 +35,7 @@ export class PesquisaPage {
   filterItems(event: any) {
     this.searchTerm = event.target.value
     if (this.searchTerm) {
-      this.filterMercados = this.supermercados.filter((mercado: Supermercado) => (mercado.nomeFantasia.toLowerCase()
+      this.filterMercados = this.supermercados.filter((mercado: Mercado) => (mercado.nomeFantasia.toLowerCase()
         .indexOf(this.searchTerm.toLowerCase()) > -1));
     }
     console.log(this.filterMercados)

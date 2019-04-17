@@ -4,12 +4,12 @@ import { CategoriaService } from '../../services/categoria.service';
 
 import { Categoria } from '../../models/categoria.model';
 import { SupermercadoService } from '../../services/supermercado.service';
-import { Supermercado } from '../../models/supermercado.model';
+import { Mercado } from '../../models/supermercado.model';
 import { Observable } from 'rxjs';
 import { API_CONFIG } from '../../config/api.config';
 import { AlcanceComponent } from '../../components/alcance/alcance';
 import { AlcanceService } from '../../services/alcance.service';
-
+import * as Lodash from "lodash";
 
 
 @IonicPage()
@@ -19,8 +19,8 @@ import { AlcanceService } from '../../services/alcance.service';
 })
 export class HomePage {
 
-  categorias: Observable<Categoria[]>;
-  mercados: Supermercado[];
+  categorias: Categoria[];
+  mercados: Mercado[];
   bucketS3: string;
 
   constructor(public navCtrl: NavController,
@@ -36,19 +36,20 @@ export class HomePage {
     this.bucketS3 = API_CONFIG.s3Url;
 
     //Carregando as Categorias
-    this.categorias = this.categoriaService.categorias;
-
-    //Carregando os Mercados
+    this.categoriaService.findAll().subscribe(resp=>{
+      this.categorias = Lodash.orderBy(resp, 'nome','asc')
+    })
+    
+/*     //Carregando os Mercados
     this.mercadoService.findAll()
       .subscribe(response => {
         this.mercados = response;
-      }, erro => { })
+      }, erro => { }) */
 
      //iniciar o popover de alcance se o alcance não estiver no localStorage
     if (!this.alcanceService.getLocaAlcance()) {
       let popover = this.popoverCtrl.create(AlcanceComponent, { showBackdrop: true, cssClass: 'custom-popover' });
       popover.present();
-      
     }
   }
 

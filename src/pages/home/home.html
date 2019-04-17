@@ -27,7 +27,7 @@
   </ion-scroll>
 
   <ion-list class="card-background-page" no-padding no-margin>
-    <ion-card class="card" *ngFor="let categoria of categorias | async" (click)="onSubCategoria(categoria)">
+    <ion-card class="card" *ngFor="let categoria of categorias" (click)="onSubCategoria(categoria)">
       <img src="{{bucketS3}}/cat{{categoria.idCategoria}}.jpg" />
     </ion-card>
   </ion-list>

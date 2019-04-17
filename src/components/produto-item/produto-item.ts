@@ -1,8 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Produto } from '../../models/produto.model';
-import { Supermercado } from '../../models/supermercado.model';
+import { Mercado } from '../../models/supermercado.model';
 import { CarrinhoService } from '../../services/carrinho.service';
 import { CarrinhoItem } from '../../models/carrinho-item.model';
+import { MercadoProduto } from '../../models/mercado-produto.model';
+import { API_CONFIG } from '../../config/api.config';
 
 @Component({
   selector: 'produto-item',
@@ -10,8 +12,8 @@ import { CarrinhoItem } from '../../models/carrinho-item.model';
 })
 export class ProdutoItemComponent implements OnInit {
 
-  @Input('produto-itens') produtos: Produto[];
-  @Input('mercado-itens') mercado: Supermercado;
+  @Input('produto-itens') produtos: MercadoProduto;
+  @Input('mercado-itens') mercado: Mercado;
   @Input() nomeCategoria:string
 
   carrinhoItems: CarrinhoItem[]
@@ -19,13 +21,15 @@ export class ProdutoItemComponent implements OnInit {
   
   foundItem:CarrinhoItem
 
+  bucketS3: string
 
   constructor(private carrinhoService: CarrinhoService) {
     this.carrinhoItem = carrinhoService.carrinhoItem
   }
 
   ngOnInit() {
-    console.log(this.nomeCategoria)
+    console.log(this.produtos)
+    this.bucketS3 = API_CONFIG.s3Url;
   }
 
   //retorna todos os items no carrinho
@@ -34,25 +38,30 @@ export class ProdutoItemComponent implements OnInit {
   }
 
   //diminui a quantidade de cada produto
-  diminuiQnt(item: Produto): void {
-    console.log("Esse é o Item"+ item)
+  diminuiQnt(item: MercadoProduto): void {
+    console.log("Esse é o Item"+ item.produto)
     this.carrinhoService.diminuiQnt(item);
   }
 
   //aumenta quantidade de cada produto
-  aumentaQnt(item: Produto) {
+  aumentaQnt(item: MercadoProduto) {
      this.carrinhoService.addItem(item);
   }
 
   //adiciona produto no carrinho
-  addCarrinho(item: Produto): void {
+  addCarrinho(item: MercadoProduto): void {
     this.carrinhoService.addItem(item, this.nomeCategoria);
   }
 
   //Verifica se produto existe no carrinho 
-  verificaProdutoNoCarrinho(item: Produto):boolean {
-    this.foundItem = this.items().find((produtoItem) => produtoItem.produto.idProduto === item.idProduto)
+  verificaProdutoNoCarrinho(item: MercadoProduto):boolean {
+    
+    this.foundItem = this.items().find((produtoItem) => produtoItem.produto.produto.idProduto === item.produto.idProduto)
     return this.foundItem ? true : false;
+  }
+
+  getMercado(produto){
+    console.log(produto)
   }
 
 }

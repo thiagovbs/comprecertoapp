@@ -14,7 +14,7 @@ export class CategoriaService{
         this.categorias = this.findAll()
     }
 
-    private findAll():Observable<Categoria[]>{
+     findAll():Observable<Categoria[]>{
         return this.http.get<Categoria[]>(`${API_CONFIG.baseUrl}/categorias`);
     }
 }

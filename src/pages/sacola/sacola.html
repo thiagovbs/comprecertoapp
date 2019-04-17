@@ -6,7 +6,9 @@
     <ion-title text-center>Minha Sacola</ion-title>
     <ion-buttons end>
       <button ion-button (click)="onSearch()" class="back-button-md">
-        <ion-icon class="search-icon" name="ios-search-outline"></ion-icon>
+        <img src="assets/imgs/what.png" height="20px" style="margin-right:10px;" class="search-icon" name="logo-whatsapp" >
+
+        <ion-icon class="search-icon"   name="ios-search-outline"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -30,7 +32,7 @@
       <h2>Valor Total</h2>
     </div>
     <div class="pull-right">
-      <span ion-text color="primary" style="font-size:15px">R$ 0,00</span>
+      <span ion-text color="primary" style="font-size:15px">{{total() |  currency: 'BRL':true}}</span>
     </div>
   </ion-item>
 </ion-footer>

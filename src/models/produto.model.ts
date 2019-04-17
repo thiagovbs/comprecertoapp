@@ -1,5 +1,6 @@
 import { Subcategoria } from "./subcategoria.model";
 import { UnidadeDeMedida } from "./unidadeDeMedida";
+import { MercadoProduto } from "./mercado-produto.model";
 
 export class Produto{
     dtAlteracao:string;
@@ -12,6 +13,7 @@ export class Produto{
     quantidade:number;
     subcategoria:Subcategoria;
     unidadeMedida:UnidadeDeMedida;
+    mercadoProdutos:MercadoProduto[]
 
 }
 

@@ -13,7 +13,11 @@ export class SubCategoriaService{
     }
 
 
-    findProdutosPorSubCategorias(categoriaId):Observable<any>{
+    findProdutosPorCategorias(categoriaId):Observable<any>{
         return this.http.get<any>(`${API_CONFIG.baseUrl}/produtos/categoria/${categoriaId}`);
+    }
+
+    findProdutos(categoriaId):Observable<any>{
+        return this.http.get<any>(`${API_CONFIG.baseUrl}/mercado-produtos?idCategoria=${categoriaId}`);
     }
 }

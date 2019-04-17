@@ -4,27 +4,25 @@
             <ion-row>
                 <ion-col col-3>
                     <ion-thumbnail>
-                        <img class="thumb-image" [src]="produto.imagem || 'assets/imgs/no-image.png'" alt="" />
+                        <img class="thumb-image" 
+                        src="{{bucketS3}}/prod{{produto.produto.idProduto}}.jpg" alt="" />
                     </ion-thumbnail>
                 </ion-col>
-                <ion-col col-6 margin-top>
-                    <h2 ion-text>{{produto.nome}}</h2>
-                    <h3 ion-text> {{produto.marca}} - {{produto.unidadeMedida.sigla}}</h3>
-                    <div class="break" style="margin-top:8px;">
-                        <p text-wrap>{{produto.caracteristica}}</p>
-                    </div>
-                    <ion-row>
+                <ion-col col-6 style="margin-top:5px">
+                    <h2 ion-text style="white-space: pre-wrap;">{{produto.produto.nome}} {{produto.produto.marca}} {{produto.produto.caracteristica}} {{produto.produto.quantidade }} {{produto.produto.unidadeMedida.sigla}}</h2>
+                    
+                    <ion-row style="margin-top:40px;">
                         <ion-col col-6>
-                            <h3 ion-text>R$ 50,00</h3>
+                            <h3 ion-text>{{produto.preco | currency:"BRL":true:"1.2" }}</h3>
                         </ion-col>
                         <ion-col col-6>
                             <span ion-text color="primary" style="font-size: 0.85em">R$ 0,00</span>
                         </ion-col>
                     </ion-row>
                 </ion-col>
-                <ion-col col-3>
+                <ion-col col-3 style="margin-top:5px">
                     <div class="pull-right">
-                        <p><small>Válido até: 13/10/2019</small></p>
+                        <p style=" font-size:0.80em !important;">{{produto.dtValidade  | date: 'dd/MM/yyyy'}}</p>
                     </div>
                     <div style="margin-top:54px;">
                         <!-- Se o produto não estiver no carrinho -->
@@ -32,13 +30,13 @@
                             <button ion-button 
                                     class="pull-right btn-sacola" 
                                     (click)="addCarrinho(produto)">
-                                Adicionar
+                                Adicionar à sacola
                             </button>
                         </div>
                         <!--fechar -->
                       <!-- Quando o produto estiver no carrinho -->  
-                        <div *ngIf="verificaProdutoNoCarrinho(produto)">
-                            <btn-qnt-produto 
+                        <div *ngIf="verificaProdutoNoCarrinho(produto)" class="pull-right">
+                            <btn-qnt-produto  
                                 [nomePage]="'Produtos'"
                                 [itemFound]="foundItem" 
                                 (add)="aumentaQnt(produto)"
@@ -53,7 +51,7 @@
     <!-- Exemplo de mercado por produto -->
     <ion-item>
         <div item-left>
-            <p>imagem</p>
+            <p>{{produto?.mercadoLocalidade?.mercado?.nomeFantasia}}</p>
         </div>
         <div class="pull-right">
             <img src="assets/icon/supermercado-produto.svg" alt="">

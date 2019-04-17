@@ -14,5 +14,9 @@ export class SupermercadoService{
         return this.http.get<any>(`${API_CONFIG.baseUrl}/mercados`)
     }
 
+/*     buscarMercadoprodutosPorBairro(bairro){
+        return this.http.get<any>(`${API_CONFIG.baseUrl}/mercado-produtos?idCategoria=${bairro}``)
+    } */
+
 
 }

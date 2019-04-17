@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { Produto } from "../models/produto.model";
 import { CarrinhoItem } from "../models/carrinho-item.model";
 import { AlertController, Events } from "ionic-angular";
+import { MercadoProduto } from "../models/mercado-produto.model";
 
 @Injectable()
 export class CarrinhoService {
@@ -21,8 +22,8 @@ export class CarrinhoService {
     }
 
     //adiciona item no carrinhoItem
-    addItem(item: Produto, nomeCategoria?: string) {
-        let foundItem = this.items.find((carditem) => carditem.produto.idProduto === item.idProduto);
+    addItem(item: MercadoProduto, nomeCategoria?: string) {
+        let foundItem = this.items.find((carditem) => carditem.produto.produto.idProduto === item.produto.idProduto);
         if (foundItem) {
             this.aumentaQnt(foundItem);
         } else {
@@ -36,8 +37,8 @@ export class CarrinhoService {
     }
 
     //diminui a quantidade se o carrinho possuir o produto
-    diminuiQnt(item: Produto) {
-        let foundItem = this.items.find((carditem: CarrinhoItem) => carditem.produto.idProduto === item.idProduto);
+    diminuiQnt(item: MercadoProduto) {
+        let foundItem = this.items.find((carditem: CarrinhoItem) => carditem.produto.produto.idProduto === item.produto.idProduto);
         console.log(foundItem.quantidade)
         if (foundItem.quantidade <= 1) {
             this.removeItem(foundItem)
@@ -63,5 +64,10 @@ export class CarrinhoService {
         }
         return item.quantidade = item.quantidade - 1;
        
+    }
+
+    total():number{
+        return this.items.map(item => item.value())
+                         .reduce((prev, value)=> prev+value, 0)
     }
 }

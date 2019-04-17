@@ -303,9 +303,9 @@
 
   .thumb-image{
     margin-top:10px;
-    margin-left:-6px;
-    height: 100px !important;
-    min-width: 85px !important;
+    margin-left:-26px;
+    height: 95px !important;
+    min-width: 105px !important;
 }
 
 //Segundo menu
@@ -313,7 +313,7 @@
   height: 32px;
   width: 100%;
   background-color: color($colors, secondary);  
-  margin-top: -15px;  
+  margin-top: 0px;  
 
   .segment{
     display: block;
@@ -417,8 +417,13 @@ ion-alert {
   }
 }
 
+
+
+
 .toolbar-md{
   padding: 0 !important;
+  min-height: 60px !important;
+
 }
 
 .search-icon{
@@ -426,13 +431,9 @@ ion-alert {
   font-weight: 700;
 }
 
-/* .bar-button-menutoggle-md ion-icon {
-  padding: 0 6px;
-  font-size: 2.3rem;
-  font-weight: 500;
-} */
 .toolbar-ios {
-  min-height: 70px;
+  padding: 0 !important;
+  min-height: 60px;
 }
 
 
