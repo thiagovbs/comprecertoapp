@@ -22,7 +22,7 @@ export class CadastroAppPage {
   sexoList = [
     {nome: 'Masculino', value: 'M'},
     {nome: 'Feminino', value: 'F'},
-    {nome: 'Outro', value: 'O'},
+    {nome: 'Outros', value: 'O'},
     
   ];
 

@@ -4,7 +4,7 @@
   <div class="login-content">
       <!-- Logo -->
       <div padding text-center style="padding-top:40px;">
-        <img src="assets/imgs/logomarca.svg"  height="120" alt="">
+        <img src="assets/icon/Logo-Sheap-04.svg"  height="100" alt="">
       </div>
       <form novalidate [formGroup]="cadastroForm" (ngSubmit)="SubmitForm()">
         <div padding>
@@ -14,11 +14,11 @@
           </ion-item>
           <ion-row  radio-group formControlName="sexo">  
               <ion-item class="bg-transparent" no-lines >
-                  <label for="sexo" class="size" >Sexo:</label>
+                  <label for="sexo" class="size" style="font-size:0.77em !important">Sexo:</label>
               </ion-item>
-            <ion-col col-6 *ngFor="let sexo of sexoList">
+            <ion-col col-4 *ngFor="let sexo of sexoList">
               <ion-item class="bg-transparent size" style="margin-top:-15px;" no-lines  >
-                <ion-label>{{sexo.nome}}</ion-label>
+                <ion-label style="font-size:0.73em">{{sexo.nome}}</ion-label>
                 <ion-radio value="{{sexo.value}}"></ion-radio>
               </ion-item>
             </ion-col>
@@ -45,7 +45,7 @@
               <span  class="error" >Senhas não são iguais</span>
           </ion-item>
           
-          <button ion-button block style="width:100%; float:center"
+          <button ion-button block style="width:95%; margin: 12px auto"
            class="register" color="secondary" margin-top [disabled]="!cadastroForm.valid">
             <ion-icon  name="ios-create-outline"  style="margin-right: 12px;">
             </ion-icon> Cadastrar

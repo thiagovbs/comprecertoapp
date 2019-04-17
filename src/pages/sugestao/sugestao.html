@@ -72,7 +72,7 @@
             <input class="input-form" type="text" formControlName="cidadeMercado" placeholder="Cidade*" />
           </ion-item>
           <ion-item no-lines class="gray-bg">
-            <button ion-button class="pull-right btn-sugestao">Enviar </button>
+            <button ion-button class="pull-right btn-sugestao" [disabled]="!sugestaoForm2.valid">Enviar </button>
           </ion-item>
         </div>
       </form>
@@ -98,7 +98,7 @@
              type="text" formControlName="descProblema" placeholder="Mensagem*"></textarea>
           </ion-item>
           <ion-item class="gray-bg">
-            <button ion-button class="pull-right btn-sugestao">Enviar </button>
+            <button ion-button class="pull-right btn-sugestao" [disabled]="!sugestaoForm3.valid">Enviar </button>
           </ion-item>
         </div>
       </form>
