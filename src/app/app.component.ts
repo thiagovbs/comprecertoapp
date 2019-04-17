@@ -32,7 +32,13 @@ export class MyApp {
 
     this.initializeApp();
   
-      
+    this.user = this.userService.getLocalUser();
+    if (this.userService.getLocalUser() !== null) {
+       
+       this.rootPage = "HomePage";
+     } else {
+       this.rootPage = "CadastroPage";
+     }
 
 
     // used for an example of ngFor and navigation
@@ -49,13 +55,7 @@ export class MyApp {
   }
 
   ionViewDidLoad() {
-    this.user = this.userService.getLocalUser();
-   if (this.userService.getLocalUser() !== null) {
-      
-      this.rootPage = "HomePage";
-    } else {
-      this.rootPage = "CadastroPage";
-    }
+   
   }
 
   initializeApp() {
