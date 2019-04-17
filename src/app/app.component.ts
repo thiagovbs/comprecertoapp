@@ -31,15 +31,9 @@ export class MyApp {
     public popoverCtrl: PopoverController) {
 
     this.initializeApp();
-    this.user = this.userService.getLocalUser();
+  
       
 
-    if (this.userService.getLocalUser() !== null) {
-      console.log(this.userService.getLocalUser())
-      this.rootPage = "HomePage";
-    } else {
-      this.rootPage = "CadastroPage";
-    }
 
     // used for an example of ngFor and navigation
     this.pages = [
@@ -52,6 +46,16 @@ export class MyApp {
       { title: 'Configurações', component: 'PoliticaPrivacidadePage', icon: 'assets/icon/Termo-de-uso_Prancheta.svg' }
 
     ];
+  }
+
+  ionViewDidLoad() {
+    this.user = this.userService.getLocalUser();
+   if (this.userService.getLocalUser() !== null) {
+      
+      this.rootPage = "HomePage";
+    } else {
+      this.rootPage = "CadastroPage";
+    }
   }
 
   initializeApp() {

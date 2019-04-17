@@ -3,16 +3,16 @@
 
     <!-- User profile -->
     <div text-center class="padding-nav primary-bg menu-left ">
-      <div >
+      <div *ngIf="user?.sexo ==='M'">
         <a menuClose>
           <img class="profile-picture" src="assets/icon/Profile-masculino_Prancheta.svg">
           <h4 ion-text color="light">{{user.nome}}</h4>
         </a>
       </div>
-<!--       <div *ngIf="user.sexo==='F'">
+      <div *ngIf="user?.sexo==='F'">
           <img class="profile-picture" src="assets/icon/Profile-femenino_Prancheta.svg">
           <h4 ion-text color="light">{{user.nome}}</h4>
-      </div> -->
+      </div>
     </div>
     <ion-list class="list-full-border">
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">

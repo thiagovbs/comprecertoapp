@@ -22,6 +22,8 @@ export class HomePage {
   categorias: Categoria[];
   mercados: Mercado[];
   bucketS3: string;
+  
+
 
   constructor(public navCtrl: NavController,
     private alcanceService: AlcanceService,
