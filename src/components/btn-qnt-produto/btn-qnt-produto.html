@@ -1,17 +1,17 @@
 
 <button ion-button class="pull-right btn-sacola-remove"
 (click)="RemoveProdutoCarrinho(produto)">
-  Remover
+  Remover da Sacola
 </button>
 <ion-row class="pull-right shadow-row">
-   <ion-col col-5 class="pull-left" style=" top:-9px; left: -10px">
+   <ion-col col-5 class="pull-left" style=" top:-9px; left: -15px">
        <button ion-button color="primary"
                class="button-qty pull-right" 
                (click)="emitAddevent(produto)">
            <ion-icon name="add"></ion-icon>
        </button>
    </ion-col>
-   <ion-col col-2 text-center style="top:-2px; right:4px">
+   <ion-col col-2 text-center style="top:-2px; right:2px">
        <p style="font-size:0.75em;">
            {{itemFound ? itemFound.quantidade : 1}}</p>
    </ion-col>

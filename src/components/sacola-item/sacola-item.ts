@@ -16,6 +16,7 @@ export class SacolaItemComponent implements OnInit {
 
   @Output() filterProdutos: EventEmitter<CarrinhoItem[]>;
 
+  somaProduto:number
   bucketS3:string;
 
   constructor(private navCtrl: NavController,
@@ -43,6 +44,10 @@ export class SacolaItemComponent implements OnInit {
   aumentaQnt(item: CarrinhoItem) {
     this.carrinhoService.aumentaQnt(item);
 
+  }
+
+  setSomaValor(produto:CarrinhoItem):number{
+     return this.somaProduto=  produto.produto.preco * produto.quantidade;  
   }
  
 }

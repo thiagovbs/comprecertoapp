@@ -241,10 +241,8 @@
     background-color: rgba(32, 32, 32, 0.1);
     border-radius:20px; 
     height: 20px;
-    
+    width:101px;   
 }
-
-
 
   .button-qty{ 
     font-size: 12px;
@@ -284,19 +282,19 @@
   }
 
   .btn-sacola{
-    width: 100%;
+    width: 102px;
     margin-top:26px;
     font-size:9px !important;
-    border-radius: 10px;
+    border-radius: 5px;
     height: 20px !important;
     
 }
 
   .btn-sacola-remove{
-    width: 100%;
+    width: 101px;
     max-height: 20px !important;
     font-size: 9px !important;
-    border-radius: 10px;
+    border-radius: 5px;
     padding: 10px !important;
     background-color: color($colors, danger);
   }

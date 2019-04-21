@@ -20,7 +20,7 @@ export class ProdutoItemComponent implements OnInit {
   carrinhoItem: CarrinhoItem
   
   foundItem:CarrinhoItem
-
+  somaProduto:number
   bucketS3: string
 
   constructor(private carrinhoService: CarrinhoService) {
@@ -39,7 +39,6 @@ export class ProdutoItemComponent implements OnInit {
 
   //diminui a quantidade de cada produto
   diminuiQnt(item: MercadoProduto): void {
-    console.log("Esse é o Item"+ item.produto)
     this.carrinhoService.diminuiQnt(item);
   }
 
@@ -55,7 +54,6 @@ export class ProdutoItemComponent implements OnInit {
 
   //Verifica se produto existe no carrinho 
   verificaProdutoNoCarrinho(item: MercadoProduto):boolean {
-    
     this.foundItem = this.items().find((produtoItem) => produtoItem.produto.produto.idProduto === item.produto.idProduto)
     return this.foundItem ? true : false;
   }
@@ -64,4 +62,11 @@ export class ProdutoItemComponent implements OnInit {
     console.log(produto)
   }
 
+  setSomaValor(produto):number{
+    if(this.foundItem){
+     return this.somaProduto= this.foundItem.quantidade * produto.preco;
+      
+    }
+    return this.somaProduto =0;    
+  }
 }

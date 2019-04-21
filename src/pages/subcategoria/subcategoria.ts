@@ -52,7 +52,7 @@ export class SubcategoriaPage {
       //listar os produtos pelo mercado produto
         this.subcategoriaService.findProdutos(this.categoria.idCategoria).subscribe((resp: MercadoProduto[]) => {
           this.produtos = resp;
-          
+          console.log(this.produtos)
           if (this.produtos.length === 0) {
             this.produtos = undefined;
           }
@@ -100,6 +100,10 @@ export class SubcategoriaPage {
 
   onSearch() {
     this.navCtrl.push('PesquisaPage')
+  }
+
+  setSomaProduto(){
+
   }
 
 

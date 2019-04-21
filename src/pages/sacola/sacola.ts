@@ -45,7 +45,6 @@ export class SacolaPage implements OnInit {
   }
 
   total():Number{
-    console.log(this.carrinhoService.total());
     return this.carrinhoService.total();
 } 
 
