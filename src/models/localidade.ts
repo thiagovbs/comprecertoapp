@@ -7,11 +7,11 @@ export interface Bairro {
 
 export interface Cidade{
     idCidade:number,
-    nomeCidade:string,
+    nome:string,
     Estados:Array<Estado>
 }
 export interface Estado{
     idEstado:number,
-    nomeEstado:string,
+    nome:string,
     sigla:string
 }

@@ -7,6 +7,7 @@ export interface MercadoProduto{
     observacao:string,
     preco:number,
     dtValidade:Date,
+    dtEntrada:Date,
     produto:Produto,
     fdestaque:boolean,
     fsuperDestaque:boolean,

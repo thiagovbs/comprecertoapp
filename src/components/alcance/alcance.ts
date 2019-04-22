@@ -69,12 +69,9 @@ export class AlcanceComponent implements OnInit {
   }
 
   SubmitForm(){
-    let alcance ={
-      estado:this.alcanceForm.value.estado,
-      cidade:this.alcanceForm.value.cidade,
-      bairro:this.alcanceForm.value.bairro
-    }
-    this.alcanceService.setLocalAlcance(alcance); 
+    console.log(this.bairros[0])
+
+    this.alcanceService.setLocalAlcance(this.bairros[0]); 
       this.viewCtrl.dismiss();
       this.appCtrl.getRootNav();
   }

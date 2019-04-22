@@ -5,6 +5,7 @@ import { CarrinhoService } from '../../services/carrinho.service';
 import { CarrinhoItem } from '../../models/carrinho-item.model';
 import { MercadoProduto } from '../../models/mercado-produto.model';
 import { API_CONFIG } from '../../config/api.config';
+import { SupermercadoService } from '../../services/supermercado.service';
 
 @Component({
   selector: 'produto-item',
@@ -22,13 +23,13 @@ export class ProdutoItemComponent implements OnInit {
   foundItem:CarrinhoItem
   somaProduto:number
   bucketS3: string
+  dtValidade:Date = null;
 
-  constructor(private carrinhoService: CarrinhoService) {
+  constructor(private carrinhoService: CarrinhoService, private mercadoService:SupermercadoService) {
     this.carrinhoItem = carrinhoService.carrinhoItem
   }
 
   ngOnInit() {
-    console.log(this.produtos)
     this.bucketS3 = API_CONFIG.s3Url;
   }
 
@@ -39,6 +40,7 @@ export class ProdutoItemComponent implements OnInit {
 
   //diminui a quantidade de cada produto
   diminuiQnt(item: MercadoProduto): void {
+    console.log(item)
     this.carrinhoService.diminuiQnt(item);
   }
 
@@ -54,7 +56,7 @@ export class ProdutoItemComponent implements OnInit {
 
   //Verifica se produto existe no carrinho 
   verificaProdutoNoCarrinho(item: MercadoProduto):boolean {
-    this.foundItem = this.items().find((produtoItem) => produtoItem.produto.produto.idProduto === item.produto.idProduto)
+    this.foundItem = this.items().find((produtoItem) => produtoItem.produto.idMercadoProduto === item.idMercadoProduto)
     return this.foundItem ? true : false;
   }
 

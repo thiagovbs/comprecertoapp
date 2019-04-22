@@ -35,7 +35,7 @@ export class SugestaoPage {
     private suporteService: SuporteService,
     public loadingCtrl: LoadingController) {
 
-    this.item = { expanded: false, text: "Qual mercado você gostaria de ver no Comprecerto?" };
+    this.item = { expanded: false, text: "Qual mercado você gostaria de ver no Sheap?" };
     this.item2 = { expanded: false, text: "Indique uma cidade ou estado que os nossos serviços não estão disponíveis?" };
     this.item3 = { expanded: false, text: "Nos ajude a melhorar enviando sugestões ou informando problemas" };
 

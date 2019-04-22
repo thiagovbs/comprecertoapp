@@ -4,7 +4,7 @@ import { SubCategoriaService } from '../../services/subcategorias.service';
 import { Subcategoria } from '../../models/subcategoria.model';
 
 import { Categoria } from '../../models/categoria.model';
-import {Mercado } from '../../models/supermercado.model';
+import { Mercado } from '../../models/supermercado.model';
 
 import { AlcanceService } from '../../services/alcance.service';
 import { AlcanceComponent } from '../../components/alcance/alcance';
@@ -29,7 +29,8 @@ export class SubcategoriaPage {
   produtos: MercadoProduto[];
   filterProdutos: MercadoProduto[] = [];
 
-  mercados:Mercado;
+  mercados: Mercado;
+  dataAtual: number;
 
   constructor(
     private alcanceService: AlcanceService,
@@ -37,7 +38,7 @@ export class SubcategoriaPage {
     public navParams: NavParams,
     private subcategoriaService: SubCategoriaService,
     private popoverCtrl: PopoverController,
-    private mercadoService:SupermercadoService) {
+    private mercadoService: SupermercadoService) {
   }
 
   ionViewWillEnter() {
@@ -49,16 +50,19 @@ export class SubcategoriaPage {
     //listando as subcategorias
     this.subcategorias = this.categoria.subcategorias;
 
-      //listar os produtos pelo mercado produto
-        this.subcategoriaService.findProdutos(this.categoria.idCategoria).subscribe((resp: MercadoProduto[]) => {
-          this.produtos = resp;
-          console.log(this.produtos)
-          if (this.produtos.length === 0) {
-            this.produtos = undefined;
-          }
-        }, erro => {
-          console.log(erro);
-        }) 
+    //listar os produtos pelo mercado produto
+    this.subcategoriaService.findProdutos(this.categoria.idCategoria).subscribe((resp: MercadoProduto[]) => {
+      this.produtos = resp;
+      if (this.produtos.length === 0) {
+        this.produtos = undefined;
+      }
+    }, erro => {
+      console.log(erro);
+    })
+
+
+    this.dataAtual = new Date().getTime();
+    console.log(this.dataAtual)
 
   }
 
@@ -85,7 +89,15 @@ export class SubcategoriaPage {
     //verifica se há produtos dentro da categoria
     if (this.produtos) {
       //Filtro de produto por subcategorias
-      this.filterProdutos = this.produtos.filter((prod: MercadoProduto) => prod.produto.subcategoria.nome === sub);
+      this.filterProdutos = this.produtos.filter((prod: MercadoProduto) => {
+        let dtEntrada = new Date(prod.dtEntrada).getTime()
+        
+        //filtro com a data de entrada
+        /* if(dtEntrada <=this.dataAtual){ */
+          return prod.produto.subcategoria.nome === sub  
+        //}
+        
+      });
 
       if (this.filterProdutos.length === 0) {
         this.filterProdutos = undefined;
@@ -101,10 +113,5 @@ export class SubcategoriaPage {
   onSearch() {
     this.navCtrl.push('PesquisaPage')
   }
-
-  setSomaProduto(){
-
-  }
-
 
 }

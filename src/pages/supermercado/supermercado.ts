@@ -5,6 +5,7 @@ import { Mercado } from '../../models/supermercado.model';
 import { API_CONFIG } from '../../config/api.config';
 import { AlcanceService } from '../../services/alcance.service';
 import { AlcanceComponent } from '../../components/alcance/alcance';
+import { Bairro } from '../../models/localidade';
 
 @IonicPage()
 @Component({
@@ -14,7 +15,7 @@ import { AlcanceComponent } from '../../components/alcance/alcance';
 export class SupermercadoPage {
 
   supermercados: Mercado;
-
+  localidadeMercado:Bairro;
   bucketS3: string
 
   constructor(public navCtrl: NavController,
@@ -25,13 +26,14 @@ export class SupermercadoPage {
   }
 
   ionViewDidLoad() {
+    this.localidadeMercado = this.alcanceService.getLocaAlcance();
+    console.log(this.localidadeMercado)
+    this.supermercadoService.buscarMercadoprodutosPorBairro(this.localidadeMercado)
+    .subscribe((resp:Mercado)=>{
+      this.supermercados = resp;
+      console.log(this.supermercados)
+    })
     
-    this.supermercadoService.findAll()
-      .subscribe(response => {
-        console.log(response)
-        this.supermercados = response;
-        
-      }, erro => { })
 
     //imagens S3
     this.bucketS3 = API_CONFIG.s3Url;

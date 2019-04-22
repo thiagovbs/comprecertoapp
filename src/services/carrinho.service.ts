@@ -10,7 +10,7 @@ export class CarrinhoService {
     items: CarrinhoItem[] = [];
 
     carrinhoItem: CarrinhoItem
-    produto: Produto;
+    
 
     constructor(private ctrlAlert: AlertController, public events: Events) {
 
@@ -23,7 +23,7 @@ export class CarrinhoService {
 
     //adiciona item no carrinhoItem
     addItem(item: MercadoProduto, nomeCategoria?: string) {
-        let foundItem = this.items.find((carditem) => carditem.produto.produto.idProduto === item.produto.idProduto);
+        let foundItem = this.items.find((carditem) => carditem.produto.idMercadoProduto === item.idMercadoProduto);
         if (foundItem) {
             this.aumentaQnt(foundItem);
         } else {
@@ -38,7 +38,7 @@ export class CarrinhoService {
 
     //diminui a quantidade se o carrinho possuir o produto
     diminuiQnt(item: MercadoProduto) {
-        let foundItem = this.items.find((carditem: CarrinhoItem) => carditem.produto.produto.idProduto === item.produto.idProduto);
+        let foundItem = this.items.find((carditem: CarrinhoItem) => carditem.produto.idMercadoProduto === item.idMercadoProduto);
         console.log(foundItem.quantidade)
         if (foundItem.quantidade <= 1) {
             this.removeItem(foundItem)
