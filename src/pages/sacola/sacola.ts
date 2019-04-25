@@ -48,4 +48,8 @@ export class SacolaPage implements OnInit {
     return this.carrinhoService.total();
 } 
 
+onCompraFacil(){
+  this.navCtrl.push('CompreFacilPage')
+}
+
 }

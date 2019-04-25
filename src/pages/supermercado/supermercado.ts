@@ -27,7 +27,6 @@ export class SupermercadoPage {
 
   ionViewDidLoad() {
     this.localidadeMercado = this.alcanceService.getLocaAlcance();
-    console.log(this.localidadeMercado)
     this.supermercadoService.buscarMercadoprodutosPorBairro(this.localidadeMercado)
     .subscribe((resp:Mercado)=>{
       this.supermercados = resp;

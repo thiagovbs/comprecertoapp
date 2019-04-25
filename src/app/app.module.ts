@@ -5,6 +5,7 @@ import { HttpClientModule} from '@angular/common/http';
 import { MyApp } from './app.component';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //Login Rede social
 import { Facebook} from '@ionic-native/facebook';
@@ -28,25 +29,31 @@ import { CarrinhoService } from '../services/carrinho.service';
 import { SuporteService } from '../services/suporte.service';
 import { SupermercadoService } from '../services/supermercado.service';
 import { AlcanceService } from '../services/alcance.service';
+import { PopoverInfoCompraFacilComponent } from '../components/popover-info-compra-facil/popover-info-compra-facil';
+import { FormCompraFacilPopoverComponent } from '../components/form-compra-facil-popover/form-compra-facil-popover';
 
 @NgModule({
   declarations: [
     MyApp,
     AlcanceComponent,
-    InfoSignPopoverComponent
+    InfoSignPopoverComponent,
+    PopoverInfoCompraFacilComponent,
+    FormCompraFacilPopoverComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
-    
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     AlcanceComponent,
-    InfoSignPopoverComponent
+    InfoSignPopoverComponent,
+    PopoverInfoCompraFacilComponent,
+    FormCompraFacilPopoverComponent
   ],
   providers: [
     StatusBar,

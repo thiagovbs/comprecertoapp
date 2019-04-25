@@ -1,0 +1,41 @@
+page-compre-facil {
+
+    .main-text{
+        white-space: pre-wrap;
+        font-size: 0.60em;
+        color: #1F1F1F;;
+        letter-spacing: 0.027em;
+    }
+    .col-position{
+        padding-left:23px !important; 
+    }
+    .cl-data{
+        font-size:0.60em !important; 
+        text-align: end;
+    }
+
+    .sub-text { 
+        margin-left: -5px;
+        font-size: 0.47em;
+        color: #000;
+
+        span{
+            color:#00836D;
+        }
+    }
+
+    .colum-1{
+        width:25%;
+        
+        float: right;
+        position: relative;
+    }
+    .colum-2{
+        width:75%;
+        float: left;
+    }
+    .clearfix{
+        clear:both
+    }
+
+}

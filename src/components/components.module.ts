@@ -4,25 +4,22 @@ import { SacolaItemComponent } from './sacola-item/sacola-item';
 import { IonicModule } from 'ionic-angular';
 import { ProdutoItemComponent } from './produto-item/produto-item';
 
-
-
-
-
-
 @NgModule({
 	declarations: [
 		BtnQntProdutoComponent,
 		SacolaItemComponent,
-    	ProdutoItemComponent,
+		ProdutoItemComponent,
     
-		],
+    
+	],
 	imports: [
 		IonicModule
 	],
-	exports:[
+	exports: [
 		BtnQntProdutoComponent,
 		SacolaItemComponent,
-        ProdutoItemComponent,
+		ProdutoItemComponent,
+    
 	]
 })
-export class ComponentsModule {}
+export class ComponentsModule { }

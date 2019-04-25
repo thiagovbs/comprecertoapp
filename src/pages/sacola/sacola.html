@@ -3,12 +3,14 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title text-center>Minha Sacola</ion-title>
+    <ion-title text-center style="margin-right:-50px;">Minha Sacola</ion-title>
     <ion-buttons end>
-      <button ion-button (click)="onSearch()" class="back-button-md">
-        <img src="assets/imgs/what.png" height="20px" style="margin-right:10px;" class="search-icon" name="logo-whatsapp" >
+      <button ion-button (click)="onCompraFacil()" class="back-button-md">
+        <img src="assets/imgs/Icon-Whatsapp.svg" height="20px" style="margin-right:-50px;" class="search-icon" name="logo-whatsapp">
+      </button>
 
-        <ion-icon class="search-icon"   name="ios-search-outline"></ion-icon>
+      <button ion-button (click)="onSearch()" class="back-button-md">
+        <ion-icon class="search-icon" name="ios-search-outline"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -32,7 +34,7 @@
       <h2>Valor Total</h2>
     </div>
     <div class="pull-right">
-      <span ion-text color="primary" style="font-size:15px">{{total() |  currency: 'BRL':true}}</span>
+      <span ion-text style="font-size:15px; ">{{total() | currency: 'BRL':true}}</span>
     </div>
   </ion-item>
 </ion-footer>

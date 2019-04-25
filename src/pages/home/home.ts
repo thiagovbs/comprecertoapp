@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, IonicPage, PopoverController, } from 'ionic-angular';
+import { NavController, IonicPage, PopoverController, Events, } from 'ionic-angular';
 import { CategoriaService } from '../../services/categoria.service';
 
 import { Categoria } from '../../models/categoria.model';
@@ -12,6 +12,7 @@ import { AlcanceService } from '../../services/alcance.service';
 import * as Lodash from "lodash";
 import { UsuarioService } from '../../services/usuario.service';
 import { Usuario } from '../../models/usuario';
+import { Bairro } from '../../models/localidade';
 
 
 @IonicPage()
@@ -24,35 +25,50 @@ export class HomePage {
   categorias: Categoria[];
   mercados: Mercado[];
   bucketS3: string;
-  user:Usuario;  
-
+  user: Usuario;
+  localidadeMercado: Bairro;
 
   constructor(public navCtrl: NavController,
     private alcanceService: AlcanceService,
     private categoriaService: CategoriaService,
     private mercadoService: SupermercadoService,
     private popoverCtrl: PopoverController,
-    private userService: UsuarioService) {
+    private events: Events) {
   }
 
   ionViewDidLoad() {
     //imagens S3
     this.bucketS3 = API_CONFIG.s3Url;
 
-    //Carregando as Categorias
-    this.categoriaService.findAll().subscribe(resp=>{
-      this.categorias = Lodash.orderBy(resp, 'nome','asc')
+    //evento que adiciona os mercados por localidade na barra superior
+    this.events.subscribe('alcance', () => {
+      this.localidadeMercado = this.alcanceService.getLocaAlcance();
+      if (this.localidadeMercado) {
+        this.mercadoService.buscarMercadoprodutosPorBairro(this.localidadeMercado)
+          .subscribe((resp: Mercado[]) => {
+            this.mercados = resp;
+          })
+      }
     })
-    
-/*     //Carregando os Mercados
-    this.mercadoService.findAll()
-      .subscribe(response => {
-        this.mercados = response;
-      }, erro => { }) */
 
-     //iniciar o popover de alcance se o alcance não estiver no localStorage
+    this.localidadeMercado = this.alcanceService.getLocaAlcance();
+    if (this.localidadeMercado) {
+      this.mercadoService.buscarMercadoprodutosPorBairro(this.localidadeMercado)
+        .subscribe((resp: Mercado[]) => {
+          this.mercados = resp;
+        })
+    }
+
+
+    //Carregando as Categorias
+    this.categoriaService.findAll().subscribe(resp => {
+      this.categorias = Lodash.orderBy(resp, 'nome', 'asc')
+    })
+
+
+    //iniciar o popover de alcance se o alcance não estiver no localStorage
     if (!this.alcanceService.getLocaAlcance()) {
-      let popover = this.popoverCtrl.create(AlcanceComponent, { showBackdrop: true, cssClass: 'custom-popover' });
+      let popover = this.popoverCtrl.create(AlcanceComponent,{} ,{ showBackdrop: true, cssClass: 'custom-popover' });
       popover.present();
     }
   }

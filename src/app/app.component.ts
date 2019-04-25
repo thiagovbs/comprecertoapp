@@ -87,7 +87,7 @@ export class MyApp {
   }
 
   alcanceAlert() {
-    let popover = this.popoverCtrl.create(AlcanceComponent, { showBackdrop: true, cssClass: 'custom-popover' });
+    let popover = this.popoverCtrl.create(AlcanceComponent,{}, { showBackdrop: true, cssClass: 'custom-popover' });
     popover.present();
   }
 
