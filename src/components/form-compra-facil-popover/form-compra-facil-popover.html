@@ -1,4 +1,51 @@
-<!-- Generated template for the FormCompraFacilPopoverComponent component -->
-<div>
-  {{text}}
-</div>
+<ion-grid>
+  <form novalidate [formGroup]="enderecoForm" (ngSubmit)="SubmitForm()">
+    <ion-row>
+      <ion-col col-12 style="width: 95%; padding-left: 15px;">
+        <p class="uppercase-cl">Informe seu endereço para entrega:</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12>
+        <ion-item class="bg-transparent size">
+          <ion-input type="text" name="endereco" style="height: 20px;" formControlName="endereco" autocomplete="off" placeholder="Endereço"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-3>
+        <ion-item class="bg-transparent size">
+          <ion-input type="text" name="numero" style="height: 20px;" formControlName="numero" autocomplete="off" placeholder="Numero"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col col-5>
+        <ion-item class="bg-transparent size">
+          <ion-input type="text" name="complemento" style="height: 20px;" formControlName="complemento" autocomplete="off" placeholder="Complemento"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col col-4>
+        <ion-item class="bg-transparent size">
+          <ion-input type="text" name="bairro" style="height: 20px;" formControlName="bairro" autocomplete="off" placeholder="Bairro"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+        <ion-col col-4>
+          <ion-item class="bg-transparent size">
+            <ion-input type="text" 
+                       name="cidade" 
+                       formControlName="cidade" autocomplete="off" placeholder="Cidade" style="height: 20px;"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col col-4>
+          <ion-item class="bg-transparent size">
+            <ion-input type="text" name="estado" formControlName="estado" autocomplete="off" style="height: 20px;" placeholder="Estado"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col col-4 style="padding-left: 25px;">
+          <button ion-button clear class="btn-enviar" color="secondary" [disabled]="!enderecoForm.valid">Enviar</button>
+        </ion-col>
+      </ion-row>
+  </form>
+</ion-grid>

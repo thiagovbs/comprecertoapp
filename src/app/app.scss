@@ -412,8 +412,17 @@ ion-alert {
    border-top-right-radius:0 !important; 
     padding: 1px;
     transform-origin: right top !important;
-    transform: scale(1);
-    
+    transform: scale(1);  
+}
+
+.form-compra-facil .popover-content{
+  top: 160px !important;
+  width: 300px !important;
+  border-radius: 20px;
+  min-height: 150px;
+  padding: 1px;
+  transform-origin: right top !important;
+  transform: scale(1);  
 }
 
 .popover-md{ 

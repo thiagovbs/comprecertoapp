@@ -1,22 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, ContentChild } from '@angular/core';
+import { FormGroup, FormControlName, FormBuilder, Validators } from '@angular/forms';
 
-/**
- * Generated class for the FormCompraFacilPopoverComponent component.
- *
- * See https://angular.io/api/core/Component for more info on Angular
- * Components.
- */
 @Component({
   selector: 'form-compra-facil-popover',
   templateUrl: 'form-compra-facil-popover.html'
 })
 export class FormCompraFacilPopoverComponent {
 
-  text: string;
+  enderecoForm: FormGroup
+  @ContentChild(FormControlName) control: FormControlName;
 
-  constructor() {
-    console.log('Hello FormCompraFacilPopoverComponent Component');
-    this.text = 'Hello World';
+
+  constructor(private formBuilder: FormBuilder) {
+
+    this.enderecoForm = this.formBuilder.group({
+      endereco: this.formBuilder.control('', [Validators.required, Validators.minLength(3)]),
+      numero: this.formBuilder.control('', [Validators.required]),
+      complemento: this.formBuilder.control('', [Validators.required]),
+      bairro: this.formBuilder.control('', [Validators.required, Validators.minLength(3)]),
+      cidade: this.formBuilder.control('', [Validators.required, Validators.minLength(3)]),
+      estado: this.formBuilder.control('', [Validators.required, Validators.minLength(3)]),
+    })
+
+  }
+
+  SubmitForm(){
+    console.log(this.enderecoForm.value)
   }
 
 }
