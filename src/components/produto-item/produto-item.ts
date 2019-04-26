@@ -15,21 +15,25 @@ export class ProdutoItemComponent implements OnInit {
 
   @Input('produto-itens') produtos: MercadoProduto;
   @Input('mercado-itens') mercado: Mercado;
-  @Input() nomeCategoria:string
+  @Input() nomeCategoria: string
+  @Input() possuiMercadoNome: boolean;
 
   carrinhoItems: CarrinhoItem[]
   carrinhoItem: CarrinhoItem
-  
-  foundItem:CarrinhoItem
-  somaProduto:number
-  bucketS3: string
-  dtValidade:Date = null;
 
-  constructor(private carrinhoService: CarrinhoService, private mercadoService:SupermercadoService) {
+  foundItem: CarrinhoItem
+  somaProduto: number
+  bucketS3: string
+  dtValidade: Date = null;
+
+
+
+  constructor(private carrinhoService: CarrinhoService, private mercadoService: SupermercadoService) {
     this.carrinhoItem = carrinhoService.carrinhoItem
   }
 
   ngOnInit() {
+    
     this.bucketS3 = API_CONFIG.s3Url;
   }
 
@@ -46,7 +50,7 @@ export class ProdutoItemComponent implements OnInit {
 
   //aumenta quantidade de cada produto
   aumentaQnt(item: MercadoProduto) {
-     this.carrinhoService.addItem(item);
+    this.carrinhoService.addItem(item);
   }
 
   //adiciona produto no carrinho
@@ -55,20 +59,20 @@ export class ProdutoItemComponent implements OnInit {
   }
 
   //Verifica se produto existe no carrinho 
-  verificaProdutoNoCarrinho(item: MercadoProduto):boolean {
+  verificaProdutoNoCarrinho(item: MercadoProduto): boolean {
     this.foundItem = this.items().find((produtoItem) => produtoItem.produto.idMercadoProduto === item.idMercadoProduto)
     return this.foundItem ? true : false;
   }
 
-  getMercado(produto){
+  getMercado(produto) {
     console.log(produto)
   }
 
-  setSomaValor(produto):number{
-    if(this.foundItem){
-     return this.somaProduto= this.foundItem.quantidade * produto.preco;
-      
+  setSomaValor(produto: MercadoProduto): number {
+    if (this.foundItem) {
+      return this.somaProduto = this.foundItem.quantidade * produto.precoMercadoProduto;
+
     }
-    return this.somaProduto =0;    
+    return this.somaProduto = 0;
   }
 }

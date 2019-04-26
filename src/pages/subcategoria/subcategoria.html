@@ -1,6 +1,12 @@
 <ion-header no-border>
   <ion-navbar color="secondary">
-    <ion-title text-center ><span>MAIS BARATOS</span>
+    <ion-title text-center >
+      <div *ngIf="mercadoNome ; else maisBarato" >
+          {{mercadoNome}}
+      </div>
+      <ng-template #maisBarato>
+          <span>MAIS BARATOS</span>
+      </ng-template>
       <bdo dir="rtl">
         <p>{{categoriaNome}}</p>
       </bdo>
@@ -32,7 +38,7 @@
 
   <ion-list class="list-full-border" *ngIf="subcategoriaNome === 'Todos' && produtos">
     <!-- Exemplo de produto --> 
-    <produto-item [produto-itens]="produtos" [nomeCategoria]="categoriaNome" [mercado-itens]="mercado">
+    <produto-item [produto-itens]="produtos" [nomeCategoria]="categoriaNome" [mercado-itens]="mercado" [possuiMercadoNome]="possuiMercadoNome">
     </produto-item>
     <!-- Exemplo de produto -->
   </ion-list>

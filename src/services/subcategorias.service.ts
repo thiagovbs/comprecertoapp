@@ -12,12 +12,15 @@ export class SubCategoriaService{
         return this.http.get<any>(`${API_CONFIG.baseUrl}/subcategorias`)
     }
 
-
-    findProdutosPorCategorias(categoriaId):Observable<any>{
-        return this.http.get<any>(`${API_CONFIG.baseUrl}/produtos/categoria/${categoriaId}`);
+    findProdutosPorCategoria(categoriaId):Observable<any>{
+        return this.http.get<any>(`${API_CONFIG.baseUrl}/mercado-produtos/dto/?idCategoria=${categoriaId}`);
     }
 
-    findProdutos(categoriaId):Observable<any>{
-        return this.http.get<any>(`${API_CONFIG.baseUrl}/mercado-produtos?idCategoria=${categoriaId}`);
+    findProdutosComDtValidade(categoriaId):Observable<any>{
+        return this.http.get<any>(`${API_CONFIG.baseUrl}/mercado-produtos/dto/com-validade/?idCategoria=${categoriaId}`);
+    }
+
+    findProdutosPorCategoriaEMercado(categoriaId, mercadoId):Observable<any>{
+        return this.http.get<any>(`${API_CONFIG.baseUrl}/mercado-produtos/dto/?idCategoria=${categoriaId}&idMercado=${mercadoId}`);
     }
 }

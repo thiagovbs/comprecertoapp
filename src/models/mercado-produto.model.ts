@@ -1,18 +1,29 @@
-import { Produto } from "./produto.model";
-import {Mercado } from "./supermercado.model";
 
 export interface MercadoProduto{
-
+    caracteristicaProduto:string,
+    dtValidadeMercadoProduto:Date,
+    fDestaqueMercadoProduto:boolean,
+    idBairro:number,
+    idCategoria:number,
+    idCidade:number,
+    idEstado:number,
+    idMercado:number,
+    idMercadoLocalidade:number,
     idMercadoProduto:number,
+    idPais:number,
+    idProduto:number,
+    idSubcategoria:number,
+    marcaProduto:string,
+    nomeBairro:string,
+    nomeCategoria:string,
+    nomeCidade:string,
+    nomeEstado:string,
+    nomeFantasiaMercado:string,
+    nomePais:string,
+    nomeProduto:string,
+    nomeSubcategoria:string,
     observacao:string,
-    preco:number,
-    dtValidade:Date,
-    dtEntrada:Date,
-    produto:Produto,
-    fdestaque:boolean,
-    fsuperDestaque:boolean,
-    mercadoLocalidade:any
-
-
-
+    precoMercadoProduto:number,
+    quantidadeProduto:string,
+    unidadeMedida:string
 }

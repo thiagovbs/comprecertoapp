@@ -6,11 +6,10 @@ import { MyApp } from './app.component';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 //Login Rede social
 import { Facebook} from '@ionic-native/facebook';
 import { GooglePlus } from '@ionic-native/google-plus';
-
+import { SocialSharing } from '@ionic-native/social-sharing';
 import {IonicStorageModule} from '@ionic/storage'
 //componentes
 import { AlcanceComponent } from '../components/alcance/alcance';
@@ -56,6 +55,7 @@ import { FormCompraFacilPopoverComponent } from '../components/form-compra-facil
     FormCompraFacilPopoverComponent
   ],
   providers: [
+    
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
@@ -63,6 +63,7 @@ import { FormCompraFacilPopoverComponent } from '../components/form-compra-facil
     GooglePlus,
     AuthInterceptorsProvider,
     ErrorInterceptorsProvider,
+    SocialSharing,
     CarrinhoService,
     CategoriaService,
     AuthService,
@@ -70,7 +71,8 @@ import { FormCompraFacilPopoverComponent } from '../components/form-compra-facil
     UsuarioService,
     SupermercadoService,
     SubCategoriaService,
-    SuporteService
+    SuporteService,
+    
   ]
 })
 export class AppModule {}

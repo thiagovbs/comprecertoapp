@@ -59,12 +59,10 @@ export class HomePage {
         })
     }
 
-
     //Carregando as Categorias
     this.categoriaService.findAll().subscribe(resp => {
       this.categorias = Lodash.orderBy(resp, 'nome', 'asc')
     })
-
 
     //iniciar o popover de alcance se o alcance não estiver no localStorage
     if (!this.alcanceService.getLocaAlcance()) {
@@ -75,7 +73,9 @@ export class HomePage {
 
   onSubCategoria(item: Categoria) {
     this.navCtrl.push("SubcategoriaPage", {
-      cat: item
+      cat: item,
+      mercadoNome:undefined,
+      mercadoId:undefined
     });
   }
 

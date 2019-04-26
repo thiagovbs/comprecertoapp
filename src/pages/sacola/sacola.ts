@@ -49,7 +49,9 @@ export class SacolaPage implements OnInit {
 } 
 
 onCompraFacil(){
-  this.navCtrl.push('CompreFacilPage')
+  this.navCtrl.push('CompreFacilPage', {
+    valorTotal: this.total()
+  })
 }
 
 }

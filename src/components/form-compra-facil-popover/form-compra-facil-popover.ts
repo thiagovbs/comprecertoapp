@@ -1,5 +1,7 @@
 import { Component, ContentChild } from '@angular/core';
 import { FormGroup, FormControlName, FormBuilder, Validators } from '@angular/forms';
+import { SocialSharing } from '@ionic-native/social-sharing';
+import { ViewController } from 'ionic-angular';
 
 @Component({
   selector: 'form-compra-facil-popover',
@@ -11,7 +13,9 @@ export class FormCompraFacilPopoverComponent {
   @ContentChild(FormControlName) control: FormControlName;
 
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, 
+              private socialSharing:SocialSharing,
+              public viewCtrl: ViewController) {
 
     this.enderecoForm = this.formBuilder.group({
       endereco: this.formBuilder.control('', [Validators.required, Validators.minLength(3)]),
@@ -26,6 +30,17 @@ export class FormCompraFacilPopoverComponent {
 
   SubmitForm(){
     console.log(this.enderecoForm.value)
+
+    this.shareWhatsApp();
+  }
+
+  shareWhatsApp(){
+    this.socialSharing.shareViaWhatsApp(this.enderecoForm.value)
+    .then(()=>{
+      this.viewCtrl.dismiss();
+    }).catch(()=>{
+
+    })
   }
 
 }

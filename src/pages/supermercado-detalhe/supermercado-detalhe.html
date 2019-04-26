@@ -9,7 +9,7 @@
   </ion-navbar>
 </ion-header>
 
-  <ion-content class="gray-bg">
+  <ion-content class="cart gray-bg">
     <ion-list class="card-background-page" no-padding no-margin>
       <ion-card class="card" *ngFor="let categoria of categorias | async" (click)="onSubCategoria(categoria)">
         <img src="{{bucketS3}}/cat{{categoria.idCategoria}}.jpg" />

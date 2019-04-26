@@ -47,7 +47,7 @@ export class SacolaItemComponent implements OnInit {
   }
 
   setSomaValor(produto:CarrinhoItem):number{
-     return this.somaProduto=  produto.produto.preco * produto.quantidade;  
+     return this.somaProduto=  produto.produto.precoMercadoProduto * produto.quantidade;  
   }
  
 }

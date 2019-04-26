@@ -5,25 +5,25 @@
                 <ion-row>
                     <ion-col col-3>
                         <ion-thumbnail>
-                            <img class="thumb-image"  src="{{bucketS3}}/prod{{item.produto.produto.idProduto}}.jpg" alt="" />
+                            <img class="thumb-image"  src="{{bucketS3}}/prod{{item.produto.idProduto}}.jpg" alt="" />
                         </ion-thumbnail>
                     </ion-col>
                     <ion-col col-6  style="margin-top:5px" >
-                        <h2  style="white-space: pre-wrap;" ion-text>{{item.produto.produto.nome}} {{item.produto.produto.marca}} {{item.produto.produto.caracteristica}} {{item.produto.produto.quantidade }} {{item.produto.produto.unidadeMedida.sigla}}</h2>
+                        <h2  style="white-space: pre-wrap;" ion-text>{{item.produto.nomeProduto}} {{item.produto.marcaProduto}} {{item.produto.caracteristicaProduto}} {{item.produto.quantidadeProduto }} {{item.produto.unidadeMedida}}</h2>
                         <ion-row  style="margin-top:45px;">
                             <ion-col col-6>
-                                <h2 ion-text>{{item.produto.preco | currency}}</h2>
+                                <h2 ion-text>{{item.produto.precoMercadoProduto | currency:'BRL'}}</h2>
                             </ion-col>
                             <ion-col col-6>
-                                <span ion-text color="primary"  style="font-size: 0.85em;margin-left: -13px;">{{setSomaValor(item) | currency }}</span>
+                                <span ion-text color="primary"  style="font-size: 0.85em;margin-left: -13px;">{{setSomaValor(item) | currency:'BRL' }}</span>
                             </ion-col>
                         </ion-row>
                     </ion-col>
                     <ion-col col-3 style="margin-top:8px">
                         <div class="pull-right">
-                            <p style=" font-size:0.80em !important;  margin-right:2px;">{{item.produto.dtValidade  | date: 'dd/MM/yyyy'}}</p>
+                            <p style=" font-size:0.80em !important;  margin-right:2px;">{{item.produto.dtValidadeMercadoProduto  | date: 'dd/MM/yyyy'}}</p>
                         </div>
-                        <div style="margin-top:59px;">
+                        <div style="margin-top:55px;">
                             <btn-qnt-produto
                             [nomePage]="'Sacola'" 
                             [itemFound]="item"
@@ -36,10 +36,10 @@
         </ion-item>
         <ion-item class="">
             <div item-left>
-                <p>imagem</p>
+                <p>{{item.produto.nomeFantasiaMercado}}</p>
             </div>
             <div class="pull-right">
-                <p>Prix</p>
+                    <img src="assets/icon/supermercado-produto.svg" alt="">
             </div>
         </ion-item>
     </ion-list>

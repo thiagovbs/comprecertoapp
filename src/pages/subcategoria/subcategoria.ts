@@ -22,6 +22,9 @@ export class SubcategoriaPage {
   categoria: Categoria;
   categoriaNome: string;
 
+  mercadoNome: string
+  mercadoId: number
+
   subcategoriaNome: string = 'Todos';
   subcategorias: Subcategoria[];
 
@@ -31,6 +34,8 @@ export class SubcategoriaPage {
 
   mercados: Mercado;
   dataAtual: number;
+
+  possuiMercadoNome:boolean;
 
   constructor(
     private alcanceService: AlcanceService,
@@ -44,6 +49,8 @@ export class SubcategoriaPage {
   ionViewWillEnter() {
     //retorna as categorias da pagina home
     this.categoria = this.navParams.get('cat');
+    this.mercadoNome = this.navParams.get('mercadoNome');
+    this.mercadoId = this.navParams.get('mercadoId');
 
     this.categoriaNome = this.categoria.nome;
 
@@ -51,18 +58,30 @@ export class SubcategoriaPage {
     this.subcategorias = this.categoria.subcategorias;
 
     //listar os produtos pelo mercado produto
-    this.subcategoriaService.findProdutos(this.categoria.idCategoria).subscribe((resp: MercadoProduto[]) => {
-      this.produtos = resp;
-      if (this.produtos.length === 0) {
-        this.produtos = undefined;
-      }
-    }, erro => {
-      console.log(erro);
-    })
+    if (!this.mercadoNome) {
+      this.possuiMercadoNome = false;
+      this.subcategoriaService.findProdutosPorCategoria(this.categoria.idCategoria).subscribe((resp: MercadoProduto[]) => {
+        this.produtos = resp;
 
+        if (this.produtos.length === 0) {
+          this.produtos = undefined;
+        }
+      }, erro => {
+        console.log(erro);
+      })
+    } else {
+      this.possuiMercadoNome = true;
+      this.subcategoriaService.findProdutosPorCategoriaEMercado(this.categoria.idCategoria,this.mercadoId)
+        .subscribe(resp => {
+          this.produtos = resp;
+          if (this.produtos.length === 0) {
+            this.produtos = undefined;
+          }
+        })
+    }
 
     this.dataAtual = new Date().getTime();
-    console.log(this.dataAtual)
+    console.log(this.possuiMercadoNome)
 
   }
 
@@ -90,13 +109,13 @@ export class SubcategoriaPage {
     if (this.produtos) {
       //Filtro de produto por subcategorias
       this.filterProdutos = this.produtos.filter((prod: MercadoProduto) => {
-        let dtEntrada = new Date(prod.dtEntrada).getTime()
-        
+        let dtEntrada = new Date(prod.dtValidadeMercadoProduto).getTime()
+
         //filtro com a data de entrada
         /* if(dtEntrada <=this.dataAtual){ */
-          return prod.produto.subcategoria.nome === sub  
+        return prod.nomeSubcategoria === sub
         //}
-        
+
       });
 
       if (this.filterProdutos.length === 0) {

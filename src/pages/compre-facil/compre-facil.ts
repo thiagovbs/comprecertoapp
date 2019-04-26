@@ -16,7 +16,12 @@ export class CompreFacilPage {
     public popoverCtrl: PopoverController) {
   }
 
+  valorTotal:number
+
   ionViewDidLoad() {
+     //retorna o valor total da pagina sacola
+     this.valorTotal = this.navParams.get('valorTotal');
+     console.log(this.valorTotal)
   }
 
    showInfoCompraFacil(){
