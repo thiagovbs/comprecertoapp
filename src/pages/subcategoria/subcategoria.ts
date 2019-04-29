@@ -81,7 +81,6 @@ export class SubcategoriaPage {
     }
 
     this.dataAtual = new Date().getTime();
-    console.log(this.possuiMercadoNome)
 
   }
 

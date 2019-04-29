@@ -3,10 +3,11 @@
   <ion-navbar color="secondary">
 
     <ion-item class="item-search">
-      <ion-input class="text-type" (input)="filterItems($event)" floating type="text" placeholder="Pesquisar"></ion-input>
+      <ion-input class="text-type" floating type="text" placeholder="Pesquisar" (input)="changeInput()"
+        [(ngModel)]="searchTerm"></ion-input>
     </ion-item>
     <ion-buttons end>
-      <button ion-button class="back-button-md">
+      <button ion-button class="back-button-md" (click)="filtrarProduto()">
         <ion-icon class="search-icon" name="ios-funnel-outline"></ion-icon>
       </button>
     </ion-buttons>
@@ -14,22 +15,22 @@
 
 </ion-header>
 
-<ion-content margin-top class="gray-bg">
-  <ion-list *ngIf="searchTerm">
-    <ion-item class="item-title" *ngIf="filterMercados.length !==0" no-lines>
-      <h2 style=" font-size:0.88em; color:#fff">Supermercados</h2>
-    </ion-item>
-    <div *ngIf="filterMercados.length ===0">
-      <ion-item class="item-title" no-lines>
-        <h2 style=" font-size:0.88em; color:#fff">Não existem mercados com esse nome</h2>
-      </ion-item>
-    </div>
-    <div *ngIf="filterMercados.length !==0">
-      <button ion-item *ngFor="let mercado of filterMercados">
-        <h2>{{mercado.nomeFantasia}}</h2>
-      </button>
-    </div>
+<ion-content margin-top class="gray-bg" style="margin-top:-10px ;height: 102% !important;" >
 
+
+  <ion-list *ngIf="filterProdutos && searchTerm">
+    <div text-center class="secondary-bg" *ngIf="filterProdutos.length !==0" style="margin-bottom: -13px;">
+      <p style="color:#fff; font-size:0.98em !important;"><small>Produtos sugeridos</small></p>
+    </div>
+    <produto-item [produto-itens]="filterProdutos" [possuiMercadoNome]="possuiMercadoNome">
+    </produto-item>
   </ion-list>
 
+  <ion-grid no-padding>
+      <ion-row *ngIf="!filterProdutos">
+        <ion-col col-12 text-center style="margin-top:150px;">
+          <img src="assets/imgs/icone-de-erro.svg" alt="" height="200">
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 </ion-content>

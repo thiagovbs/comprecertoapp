@@ -14,7 +14,7 @@ import { SupermercadoService } from '../../services/supermercado.service';
 export class ProdutoItemComponent implements OnInit {
 
   @Input('produto-itens') produtos: MercadoProduto;
-  @Input('mercado-itens') mercado: Mercado;
+  
   @Input() nomeCategoria: string
   @Input() possuiMercadoNome: boolean;
 
@@ -55,7 +55,7 @@ export class ProdutoItemComponent implements OnInit {
 
   //adiciona produto no carrinho
   addCarrinho(item: MercadoProduto): void {
-    this.carrinhoService.addItem(item, this.nomeCategoria);
+    this.carrinhoService.addItem(item, item.nomeCategoria);
   }
 
   //Verifica se produto existe no carrinho 

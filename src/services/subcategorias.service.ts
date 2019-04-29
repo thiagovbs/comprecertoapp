@@ -12,6 +12,10 @@ export class SubCategoriaService{
         return this.http.get<any>(`${API_CONFIG.baseUrl}/subcategorias`)
     }
 
+    findProdutos():Observable<any>{
+        return this.http.get<any>(`${API_CONFIG.baseUrl}/mercado-produtos/dto`);
+    }
+
     findProdutosPorCategoria(categoriaId):Observable<any>{
         return this.http.get<any>(`${API_CONFIG.baseUrl}/mercado-produtos/dto/?idCategoria=${categoriaId}`);
     }
