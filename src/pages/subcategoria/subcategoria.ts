@@ -35,7 +35,7 @@ export class SubcategoriaPage {
   mercados: Mercado;
   dataAtual: number;
 
-  possuiMercadoNome:boolean;
+  possuiMercadoNome: boolean;
 
   constructor(
     private alcanceService: AlcanceService,
@@ -62,7 +62,9 @@ export class SubcategoriaPage {
       this.possuiMercadoNome = false;
       this.subcategoriaService.findProdutosPorCategoria(this.categoria.idCategoria).subscribe((resp: MercadoProduto[]) => {
         this.produtos = resp;
-
+        sortByFDestaque(this.produtos);
+        sortByPreco(this.produtos)
+        
         if (this.produtos.length === 0) {
           this.produtos = undefined;
         }
@@ -71,9 +73,12 @@ export class SubcategoriaPage {
       })
     } else {
       this.possuiMercadoNome = true;
-      this.subcategoriaService.findProdutosPorCategoriaEMercado(this.categoria.idCategoria,this.mercadoId)
+      this.subcategoriaService.findProdutosPorCategoriaEMercado(this.categoria.idCategoria, this.mercadoId)
         .subscribe(resp => {
           this.produtos = resp;
+          sortByFDestaque(this.produtos);
+          sortByPreco(this.produtos)
+
           if (this.produtos.length === 0) {
             this.produtos = undefined;
           }
@@ -132,4 +137,21 @@ export class SubcategoriaPage {
     this.navCtrl.push('PesquisaPage')
   }
 
+
+
+}
+const sortByPreco = (produtos: MercadoProduto[]) => {
+  produtos.sort((produtoA: MercadoProduto, produtoB: MercadoProduto) => {
+    if (produtoA.precoMercadoProduto > produtoB.precoMercadoProduto) return 1;
+    if (produtoA.precoMercadoProduto < produtoB.precoMercadoProduto) return -1;
+    return 0;
+  })
+}
+
+const sortByFDestaque = (produtos: MercadoProduto[]) => {
+  produtos.sort((produtoA: MercadoProduto, produtoB: MercadoProduto) => {
+    if (produtoA.fDestaqueMercadoProduto) return 1;
+    if (!produtoB.fDestaqueMercadoProduto) return -1;
+    return 0;
+  })
 }

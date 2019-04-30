@@ -32,6 +32,8 @@ export class PesquisaPage {
     this.mercadoProdutosService.findProdutos()
       .subscribe((response: MercadoProduto[]) => {
         this.produtos = response;
+        sortByFDestaque(this.produtos);
+        sortByPreco(this.produtos)
       }, erro => { })
   }
 
@@ -54,4 +56,20 @@ export class PesquisaPage {
   changeInput(){   
     this.filterProdutos = [];
   }
+}
+
+const sortByPreco = (produtos: MercadoProduto[]) => {
+  produtos.sort((produtoA: MercadoProduto, produtoB: MercadoProduto) => {
+    if (produtoA.precoMercadoProduto > produtoB.precoMercadoProduto) return 1;
+    if (produtoA.precoMercadoProduto < produtoB.precoMercadoProduto) return -1;
+    return 0;
+  })
+}
+
+const sortByFDestaque = (produtos: MercadoProduto[]) => {
+  produtos.sort((produtoA: MercadoProduto, produtoB: MercadoProduto) => {
+    if (produtoA.fDestaqueMercadoProduto) return 1;
+    if (!produtoB.fDestaqueMercadoProduto) return -1;
+    return 0;
+  })
 }

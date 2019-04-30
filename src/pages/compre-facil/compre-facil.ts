@@ -19,9 +19,9 @@ export class CompreFacilPage {
   valorTotal: number;
   produtos: CarrinhoItem[];
   mercadosSacola: SacolaMercados[];
-  foundItem:SacolaMercados;
+  foundItem: SacolaMercados;
   bucketS3: string;
-  qntTotal:number = 0;
+  qntTotal: number = 0;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -37,38 +37,43 @@ export class CompreFacilPage {
     this.valorTotal = this.navParams.get('valorTotal');
     this.produtos = this.navParams.get('produtos_sacola');
 
+    //produtos do carrinho para o serviço de compre-facil
     this.compraFacilService.getItemsCarrinho(this.produtos);
+    //serviço que modifica o carrinho para o modelo de SacolaMercados
     this.mercadosSacola = this.compraFacilService.getSacolaMercados();
-    console.log(this.mercadosSacola)
+
   }
 
+  //popover mostrar a msg de politicas do compre facil
   showInfoCompraFacil() {
     let popover = this.popoverCtrl.create(PopoverInfoCompraFacilComponent, {}, { cssClass: 'compra-facil' });
     popover.present();
   }
 
+  //popover para mostrar o form para mercados que entregam produtos em casa
   showFormCompraFacil(ev) {
     let popover = this.popoverCtrl.create(FormCompraFacilPopoverComponent, {}, { cssClass: 'form-compra-facil' });
     popover.present();
   }
 
-  setQuantidade():number{
-    if(this.foundItem){
+  //quantidade total de produtos na sacola de cada mercado
+  setQuantidade(): number {
+    if (this.foundItem) {
       return this.compraFacilService.getQntProdutosPorMercado(this.foundItem.carrinhoItem);
     }
   }
-
-  setValorTotal():number{
-    if(this.foundItem){
+  //valor total de produtos na sacola de cada mercado
+  setValorTotal(): number {
+    if (this.foundItem) {
       return this.compraFacilService.getValorProdutosPorMercado(this.foundItem.carrinhoItem);
     }
   }
 
-    //Verifica se produto existe no carrinho 
-    verificaMercadoNoCarrinho(item: SacolaMercados): boolean {
-      this.foundItem = this.mercadosSacola.find((produtoItem) => produtoItem.sacolaMercado.idMercadoLocalidade === item.sacolaMercado.idMercadoLocalidade);
-      return this.foundItem ? true : false;
-    }
+  //Verifica se mercado existe no carrinho 
+  verificaMercadoNoCarrinho(item: SacolaMercados): boolean {
+    this.foundItem = this.mercadosSacola.find((produtoItem) => produtoItem.sacolaMercado.idMercadoLocalidade === item.sacolaMercado.idMercadoLocalidade);
+    return this.foundItem ? true : false;
+  }
 
 
 }
