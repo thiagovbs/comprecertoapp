@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
-import { Produto } from "../models/produto.model";
 import { CarrinhoItem } from "../models/carrinho-item.model";
-import { AlertController, Events } from "ionic-angular";
+import { Events } from "ionic-angular";
 import { MercadoProduto } from "../models/mercado-produto.model";
+import { CompraFacilService } from "./compra-facil.service";
 
 @Injectable()
 export class CarrinhoService {
@@ -12,7 +12,7 @@ export class CarrinhoService {
     carrinhoItem: CarrinhoItem
     
 
-    constructor(private ctrlAlert: AlertController, public events: Events) {
+    constructor(public events: Events, private compraFacilService:CompraFacilService) {
 
     }
 
@@ -23,10 +23,11 @@ export class CarrinhoService {
 
     //adiciona item no carrinhoItem
     addItem(item: MercadoProduto, nomeCategoria?: string) {
-        let foundItem = this.items.find((carditem) => carditem.produto.idMercadoProduto === item.idMercadoProduto);
+        let foundItem = this.items.find((carditem:CarrinhoItem) => carditem.produto.idMercadoProduto === item.idMercadoProduto);
         if (foundItem) {
             this.aumentaQnt(foundItem);
         } else {
+           
             this.items.push(new CarrinhoItem(item, nomeCategoria));
         }
     }
@@ -36,10 +37,10 @@ export class CarrinhoService {
         return item.quantidade = item.quantidade + 1;
     }
 
-    //diminui a quantidade se o carrinho possuir o produto
+    //diminui a quantidade se do produto-item possuir o produto
     diminuiQnt(item: MercadoProduto) {
         let foundItem = this.items.find((carditem: CarrinhoItem) => carditem.produto.idMercadoProduto === item.idMercadoProduto);
-        console.log(foundItem.quantidade)
+        
         if (foundItem.quantidade <= 1) {
             this.removeItem(foundItem)
         }
@@ -52,7 +53,7 @@ export class CarrinhoService {
         //this.events.publish('deletar');
     }
 
-    //deleta o produto da lista
+    //deleta o produto do carrinho quando clicar no menos
     removeItemCarrinho(item: CarrinhoItem) {
         this.items.splice(this.items.indexOf(item), 1);
         this.events.publish('deletar');

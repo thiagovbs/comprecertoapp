@@ -1,7 +1,9 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, Events, ViewController, App } from 'ionic-angular';
 import { CarrinhoItem } from '../../models/carrinho-item.model';
 import { CarrinhoService } from '../../services/carrinho.service';
+
+
 
 
 @IonicPage()
@@ -13,14 +15,15 @@ export class SacolaPage implements OnInit {
 
   produtos: CarrinhoItem[];
   categorias: Array<string> = []
-
-
+  
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     private carrinhoService: CarrinhoService,
     public events: Events,
     public viewCtrl: ViewController,
     public appCtrl: App) {
+
+      
 
   }
 
@@ -38,20 +41,23 @@ export class SacolaPage implements OnInit {
     //evento para de disparar o evento de deletar
     this.events.unsubscribe('deletar')
 
+    
+
   }
 
   onSearch() {
     this.navCtrl.push('PesquisaPage')
   }
 
-  total():Number{
+  total(): number {
     return this.carrinhoService.total();
-} 
+  }
 
-onCompraFacil(){
-  this.navCtrl.push('CompreFacilPage', {
-    valorTotal: this.total()
-  })
+  onCompraFacil() {
+    this.navCtrl.push('CompreFacilPage', {
+      produtos_sacola: this.produtos,
+      valorTotal: this.total()
+    })
+  }
 }
 
-}

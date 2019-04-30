@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Produto } from '../../models/produto.model';
+
 import { Mercado } from '../../models/supermercado.model';
 import { CarrinhoService } from '../../services/carrinho.service';
 import { CarrinhoItem } from '../../models/carrinho-item.model';

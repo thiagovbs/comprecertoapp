@@ -1,4 +1,3 @@
-import { Produto } from "./produto.model";
 import { MercadoProduto } from "./mercado-produto.model";
 
 export class CarrinhoItem {
@@ -12,4 +11,5 @@ export class CarrinhoItem {
     value(): number {
         return this.produto.precoMercadoProduto * this.quantidade;
     }
+    
 }

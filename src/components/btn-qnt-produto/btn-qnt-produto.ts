@@ -23,7 +23,6 @@ export class BtnQntProdutoComponent implements OnInit {
 
   //aumenta quantidade de produtos
   emitAddevent() {
-      console.log(this.itemFound)
       this.add.emit()
    }
 

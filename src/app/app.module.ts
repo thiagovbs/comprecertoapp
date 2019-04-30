@@ -30,6 +30,7 @@ import { SupermercadoService } from '../services/supermercado.service';
 import { AlcanceService } from '../services/alcance.service';
 import { PopoverInfoCompraFacilComponent } from '../components/popover-info-compra-facil/popover-info-compra-facil';
 import { FormCompraFacilPopoverComponent } from '../components/form-compra-facil-popover/form-compra-facil-popover';
+import { CompraFacilService } from '../services/compra-facil.service';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { FormCompraFacilPopoverComponent } from '../components/form-compra-facil
     SupermercadoService,
     SubCategoriaService,
     SuporteService,
+    CompraFacilService
     
   ]
 })
