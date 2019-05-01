@@ -29,12 +29,15 @@ export class AuthService{
         return  this.http.post(API_CONFIG.authUrl, body, {headers: hds, withCredentials:true})   
     }
 
+    armazenarToken(token: string) {
+        localStorage.setItem('token', token);
+      }
+    
+
     successfullLogin(data){
         this.usuarioService.setLocalUser(null);
         
          let user:Usuario={
-            refreshToken:data.refresh_token, 
-            accessToken:data.access_token,
             nome: data.user.nome,
             email: data.user.email,
             login: data.user.login,
@@ -46,15 +49,16 @@ export class AuthService{
     logout(){
         this.usuarioService.setLocalUser(null);
         this.alcanceService.setLocalAlcance(null);
+        localStorage.removeItem('token');
     }
 
-    getAccessToken(refreshToken){
+    getRefreshToken( ){
         
         const hds = new HttpHeaders({
             'Content-Type': 'application/x-www-form-urlencoded',
             'Authorization': 'Basic aW9uaWM6MTBuMWMw'
           });
-        const body = `refresh_token=${refreshToken}&grant_type=refresh_token`;
+        const body = `grant_type=refresh_token`;
         return  this.http.post(API_CONFIG.authUrl, body, {headers: hds, withCredentials:true})          
     }
 

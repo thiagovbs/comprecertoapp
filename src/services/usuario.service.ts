@@ -14,7 +14,7 @@ export class UsuarioService{
 
     cadastrarUsuario(usuario:Usuario){  
         console.log(usuario)      
-       return this.http.post(`${API_CONFIG.cadUrl}/usuarios`,usuario,{
+       return this.http.post(`${API_CONFIG.baseUrl}/usuarios`,usuario,{
            observe:'response',
            responseType:'text'
        });

@@ -76,6 +76,8 @@ export class SugestaoPage {
       .subscribe(response => {
         this.sugestaoForm.reset();
         loading.dismiss();
+      },erro=>{
+        loading.dismiss();
       })
   }
 
@@ -89,6 +91,8 @@ export class SugestaoPage {
       .subscribe(response => {
         this.sugestaoForm2.reset();
         loading.dismiss();
+      },erro=>{
+        loading.dismiss();
       })
   }
 
@@ -101,6 +105,8 @@ export class SugestaoPage {
     this.suporteService.enviarMensagemProblemas(this.envioFormSuporte)
       .subscribe(response => {
         this.sugestaoForm3.reset();
+        loading.dismiss();
+      },erro=>{
         loading.dismiss();
       })
   }

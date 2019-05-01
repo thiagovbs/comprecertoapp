@@ -1,6 +1,4 @@
 export interface Usuario{
-    accessToken?:string,
-    refreshToken?:string,
     nome:string,
     email:string,
     login: string,

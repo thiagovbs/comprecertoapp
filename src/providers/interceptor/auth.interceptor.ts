@@ -20,16 +20,18 @@ export class AuthInterceptor implements HttpInterceptor{
     
     
 
-    let token = this.usuarioService.getLocalUser();
+    let token = localStorage.getItem('token');
     let N  = API_CONFIG.baseUrl.length;
     let requestToAPI = request.url.substring(0,N) == API_CONFIG.baseUrl
 
     if(token && requestToAPI){   
-      console.log("Usuário logado")    
+         
         const authReq = request.clone({
           responseType:'json',
-          setHeaders: {Authorization: 'Bearer ' + token.accessToken}
+          setHeaders: {Authorization: 'Bearer ' + localStorage.getItem('token')}
         }) 
+        //if(token.accessToken.expired)
+        
         return next.handle(authReq)
     }
     else{  

@@ -42,8 +42,7 @@ export class SubcategoriaPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private subcategoriaService: SubCategoriaService,
-    private popoverCtrl: PopoverController,
-    private mercadoService: SupermercadoService) {
+    private popoverCtrl: PopoverController) {
   }
 
   ionViewWillEnter() {
@@ -96,7 +95,7 @@ export class SubcategoriaPage {
       retornoAlcance = true;
     }
     else {
-      let popover = this.popoverCtrl.create(AlcanceComponent, { showBackdrop: true, cssClass: 'custom-popover' });
+      let popover = this.popoverCtrl.create(AlcanceComponent,{}, { showBackdrop: true, cssClass: 'custom-popover' });
       popover.present();
     }
 

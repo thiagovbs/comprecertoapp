@@ -61,8 +61,6 @@ export class InfoSignPopoverComponent {
 
     //preenchendo o usuário com todas as informações para seu cadastro
     this.user = {
-      accessToken: null,
-      refreshToken: null,
       nome: this.faceNome,
       email: this.faceEmail,
       login: this.faceEmail,
