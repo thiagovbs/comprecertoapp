@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, PopoverController, AlertController } from 'ionic-angular';
 import { PopoverInfoCompraFacilComponent } from '../../components/popover-info-compra-facil/popover-info-compra-facil';
 import { FormCompraFacilPopoverComponent } from '../../components/form-compra-facil-popover/form-compra-facil-popover';
 
@@ -7,6 +7,7 @@ import { CarrinhoItem } from '../../models/carrinho-item.model';
 import { SacolaMercados } from '../../models/SacolaMercados.model';
 import { CompraFacilService } from '../../services/compra-facil.service';
 import { API_CONFIG } from '../../config/api.config';
+import { CarrinhoService } from '../../services/carrinho.service';
 
 
 @IonicPage()
@@ -26,10 +27,32 @@ export class CompreFacilPage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public popoverCtrl: PopoverController,
-    private compraFacilService: CompraFacilService) {
+    private compraFacilService: CompraFacilService,
+    private carrinhoService: CarrinhoService,
+    private alertCtl: AlertController) {
   }
 
-
+  //Impedir que a página abra sem o alcance settado
+  ionViewCanEnter(): boolean {
+    let retornoItems: boolean = false;
+    if (this.carrinhoService.items.length !== 0) {
+      retornoItems = true;
+    }
+    //AlcanceComponent, {}, { showBackdrop: true, cssClass: 'custom-popover' }
+    else {
+      let alert = this.alertCtl.create({
+        title: '<img src="assets/imgs/icone-de-erro.svg" height="100">',
+        message: 'Adicione algum produto para sua compra!',
+        enableBackdropDismiss: false,
+        cssClass: 'AlertCompraFacil',
+        buttons: [
+          { text: 'Ok' }
+        ]
+      })
+      alert.present()
+    }
+    return retornoItems
+  }
 
   ionViewDidLoad() {
     this.bucketS3 = API_CONFIG.s3Url;

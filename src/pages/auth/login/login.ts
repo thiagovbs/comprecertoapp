@@ -32,6 +32,7 @@ export class LoginPage {
     subscribe((data:any) =>{
       loading.dismiss();
       this.authService.armazenarToken(data['access_token']);
+      this.authService.armazenarRefreshToken(data['refresh_token']);
       this.authService.successfullLogin(data);
       this.events.publish('user:LoggedIn')
       this.navCtrl.setRoot('HomePage')

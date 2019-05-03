@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { SubCategoriaService } from '../../services/subcategorias.service';
 import { MercadoProduto } from '../../models/mercado-produto.model';
 
@@ -20,7 +20,8 @@ export class PesquisaPage {
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    public mercadoProdutosService: SubCategoriaService) {
+    public mercadoProdutosService: SubCategoriaService,
+    public alertCrtl:AlertController) {
   }
 
   ionViewDidLoad() {
@@ -43,7 +44,17 @@ export class PesquisaPage {
       this.filterProdutos = this.produtos.filter((produto: MercadoProduto) => (produto.nomeProduto.toLowerCase()
         .indexOf(this.searchTerm.toLowerCase()) > -1));
         if(this.filterProdutos.length === 0){
-              
+          let alert = this.alertCrtl.create({
+            title: '<img src="assets/imgs/icone-de-erro.svg" height="100">',
+            message: 'Não achamos nenhum produto com esse nome!',
+            enableBackdropDismiss: false,
+            cssClass: 'AlertCompraFacil',
+            buttons: [
+              { text: 'Ok' }
+            ]
+          })
+          alert.present()
+          
           this.filterProdutos = undefined
         }
           
@@ -52,7 +63,6 @@ export class PesquisaPage {
       this.filterProdutos = undefined
     }
   }
-
   changeInput(){   
     this.filterProdutos = [];
   }

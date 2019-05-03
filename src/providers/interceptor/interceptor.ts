@@ -11,26 +11,16 @@ export class InterceptorProvider implements HttpInterceptor {
 
   constructor(
     private alertCrtl: AlertController,
-    private authService: AuthService,
     private usuarioService: UsuarioService) {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    
-    console.log("Interceptor");
     return next.handle(request)
-      .catch((error:any) => {
-
+      .catch((error: any) => {
         let erroObj = error;
-
         console.log("Erro Interceptado pelo Interceptor");
-
         if (erroObj instanceof HttpErrorResponse) {
-
           switch (erroObj.status) {
-            case 401:
-              return this.getNewAccessToken(request,next);
-            //break; 
             case 400:
               this.userFail();
               break;
@@ -39,35 +29,16 @@ export class InterceptorProvider implements HttpInterceptor {
               break;
             case 500:
               this.handle500();
-
+              break
+            case 404:
+              this.handleDefaultError(erroObj)
+              break
           }
+          this.handleDefaultError(erroObj)
         }
         return Observable.throw(erroObj);
       }) as any
   }
-
-  getNewAccessToken(req:HttpRequest<any>,next:HttpHandler):Observable<any> {
-     return this.authService.getRefreshToken().switchMap(resp=>{
-        this.authService.armazenarToken(resp['access_token']);
-        return next.handle(req.clone({
-          setHeaders:{
-            Authorization:'Bearer' + localStorage.getItem('token')
-          }
-        }))
-      })
-   
-  }
-
-  //refresh token pelo access token
-/*   getNewAccessToken(){
-    console.log('Navegação com access token inválido. Obtendo novo token...');
-    return this.authService.getRefreshToken().subscribe((response) => {
-      this.authService.armazenarToken(response['access_token']);
-      console.log('Novo access token criado!');
-    })
-    
-  } */
-
 
   //Erro ao Loggar
   userFail() {
@@ -106,8 +77,6 @@ export class InterceptorProvider implements HttpInterceptor {
     })
     alert.present();
   }
-
-
 
   handle403() {
     this.usuarioService.setLocalUser(null);

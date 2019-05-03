@@ -32,7 +32,9 @@ export class AuthService{
     armazenarToken(token: string) {
         localStorage.setItem('token', token);
       }
-    
+    armazenarRefreshToken(token:string){
+        localStorage.setItem('refresh_token', token);
+    }
 
     successfullLogin(data){
         this.usuarioService.setLocalUser(null);
@@ -52,13 +54,13 @@ export class AuthService{
         localStorage.removeItem('token');
     }
 
-    getRefreshToken( ){
-        
+    getRefreshToken(refreshToken){
+        console.log("refreshToken")
         const hds = new HttpHeaders({
             'Content-Type': 'application/x-www-form-urlencoded',
             'Authorization': 'Basic aW9uaWM6MTBuMWMw'
           });
-        const body = `grant_type=refresh_token`;
+        const body = `grant_type=refresh_token&refresh_token=${refreshToken}`;
         return  this.http.post(API_CONFIG.authUrl, body, {headers: hds, withCredentials:true})          
     }
 

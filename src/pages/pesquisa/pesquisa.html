@@ -25,12 +25,4 @@
     <produto-item [produto-itens]="filterProdutos" [possuiMercadoNome]="possuiMercadoNome">
     </produto-item>
   </ion-list>
-
-  <ion-grid no-padding>
-      <ion-row *ngIf="!filterProdutos">
-        <ion-col col-12 text-center style="margin-top:150px;">
-          <img src="assets/imgs/icone-de-erro.svg" alt="" height="200">
-        </ion-col>
-      </ion-row>
-    </ion-grid>
 </ion-content>

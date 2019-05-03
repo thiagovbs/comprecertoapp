@@ -34,6 +34,11 @@ export class HomePage {
     private mercadoService: SupermercadoService,
     private popoverCtrl: PopoverController,
     private events: Events) {
+
+    //Carregando as Categorias
+    this.categoriaService.findAll().subscribe(resp => {
+      this.categorias = Lodash.orderBy(resp, 'nome', 'asc')
+    })
   }
 
   ionViewDidLoad() {
@@ -59,14 +64,11 @@ export class HomePage {
         })
     }
 
-    //Carregando as Categorias
-    this.categoriaService.findAll().subscribe(resp => {
-      this.categorias = Lodash.orderBy(resp, 'nome', 'asc')
-    })
+
 
     //iniciar o popover de alcance se o alcance não estiver no localStorage
     if (!this.alcanceService.getLocaAlcance()) {
-      let popover = this.popoverCtrl.create(AlcanceComponent,{} ,{ showBackdrop: true, cssClass: 'custom-popover' });
+      let popover = this.popoverCtrl.create(AlcanceComponent, {}, { showBackdrop: true, cssClass: 'custom-popover' });
       popover.present();
     }
   }
@@ -74,8 +76,8 @@ export class HomePage {
   onSubCategoria(item: Categoria) {
     this.navCtrl.push("SubcategoriaPage", {
       cat: item,
-      mercadoNome:undefined,
-      mercadoId:undefined
+      mercadoNome: undefined,
+      mercadoId: undefined
     });
   }
 

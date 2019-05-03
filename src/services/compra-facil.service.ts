@@ -7,10 +7,7 @@ import { MercadoProduto } from "../models/mercado-produto.model";
 @Injectable()
 export class CompraFacilService {
 
-
     itensCarrinho: CarrinhoItem[] = [];
-
-
 
     sacolaMercadoDTO: SacolaMercadoDTO = {} as SacolaMercadoDTO;
 

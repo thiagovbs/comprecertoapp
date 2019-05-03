@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, Events, ViewController, App } from 'ionic-angular';
 import { CarrinhoItem } from '../../models/carrinho-item.model';
 import { CarrinhoService } from '../../services/carrinho.service';
+import { CompraFacilService } from '../../services/compra-facil.service';
 
 
 
@@ -40,8 +41,6 @@ export class SacolaPage implements OnInit {
 
     //evento para de disparar o evento de deletar
     this.events.unsubscribe('deletar')
-
-    
 
   }
 
