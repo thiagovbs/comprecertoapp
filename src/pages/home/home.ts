@@ -76,8 +76,7 @@ export class HomePage {
   onSubCategoria(item: Categoria) {
     this.navCtrl.push("SubcategoriaPage", {
       cat: item,
-      mercadoNome: undefined,
-      mercadoId: undefined
+      mercadoDetalhe: undefined
     });
   }
 

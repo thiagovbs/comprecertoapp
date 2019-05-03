@@ -39,9 +39,12 @@ export class AuthInterceptor implements HttpInterceptor {
     else {
       return next.handle(request)
         .catch((error: any) => {
+          console.log("erroObj.status")
           let erroObj = error;
           if (erroObj instanceof HttpErrorResponse) {
+            
             switch (erroObj.status) {
+              
               case 401:
                 return this.getNewAccessToken(request, next);
               case 0:

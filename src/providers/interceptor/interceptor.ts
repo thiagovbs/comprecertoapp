@@ -11,7 +11,7 @@ export class InterceptorProvider implements HttpInterceptor {
 
   constructor(
     private alertCrtl: AlertController,
-    private usuarioService: UsuarioService) {
+    private usuarioService: UsuarioService,private authService: AuthService) {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -33,11 +33,27 @@ export class InterceptorProvider implements HttpInterceptor {
             case 404:
               this.handleDefaultError(erroObj)
               break
+            case 401:
+              return this.getNewAccessToken(request, next);
+            case 0:
+              return this.getNewAccessToken(request, next);
           }
           this.handleDefaultError(erroObj)
         }
         return Observable.throw(erroObj);
       }) as any
+  }
+
+  getNewAccessToken(req: HttpRequest<any>, next: HttpHandler): Observable<any> {
+    return this.authService.getRefreshToken(localStorage.getItem('refresh_token')).switchMap((resp:any) => {
+      localStorage.setItem('token',resp.access_token)
+      console.log(resp)
+      return next.handle(req.clone({
+        setHeaders: {
+          Authorization: 'Bearer' + localStorage.getItem('token')
+        }
+      }))
+    })
   }
 
   //Erro ao Loggar

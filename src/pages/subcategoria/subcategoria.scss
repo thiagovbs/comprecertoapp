@@ -26,7 +26,7 @@ page-subcategoria {
     }
 
     .toolbar-title-md{
-        margin-top:8px;
+        margin-top:20px;
     }
         
     .toolbar-title-ios{
@@ -52,6 +52,9 @@ page-subcategoria {
         letter-spacing:0.5px; 
         margin-top: 0;
         font-weight: 400;
+    }
+    .toolbar-title-md .title-mercado{
         
+        padding: 0 34px !important;
     }
 }

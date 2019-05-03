@@ -1,15 +1,19 @@
 <ion-header no-border>
   <ion-navbar color="secondary">
-    <ion-title text-center >
-      <div *ngIf="mercadoNome ; else maisBarato" >
-          {{mercadoNome}}
+    <ion-title text-center>
+      <div *ngIf="possuiMercadoNome ; else maisBarato" class="title-mercado">
+          <span>{{mercadoDetalhe.nomeMercado}}</span>
+        <bdo rlt="bottom">
+          <p>{{mercadoDetalhe.nomeCategoria}}</p>
+        </bdo>
       </div>
       <ng-template #maisBarato>
-          <span>MAIS BARATOS</span>
+        <span>MAIS BARATOS</span>
+        <bdo dir="rtl">
+          <p>{{categoriaNome}}</p>
+        </bdo>
       </ng-template>
-      <bdo dir="rtl">
-        <p>{{categoriaNome}}</p>
-      </bdo>
+
     </ion-title>
 
     <ion-buttons end>
@@ -20,10 +24,11 @@
   </ion-navbar>
 </ion-header>
 <!-- Lista das subcategorias por mercado -->
-<ion-content class="gray-bg" >
+<ion-content class="gray-bg">
   <ion-toolbar style="min-height:30px !important;">
     <div class="barsubprodutos">
-      <ion-scroll scrollX="true" class="menu-2">
+      <!-- Todas subcategorias -->
+      <ion-scroll scrollX="true" class="menu-2" *ngIf="!possuiMercadoNome">
         <ion-segment scrollX="true" class="segment" color="primary" [(ngModel)]="subcategoriaNome">
           <ion-segment-button value="Todos" class="segment-button" (click)="onTodosProdutos()">
             Todos
@@ -33,11 +38,23 @@
           </ion-segment-button>
         </ion-segment>
       </ion-scroll>
+      <!-- Mercado subcategorias -->
+      <ion-scroll scrollX="true" class="menu-2" *ngIf="possuiMercadoNome">
+        <ion-segment scrollX="true" class="segment" color="primary" [(ngModel)]="subcategoriaNome">
+          <ion-segment-button value="Todos" class="segment-button" (click)="onTodosProdutos()">
+            Todos
+          </ion-segment-button>
+          <ion-segment-button *ngFor="let sub of mercadoSubCategoria" (click)="onSubCategoria(sub.nomeSubcategoria)"
+            value="{{sub.nomeSubcategoria}}">
+            {{sub.nomeSubcategoria}}
+          </ion-segment-button>
+        </ion-segment>
+      </ion-scroll>
     </div>
   </ion-toolbar>
 
   <ion-list class="list-full-border" *ngIf="subcategoriaNome === 'Todos' && produtos">
-    <!-- Exemplo de produto --> 
+    <!-- Exemplo de produto -->
     <produto-item [produto-itens]="produtos" [nomeCategoria]="categoriaNome" [possuiMercadoNome]="possuiMercadoNome">
     </produto-item>
     <!-- Exemplo de produto -->
@@ -45,7 +62,7 @@
 
   <ion-list class="list-full-border" *ngIf="subcategoriaNome !== 'Todos' && filterProdutos">
     <!-- Exemplo de produto -->
-    <produto-item [produto-itens]="filterProdutos"></produto-item>
+    <produto-item [produto-itens]="filterProdutos" [possuiMercadoNome]="possuiMercadoNome"></produto-item>
     <!-- Exemplo de produto -->
   </ion-list>
 </ion-content>

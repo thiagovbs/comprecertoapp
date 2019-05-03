@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-angular';
 import { SubCategoriaService } from '../../services/subcategorias.service';
 import { Subcategoria } from '../../models/subcategoria.model';
@@ -9,6 +9,7 @@ import { Mercado } from '../../models/supermercado.model';
 import { AlcanceService } from '../../services/alcance.service';
 import { AlcanceComponent } from '../../components/alcance/alcance';
 import { MercadoProduto } from '../../models/mercado-produto.model';
+import { MercadoDetalheProd, MercadoDetalheSubcategoria } from '../supermercado-detalhe/supermercado-detalhe';
 import { SupermercadoService } from '../../services/supermercado.service';
 
 
@@ -17,13 +18,14 @@ import { SupermercadoService } from '../../services/supermercado.service';
   selector: 'page-subcategoria',
   templateUrl: 'subcategoria.html',
 })
-export class SubcategoriaPage {
+export class SubcategoriaPage implements OnInit {
 
   categoria: Categoria;
   categoriaNome: string;
 
-  mercadoNome: string
-  mercadoId: number
+
+  mercadoDetalhe: MercadoDetalheProd = {} as MercadoDetalheProd
+  mercadoSubCategoria: MercadoDetalheSubcategoria[] = [];
 
   subcategoriaNome: string = 'Todos';
   subcategorias: Subcategoria[];
@@ -35,46 +37,57 @@ export class SubcategoriaPage {
   mercados: Mercado;
   dataAtual: number;
 
-  possuiMercadoNome: boolean;
+  possuiMercadoNome: boolean = false;
 
   constructor(
     private alcanceService: AlcanceService,
     public navCtrl: NavController,
     public navParams: NavParams,
     private subcategoriaService: SubCategoriaService,
-    private popoverCtrl: PopoverController) {
+    private popoverCtrl: PopoverController,
+    private supermercadoService: SupermercadoService) {
   }
 
-  ionViewWillEnter() {
-    //retorna as categorias da pagina home
-    this.categoria = this.navParams.get('cat');
-    this.mercadoNome = this.navParams.get('mercadoNome');
-    this.mercadoId = this.navParams.get('mercadoId');
+  ngOnInit() {
 
-    this.categoriaNome = this.categoria.nome;
+    this.possuiMercadoNome = false;
+    this.mercadoDetalhe = this.navParams.get('mercadoDetalhe');
 
-    //listando as subcategorias
-    this.subcategorias = this.categoria.subcategorias;
-
-    //listar os produtos pelo mercado produto
-    if (!this.mercadoNome) {
+    //Verifica se são categorias que vem da pagina mercado-detalhe ou da Home
+    if (this.mercadoDetalhe) {
+      this.possuiMercadoNome = true;
+      this.mercadoDetalhe.idCategoria = this.navParams.get('cat');
+      this.mercadoDetalhe = this.navParams.get('mercadoDetalhe');
+    } else {
       this.possuiMercadoNome = false;
+      this.categoria = this.navParams.get('cat');
+      this.categoriaNome = this.categoria.nome;
+      this.subcategorias = this.categoria.subcategorias;
+    }
+  }
+
+
+  ionViewWillEnter() {
+    
+    //listar os produtos pelo mercado produto
+    if (!this.mercadoDetalhe) {
+
       this.subcategoriaService.findProdutosPorCategoria(this.categoria.idCategoria).subscribe((resp: MercadoProduto[]) => {
         this.produtos = resp;
         sortByFDestaque(this.produtos);
         sortByPreco(this.produtos)
-        
+
         if (this.produtos.length === 0) {
           this.produtos = undefined;
         }
-      }, erro => {
-        console.log(erro);
-      })
+      }, erro => { })
     } else {
-      this.possuiMercadoNome = true;
-      this.subcategoriaService.findProdutosPorCategoriaEMercado(this.categoria.idCategoria, this.mercadoId)
+      this.subcategoriaService.findProdutosPorCategoriaEMercado(this.mercadoDetalhe.idCategoria, this.mercadoDetalhe.idMercado)
         .subscribe(resp => {
           this.produtos = resp;
+          this.mercadoSubCategoria = this.supermercadoService
+            .filtrarSubcategoriasPorMercadoProduto(this.produtos)
+
           sortByFDestaque(this.produtos);
           sortByPreco(this.produtos)
 
@@ -83,9 +96,7 @@ export class SubcategoriaPage {
           }
         })
     }
-
     this.dataAtual = new Date().getTime();
-
   }
 
   //Impedir que a página abra sem o alcance settado
@@ -95,13 +106,14 @@ export class SubcategoriaPage {
       retornoAlcance = true;
     }
     else {
-      let popover = this.popoverCtrl.create(AlcanceComponent,{}, { showBackdrop: true, cssClass: 'custom-popover' });
+      let popover = this.popoverCtrl.create(AlcanceComponent, {}, { showBackdrop: true, cssClass: 'custom-popover' });
       popover.present();
     }
     return retornoAlcance
   }
 
   onSubCategoria(sub: string): MercadoProduto[] {
+    console.log(this.possuiMercadoNome)
     this.subcategoriaNome = sub;
     //ao clicar no botão onSubCategoria o filterProdutos do html vai estar falso e o
     //conteúdo da div não vai aparecer quando houver uma subcategoria sem produto

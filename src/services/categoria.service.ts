@@ -10,7 +10,6 @@ export class CategoriaService{
     categorias:Observable<Categoria[]>;
 
     constructor(public http:HttpClient){
-        
         this.categorias = this.findAll()
     }
 
