@@ -6,6 +6,7 @@ import { MyApp } from './app.component';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {EmailComposer}  from '@ionic-native/email-composer'
 //Login Rede social
 import { Facebook} from '@ionic-native/facebook';
 import { GooglePlus } from '@ionic-native/google-plus';
@@ -62,6 +63,7 @@ import { CompraFacilService } from '../services/compra-facil.service';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Facebook,
     GooglePlus,
+    EmailComposer,
     AuthInterceptorsProvider,
     ErrorInterceptorsProvider,
     SocialSharing,

@@ -1,7 +1,8 @@
 import { Component, ContentChild } from '@angular/core';
-import { IonicPage, NavController, LoadingController, Loading } from 'ionic-angular';
+import { IonicPage, NavController, LoadingController, Loading, AlertController } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators, FormControlName } from '@angular/forms';
 import { SuporteService } from '../../services/suporte.service';
+import { EmailComposer } from '@ionic-native/email-composer';
 
 
 
@@ -17,6 +18,10 @@ export class SugestaoPage {
   sugestaoForm3: FormGroup
   @ContentChild(FormControlName) control: FormControlName;
 
+  subject: string = 'Meu Titulo';
+  body: string = '';
+  to: string = 'philipe.lopes07@gmail.com ';
+
   envioFormSuporte: { titulo: string, formSuporte: any };
 
   item: { expanded: boolean, text: string } = { expanded: false, text: "" };
@@ -28,12 +33,15 @@ export class SugestaoPage {
     this.navCtrl.push('PesquisaPage')
   }
 
-
+  alert: any;
   itemsExpandedHeight: number = 200;
+
   constructor(public navCtrl: NavController,
     private formBuilder: FormBuilder,
     private suporteService: SuporteService,
-    public loadingCtrl: LoadingController) {
+    public loadingCtrl: LoadingController,
+    private emailComposer: EmailComposer,
+    public alertCrtl: AlertController) {
 
     this.item = { expanded: false, text: "Qual mercado você gostaria de ver no Sheap?" };
     this.item2 = { expanded: false, text: "Indique uma cidade ou estado que os nossos serviços não estão disponíveis?" };
@@ -58,8 +66,19 @@ export class SugestaoPage {
       descProblema: this.formBuilder.control('', [Validators.required, Validators.minLength(3)]),
     })
 
+    this.alert = this.alertCrtl.create({
+      title: '<img src="assets/icon/Logo-Sheap-icone-03.svg" height="100">',
+      message: 'Obrigado, seu email é muito importante para nós!',
+      enableBackdropDismiss: true,
+      cssClass: 'AlertCompraFacil',
+      buttons: [
+        { text: 'Ok' }
+      ]
+    })
 
   }
+
+
 
   expandItem(item) {
     item.expanded = !item.expanded;
@@ -72,28 +91,50 @@ export class SugestaoPage {
       titulo: this.item.text,
       formSuporte: this.sugestaoForm.value
     }
-    this.suporteService.enviarMensagemQualMercado(this.envioFormSuporte)
-      .subscribe(response => {
-        this.sugestaoForm.reset();
-        loading.dismiss();
-      },erro=>{
-        loading.dismiss();
-      })
+
+    let formatoEmail = `Supermercado:${this.envioFormSuporte.formSuporte.nomeMercado}<br>,
+                        Estado:${this.envioFormSuporte.formSuporte.estadoMercado}<br>,
+                        Cidade:${this.envioFormSuporte.formSuporte.cidadeMercado}<br>,
+                        Bairro:${this.envioFormSuporte.formSuporte.bairroMercado}<br>`
+    let email = {
+      to: this.to,
+      subject: this.item.text,
+      body: formatoEmail,
+      isHtml: true,
+      app: 'Gmail'
+    }
+
+    this.emailComposer.open(email).then(resp => {
+      loading.dismiss();
+      this.alert.present()
+    });
+
+
   }
 
   enviaForm2() {
+
+
     let loading: Loading = this.showLoading();
     this.envioFormSuporte = {
       titulo: this.item2.text,
       formSuporte: this.sugestaoForm2.value
     }
-    this.suporteService.enviarMensagemIndiqueUmaCidade(this.envioFormSuporte)
-      .subscribe(response => {
-        this.sugestaoForm2.reset();
-        loading.dismiss();
-      },erro=>{
-        loading.dismiss();
-      })
+    let formatoEmail = `Estado:${this.envioFormSuporte.formSuporte.estadoMercado}<br>,
+                        Cidade:${this.envioFormSuporte.formSuporte.cidadeMercado}<br>`
+
+    let email = {
+      to: this.to,
+      subject: this.item2.text,
+      body: formatoEmail,
+      isHtml: true,
+      app: 'Gmail'
+    }
+
+    this.emailComposer.open(email).then(resp => {
+      loading.dismiss();
+      this.alert.present()
+    });
   }
 
   enviaForm3() {
@@ -102,13 +143,22 @@ export class SugestaoPage {
       titulo: this.item3.text,
       formSuporte: this.sugestaoForm3.value
     }
-    this.suporteService.enviarMensagemProblemas(this.envioFormSuporte)
-      .subscribe(response => {
-        this.sugestaoForm3.reset();
-        loading.dismiss();
-      },erro=>{
-        loading.dismiss();
-      })
+
+    console.log(this.envioFormSuporte.formSuporte)
+    let formatoEmail = `${this.envioFormSuporte.formSuporte.descProblema}<br>`
+
+    let email = {
+      to: this.to,
+      subject: this.item3.text,
+      body: formatoEmail,
+      isHtml: true,
+      app: 'Gmail'
+    }
+
+    this.emailComposer.open(email).then(resp => {
+      loading.dismiss();
+      this.alert.present()
+    });
   }
 
 
