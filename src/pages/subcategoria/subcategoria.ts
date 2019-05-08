@@ -76,7 +76,7 @@ export class SubcategoriaPage implements OnInit {
         this.produtos = resp;
         sortByFDestaque(this.produtos);
         sortByPreco(this.produtos)
-
+        console.log(this.produtos)
         if (this.produtos.length === 0) {
           this.produtos = undefined;
         }

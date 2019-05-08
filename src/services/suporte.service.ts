@@ -3,13 +3,14 @@ import { HttpClient } from "@angular/common/http";
 import { API_CONFIG } from "../config/api.config";
 import { Observable } from "rxjs";
 
+
 @Injectable()
 export class SuporteService {
 
     constructor(public http: HttpClient) {
     }
 
-    enviarMensagemQualMercado(envioFormSuporte:any):Observable<any>{
+    enviarMensagemQualMercado(email:string,envioFormSuporte:any):Observable<any>{
         let tituloEmail = envioFormSuporte.titulo;
         
         let nomeMercado = envioFormSuporte.formSuporte.nomeMercado;
@@ -24,14 +25,14 @@ export class SuporteService {
         let bairroMercado = envioFormSuporte.formSuporte.bairroMercado;
         bairroMercado = bairroMercado.trim();
        return this.http
-       .post(`${API_CONFIG.baseUrl}/suporte/1`,tituloEmail+"/" +nomeMercado+"/"+estadoMercado+"/"+cidadeMercado+"/"+bairroMercado,
+       .post(`${API_CONFIG.baseUrl}/rest/suporte/1`,tituloEmail+"/" +nomeMercado+"/"+estadoMercado+"/"+cidadeMercado+"/"+bairroMercado +"/"+email,
         {
             observe:'response',
             responseType:'text'
         }) 
     }
 
-    enviarMensagemIndiqueUmaCidade(envioFormSuporte:any){
+    enviarMensagemIndiqueUmaCidade(email:string,envioFormSuporte:any){
         let tituloEmail = envioFormSuporte.titulo;
         
         let estadoMercado = envioFormSuporte.formSuporte.estadoMercado;
@@ -41,20 +42,20 @@ export class SuporteService {
         cidadeMercado = cidadeMercado.trim();
 
         return this.http
-        .post(`${API_CONFIG.baseUrl}/suporte/2`,tituloEmail+"/"+estadoMercado+"/"+cidadeMercado,
+        .post(`${API_CONFIG.baseUrl}/rest/suporte/2`,tituloEmail+"/"+estadoMercado+"/"+cidadeMercado+"/"+email,
          {
              observe:'response',
              responseType:'text'
          }) 
     }
 
-    enviarMensagemProblemas(envioFormSuporte:any){
+    enviarMensagemProblemas(email:string,envioFormSuporte:any){
         let tituloEmail = envioFormSuporte.titulo; 
         let msg = envioFormSuporte.formSuporte.descProblema;
         console.log(msg)
        
         return this.http
-        .post(`${API_CONFIG.baseUrl}/suporte/3`,tituloEmail+"/"+msg,
+        .post(`${API_CONFIG.baseUrl}/rest/suporte/3`,tituloEmail+"/"+msg+"/"+email,
          {
              observe:'response',
              responseType:'text'

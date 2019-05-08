@@ -4,6 +4,9 @@ import { FormGroup, FormBuilder, Validators, FormControlName } from '@angular/fo
 import { SuporteService } from '../../services/suporte.service';
 import { EmailComposer } from '@ionic-native/email-composer';
 
+import { UsuarioService } from '../../services/usuario.service';
+import { Usuario } from '../../models/usuario';
+
 
 
 @IonicPage()
@@ -28,6 +31,7 @@ export class SugestaoPage {
   item2: { expanded: boolean, text: string } = { expanded: false, text: "" };
   item3: { expanded: boolean, text: string } = { expanded: false, text: "" };
 
+  user:Usuario
 
   onSearch() {
     this.navCtrl.push('PesquisaPage')
@@ -41,7 +45,8 @@ export class SugestaoPage {
     private suporteService: SuporteService,
     public loadingCtrl: LoadingController,
     private emailComposer: EmailComposer,
-    public alertCrtl: AlertController) {
+    public alertCrtl: AlertController,
+    private usuarioService:UsuarioService) {
 
     this.item = { expanded: false, text: "Qual mercado você gostaria de ver no Sheap?" };
     this.item2 = { expanded: false, text: "Indique uma cidade ou estado que os nossos serviços não estão disponíveis?" };
@@ -78,7 +83,11 @@ export class SugestaoPage {
 
   }
 
+  ionViewWillEnter(){
+    this.user = this.usuarioService.getLocalUser()
 
+    console.log(this.user)
+  }
 
   expandItem(item) {
     item.expanded = !item.expanded;
@@ -92,22 +101,17 @@ export class SugestaoPage {
       formSuporte: this.sugestaoForm.value
     }
 
-    let formatoEmail = `Supermercado:${this.envioFormSuporte.formSuporte.nomeMercado}<br>,
-                        Estado:${this.envioFormSuporte.formSuporte.estadoMercado}<br>,
-                        Cidade:${this.envioFormSuporte.formSuporte.cidadeMercado}<br>,
-                        Bairro:${this.envioFormSuporte.formSuporte.bairroMercado}<br>`
-    let email = {
-      to: this.to,
-      subject: this.item.text,
-      body: formatoEmail,
-      isHtml: true,
-      app: 'Gmail'
-    }
 
-    this.emailComposer.open(email).then(resp => {
-      loading.dismiss();
-      this.alert.present()
-    });
+    this.suporteService.enviarMensagemQualMercado(this.user.email,this.envioFormSuporte)
+      .subscribe(response => {
+        console.log(response)
+        this.sugestaoForm.reset();
+        loading.dismiss();
+        this.alert.present()
+      }, erro => {
+        loading.dismiss();
+      })
+
 
 
   }
@@ -120,21 +124,16 @@ export class SugestaoPage {
       titulo: this.item2.text,
       formSuporte: this.sugestaoForm2.value
     }
-    let formatoEmail = `Estado:${this.envioFormSuporte.formSuporte.estadoMercado}<br>,
-                        Cidade:${this.envioFormSuporte.formSuporte.cidadeMercado}<br>`
 
-    let email = {
-      to: this.to,
-      subject: this.item2.text,
-      body: formatoEmail,
-      isHtml: true,
-      app: 'Gmail'
-    }
-
-    this.emailComposer.open(email).then(resp => {
-      loading.dismiss();
-      this.alert.present()
-    });
+    this.suporteService.enviarMensagemIndiqueUmaCidade(this.user.email,this.envioFormSuporte)
+      .subscribe(response => {
+        console.log(response)
+        this.sugestaoForm.reset();
+        loading.dismiss();
+        this.alert.present()
+      }, erro => {
+        loading.dismiss();
+      })
   }
 
   enviaForm3() {
@@ -144,21 +143,15 @@ export class SugestaoPage {
       formSuporte: this.sugestaoForm3.value
     }
 
-    console.log(this.envioFormSuporte.formSuporte)
-    let formatoEmail = `${this.envioFormSuporte.formSuporte.descProblema}<br>`
-
-    let email = {
-      to: this.to,
-      subject: this.item3.text,
-      body: formatoEmail,
-      isHtml: true,
-      app: 'Gmail'
-    }
-
-    this.emailComposer.open(email).then(resp => {
+    this.suporteService.enviarMensagemProblemas(this.user.email,this.envioFormSuporte)
+    .subscribe(response => {
+      console.log(response)
+      this.sugestaoForm.reset();
       loading.dismiss();
       this.alert.present()
-    });
+    }, erro => {
+      loading.dismiss();
+    })
   }
 
 

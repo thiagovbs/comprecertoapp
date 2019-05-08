@@ -39,7 +39,7 @@ export class AuthInterceptor implements HttpInterceptor {
     else {
       return next.handle(request)
         .catch((error: any) => {
-          console.log("erroObj.status")
+          
           let erroObj = error;
           if (erroObj instanceof HttpErrorResponse) {
             
