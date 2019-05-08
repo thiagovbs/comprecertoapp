@@ -54,4 +54,7 @@ export class LoginPage {
       return loading;
     }
   
+    onMinhaSenha(){
+      this.navCtrl.push('EsqueciMinhaSenhaPage')
+    }
 }

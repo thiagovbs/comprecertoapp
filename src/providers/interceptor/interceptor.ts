@@ -27,9 +27,9 @@ export class InterceptorProvider implements HttpInterceptor {
             case 403:
               this.handle403();
               break;
-            case 500:
-              this.handle500();
-              break
+            //case 500:
+              //this.handle500();
+              //break
             case 404:
               this.handleDefaultError(erroObj)
               break
@@ -38,7 +38,7 @@ export class InterceptorProvider implements HttpInterceptor {
             case 0:
               return this.getNewAccessToken(request, next);
           }
-          this.handleDefaultError(erroObj)
+          //this.handleDefaultError(erroObj)
         }
         return Observable.throw(erroObj);
       }) as any

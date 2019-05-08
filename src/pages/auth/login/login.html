@@ -1,4 +1,11 @@
+<ion-header no-border>
 
+    <ion-navbar color="secondary" >
+      <ion-title text-center style="padding-right:40px;">
+        Login
+      </ion-title>
+    </ion-navbar>
+  </ion-header>
 <ion-content class="gray-bg">
   
   <div class="login-content">
@@ -17,7 +24,7 @@
             <ion-label  floating>Digite sua senha</ion-label>
             <ion-input type="password" name="password" required [(ngModel)]="login.password"></ion-input>
           </ion-item>
-          
+          <a class="span-cadastro" (click)="onMinhaSenha()">Esqueci minha senha !</a>
           <button ion-button block 
           style="width:95%; margin: 10px auto"
           class="register" color="secondary" [disabled]="!form.valid" (click)="loggar()" margin-top>

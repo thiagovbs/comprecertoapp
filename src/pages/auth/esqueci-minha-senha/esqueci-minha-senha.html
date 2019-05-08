@@ -1,0 +1,29 @@
+<ion-header no-border>
+
+  <ion-navbar color="secondary" >
+    <ion-title text-center style="padding-right:40px;">
+      Recuperar Senha
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content class="gray-bg">
+
+<div class="login-content">
+    <form #form="ngForm" novalidate>
+      <div class="socialLogin" padding>
+        <p style="color:darkred;" class="size">Será encaminhado uma mensagem para seu e-mail, com um link de recuperação de senha. Coloque o seu e-mail cadastrado</p>
+        <ion-item class="bg-transparent size">
+          <ion-label floating>Digite seu Email</ion-label>
+          <ion-input name="username" required [(ngModel)]="login.username"></ion-input>
+        </ion-item>
+        <button ion-button block 
+        style="width:95%; margin: 10px auto"
+        class="register" color="secondary" [disabled]="!form.valid" (click)="enviarSenha()" margin-top>
+          Enviar
+        </button>
+      </div>
+    </form> 
+</div>
+
+
+</ion-content>

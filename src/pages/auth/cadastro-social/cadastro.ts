@@ -31,7 +31,7 @@ export class CadastroPage {
   userLogin: UserLogin;
 
   entrar() {
-    this.navCtrl.setRoot('LoginPage');
+    this.navCtrl.push('LoginPage');
   }
 
   ionViewWillEnter() {
