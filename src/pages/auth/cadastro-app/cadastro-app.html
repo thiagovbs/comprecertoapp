@@ -1,11 +1,14 @@
+<ion-header no-border>
 
+    <ion-navbar color="secondary" >
+      <ion-title text-center style="padding-right:40px;">
+        Cadastro
+      </ion-title>
+    </ion-navbar>
+  </ion-header>
 <ion-content class="gray-bg">
   
   <div class="login-content">
-      <!-- Logo -->
-      <div padding text-center style="padding-top:40px;">
-        <img src="assets/icon/Logo-Sheap-04.svg"  height="100" alt="">
-      </div>
       <form novalidate [formGroup]="cadastroForm" (ngSubmit)="SubmitForm()">
         <div padding>
           <ion-item class="bg-transparent size" >

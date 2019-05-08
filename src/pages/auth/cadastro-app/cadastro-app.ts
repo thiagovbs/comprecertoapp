@@ -72,7 +72,7 @@ export class CadastroAppPage {
     var milliseconds = dt_Nascimento.getTime(); 
     let email_form = this.cadastroForm.controls['email'].value;
     let senha_form = this.cadastroForm.controls['senha'].value;
-    let login_form = email_form.substring(0, email_form.lastIndexOf("@"));
+    
      
     this.permissao ={
       descricao: "USER"
@@ -83,7 +83,7 @@ export class CadastroAppPage {
     this.usuario ={
       nome: nome_form,
       email: email_form,
-      login: login_form,
+      login: email_form,
       dtNascimento: milliseconds,
       senha: senha_form,
       sexo: sexo_form,
