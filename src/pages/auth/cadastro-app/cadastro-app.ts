@@ -22,7 +22,7 @@ export class CadastroAppPage {
   sexoList = [
     {nome: 'Masculino', value: 'M'},
     {nome: 'Feminino', value: 'F'},
-    {nome: 'Outros', value: 'O'},
+    {nome: 'Outro', value: 'O'},
     
   ];
 
@@ -38,7 +38,7 @@ export class CadastroAppPage {
 
       this.cadastroForm = this.formBuilder.group({
         nome:this.formBuilder.control('',[Validators.required, Validators.minLength(3)]),
-        sexo: this.formBuilder.control(false, [Validators.required]),
+        sexo: this.formBuilder.control('', [Validators.required]),
         dtNascimento:this.formBuilder.control('',[Validators.required]),
         email:this.formBuilder.control('',[Validators.required, Validators.pattern(this.emailPattern)]),
         senha:this.formBuilder.control('', [Validators.required, Validators.minLength(3)]),

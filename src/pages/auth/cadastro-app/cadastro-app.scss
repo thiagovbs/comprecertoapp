@@ -5,7 +5,7 @@ page-cadastro-app {
     }
 
     .size{
-        font-size: 0.85em !important;
+        font-size: 0.9em !important;
         font-weight:500; 
         width: 95%;
         margin: 0 auto !important;
@@ -13,7 +13,18 @@ page-cadastro-app {
     }
 
     .error{
-        color:red;
+        color:red;       
+    }
+
+    .size-select-item{
+        background-color: transparent;
+        width:100%;
+        padding:10px !important;
         
+        .size-select{
+            min-width: 98%;
+            padding-left: 5px;
+            font-size: 0.9em;
+        }
     }
 }

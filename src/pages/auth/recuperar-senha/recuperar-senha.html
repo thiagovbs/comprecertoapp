@@ -1,0 +1,34 @@
+<ion-header no-border>
+
+  <ion-navbar color="secondary">
+    <ion-title text-center>
+      Nova senha
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content class="gray-bg">
+
+  <div class="login-content">
+    <form [formGroup]="ngForm" novalidate (ngSubmit)="SubmitForm()">
+      <div class="socialLogin" padding>
+        <ion-item class="bg-transparent size">
+          <ion-label floating>Digite sua senha</ion-label>
+          <ion-input type="password" formControlName="senha" style="text-transform: lowercase"></ion-input>
+        </ion-item>
+        <ion-item class="bg-transparent size">
+          <ion-label floating>Confirme sua senha</ion-label>
+          <ion-input type="password" formControlName="confirmSenha" style="text-transform: lowercase"></ion-input>
+        </ion-item>
+        <ion-item class="bg-transparent size" *ngIf="ngForm.hasError('senhaNaoCompara')" no-lines>
+          <span class="error">Senhas não são iguais</span>
+        </ion-item>
+        <button ion-button block style="width:95%; margin: 10px auto" class="register" color="secondary"
+          [disabled]="!ngForm.valid" margin-top>
+          Enviar
+        </button>
+      </div>
+    </form>
+  </div>
+
+
+</ion-content>

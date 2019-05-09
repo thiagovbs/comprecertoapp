@@ -45,7 +45,9 @@ export class CadastroPage {
         if (res.status === 'connected') {
           this.fb.api('me?fields=id,name,email', [])
             .then(profile => {
+              console.log(profile)
               this.userLogin = {
+                name:profile.name,
                 username: profile.email,
                 password: profile.id
               }
@@ -53,7 +55,8 @@ export class CadastroPage {
                 this.meuAlert(response.nome);
                 this.navCtrl.push('LoginPage')
               }, erro => {
-                console.log("Não existe usuário")
+                this.AddModalAlert(this.userLogin);
+                console.log("Não existe usuário");
               })
             });
           //this.navCtrl.setRoot('HomePage');
@@ -69,16 +72,18 @@ export class CadastroPage {
     this.googlePlus.login({
     })
       .then(res => {
+        console.log(res.displayName)
         this.userLogin = {
+          name:res.displayName,
           username: res.email,
           password: res.userId
         }
         this.usuarioService.buscarPorEmail(this.userLogin.username).subscribe((response: Usuario) => {
           this.meuAlert(response.nome);
-
           this.navCtrl.push('LoginPage')
         }, erro => {
-          console.log("Não existe usuário")
+          this.AddModalAlert(this.userLogin);
+          console.log("Não existe usuário");
         })
       })
       .catch(err => console.error(err));
@@ -89,8 +94,8 @@ export class CadastroPage {
   }
 
   //Criar a pagina modal para o usuário preencher informações extras no cadastro pelo facebook e/ou google
-  AddModalAlert(perfil) {
-    let profileModal = this.modalCtrl.create(InfoSignPopoverComponent, { usuario: perfil });
+  private AddModalAlert(perfil) {
+    let profileModal = this.modalCtrl.create(InfoSignPopoverComponent,{ usuario: perfil });
     profileModal.present();
   }
 

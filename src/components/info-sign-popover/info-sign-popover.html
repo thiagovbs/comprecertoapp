@@ -3,22 +3,18 @@
     <img src="assets/imgs/logomarca.svg" height="120" alt="">
   </div>
   <ion-grid>
-    <ion-row>
-      <ion-col text-center>
-        <strong><label style="font-size: 1.2em; color:#1f1e1e">Complete seu cadastro</label></strong>
-      </ion-col>
-      <form novalidate [formGroup]="cadastroPopUpForm" (ngSubmit)="SubmitMaisInfoForm()">
-        <ion-row radio-group formControlName="sexo">
-          <ion-item class="bg-transparent" no-lines>
-            <label for="sexo" class="size">Informe seu sexo:</label>
-          </ion-item>
-          <ion-col col-12 *ngFor="let sexo of sexoList">
-            <ion-item class="bg-transparent size" style="margin-top:-15px;" no-lines>
-              <ion-label>{{sexo.nome}}</ion-label>
-              <ion-radio value="{{sexo.value}}"></ion-radio>
-            </ion-item>
-          </ion-col>
-        </ion-row>
+    <ion-row style="margin:0 auto;">
+      <strong><label style="font-size: 1.2em; color:#1f1e1e">Complete seu cadastro</label></strong>
+    </ion-row>
+    <form novalidate [formGroup]="cadastroPopUpForm" (ngSubmit)="SubmitMaisInfoForm()">
+      <ion-row margin-top>
+        <ion-item class="bg-transparent" class="size-select-item">
+          <ion-select formControlName="sexo" placeholder="sexo" class="size-select">
+            <ion-option *ngFor="let sexo of sexoList" value="{{sexo.value}}">{{sexo.nome}}</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-row>
+      <ion-row margin-top>
         <ion-col col-12>
           <ion-item class="bg-transparent size">
             <ion-label style="color:#000">Informe sua data de nascimento:</ion-label>
@@ -26,12 +22,12 @@
               formControlName="dtNascimento"></ion-datetime>
           </ion-item>
         </ion-col>
-        <button ion-button block style="width:100%; float:center" class="register" color="secondary" margin-top
-          [disabled]="!cadastroPopUpForm.valid">
-          <ion-icon name="ios-create-outline" style="margin-right: 12px;">
-          </ion-icon> Confirmar
-        </button>
-      </form>
-    </ion-row>
+      </ion-row>
+      <button ion-button block style="width:95%; margin: 12px auto" class="register" color="secondary" margin-top
+        [disabled]="!cadastroPopUpForm.valid">
+        <ion-icon name="ios-create-outline" style="margin-right: 12px;">
+        </ion-icon> Confirmar
+      </button>
+    </form>
   </ion-grid>
 </ion-content>

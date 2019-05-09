@@ -1,0 +1,16 @@
+page-recuperar-senha {
+    .bg-transparent{
+        background: transparent;
+    }
+    .size{
+        font-size: 0.95em !important;
+        font-weight:500; 
+        width: 95%;
+        margin: 0 auto !important;
+        padding: 0 !important;
+    }
+    
+    .error{
+        color:red;       
+    }
+}

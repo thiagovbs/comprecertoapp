@@ -33,7 +33,6 @@ export class SupermercadoPage {
       console.log(this.supermercados)
     })
     
-
     //imagens S3
     this.bucketS3 = API_CONFIG.s3Url;
   }
@@ -58,7 +57,7 @@ export class SupermercadoPage {
       retornoAlcance = true;
     }
     else {
-      let popover = this.popoverCtrl.create(AlcanceComponent, { showBackdrop: true, cssClass: 'custom-popover' });
+      let popover = this.popoverCtrl.create(AlcanceComponent,{},{ showBackdrop: true, cssClass: 'custom-popover' });
       popover.present();
     }
 

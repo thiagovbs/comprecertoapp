@@ -26,7 +26,6 @@ export class UsuarioService {
     }
 
     buscarPorEmail(login) {
-        console.log(login)
         return this.http.post(`${API_CONFIG.baseUrl}/usuarios/login`, login)
     }
 

@@ -62,6 +62,7 @@ export class InterceptorProvider implements HttpInterceptor {
       title: 'Erro de Autenticação',
       message: 'Usuario e/ou senha inválidos',
       enableBackdropDismiss: false,
+      cssClass: 'AlertCompraFacil',
       buttons: [
         { text: 'Ok' }
       ]
@@ -74,6 +75,7 @@ export class InterceptorProvider implements HttpInterceptor {
       title: 'Erro de comunicação com o servidor',
       message: 'Algo aconteceu de errado =/. Tente mais tarde',
       enableBackdropDismiss: false,
+      cssClass: 'AlertCompraFacil',
       buttons: [
         { text: 'Ok' }
       ]
@@ -85,6 +87,7 @@ export class InterceptorProvider implements HttpInterceptor {
   handleDefaultError(erro) {
     let alert = this.alertCrtl.create({
       title: 'Erro ' + erro.status,
+      cssClass: 'AlertCompraFacil',
       message: erro.message,
       enableBackdropDismiss: false,
       buttons: [

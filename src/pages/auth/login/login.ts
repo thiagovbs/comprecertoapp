@@ -20,7 +20,8 @@ export class LoginPage {
               public loadingCtrl: LoadingController,
               private events:Events) {
                 
-    this.login ={username:"",
+    this.login ={
+                username:"",
                  password:""}
               
   
