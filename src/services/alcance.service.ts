@@ -24,26 +24,33 @@ export class AlcanceService {
     }
 
     //buscar bairros por cidades
-    getBairros(bairroId): Observable<Bairro[]> {
-        return this.http.get<Bairro[]>((`${API_CONFIG.baseUrl}/bairros/cidade/${bairroId}`));
+    getBairros(cidadeId): Observable<Bairro[]> {
+        return this.http.get<Bairro[]>((`${API_CONFIG.baseUrl}/bairros/cidade/${cidadeId}`));
+    }
+    //buscar bairros por cidades
+    getUnicoBairro(bairroId): Observable<Bairro[]> {
+        return this.http.get<Bairro[]>((`${API_CONFIG.baseUrl}/bairros/${bairroId}`));
     }
 
 
-       //Settar o usuário no localStorage
-       setLocalAlcance(obj:any){ 
-        if(obj === null){
+    //Settar o usuário no localStorage
+    setLocalAlcance(obj: any) {
+        if (obj === null) {
             localStorage.removeItem(STORAGE_KEYS.localAlcance)
-        }else{
+        } else {
+            console.log(obj)
             localStorage.setItem(STORAGE_KEYS.localAlcance, JSON.stringify(obj))
         }
     }
 
-      //Pegar o usuário ativo no localstorage
-      getLocaAlcance(){
+    //Pegar o usuário ativo no localstorage
+    getLocaAlcance() {
+        
         let alcance = localStorage.getItem(STORAGE_KEYS.localAlcance);
-        if(alcance === null){
+        
+        if (alcance === null) {
             return null
-        }else{
+        } else {
             return JSON.parse(alcance);
         }
     }

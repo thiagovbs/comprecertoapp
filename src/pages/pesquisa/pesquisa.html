@@ -7,7 +7,10 @@
         [(ngModel)]="searchTerm"></ion-input>
     </ion-item>
     <ion-buttons end>
-      <button ion-button class="back-button-md" (click)="filtrarProduto()">
+      <button ion-button class="back-button-md" (click)="filtrarProduto()" style="margin-right:-10px">
+        <ion-icon class="search-icon" name="ios-search-outline"></ion-icon>
+      </button>
+      <button ion-button class="back-button-md">
         <ion-icon class="search-icon" name="ios-funnel-outline"></ion-icon>
       </button>
     </ion-buttons>
@@ -15,10 +18,13 @@
 
 </ion-header>
 
-<ion-content margin-top class="gray-bg" style="margin-top:-10px ;height: 102% !important;" >
+<ion-content margin-top class="gray-bg" style="margin-top:-10px ;height: 102% !important;">
 
 
   <ion-list *ngIf="filterProdutos && searchTerm">
+
+    <produto-item [produto-itens]="filterProdutosUnico" [possuiMercadoNome]="possuiMercadoNome">
+    </produto-item>
     <div text-center class="secondary-bg" *ngIf="filterProdutos.length !==0" style="margin-bottom: -13px;">
       <p style="color:#fff; font-size:0.98em !important;"><small>Produtos sugeridos</small></p>
     </div>

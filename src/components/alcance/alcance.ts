@@ -18,9 +18,11 @@ export class AlcanceComponent implements OnInit {
   estados: Observable<Estado[]>;
   cidades: Cidade[];
   bairros: Bairro[];
+  bairroEscolhido:Bairro;
 
   idEstado: number;
   idCidade: number;
+  idBairro:number;
 
   checkCidade: boolean = true;
   checkBairro: boolean = true;
@@ -40,6 +42,7 @@ export class AlcanceComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.bairroEscolhido = null;
     this.estados = this.alcanceService.estados;
   }
 
@@ -70,16 +73,29 @@ export class AlcanceComponent implements OnInit {
     this.checkBairro = false;
   }
 
+  getIdBairro(bairro:Bairro){  
+    this.bairroEscolhido = bairro
+    this.idBairro = bairro.idBairro
+    return bairro.nome
+  }
+
+  checkBlurBairro(evento){
+    this.bairroEscolhido = this.bairros.find((bairro:Bairro) => bairro.nome === evento.value)
+    console.log(this.bairroEscolhido)
+  }
+
+
+
   SubmitForm() {
-
-
-    this.alcanceService.setLocalAlcance(this.bairros[0]);
+    console.log(this.bairroEscolhido)
+    this.alcanceService.setLocalAlcance(this.bairroEscolhido);
     this.events.publish('alcance')
     this.navCtrl.setRoot(this.navCtrl.getActive());
     this.viewCtrl.dismiss();
     
-   
   }
+
+
 
 
 

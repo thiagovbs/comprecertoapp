@@ -2,7 +2,6 @@ export interface Bairro {
  idBairro:number,
  nome:string,
  cidade:Cidade[]
-
 }
 
 export interface Cidade{

@@ -27,8 +27,8 @@
             <ion-col col-4>
                 <label for="Estado" class="lbl_eselect">Bairro</label>
                 <ion-item class="select-model">
-                    <ion-select   class="resize" [disabled]="checkBairro"  formControlName="bairro">
-                        <ion-option   *ngFor="let bairro of bairros">{{bairro.nome}}</ion-option>
+                    <ion-select (ionBlur)="checkBlurBairro($event)" class="resize" [disabled]="checkBairro"  formControlName="bairro">
+                        <ion-option *ngFor="let bairro of bairros">{{bairro.nome}}</ion-option>
                     </ion-select>
                 </ion-item>
             </ion-col>

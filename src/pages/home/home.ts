@@ -10,7 +10,6 @@ import { API_CONFIG } from '../../config/api.config';
 import { AlcanceComponent } from '../../components/alcance/alcance';
 import { AlcanceService } from '../../services/alcance.service';
 import * as Lodash from "lodash";
-import { UsuarioService } from '../../services/usuario.service';
 import { Usuario } from '../../models/usuario';
 import { Bairro } from '../../models/localidade';
 
@@ -51,6 +50,7 @@ export class HomePage {
       if (this.localidadeMercado) {
         this.mercadoService.buscarMercadoprodutosPorBairro(this.localidadeMercado)
           .subscribe((resp: Mercado[]) => {
+            console.log(resp)
             this.mercados = resp;
           })
       }

@@ -11,6 +11,7 @@ import { AlcanceComponent } from '../../components/alcance/alcance';
 import { MercadoProduto } from '../../models/mercado-produto.model';
 import { MercadoDetalheProd, MercadoDetalheSubcategoria } from '../supermercado-detalhe/supermercado-detalhe';
 import { SupermercadoService } from '../../services/supermercado.service';
+import { Bairro } from '../../models/localidade';
 
 
 @IonicPage()
@@ -37,6 +38,7 @@ export class SubcategoriaPage implements OnInit {
   mercados: Mercado;
   dataAtual: number;
 
+  localidade: Bairro;
   possuiMercadoNome: boolean = false;
 
   constructor(
@@ -68,11 +70,12 @@ export class SubcategoriaPage implements OnInit {
 
 
   ionViewWillEnter() {
-    
+    this.localidade = this.alcanceService.getLocaAlcance();
+    console.log(this.localidade)
     //listar os produtos pelo mercado produto
     if (!this.mercadoDetalhe) {
 
-      this.subcategoriaService.findProdutosPorCategoria(this.categoria.idCategoria).subscribe((resp: MercadoProduto[]) => {
+      this.subcategoriaService.findProdutosPorCategoria(this.categoria.idCategoria,this.localidade.idBairro).subscribe((resp: MercadoProduto[]) => {
         this.produtos = resp;
         sortByFDestaque(this.produtos);
         sortByPreco(this.produtos)

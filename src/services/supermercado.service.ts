@@ -6,12 +6,14 @@ import { API_CONFIG } from "../config/api.config";
 import { Bairro } from "../models/localidade";
 import { MercadoDetalheProd, MercadoDetalheSubcategoria } from "../pages/supermercado-detalhe/supermercado-detalhe";
 import { MercadoProduto } from "../models/mercado-produto.model";
+import { PacoteTipoServico } from "../models/pacote-tipo-servico.model";
 
 @Injectable()
 export class SupermercadoService {
 
   mercadoCategoria: MercadoDetalheProd[] = [];
   mercadoSubCategoria: MercadoDetalheSubcategoria[] = []
+  tipoServico:PacoteTipoServico
 
   constructor(public http: HttpClient) {
   }
@@ -21,7 +23,8 @@ export class SupermercadoService {
   }
 
   buscarMercadoprodutosPorBairro(lodalidadeMercado: Bairro) {
-    return this.http.get<any>(`${API_CONFIG.baseUrl}/mercados?idBairro/dto?=${lodalidadeMercado.idBairro}`)
+    console.log(lodalidadeMercado.idBairro)
+    return this.http.get<any>(`${API_CONFIG.baseUrl}/mercados?idBairro=${lodalidadeMercado.idBairro}`)
   }
 
   buscarProdutosPorMercado(idMecado) {
@@ -68,5 +71,7 @@ export class SupermercadoService {
     console.log(this.mercadoSubCategoria)
     return this.mercadoSubCategoria;
   }
+
+  
 
 }

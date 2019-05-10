@@ -60,7 +60,6 @@ export class SupermercadoPage {
       let popover = this.popoverCtrl.create(AlcanceComponent,{},{ showBackdrop: true, cssClass: 'custom-popover' });
       popover.present();
     }
-
     return retornoAlcance
   }
 }
