@@ -13,7 +13,8 @@ export class SupermercadoService {
 
   mercadoCategoria: MercadoDetalheProd[] = [];
   mercadoSubCategoria: MercadoDetalheSubcategoria[] = []
-  tipoServico:PacoteTipoServico
+  tipoServico: PacoteTipoServico[] = [];
+
 
   constructor(public http: HttpClient) {
   }
@@ -27,19 +28,10 @@ export class SupermercadoService {
     return this.http.get<any>(`${API_CONFIG.baseUrl}/mercados?idBairro=${lodalidadeMercado.idBairro}`)
   }
 
-  buscarProdutosPorMercado(idMecado) {
-    return this.http.get<any>(`${API_CONFIG.baseUrl}/mercado-produtos/dto?idMercado=${idMecado}`)
-  }
-
-  buscarProdutosComDataValidadePorMercado(idMecado) {
-    return this.http.get<any>(`${API_CONFIG.baseUrl}/mercado-produtos/dto/com-validade?idMercado=${idMecado}`)
-  }
-
-
 
   filtrarCategoriasPorMercadoProduto(mercadoProduto: MercadoProduto[]): MercadoDetalheProd[] {
     this.mercadoCategoria = [];
-    
+
     mercadoProduto.map((mercado: MercadoProduto) => {
       this.mercadoCategoria.push({
         idCategoria: mercado.idCategoria,
@@ -61,17 +53,43 @@ export class SupermercadoService {
       this.mercadoSubCategoria.push({
         idSubcategoria: mercado.idSubcategoria,
         nomeSubcategoria: mercado.nomeSubcategoria,
-        idCategoria:mercado.idCategoria
+        idCategoria: mercado.idCategoria
       });
     })
     //filtra o array para que não haja categorias repetidas
     this.mercadoSubCategoria = this.mercadoSubCategoria.filter((thing, index, self) => {
       return index === self.findIndex((t) => (t.idSubcategoria === thing.idSubcategoria))
     })
-    console.log(this.mercadoSubCategoria)
+
     return this.mercadoSubCategoria;
   }
 
-  
+  filtrarPorMerdoServicos() {
+
+  }
+
+  setServicos(mercadoProdutoServico: MercadoProduto[]) {
+    if (mercadoProdutoServico) {
+      mercadoProdutoServico.map((mercadoServico: MercadoProduto) => {
+        //console.log(mercadoServico)
+        mercadoServico.mercadoServicos.map((resp:any) => {
+          //8 é o Id que o pacote de posicionamento pertence na base
+          if (resp.idMercadoServico === 8) {            
+            this.tipoServico = resp.pacoteServico;
+            return this.tipoServico;
+          }
+        })
+      })
+    }else{
+      console.log("não entrei no servico")  
+      return this.tipoServico = [];
+    }
+
+  }
+
+  getServicos():PacoteTipoServico[] {
+    return this.tipoServico;
+  }
+
 
 }

@@ -25,7 +25,7 @@ export class SubCategoriaService{
     }
 
     findProdutosPorCategoriaEMercado(categoriaId, mercadoId):Observable<any>{
-        return this.http.get<any>(`${API_CONFIG.baseUrl}/mercado-produtos/dto/?idCategoria=${categoriaId}&idMercado=${mercadoId}`);
+        return this.http.get<any>(`${API_CONFIG.baseUrl}/mercado-produtos/dto/com-validade/?idCategoria=${categoriaId}&idMercado=${mercadoId}`);
     }
 
     findProdutosPorMercado(mercadoId):Observable<any>{

@@ -19,6 +19,7 @@ export interface MercadoProduto{
     nomeCidade:string,
     nomeEstado:string,
     nomeFantasiaMercado:string,
+    mercadoServicos:any;
     nomePais:string,
     nomeProduto:string,
     nomeSubcategoria:string,

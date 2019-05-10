@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-angular';
 import { SubCategoriaService } from '../../services/subcategorias.service';
 import { Subcategoria } from '../../models/subcategoria.model';
-
+import { Filtros } from "../../util/filtros";
 import { Categoria } from '../../models/categoria.model';
 import { Mercado } from '../../models/supermercado.model';
 
@@ -12,6 +12,7 @@ import { MercadoProduto } from '../../models/mercado-produto.model';
 import { MercadoDetalheProd, MercadoDetalheSubcategoria } from '../supermercado-detalhe/supermercado-detalhe';
 import { SupermercadoService } from '../../services/supermercado.service';
 import { Bairro } from '../../models/localidade';
+import { PacoteTipoServico } from '../../models/pacote-tipo-servico.model';
 
 
 @IonicPage()
@@ -27,6 +28,7 @@ export class SubcategoriaPage implements OnInit {
 
   mercadoDetalhe: MercadoDetalheProd = {} as MercadoDetalheProd
   mercadoSubCategoria: MercadoDetalheSubcategoria[] = [];
+  tipoServico: PacoteTipoServico[] = [];
 
   subcategoriaNome: string = 'Todos';
   subcategorias: Subcategoria[];
@@ -47,7 +49,8 @@ export class SubcategoriaPage implements OnInit {
     public navParams: NavParams,
     private subcategoriaService: SubCategoriaService,
     private popoverCtrl: PopoverController,
-    private supermercadoService: SupermercadoService) {
+    private supermercadoService: SupermercadoService,
+    private filtrosService: Filtros) {
   }
 
   ngOnInit() {
@@ -71,28 +74,39 @@ export class SubcategoriaPage implements OnInit {
 
   ionViewWillEnter() {
     this.localidade = this.alcanceService.getLocaAlcance();
-    console.log(this.localidade)
     //listar os produtos pelo mercado produto
     if (!this.mercadoDetalhe) {
+      this.subcategoriaService.findProdutosPorCategoria(this.categoria.idCategoria, this.localidade.idBairro)
+        .subscribe((resp: MercadoProduto[]) => {
+          this.produtos = resp;
+          //settar os serviços por produto
+          this.supermercadoService.setServicos(this.produtos);
+          //get os serviços por produto
+          this.tipoServico = this.supermercadoService.getServicos();
 
-      this.subcategoriaService.findProdutosPorCategoria(this.categoria.idCategoria,this.localidade.idBairro).subscribe((resp: MercadoProduto[]) => {
-        this.produtos = resp;
-        sortByFDestaque(this.produtos);
-        sortByPreco(this.produtos)
-        console.log(this.produtos)
-        if (this.produtos.length === 0) {
-          this.produtos = undefined;
-        }
-      }, erro => { })
+          this.filtrosService.sortByServicoPosicionamentoMercado(this.tipoServico)
+          this.filtrosService.sortByFDestaque(this.produtos);
+          this.filtrosService.sortByPreco(this.produtos);
+
+          if (this.produtos.length === 0) {
+            this.produtos = undefined;
+          }
+        }, erro => { })
     } else {
       this.subcategoriaService.findProdutosPorCategoriaEMercado(this.mercadoDetalhe.idCategoria, this.mercadoDetalhe.idMercado)
         .subscribe(resp => {
           this.produtos = resp;
           this.mercadoSubCategoria = this.supermercadoService
-            .filtrarSubcategoriasPorMercadoProduto(this.produtos)
+            .filtrarSubcategoriasPorMercadoProduto(this.produtos);
 
-          sortByFDestaque(this.produtos);
-          sortByPreco(this.produtos)
+          //settar os serviços por produto
+          this.supermercadoService.setServicos(this.produtos);
+          //get os serviços por produto
+          this.tipoServico = this.supermercadoService.getServicos();
+
+          this.filtrosService.sortByServicoPosicionamentoMercado(this.tipoServico)
+          this.filtrosService.sortByFDestaque(this.produtos);
+          this.filtrosService.sortByPreco(this.produtos)
 
           if (this.produtos.length === 0) {
             this.produtos = undefined;
@@ -151,20 +165,5 @@ export class SubcategoriaPage implements OnInit {
   }
 
 
-
-}
-const sortByPreco = (produtos: MercadoProduto[]) => {
-  produtos.sort((produtoA: MercadoProduto, produtoB: MercadoProduto) => {
-    if (produtoA.precoMercadoProduto > produtoB.precoMercadoProduto) return 1;
-    if (produtoA.precoMercadoProduto < produtoB.precoMercadoProduto) return -1;
-    return 0;
-  })
 }
 
-const sortByFDestaque = (produtos: MercadoProduto[]) => {
-  produtos.sort((produtoA: MercadoProduto, produtoB: MercadoProduto) => {
-    if (produtoA.fDestaqueMercadoProduto) return 1;
-    if (!produtoB.fDestaqueMercadoProduto) return -1;
-    return 0;
-  })
-}

@@ -32,6 +32,7 @@ import { AlcanceService } from '../services/alcance.service';
 import { PopoverInfoCompraFacilComponent } from '../components/popover-info-compra-facil/popover-info-compra-facil';
 import { FormCompraFacilPopoverComponent } from '../components/form-compra-facil-popover/form-compra-facil-popover';
 import { CompraFacilService } from '../services/compra-facil.service';
+import { Filtros } from "../util/filtros";
 
 @NgModule({
   declarations: [
@@ -75,8 +76,8 @@ import { CompraFacilService } from '../services/compra-facil.service';
     SupermercadoService,
     SubCategoriaService,
     SuporteService,
-    CompraFacilService
-    
+    CompraFacilService,
+    Filtros
   ]
 })
 export class AppModule {}
