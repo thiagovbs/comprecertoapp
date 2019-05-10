@@ -7,13 +7,15 @@ import { Bairro } from "../models/localidade";
 import { MercadoDetalheProd, MercadoDetalheSubcategoria } from "../pages/supermercado-detalhe/supermercado-detalhe";
 import { MercadoProduto } from "../models/mercado-produto.model";
 import { PacoteTipoServico } from "../models/pacote-tipo-servico.model";
+import { Mercado } from "../models/supermercado.model";
 
 @Injectable()
 export class SupermercadoService {
 
   mercadoCategoria: MercadoDetalheProd[] = [];
   mercadoSubCategoria: MercadoDetalheSubcategoria[] = []
-  tipoServico: PacoteTipoServico[] = [];
+  tipoServicoProduto: PacoteTipoServico[] = [];
+  tipoServicoMercado: PacoteTipoServico[] = [];
 
 
   constructor(public http: HttpClient) {
@@ -24,7 +26,6 @@ export class SupermercadoService {
   }
 
   buscarMercadoprodutosPorBairro(lodalidadeMercado: Bairro) {
-    console.log(lodalidadeMercado.idBairro)
     return this.http.get<any>(`${API_CONFIG.baseUrl}/mercados?idBairro=${lodalidadeMercado.idBairro}`)
   }
 
@@ -68,28 +69,49 @@ export class SupermercadoService {
 
   }
 
-  setServicos(mercadoProdutoServico: MercadoProduto[]) {
+  setServicosPorProduto(mercadoProdutoServico: MercadoProduto[]) {
     if (mercadoProdutoServico) {
       mercadoProdutoServico.map((mercadoServico: MercadoProduto) => {
         //console.log(mercadoServico)
-        mercadoServico.mercadoServicos.map((resp:any) => {
+        mercadoServico.mercadoServicos.map((resp: any) => {
           //8 é o Id que o pacote de posicionamento pertence na base
-          if (resp.idMercadoServico === 8) {            
-            this.tipoServico = resp.pacoteServico;
-            return this.tipoServico;
+          if (resp.idMercadoServico === 8) {
+            this.tipoServicoProduto = resp.pacoteServico;
+            this.tipoServicoProduto;
           }
         })
       })
-    }else{
-      console.log("não entrei no servico")  
-      return this.tipoServico = [];
+    } else {
+      console.log("não entrei no servico")
+      return this.tipoServicoProduto = [];
     }
 
   }
-
-  getServicos():PacoteTipoServico[] {
-    return this.tipoServico;
+  getServicosPorProduto(): PacoteTipoServico[] {
+    return this.tipoServicoProduto;
   }
 
 
+  setServicosPorMercado(mercadoService: Mercado[]) {
+    let mercadoLocalidade: any
+    if (mercadoService) {
+      mercadoService.map((mercado: Mercado) => {
+        mercadoLocalidade = mercado.mercadoLocalidades[0];
+
+        mercadoLocalidade.mercadoServicos.map((resp: any) => {
+          //8 é o Id que o pacote de posicionamento pertence na base
+          if (resp.pacoteServico.descricao === "x") {
+            this.tipoServicoMercado.push(resp.pacoteServico);
+          }
+        })
+      })
+    } else {
+      console.log("não entrei no servico")
+      return this.tipoServicoMercado = [];
+    }
+  }
+
+  getServicosPorMercado(): PacoteTipoServico[] {
+    return this.tipoServicoMercado;
+  }
 }

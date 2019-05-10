@@ -8,6 +8,7 @@ export interface Mercado{
   fativo:boolean,
   fdestaque:boolean,
   fsuperDestaque:boolean,
+  mercadoLocalidades:any,
   logo?:string,
   telefone:string,
   cnpj:number,

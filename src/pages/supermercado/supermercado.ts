@@ -6,6 +6,8 @@ import { API_CONFIG } from '../../config/api.config';
 import { AlcanceService } from '../../services/alcance.service';
 import { AlcanceComponent } from '../../components/alcance/alcance';
 import { Bairro } from '../../models/localidade';
+import { Filtros } from '../../util/filtros';
+import { PacoteTipoServico } from '../../models/pacote-tipo-servico.model';
 
 @IonicPage()
 @Component({
@@ -14,35 +16,40 @@ import { Bairro } from '../../models/localidade';
 })
 export class SupermercadoPage {
 
-  supermercados: Mercado;
-  localidadeMercado:Bairro;
-  bucketS3: string
+  supermercados: Mercado[];
+  localidadeMercado: Bairro;
+  bucketS3: string;
+  tiposServico: PacoteTipoServico[]
 
   constructor(public navCtrl: NavController,
     public supermercadoService: SupermercadoService,
     private alcanceService: AlcanceService,
-    private popoverCtrl: PopoverController) {
+    private popoverCtrl: PopoverController,
+    private filtrosService: Filtros) {
 
   }
 
   ionViewDidLoad() {
     this.localidadeMercado = this.alcanceService.getLocaAlcance();
     this.supermercadoService.buscarMercadoprodutosPorBairro(this.localidadeMercado)
-    .subscribe((resp:Mercado)=>{
-      this.supermercados = resp;
-      console.log(this.supermercados)
-    })
-    
+      .subscribe((resp: Mercado[]) => {
+        this.supermercados = resp
+        this.supermercadoService.setServicosPorMercado(this.supermercados);
+        this.tiposServico = this.supermercadoService.getServicosPorMercado()
+        this.filtrosService.sortByServicoPosicionamentoMercado(this.tiposServico)
+        console.log(this.tiposServico)
+      })
+
     //imagens S3
     this.bucketS3 = API_CONFIG.s3Url;
   }
-  
+
 
   onMercado(supermercado: Mercado) {
     console.log(supermercado)
     this.navCtrl.push("SupermercadoDetalhePage", {
       mercado: supermercado
-      
+
     });
   }
 
@@ -57,7 +64,7 @@ export class SupermercadoPage {
       retornoAlcance = true;
     }
     else {
-      let popover = this.popoverCtrl.create(AlcanceComponent,{},{ showBackdrop: true, cssClass: 'custom-popover' });
+      let popover = this.popoverCtrl.create(AlcanceComponent, {}, { showBackdrop: true, cssClass: 'custom-popover' });
       popover.present();
     }
     return retornoAlcance

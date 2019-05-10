@@ -80,10 +80,10 @@ export class SubcategoriaPage implements OnInit {
         .subscribe((resp: MercadoProduto[]) => {
           this.produtos = resp;
           //settar os serviços por produto
-          this.supermercadoService.setServicos(this.produtos);
+          this.supermercadoService.setServicosPorProduto(this.produtos);
           //get os serviços por produto
-          this.tipoServico = this.supermercadoService.getServicos();
-
+          this.tipoServico = this.supermercadoService.getServicosPorProduto();
+          //filtros
           this.filtrosService.sortByServicoPosicionamentoMercado(this.tipoServico)
           this.filtrosService.sortByFDestaque(this.produtos);
           this.filtrosService.sortByPreco(this.produtos);
@@ -100,10 +100,11 @@ export class SubcategoriaPage implements OnInit {
             .filtrarSubcategoriasPorMercadoProduto(this.produtos);
 
           //settar os serviços por produto
-          this.supermercadoService.setServicos(this.produtos);
+          this.supermercadoService.setServicosPorProduto(this.produtos);
           //get os serviços por produto
-          this.tipoServico = this.supermercadoService.getServicos();
+          this.tipoServico = this.supermercadoService.getServicosPorProduto();
 
+          //filtros
           this.filtrosService.sortByServicoPosicionamentoMercado(this.tipoServico)
           this.filtrosService.sortByFDestaque(this.produtos);
           this.filtrosService.sortByPreco(this.produtos)

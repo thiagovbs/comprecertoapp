@@ -4,6 +4,9 @@ import { SubCategoriaService } from '../../services/subcategorias.service';
 import { MercadoProduto } from '../../models/mercado-produto.model';
 import { Bairro } from '../../models/localidade';
 import { AlcanceService } from '../../services/alcance.service';
+import { Filtros } from '../../util/filtros';
+import { SupermercadoService } from '../../services/supermercado.service';
+import { PacoteTipoServico } from '../../models/pacote-tipo-servico.model';
 
 
 
@@ -15,6 +18,7 @@ import { AlcanceService } from '../../services/alcance.service';
 export class PesquisaPage {
 
   produtos: MercadoProduto[];
+  servicosProduto:PacoteTipoServico[];
   filterProdutos: MercadoProduto[] = [];
   filterProdutosUnico: MercadoProduto[] = [];
   searchTerm: string;
@@ -27,7 +31,9 @@ export class PesquisaPage {
     public navParams: NavParams,
     public mercadoProdutosService: SubCategoriaService,
     public alertCrtl: AlertController,
-    private alcanceService: AlcanceService) {
+    private alcanceService: AlcanceService,
+    private supermercadoService: SupermercadoService,
+    private filtrosService: Filtros) {
   }
 
   ionViewDidLoad() {
@@ -41,9 +47,16 @@ export class PesquisaPage {
     this.mercadoProdutosService.findProdutosComDtValidadeEbairro(this.localidadeMercado.idBairro)
       .subscribe((response: MercadoProduto[]) => {
         this.produtos = response;
-        sortByFDestaque(this.produtos);
-        sortByPreco(this.produtos)
-        console.log(this.produtos)
+
+        //servico de posicionamento por produto
+        this.supermercadoService.setServicosPorProduto(this.produtos);
+        this.servicosProduto = this.supermercadoService.getServicosPorProduto();
+
+        //filtros
+        this.filtrosService.sortByFDestaque(this.produtos);
+        this.filtrosService.sortByServicoPosicionamentoMercado(this.servicosProduto);
+        this.filtrosService.sortByPreco(this.produtos)
+        
         //pega os produtos e cria um array por (nome - marca - caracteristica)
         this.produtos.map((produto: MercadoProduto) => {
           this.arrayNomeCompletoProdutos.push({
@@ -86,7 +99,6 @@ export class PesquisaPage {
         })
       });
 
-
       if (this.filterProdutosUnico.length === 0) {
         this.myAlert()
         this.filterProdutosUnico = undefined;
@@ -99,6 +111,7 @@ export class PesquisaPage {
     }
   }
 
+  //Apagar as listas caso o usuário mude a pesquisa
   changeInput() {
     this.filterProdutos = [];
     this.filterProdutosUnico = [];
@@ -116,20 +129,4 @@ export class PesquisaPage {
     })
     alert.present()
   }
-}
-
-const sortByPreco = (produtos: MercadoProduto[]) => {
-  produtos.sort((produtoA: MercadoProduto, produtoB: MercadoProduto) => {
-    if (produtoA.precoMercadoProduto > produtoB.precoMercadoProduto) return 1;
-    if (produtoA.precoMercadoProduto < produtoB.precoMercadoProduto) return -1;
-    return 0;
-  })
-}
-
-const sortByFDestaque = (produtos: MercadoProduto[]) => {
-  produtos.sort((produtoA: MercadoProduto, produtoB: MercadoProduto) => {
-    if (produtoA.fDestaqueMercadoProduto) return 1;
-    if (!produtoB.fDestaqueMercadoProduto) return -1;
-    return 0;
-  })
 }

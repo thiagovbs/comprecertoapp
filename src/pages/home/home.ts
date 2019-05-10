@@ -12,6 +12,8 @@ import { AlcanceService } from '../../services/alcance.service';
 import * as Lodash from "lodash";
 import { Usuario } from '../../models/usuario';
 import { Bairro } from '../../models/localidade';
+import { Filtros } from '../../util/filtros';
+import { PacoteTipoServico } from '../../models/pacote-tipo-servico.model';
 
 
 @IonicPage()
@@ -26,13 +28,15 @@ export class HomePage {
   bucketS3: string;
   user: Usuario;
   localidadeMercado: Bairro;
+  tiposServico: PacoteTipoServico[]
 
   constructor(public navCtrl: NavController,
     private alcanceService: AlcanceService,
     private categoriaService: CategoriaService,
     private mercadoService: SupermercadoService,
     private popoverCtrl: PopoverController,
-    private events: Events) {
+    private events: Events,
+    private filtrosService: Filtros) {
 
     //Carregando as Categorias
     this.categoriaService.findAll().subscribe(resp => {
@@ -50,8 +54,12 @@ export class HomePage {
       if (this.localidadeMercado) {
         this.mercadoService.buscarMercadoprodutosPorBairro(this.localidadeMercado)
           .subscribe((resp: Mercado[]) => {
-            console.log(resp)
             this.mercados = resp;
+            
+            this.mercadoService.setServicosPorMercado(this.mercados);
+            this.tiposServico = this.mercadoService.getServicosPorMercado()
+            this.filtrosService.sortByServicoPosicionamentoMercado(this.tiposServico)
+            console.log(this.tiposServico)
           })
       }
     })
