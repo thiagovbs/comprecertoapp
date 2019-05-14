@@ -45,6 +45,9 @@ export class SupermercadoDetalhePage {
     this.subcategoriaService.findProdutosPorMercado(this.mercado.idMercado)
       .subscribe((resp: MercadoProduto[]) => {
         this.mercadoCategoria = this.supermercadoService.filtrarCategoriasPorMercadoProduto(resp);
+        this.mercadoCategoria.sort((a,b)=>{
+           if (a.nomeCategoria <= b.nomeCategoria) return -1
+        })
       })
   }
 

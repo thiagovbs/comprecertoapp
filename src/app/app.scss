@@ -300,10 +300,12 @@
   }
 
   .thumb-image{
-    margin-top:10px;
+    margin-top: 0px;
     margin-left:-26px;
-    height: 95px !important;
-    min-width: 105px !important;
+    min-height: 95px !important;
+    min-width: 100px !important;
+    max-height: 95px !important;
+    max-width: 100px !important;
 }
 
 .thumb-image-compra-sacola{
@@ -445,9 +447,6 @@ ion-alert {
   }
 }
 
-
-
-
 .toolbar-md{
   padding: 0 !important;
   min-height: 60px !important;
@@ -479,16 +478,34 @@ ion-alert {
     color:#000;
   }
   .alert-button-group{
-    -webkit-justify-content: center !important;
+    justify-content: center !important;
     background: map-get($colors, secondary) !important;
     .alert-button-default{
       color:#fff;
       width: 90%;
       .button-inner{
-        -webkit-justify-content: center !important;
+        
+        justify-content: center !important;
       }
     }
   }
+}
+
+.item-ios {
+  
+  h2 {
+    margin: 0px 0px 0px;
+  }
+}
+  
+.col-card-meio{
+  margin-top:3px ;
+  margin-left:-16px;
+}
+
+.col-card-fim{
+  margin-top:5px ;
+  margin-left:16px;
 }
 
 
