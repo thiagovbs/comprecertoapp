@@ -17,7 +17,7 @@ export class SubCategoriaService{
     }
 
     findProdutosPorCategoria(categoriaId, idBairro):Observable<any>{
-        return this.http.get<any>(`${API_CONFIG.baseUrl}/mercado-produtos/dto/?idCategoria=${categoriaId}&idBairro=${idBairro}`);
+        return this.http.get<any>(`${API_CONFIG.baseUrl}/mercado-produtos/dto/com-validade/?idCategoria=${categoriaId}&idBairro=${idBairro}`);
     }
 
     findProdutosComDtValidade(categoriaId):Observable<any>{
@@ -29,7 +29,7 @@ export class SubCategoriaService{
     }
 
     findProdutosPorMercado(mercadoId):Observable<any>{
-        return this.http.get<any>(`${API_CONFIG.baseUrl}/mercado-produtos/dto/?idMercado=${mercadoId}`);
+        return this.http.get<any>(`${API_CONFIG.baseUrl}/mercado-produtos/dto/com-validade/?idMercado=${mercadoId}`);
     }
 
     findProdutosComDtValidadeEbairro(idBairro):Observable<any>{

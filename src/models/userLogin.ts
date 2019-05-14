@@ -1,5 +1,5 @@
 export interface UserLogin{
-    name?:string,
+    nome?:string,
     username:string,
     password:string,
 }

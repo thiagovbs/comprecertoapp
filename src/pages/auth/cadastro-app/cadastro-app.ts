@@ -89,16 +89,17 @@ export class CadastroAppPage {
       sexo: sexo_form,
       permissoes:[this.permissao]
     }
-
+    console.log(this.usuario)
     this.usuarioService.cadastrarUsuario(this.usuario)
     .subscribe(response =>{
-      console.log(response.status)
+      
       loading.dismiss();
       if(response.status){
         let alert = this.alertCtrl.create({
           title: 'Parabéns',
           subTitle: 'Cadastro criado com sucesso',
-          buttons: ['OK']
+          buttons: ['OK'],
+          cssClass: 'AlertCompraFacil'
         });
           alert.present();
           this.navCtrl.push('LoginPage');

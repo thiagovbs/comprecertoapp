@@ -12,50 +12,52 @@ import { AuthService } from '../../../services/auth.service';
 })
 export class LoginPage {
 
-  login:UserLogin;
-  
+  login: UserLogin;
+
   constructor(private navCtrl: NavController,
-              private menu:MenuController,
-              private authService:AuthService,
-              public loadingCtrl: LoadingController,
-              private events:Events) {
-                
-    this.login ={
-                username:"",
-                 password:""}
-              
-  
+    private menu: MenuController,
+    private authService: AuthService,
+    public loadingCtrl: LoadingController,
+    private events: Events) {
+
+    this.login = {
+      nome: "",
+      username: "",
+      password: ""
+    }
+
+
   }
 
-  loggar(){ 
+  loggar() {
     let loading: Loading = this.showLoading();
     this.authService.autenticar(this.login).
-    subscribe((data:any) =>{
-      loading.dismiss();
-      this.authService.armazenarToken(data['access_token']);
-      this.authService.armazenarRefreshToken(data['refresh_token']);
-      this.authService.successfullLogin(data);
-      this.events.publish('user:LoggedIn')
-      this.navCtrl.setRoot('HomePage')
-    },error =>{
-      loading.dismiss();
-    });
+      subscribe((data: any) => {
+        loading.dismiss();
+        this.authService.armazenarToken(data['access_token']);
+        this.authService.armazenarRefreshToken(data['refresh_token']);
+        this.authService.successfullLogin(data);
+        this.events.publish('user:LoggedIn')
+        this.navCtrl.setRoot('HomePage')
+      }, error => {
+        loading.dismiss();
+      });
   }
-  
-  ionViewWillEnter(){
+
+  ionViewWillEnter() {
     this.menu.swipeEnable(false);
   }
 
-    //metodo que retorna um loading na tela
-    private showLoading(): Loading {
-      let loading: Loading = this.loadingCtrl.create({
-        content: 'Aguarde...'
-      })
-      loading.present();
-      return loading;
-    }
-  
-    onMinhaSenha(){
-      this.navCtrl.push('EsqueciMinhaSenhaPage')
-    }
+  //metodo que retorna um loading na tela
+  private showLoading(): Loading {
+    let loading: Loading = this.loadingCtrl.create({
+      content: 'Aguarde...'
+    })
+    loading.present();
+    return loading;
+  }
+
+  onMinhaSenha() {
+    this.navCtrl.push('EsqueciMinhaSenhaPage')
+  }
 }

@@ -1,8 +1,10 @@
 import { Component, ContentChild } from '@angular/core';
-import { NavController, NavParams, Loading, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, Loading, LoadingController, Events } from 'ionic-angular';
 import { FormBuilder, FormGroup, FormControlName, Validators } from '@angular/forms';
 import { Usuario, Permissao } from '../../models/usuario';
 import { UsuarioService } from '../../services/usuario.service';
+import { AuthService } from '../../services/auth.service';
+import { UserLogin } from '../../models/userLogin';
 
 @Component({
   selector: 'info-sign-popover',
@@ -14,10 +16,11 @@ export class InfoSignPopoverComponent {
   cadastroPopUpForm: FormGroup
   @ContentChild(FormControlName) control: FormControlName;
 
-  user: Usuario
-  faceId: string
-  faceEmail: string
-  faceNome: string
+  user: Usuario;
+  loginUser:UserLogin;
+  faceId: string;
+  faceEmail: string;
+  faceNome: string;
   permissao: Permissao;
 
   sexoList = [
@@ -31,7 +34,9 @@ export class InfoSignPopoverComponent {
     private formBuilder: FormBuilder,
     private params: NavParams,
     private usuarioService: UsuarioService,
-    public loadingCtrl: LoadingController
+    public loadingCtrl: LoadingController,
+    private authService: AuthService,
+    private events: Events
   ) {
 
     this.cadastroPopUpForm = this.formBuilder.group({
@@ -48,12 +53,8 @@ export class InfoSignPopoverComponent {
   ionViewWillEnter() {
     let face = this.params.get('usuario');
     this.faceId = face.password;
-
-    this.faceId = this.faceId.substring(0, 10)
-    this.faceNome = face.name;
+    this.faceNome = face.nome;
     this.faceEmail = face.username;
-
-    console.log(face)
   }
 
   SubmitMaisInfoForm() {
@@ -77,11 +78,32 @@ export class InfoSignPopoverComponent {
       sexo: sexo_form,
       permissoes: [this.permissao]
     }
+
     console.log(this.user)
+
+    this.loginUser ={
+      username: this.user.email,
+      password:this.user.senha
+    }
+    console.log(this.loginUser)
+    //Cadastro usuario
     this.usuarioService.cadastrarUsuario(this.user)
       .subscribe(response => {
+        //JSON.parse(response.body);
         loading.dismiss();
-        this.navCntl.setRoot('HomePage');
+        if (response.status) {
+          this.authService.autenticar(this.loginUser).subscribe(resp => {
+            //armazena informações no localStorage
+            this.authService.armazenarToken(resp['access_token']);
+            this.authService.armazenarRefreshToken(resp['refresh_token']);
+            this.authService.successfullLogin(resp);
+            this.events.publish('user:LoggedIn');
+            this.navCntl.setRoot('HomePage');
+
+          }, err => {
+            console.log(err)
+          })
+        }
       }, erro => {
         console.log(erro)
         loading.dismiss();
