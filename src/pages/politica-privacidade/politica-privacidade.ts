@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AuthService } from '../../services/auth.service';
 
 
 
@@ -10,7 +11,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class PoliticaPrivacidadePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams,
+              private authService: AuthService) {
   }
 
   onSearch(){
@@ -23,5 +26,10 @@ export class PoliticaPrivacidadePage {
 
   termoUsoDetail(){
     this.navCtrl.push('TermoUsoDetailPage')
+  }
+
+  sair() {
+    this.authService.logout();
+    this.navCtrl.setRoot('CadastroPage');
   }
 }

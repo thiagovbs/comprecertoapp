@@ -15,8 +15,8 @@
 <ion-content padding class="light-bg">
 
   <button outline ion-item full class="politic-button" (click)="politicDetail()">
-    <ion-icon item-left style="margin:0;"> 
-      <img src="assets/icon/Politica-de-privacidade_Prancheta.svg" height="19"  alt="" >
+    <ion-icon item-left style="margin:0;">
+      <img src="assets/icon/Politica-de-privacidade_Prancheta.svg" height="19" alt="">
     </ion-icon>
     Política de Privacidade
   </button>
@@ -28,5 +28,10 @@
   </button>
 
 
-
 </ion-content>
+<ion-footer class="cart-footer" style="padding: 16px !important" no-border>
+  <button outline ion-item full (click)="sair()"  class="sair-button">
+    <ion-icon item-left name="ios-log-out-outline" class="icon-sair"></ion-icon>
+    Sair
+  </button>
+</ion-footer>

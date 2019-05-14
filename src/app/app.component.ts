@@ -26,7 +26,6 @@ export class MyApp {
   constructor(public platform: Platform,
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
-    private authService: AuthService,
     private userService: UsuarioService,
     public popoverCtrl: PopoverController,
     public events:Events) {
@@ -91,8 +90,5 @@ export class MyApp {
     popover.present();
   }
 
-  sair() {
-    this.authService.logout();
-    this.nav.setRoot('CadastroPage');
-  }
+
 }

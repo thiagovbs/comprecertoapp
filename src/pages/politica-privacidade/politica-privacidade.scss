@@ -18,4 +18,18 @@ page-politica-privacidade {
         color: #00836D;
         font-size: 1.4rem;
     }
+
+    .sair-button{
+        height: 4.7rem !important;
+        border-radius: 7px !important;
+        border: 1.18px solid #009b89;
+        
+        .icon-sair{
+            color:#00836D; 
+            font-weight:600; 
+            font-size:1.5em;
+            margin-bottom:5px;
+            padding-left: 56px;
+        }
+    }
 }
