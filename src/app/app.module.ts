@@ -6,11 +6,11 @@ import { MyApp } from './app.component';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {EmailComposer}  from '@ionic-native/email-composer'
+
 //Login Rede social
 import { Facebook} from '@ionic-native/facebook';
 import { GooglePlus } from '@ionic-native/google-plus';
-import { SocialSharing } from '@ionic-native/social-sharing';
+
 import {IonicStorageModule} from '@ionic/storage'
 //componentes
 import { AlcanceComponent } from '../components/alcance/alcance';
@@ -58,16 +58,14 @@ import { Filtros } from "../util/filtros";
     FormCompraFacilPopoverComponent
   ],
   providers: [
-    
+
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Facebook,
     GooglePlus,
-    EmailComposer,
     AuthInterceptorsProvider,
     ErrorInterceptorsProvider,
-    SocialSharing,
     CarrinhoService,
     CategoriaService,
     AuthService,

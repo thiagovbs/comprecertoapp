@@ -2,8 +2,6 @@ import { Component, ContentChild } from '@angular/core';
 import { IonicPage, NavController, LoadingController, Loading, AlertController } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators, FormControlName } from '@angular/forms';
 import { SuporteService } from '../../services/suporte.service';
-import { EmailComposer } from '@ionic-native/email-composer';
-
 import { UsuarioService } from '../../services/usuario.service';
 import { Usuario } from '../../models/usuario';
 
@@ -44,7 +42,6 @@ export class SugestaoPage {
     private formBuilder: FormBuilder,
     private suporteService: SuporteService,
     public loadingCtrl: LoadingController,
-    private emailComposer: EmailComposer,
     public alertCrtl: AlertController,
     private usuarioService:UsuarioService) {
 
@@ -85,7 +82,6 @@ export class SugestaoPage {
 
   ionViewWillEnter(){
     this.user = this.usuarioService.getLocalUser()
-
     console.log(this.user)
   }
 
