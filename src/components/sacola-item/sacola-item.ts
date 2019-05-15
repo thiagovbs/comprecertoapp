@@ -3,8 +3,6 @@ import { CarrinhoItem } from '../../models/carrinho-item.model';
 import { CarrinhoService } from '../../services/carrinho.service';
 import { Events, NavController, App } from 'ionic-angular';
 import { API_CONFIG } from '../../config/api.config';
-import { CompraFacilService } from '../../services/compra-facil.service';
-
 
 @Component({
   selector: 'sacola-item',
@@ -22,8 +20,7 @@ export class SacolaItemComponent implements OnInit {
 
   constructor(private navCtrl: NavController,
     private carrinhoService: CarrinhoService,
-    public events: Events, public appCtrl: App,
-    private compraFacilService:CompraFacilService) {
+    public events: Events, public appCtrl: App) {
   }
   ngOnInit() {
     this.bucketS3 = API_CONFIG.s3Url;
@@ -52,5 +49,5 @@ export class SacolaItemComponent implements OnInit {
      return this.somaProduto=  produto.produto.precoMercadoProduto * produto.quantidade;  
   }
 
- 
+
 }

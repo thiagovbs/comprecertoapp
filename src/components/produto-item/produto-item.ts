@@ -75,4 +75,6 @@ export class ProdutoItemComponent implements OnInit {
     }
     return this.somaProduto = 0;
   }
+
+ 
 }

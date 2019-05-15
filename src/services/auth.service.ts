@@ -6,6 +6,8 @@ import { API_CONFIG } from "../config/api.config";
 import { Usuario } from "../models/usuario";
 import { UsuarioService } from "./usuario.service";
 import { AlcanceService } from "./alcance.service";
+import { CarrinhoService } from "./carrinho.service";
+import { STORAGE_KEYS } from "../config/storage_keys.config";
 
 
 
@@ -15,7 +17,8 @@ export class AuthService{
 
     constructor(public http:HttpClient,
                 public usuarioService: UsuarioService,
-                public alcanceService:AlcanceService){
+                public alcanceService:AlcanceService,
+                public carrinhoService:CarrinhoService){
         
     }
 
@@ -49,8 +52,14 @@ export class AuthService{
     }
 
     logout(){
+        //remove usuario loggado
         this.usuarioService.setLocalUser(null);
+        //remove localização
         this.alcanceService.setLocalAlcance(null);
+        //remove sacola
+        this.carrinhoService.items = [];
+        localStorage.removeItem(STORAGE_KEYS.localSacola)
+        //remove token
         localStorage.removeItem('token');
     }
 

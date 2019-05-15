@@ -13,6 +13,7 @@ import { MercadoDetalheProd, MercadoDetalheSubcategoria } from '../supermercado-
 import { SupermercadoService } from '../../services/supermercado.service';
 import { Bairro } from '../../models/localidade';
 import { PacoteTipoServico } from '../../models/pacote-tipo-servico.model';
+import { CarrinhoService } from '../../services/carrinho.service';
 
 
 @IonicPage()
@@ -50,7 +51,8 @@ export class SubcategoriaPage implements OnInit {
     private subcategoriaService: SubCategoriaService,
     private popoverCtrl: PopoverController,
     private supermercadoService: SupermercadoService,
-    private filtrosService: Filtros) {
+    private filtrosService: Filtros,
+    private carrinhoService:CarrinhoService) {
   }
 
   ngOnInit() {
@@ -141,13 +143,7 @@ export class SubcategoriaPage implements OnInit {
     if (this.produtos) {
       //Filtro de produto por subcategorias
       this.filterProdutos = this.produtos.filter((prod: MercadoProduto) => {
-        let dtEntrada = new Date(prod.dtValidadeMercadoProduto).getTime()
-
-        //filtro com a data de entrada
-        /* if(dtEntrada <=this.dataAtual){ */
         return prod.nomeSubcategoria === sub
-        //}
-
       });
 
       if (this.filterProdutos.length === 0) {
@@ -165,6 +161,10 @@ export class SubcategoriaPage implements OnInit {
     this.navCtrl.push('PesquisaPage')
   }
 
+  //ao sair da tela de produtos, os itens seão adicionados no localStorage
+  ionViewDidLeave(){
+    this.carrinhoService.setLocalSacola()
+  }
 
 }
 

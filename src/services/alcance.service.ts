@@ -44,8 +44,7 @@ export class AlcanceService {
     }
 
     //Pegar o usuário ativo no localstorage
-    getLocaAlcance() {
-        
+    getLocaAlcance() {     
         let alcance = localStorage.getItem(STORAGE_KEYS.localAlcance);
         
         if (alcance === null) {

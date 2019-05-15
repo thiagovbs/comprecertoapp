@@ -1,6 +1,6 @@
 <div *ngFor="let item of items">
     
-    <ion-list style="margin-top:-14px">
+    <ion-list style="margin-top:-16px">
         <ion-item class="card">
             <ion-grid no-padding>
                 <ion-row>
@@ -11,7 +11,7 @@
                     </ion-col>
                     <ion-col col-6  class="col-card-meio" >
                         <h2  style="white-space: pre-wrap;" ion-text>{{item.produto.nomeProduto}} {{item.produto.marcaProduto}} {{item.produto.caracteristicaProduto}} {{item.produto.quantidadeProduto }} {{item.produto.unidadeMedida}}</h2>
-                        <ion-row  style="margin-top:30px;">
+                        <ion-row  style="margin-top:30px; margin-left: -5px">
                             <ion-col col-6>
                                 <h2 ion-text>{{item.produto.precoMercadoProduto | currency:'BRL'}}</h2>
                             </ion-col>
