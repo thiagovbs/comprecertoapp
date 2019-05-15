@@ -54,8 +54,9 @@ export class CompraFacilService {
 
     getValorProdutosPorMercado(carrinhoMercado: CarrinhoItem[]): number{
         let valorTotal:number = 0;
-        carrinhoMercado.map((carrinhoMercado: CarrinhoItem) => {        
-            valorTotal = valorTotal + carrinhoMercado.value()
+        carrinhoMercado.map((carrinhoMercado: CarrinhoItem) => { 
+           let total= carrinhoMercado.produto.precoMercadoProduto * carrinhoMercado.quantidade       
+            valorTotal = valorTotal + total
         })
         return valorTotal
     }

@@ -38,7 +38,6 @@ export class CompreFacilPage {
     if (this.carrinhoService.items.length !== 0) {
       retornoItems = true;
     }
-    //AlcanceComponent, {}, { showBackdrop: true, cssClass: 'custom-popover' }
     else {
       let alert = this.alertCtl.create({
         title: '<img src="assets/imgs/icone-de-erro.svg" height="100">',
