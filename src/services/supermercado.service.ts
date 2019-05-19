@@ -65,10 +65,6 @@ export class SupermercadoService {
     return this.mercadoSubCategoria;
   }
 
-  filtrarPorMerdoServicos() {
-
-  }
-
   setServicosPorProduto(mercadoProdutoServico: MercadoProduto[]) {
     if (mercadoProdutoServico) {
       mercadoProdutoServico.map((mercadoServico: MercadoProduto) => {

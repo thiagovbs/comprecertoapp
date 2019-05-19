@@ -1,0 +1,44 @@
+<ion-header>
+
+  <ion-navbar color="secondary" class="navbar-search">
+    <ion-item class="item-search">
+      <ion-input class="text-type" floating type="text" placeholder="Pesquisar" [(ngModel)]="buscar"
+        (input)="changeMercado($event)"></ion-input>
+    </ion-item>
+    <ion-buttons end>
+      <button ion-button class="back-button-md" (click)="searchMercado()">
+        <ion-icon class="search-icon" name="ios-search"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+<ion-content style="background:#eee;">
+  <ion-list *ngIf="verficaBuscar">
+    <ion-item class="item-title" no-lines margin-top>
+      <h2 style=" font-size:0.88em; color:#fff;">Supermercados</h2>
+    </ion-item>
+    <ion-item *ngFor="let mercado of supermercadosFilter" style="background:#eee"
+      (click)="showMercado(mercado,mercado.checked)">
+      <ion-label style="color:#000">{{mercado.nomeFantasia}}</ion-label>
+      <ion-checkbox red item-right [(ngModel)]="mercado.checked" (click)="showMercado(mercado,mercado.checked)">
+      </ion-checkbox>
+    </ion-item>
+  </ion-list>
+  <ion-list *ngIf="!verficaBuscar">
+    <ion-item class="item-title" no-lines margin-top>
+      <h2 style=" font-size:0.88em; color:#fff;">Supermercados</h2>
+    </ion-item>
+    <ion-item *ngFor="let mercado of supermercados" style="background:#eee">
+      <ion-label style="color:#000">{{mercado.nomeFantasia}}</ion-label>
+      <ion-checkbox item-right [(ngModel)]="mercado.checked" (click)="showMercado(mercado,mercado.checked)">
+      </ion-checkbox>
+    </ion-item>
+  </ion-list>
+
+</ion-content>
+<ion-footer class="cart-footer">
+  <button ion-button block style="width:100%; margin: 0px auto" class="register" (click)="onFiltrar()" color="secondary" margin-bottom>
+    Filtrar
+  </button>
+</ion-footer>

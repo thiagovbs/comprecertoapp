@@ -1,10 +1,13 @@
-page-pesquisa {
+page-popover-search-mercado {
 
+
+    
     .item-search{
         background:transparent;
         width: 85%;
         margin: -15px auto;
     }
+
     
     ::placeholder {
         color: #fff !important;
@@ -33,6 +36,10 @@ page-pesquisa {
         min-height: 3.4rem !important;
     }
 
+    .label{
+        margin: 0 !important;
+    }
+
     h2{
         
         font-size: 0.88em !important;
@@ -49,6 +56,9 @@ page-pesquisa {
 
     p{
         font-size:0.75em !important;
+    }
+    .navbar-search{
+        min-height: 45px !important;
     }
 
     .toolbar-content{

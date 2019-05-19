@@ -34,13 +34,15 @@ import { FormCompraFacilPopoverComponent } from '../components/form-compra-facil
 import { CompraFacilService } from '../services/compra-facil.service';
 import { Filtros } from "../util/filtros";
 
+
 @NgModule({
   declarations: [
     MyApp,
     AlcanceComponent,
     InfoSignPopoverComponent,
     PopoverInfoCompraFacilComponent,
-    FormCompraFacilPopoverComponent
+    FormCompraFacilPopoverComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -55,7 +57,7 @@ import { Filtros } from "../util/filtros";
     AlcanceComponent,
     InfoSignPopoverComponent,
     PopoverInfoCompraFacilComponent,
-    FormCompraFacilPopoverComponent
+    FormCompraFacilPopoverComponent,
   ],
   providers: [
 

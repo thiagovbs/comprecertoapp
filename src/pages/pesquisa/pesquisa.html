@@ -10,15 +10,15 @@
       <button ion-button class="back-button-md" (click)="filtrarProduto()" style="margin-right:-10px">
         <ion-icon class="search-icon" name="ios-search-outline"></ion-icon>
       </button>
-      <button ion-button class="back-button-md">
-        <ion-icon class="search-icon" name="ios-funnel-outline"></ion-icon>
+      <button ion-button class="back-button-md" (click)="filtrarMercado()">
+        <ion-icon class="search-icon" [name]="nameIcon" style="color:#fff"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
-<ion-content  class="gray-bg">
+<ion-content class="gray-bg">
   <ion-list *ngIf="filterProdutos && searchTerm">
 
     <produto-item [produto-itens]="filterProdutosUnico" [possuiMercadoNome]="possuiMercadoNome">
@@ -29,4 +29,6 @@
     <produto-item [produto-itens]="filterProdutos" [possuiMercadoNome]="possuiMercadoNome">
     </produto-item>
   </ion-list>
+
+ 
 </ion-content>

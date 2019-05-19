@@ -4,13 +4,12 @@ import { SacolaItemComponent } from './sacola-item/sacola-item';
 import { IonicModule } from 'ionic-angular';
 import { ProdutoItemComponent } from './produto-item/produto-item';
 
+
 @NgModule({
 	declarations: [
 		BtnQntProdutoComponent,
 		SacolaItemComponent,
 		ProdutoItemComponent,
-    
-    
 	],
 	imports: [
 		IonicModule
@@ -19,6 +18,7 @@ import { ProdutoItemComponent } from './produto-item/produto-item';
 		BtnQntProdutoComponent,
 		SacolaItemComponent,
 		ProdutoItemComponent,
+    
     
 	]
 })

@@ -53,7 +53,6 @@ export class SacolaPage implements OnInit{
   }
 
   onCompraFacil() {
-    console.log(this.total())
     this.navCtrl.push('CompreFacilPage', {
       produtos_sacola: this.produtos,
       valorTotal: this.total()

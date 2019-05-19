@@ -19,7 +19,7 @@ export class Filtros {
     }
 
     sortByServicoPosicionamentoMercado(tiposServico: PacoteTipoServico[]) {
-        console.log(tiposServico)
+        
         if (tiposServico.length > 0) {
             tiposServico.sort((servicoA: PacoteTipoServico, servicoB: PacoteTipoServico) => {
                 if (servicoA.nome === "Pacote Super Destaque") return 1;

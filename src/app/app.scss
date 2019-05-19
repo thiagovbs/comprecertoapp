@@ -427,6 +427,21 @@ ion-alert {
   transform: scale(1);  
 }
 
+.search-mercado .popover-content{
+  top: 100px !important;
+  width: 300px !important;
+  transform: scale(1);  
+  padding: 0px;
+  min-height: 300px;
+  border-radius: 10px;
+  background:#eee;
+}
+.popover-ios .popover-content{
+  -webkit-box-shadow: 0px 0px 10px 5px rgb(58, 58, 58);
+  -moz-box-shadow: 0px 0px 10px 5px rgb(58, 58, 58);
+  box-shadow: 0px 0px 10px 5px rgb(58, 58, 58);
+ }
+
 .popover-md{ 
   ion-backdrop
   {
@@ -434,10 +449,12 @@ ion-alert {
   }
 }
 
+
+
 .popover-ios{
   ion-backdrop
   {
-  	opacity: 0.4 !important;
+  	opacity: 0.3 !important;
   }
   .select-ios {
     height: 18px;
