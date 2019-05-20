@@ -8,6 +8,7 @@ import { Filtros } from '../../util/filtros';
 import { SupermercadoService } from '../../services/supermercado.service';
 import { PacoteTipoServico } from '../../models/pacote-tipo-servico.model';
 import { Mercado } from '../../models/supermercado.model';
+import { AlcanceComponent } from '../../components/alcance/alcance';
 
 @IonicPage()
 @Component({
@@ -38,6 +39,19 @@ export class PesquisaPage {
     private supermercadoService: SupermercadoService,
     private filtrosService: Filtros,
     public popoverCtrl: PopoverController) {
+  }
+
+  //Impedir que a página abra sem o alcance settado
+  ionViewCanEnter(): boolean {
+    let retornoAlcance: boolean = false;
+    if (this.alcanceService.getLocaAlcance()) {
+      retornoAlcance = true;
+    }
+    else {
+      let popover = this.popoverCtrl.create(AlcanceComponent, {}, { showBackdrop: true, cssClass: 'custom-popover' });
+      popover.present();
+    }
+    return retornoAlcance
   }
 
   ionViewDidLoad() {
