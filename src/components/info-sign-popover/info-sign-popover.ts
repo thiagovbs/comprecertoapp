@@ -55,6 +55,8 @@ export class InfoSignPopoverComponent {
     this.faceId = face.password;
     this.faceNome = face.nome;
     this.faceEmail = face.username;
+
+    
   }
 
   SubmitMaisInfoForm() {
@@ -79,13 +81,13 @@ export class InfoSignPopoverComponent {
       permissoes: [this.permissao]
     }
 
-    console.log(this.user)
+    
 
     this.loginUser ={
       username: this.user.email,
       password:this.user.senha
     }
-    console.log(this.loginUser)
+    console.log(this.user)
     //Cadastro usuario
     this.usuarioService.cadastrarUsuario(this.user)
       .subscribe(response => {
