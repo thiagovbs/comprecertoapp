@@ -15,14 +15,13 @@ export class AlcanceComponent implements OnInit {
   @ContentChild(FormControlName) control: FormControlName;
 
 
-  estados: Observable<Estado[]>;
+  estados: Estado[];
   cidades: Cidade[];
   bairros: Bairro[];
   bairroEscolhido:Bairro;
 
-  idEstado: number;
-  idCidade: number;
-  idBairro:number;
+  cidade:Cidade;
+  estado:Estado = {} as Estado;
 
   checkCidade: boolean = true;
   checkBairro: boolean = true;
@@ -35,59 +34,57 @@ export class AlcanceComponent implements OnInit {
     private navCtrl: NavController) {
 
     this.alcanceForm = formBuilder.group({
-      estado: this.formBuilder.control('', [Validators.required]),
-      cidade: this.formBuilder.control('', [Validators.required]),
+      estado: this.formBuilder.control('',[Validators.required]),
+      cidade: this.formBuilder.control({value:'', disabled:false}, [Validators.required]),
       bairro: this.formBuilder.control('', [Validators.required]),
     })
   }
 
   ngOnInit() {
+    this.estados = undefined;
+    this.cidades = undefined;
+    this.bairros = undefined;
     this.bairroEscolhido = null;
-    this.estados = this.alcanceService.estados;
-  }
 
-  //Pega o Id do Estado e retorna a string
-  getIdEstado(estado) {
-    this.idEstado = estado.idEstado;
-    return estado.sigla
+    this.alcanceService.getEstados().subscribe((estados:Estado[])=>{
+      this.estados = estados;
+      console.log(this.estados)
+    })
+    
   }
-
   //Pega as Cidades de acordo com o estado
-  checkBlurEstado() {
-    this.alcanceService.getCidades(this.idEstado).subscribe((cidade: Cidade[]) => {
-      this.cidades = cidade;
-    })
-    this.checkCidade = false;
+  selectEstado(event, estado) {
+    
+    if(this.estados){
+      this.alcanceService.getCidades(estado.idEstado).subscribe((cidade: Cidade[]) => {
+        this.cidades = cidade;
+      })
+      this.checkCidade = false;
+    }else{
+      this.checkCidade = true;
+    }
   }
 
-  //Pega o Id do Estado e retorna a string
-  getIdCidade(cidade) {
-    this.idCidade = cidade.idCidade;
-    return cidade.nome
+  selectCidade(event, cidade) { 
+    if(cidade){
+      this.alcanceService.getBairros(cidade.idCidade).subscribe((bairro: Bairro[]) => {
+        this.bairros = bairro; 
+        this.checkBairro = false; 
+      })
+    }
+    
   }
 
-  checkBlurCidade() {
-    this.alcanceService.getBairros(this.idCidade).subscribe((bairro: Bairro[]) => {
-      this.bairros = bairro;
-    })
+  selectBairro(evento,bairro){
     this.checkBairro = false;
-  }
-
-  getIdBairro(bairro:Bairro){  
     this.bairroEscolhido = bairro
-    this.idBairro = bairro.idBairro
-    return bairro.nome
-  }
-
-  checkBlurBairro(evento){
-    this.bairroEscolhido = this.bairros.find((bairro:Bairro) => bairro.nome === evento.value)
-    console.log(this.bairroEscolhido)
   }
 
 
 
   SubmitForm() {
-    console.log(this.bairroEscolhido)
+    this.alcanceService.setLocalAlcance(null);
+    
     this.alcanceService.setLocalAlcance(this.bairroEscolhido);
     this.events.publish('alcance')
     this.navCtrl.setRoot(this.navCtrl.getActive());

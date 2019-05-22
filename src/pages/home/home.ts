@@ -59,7 +59,6 @@ export class HomePage {
             this.mercadoService.setServicosPorMercado(this.mercados);
             this.tiposServico = this.mercadoService.getServicosPorMercado()
             this.filtrosService.sortByServicoPosicionamentoMercado(this.tiposServico)
-            console.log(this.tiposServico)
           })
       }
     })

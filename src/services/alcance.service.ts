@@ -9,13 +9,11 @@ import { STORAGE_KEYS } from "../config/storage_keys.config";
 @Injectable()
 export class AlcanceService {
 
-    estados: Observable<Estado[]>
-
     constructor(public http: HttpClient) {
-        this.estados = this.getEstados();
+        
     }
 
-    private getEstados(): Observable<Estado[]> {
+    getEstados(): Observable<Estado[]> {
         return this.http.get<Estado[]>((`${API_CONFIG.baseUrl}/estados`));
     }
     //buscar cidades por estados

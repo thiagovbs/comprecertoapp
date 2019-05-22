@@ -88,10 +88,11 @@ export class CadastroPage {
 
   //Login pelo Google Plus
   googleLogin() {
+    let loading: Loading = this.showLoading();
     this.googlePlus.login({
     })
       .then(res => {
-
+        loading.dismiss();
         this.userLogin = {
           nome: res.displayName,
           username: res.email,
@@ -117,11 +118,15 @@ export class CadastroPage {
           })
 
         }, erro => {
-          console.log("Não existe usuário");
+          loading.dismiss();
           this.AddModalAlert(this.userLogin);
         })
       })
-      .catch(err => console.error(err));
+      .catch(
+        err => {
+          loading.dismiss();
+          console.error(err);
+        });
   }
 
   cadastrar() {

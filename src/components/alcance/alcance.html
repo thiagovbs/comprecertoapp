@@ -9,8 +9,8 @@
             <ion-col col-2>
                 <label for="Estado" class="lbl_eselect">Estado</label>
                 <ion-item class="select-model">
-                    <ion-select #mySelect class="resize2" formControlName="estado" (ionBlur)="checkBlurEstado()">
-                        <ion-option *ngFor="let estado of estados | async" >{{getIdEstado(estado)}}</ion-option>
+                    <ion-select  class="resize2" formControlName="estado"  >
+                        <ion-option *ngFor="let estado of estados" (ionSelect)="selectEstado($event,estado)">{{estado.sigla}}</ion-option>
                     </ion-select>
                 </ion-item>
             </ion-col>
@@ -18,17 +18,17 @@
             <ion-col col-4>
                 <label for="Estado" class="lbl_eselect">Cidade</label>
                 <ion-item class="select-model">
-                    <ion-select class="resize" [disabled]="checkCidade" 
-                    (ionBlur)="checkBlurCidade()" formControlName="cidade">
-                        <ion-option *ngFor="let cidade of cidades">{{ getIdCidade(cidade)}}</ion-option>
+                    <ion-select class="resize" 
+                     formControlName="cidade" [disabled]="checkCidade"> 
+                        <ion-option *ngFor="let cidade of cidades" (ionSelect)="selectCidade($event,cidade)">{{cidade.nome}}</ion-option>
                     </ion-select>
                 </ion-item>
             </ion-col>
             <ion-col col-4>
                 <label for="Estado" class="lbl_eselect">Bairro</label>
                 <ion-item class="select-model">
-                    <ion-select (ionBlur)="checkBlurBairro($event)" class="resize" [disabled]="checkBairro"  formControlName="bairro">
-                        <ion-option *ngFor="let bairro of bairros">{{bairro.nome}}</ion-option>
+                    <ion-select class="resize" [disabled]="checkBairro"  formControlName="bairro">
+                        <ion-option *ngFor="let bairro of bairros" (ionSelect)="selectBairro($event,bairro)">{{bairro.nome}}</ion-option>
                     </ion-select>
                 </ion-item>
             </ion-col>
