@@ -245,8 +245,7 @@
 }
 
   .button-qty{ 
-    font-size: 12px;
-    
+    font-size: 12px; 
     border-radius: 20px;
     height: 20px;
     padding: 6px;
@@ -316,6 +315,7 @@
   border:1px solid #eee;
 }
 
+
 //Segundo menu
 .menu-2{
   height: 32px;
@@ -356,9 +356,13 @@ li.active{
   border-bottom: 3px solid #f8f8f8;
   }
 }
-.toolbar-ios .segment-ios {
-   top: 5px !important;
+.toolbar-ios{
+  min-height: 61px !important;
+  .toolbar-ios .segment-ios {
+    top: 0px !important;
+ }
 }
+
 //fim menu 2
 
 button{
@@ -466,7 +470,7 @@ ion-alert {
 
 .toolbar-md{
   padding: 0 !important;
-  min-height: 60px !important;
+  min-height: 62px !important;
 
 }
 
@@ -477,7 +481,7 @@ ion-alert {
 
 .toolbar-ios {
   padding: 0 !important;
-  min-height: 60px;
+  min-height: 58px;
 }
 
 .cart-footer ion-item{

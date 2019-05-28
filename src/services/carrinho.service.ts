@@ -20,7 +20,6 @@ export class CarrinhoService {
     getLocaSacola() {
         let dataAtual = new Date().getTime();
         let sacola = localStorage.getItem(STORAGE_KEYS.localSacola);
-        console.log(JSON.parse(sacola))
         if (sacola === null) {
             return null
         } else {
