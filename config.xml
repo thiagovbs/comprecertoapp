@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="br.philipe.comprecerto" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="br.com.sheap" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>sheap</name>
     <description>Aplicativo para compra mais barata em produtos de supermercados.</description>
     <author email="contato@gmail.com" href="philipe.lopes@projeti.org">ProjeTI</author>
@@ -91,7 +91,7 @@
     </plugin>
     <plugin name="cordova-plugin-add-swift-support" spec="^2.0.2" />
     <plugin name="cordova-plugin-googleplus" spec="^7.0.1">
-        <variable name="REVERSED_CLIENT_ID" value="975645392573-l16if60q835ifupaat4r2t3avvefrhg5.apps.googleusercontent.com" />
+        <variable name="REVERSED_CLIENT_ID" value="apps.googleusercontent.com.975645392573-l16if60q835ifupaat4r2t3avvefrhg5" />
     </plugin>
     <plugin name="cordova-plugin-facebook4" spec="4.2.1">
         <variable name="APP_ID" value="345951992720018" />
@@ -99,5 +99,5 @@
         <variable name="FACEBOOK_HYBRID_APP_EVENTS" value="false" />
         <variable name="FACEBOOK_ANDROID_SDK_VERSION" value="4.40.0" />
     </plugin>
-    <engine name="android" spec="^7.1.0" />
+    <engine name="android" spec="7.1.0" />
 </widget>
