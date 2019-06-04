@@ -21,6 +21,7 @@
     "@angular/platform-browser": "5.2.11",
     "@angular/platform-browser-dynamic": "5.2.11",
     "@ionic-native/core": "^4.11.0",
+    "@ionic-native/date-picker": "^4.20.0",
     "@ionic-native/email-composer": "^4.20.0",
     "@ionic-native/facebook": "^4.20.0",
     "@ionic-native/google-plus": "^4.20.0",

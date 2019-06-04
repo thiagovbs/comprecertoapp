@@ -44,7 +44,7 @@ export class CadastroPage {
 
   //Login Pelo Facebook
   fbLogin() {
-    this.fb.login(['public_profile' ,'user_friends','email'])
+    this.fb.login(['profile_picture','email'])
       .then((res: FacebookLoginResponse) => {
         console.log("facebook")
         if (res.status === 'connected') {

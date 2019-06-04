@@ -7,6 +7,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+
 //Login Rede social
 import { Facebook} from '@ionic-native/facebook';
 import { GooglePlus } from '@ionic-native/google-plus';
@@ -49,7 +50,7 @@ import { Filtros } from "../util/filtros";
     BrowserAnimationsModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot(),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -60,7 +61,6 @@ import { Filtros } from "../util/filtros";
     FormCompraFacilPopoverComponent,
   ],
   providers: [
-
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
