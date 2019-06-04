@@ -6,7 +6,7 @@ import { MyApp } from './app.component';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { DatePicker } from '@ionic-native/date-picker';
 
 //Login Rede social
 import { Facebook} from '@ionic-native/facebook';
@@ -61,6 +61,7 @@ import { Filtros } from "../util/filtros";
     FormCompraFacilPopoverComponent,
   ],
   providers: [
+    DatePicker,
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},

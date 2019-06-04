@@ -12,21 +12,17 @@ import { AuthService } from '../../../services/auth.service';
 })
 export class LoginPage {
 
-  login: UserLogin;
+  login: UserLogin= {} as UserLogin;
 
   constructor(private navCtrl: NavController,
     private menu: MenuController,
     private authService: AuthService,
     public loadingCtrl: LoadingController,
     private events: Events) {
+  }
 
-    this.login = {
-      nome: "",
-      username: "",
-      password: ""
-    }
-
-
+  onPageWillLeave(): void {
+    this.events.unsubscribe('user:LoggedIn');
   }
 
   loggar() {
@@ -41,7 +37,7 @@ export class LoginPage {
         this.navCtrl.setRoot('HomePage')
       }, error => {
         loading.dismiss();
-      });
+      })
   }
 
   ionViewWillEnter() {

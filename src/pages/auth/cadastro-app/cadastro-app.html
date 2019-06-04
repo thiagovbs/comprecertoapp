@@ -17,7 +17,6 @@
         </ion-item>
         <ion-row margin-top>
           <ion-item class="bg-transparent" class="size-select-item">
-
             <ion-select formControlName="sexo" placeholder="sexo" class="size-select">
               <ion-option *ngFor="let sexo of sexoList" value="{{sexo.value}}">{{sexo.nome}}</ion-option>
             </ion-select>
@@ -25,10 +24,16 @@
 
         </ion-row>
         <ion-item class="bg-transparent size">
-          <ion-label>Data de Nascimento:</ion-label>
-          <ion-datetime displayFormat="DD/MM/YYYY" autocomplete="off" pickerFormat="MMMM-YYYY-DD"
-            formControlName="dtNascimento"></ion-datetime>
+          <ion-input 
+                        placeholder="Data de nascimento" 
+                        [(ngModel)]="dtNascimento"
+                        formControlName="data"
+                       ></ion-input>
+          <button clear item-right ion-button type="button" (click)="onBirthday()">
+            <ion-icon name="calendar"></ion-icon>
+          </button>
         </ion-item>
+
         <ion-item class="bg-transparent size">
           <ion-label floating>Digite seu email</ion-label>
           <ion-input formControlName="email"></ion-input>
