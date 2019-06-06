@@ -81,6 +81,7 @@ export class SubcategoriaPage implements OnInit {
       this.subcategoriaService.findProdutosPorCategoria(this.categoria.idCategoria, this.localidade.idBairro)
         .subscribe((resp: MercadoProduto[]) => {
           this.produtos = resp;
+          console.log(this.produtos)
           //settar os serviços por produto
           this.supermercadoService.setServicosPorProduto(this.produtos);
           //get os serviços por produto
@@ -95,9 +96,11 @@ export class SubcategoriaPage implements OnInit {
           }
         }, erro => { })
     } else {
+      
       this.subcategoriaService.findProdutosPorCategoriaEMercado(this.mercadoDetalhe.idCategoria, this.mercadoDetalhe.idMercado)
         .subscribe(resp => {
           this.produtos = resp;
+          
           this.mercadoSubCategoria = this.supermercadoService
             .filtrarSubcategoriasPorMercadoProduto(this.produtos);
 

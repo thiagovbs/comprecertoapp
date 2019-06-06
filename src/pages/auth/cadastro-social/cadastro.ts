@@ -56,7 +56,7 @@ export class CadastroPage {
                 username: profile.email,
                 password: profile.id
               }
-              //Veirifica se o usuário existe no banco
+              //Verifica se o usuário existe no banco
               this.usuarioService.buscarPorEmail(this.userLogin.username).subscribe((response: Usuario) => {
                 let loading: Loading = this.showLoading();
                 this.meuAlert(response.nome);

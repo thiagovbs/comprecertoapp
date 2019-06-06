@@ -36,6 +36,7 @@ import { CompraFacilService } from '../services/compra-facil.service';
 import { Filtros } from "../util/filtros";
 
 
+
 @NgModule({
   declarations: [
     MyApp,
@@ -44,13 +45,16 @@ import { Filtros } from "../util/filtros";
     PopoverInfoCompraFacilComponent,
     FormCompraFacilPopoverComponent,
     
+    
   ],
   imports: [
+    
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    
   ],
   bootstrap: [IonicApp],
   entryComponents: [

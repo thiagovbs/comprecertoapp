@@ -17,13 +17,15 @@
       <ion-row margin-top>
         <ion-col col-12>
           <ion-item class="bg-transparent size">
-            <ion-label style="color:#000">Informe sua data de nascimento:</ion-label>
-            <ion-datetime displayFormat="DD/MM/YYYY" autocomplete="off" pickerFormat="MMMM-YYYY-DD"
-              formControlName="dtNascimento"></ion-datetime>
+            <ion-input placeholder="Data de nascimento" [(ngModel)]="dtNascimento" formControlName="data"></ion-input>
+            <button clear item-right ion-button type="button" (click)="onBirthday()">
+              <ion-icon name="calendar"></ion-icon>
+            </button>
           </ion-item>
+  
         </ion-col>
       </ion-row>
-      <button ion-button block style="width:95%; margin: 12px auto" class="register" color="secondary" margin-top
+      <button ion-button block style="width:93%; margin: 12px auto" class="register" color="secondary" margin-top
         [disabled]="!cadastroPopUpForm.valid">
         <ion-icon name="ios-create-outline" style="margin-right: 12px;">
         </ion-icon> Confirmar

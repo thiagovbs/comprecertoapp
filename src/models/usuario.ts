@@ -9,5 +9,6 @@ export interface Usuario{
 }
 
 export interface Permissao{
+    idPermissao:number,
     descricao:string;
 }

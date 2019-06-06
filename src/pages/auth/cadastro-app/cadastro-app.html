@@ -24,11 +24,7 @@
 
         </ion-row>
         <ion-item class="bg-transparent size">
-          <ion-input 
-                        placeholder="Data de nascimento" 
-                        [(ngModel)]="dtNascimento"
-                        formControlName="data"
-                       ></ion-input>
+          <ion-input placeholder="Data de nascimento" [(ngModel)]="dtNascimento" formControlName="data"></ion-input>
           <button clear item-right ion-button type="button" (click)="onBirthday()">
             <ion-icon name="calendar"></ion-icon>
           </button>
@@ -36,7 +32,7 @@
 
         <ion-item class="bg-transparent size">
           <ion-label floating>Digite seu email</ion-label>
-          <ion-input formControlName="email"></ion-input>
+          <ion-input type="text" formControlName="email" (keyup)="changeInput($event)" autocapitalize="none" value="{{emailEditado}}"></ion-input>
         </ion-item>
         <ion-item class="bg-transparent size">
           <ion-label floating>Digite sua senha</ion-label>

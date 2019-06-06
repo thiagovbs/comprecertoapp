@@ -10,7 +10,9 @@
                 <label for="Estado" class="lbl_eselect">Estado</label>
                 <ion-item class="select-model">
                     <ion-select  class="resize2" formControlName="estado"  >
-                        <ion-option *ngFor="let estado of estados" (ionSelect)="selectEstado($event,estado)">{{estado.sigla}}</ion-option>
+                        <ion-option *ngFor="let estado of estados" (ionSelect)="selectEstado($event,estado)" [value]="estado.idEstado">
+                            {{estado.sigla}}
+                        </ion-option>
                     </ion-select>
                 </ion-item>
             </ion-col>
@@ -19,16 +21,20 @@
                 <label for="Estado" class="lbl_eselect">Cidade</label>
                 <ion-item class="select-model">
                     <ion-select class="resize" 
-                     formControlName="cidade" [disabled]="checkCidade"> 
-                        <ion-option *ngFor="let cidade of cidades" (ionSelect)="selectCidade($event,cidade)">{{cidade.nome}}</ion-option>
+                     formControlName="cidade" > 
+                        <ion-option *ngFor="let cidade of cidades" (ionSelect)="selectCidade($event,cidade)"  [value]="cidade.idCidade">
+                            {{cidade.nome}}
+                        </ion-option>
                     </ion-select>
                 </ion-item>
             </ion-col>
             <ion-col col-4>
                 <label for="Estado" class="lbl_eselect">Bairro</label>
                 <ion-item class="select-model">
-                    <ion-select class="resize" [disabled]="checkBairro"  formControlName="bairro">
-                        <ion-option *ngFor="let bairro of bairros" (ionSelect)="selectBairro($event,bairro)">{{bairro.nome}}</ion-option>
+                    <ion-select class="resize" formControlName="bairro">
+                        <ion-option *ngFor="let bairro of bairros" (ionSelect)="selectBairro($event,bairro)" [value]="bairro.idBairro">
+                            {{bairro.nome}}
+                        </ion-option>
                     </ion-select>
                 </ion-item>
             </ion-col>

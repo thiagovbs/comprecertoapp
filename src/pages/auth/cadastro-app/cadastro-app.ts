@@ -1,10 +1,9 @@
 import { Component, ContentChild } from '@angular/core';
 import { IonicPage, NavController, MenuController, AlertController, LoadingController, Loading } from 'ionic-angular';
-import { FormGroup, FormBuilder, FormControlName, Validators, AbstractControl } from '@angular/forms';
+import { FormGroup, FormControlName, Validators, AbstractControl, FormControl } from '@angular/forms';
 import { Usuario, Permissao } from '../../../models/usuario';
 import { UsuarioService } from '../../../services/usuario.service';
 import { DatePicker } from '@ionic-native/date-picker';
-
 
 
 @IonicPage()
@@ -17,35 +16,38 @@ export class CadastroAppPage {
   cadastroForm: FormGroup
   @ContentChild(FormControlName) control: FormControlName;
 
-  emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
   dtNascimento: any = '';
   sexoList = [
     { nome: 'Masculino', value: 'M' },
     { nome: 'Feminino', value: 'F' },
     { nome: 'Outro', value: 'O' },
-
   ];
-
+  emailEditado: string = "";
+  emailPattern = /^\s*(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))\s*$/
   usuario: Usuario;
   permissao: Permissao;
 
   constructor(public navCtrl: NavController,
     public menu: MenuController,
-    private formBuilder: FormBuilder,
     private usuarioService: UsuarioService,
     private alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
     private datePicker: DatePicker) {
 
-    this.cadastroForm = this.formBuilder.group({
-      nome: this.formBuilder.control('', [Validators.required, Validators.minLength(3)]),
-      sexo: this.formBuilder.control('', [Validators.required]),
-      data:this.formBuilder.control({value:'', disabled:true}, [Validators.required], ),
-      email: this.formBuilder.control('', [Validators.required, Validators.pattern(this.emailPattern)]),
-      senha: this.formBuilder.control('', [Validators.required, Validators.minLength(3)]),
-      confirmSenha: this.formBuilder.control('', [Validators.required])
-    }, { validator: CadastroAppPage.equalTo })
+    this.cadastroForm = new FormGroup({
+      nome: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      sexo: new FormControl('', [Validators.required]),
+      data: new FormControl({ value: '', disabled: true }, [Validators.required]),
+      email: new FormControl('', [Validators.required, Validators.pattern(this.emailPattern)]),
+      senha: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      confirmSenha: new FormControl('', [Validators.required])
+    }, { validators: CadastroAppPage.equalTo })
 
+  }
+  //condiciona ao usuário digital o email com letra minúscula e sem espaço
+  changeInput(evento) {
+    let email: string = evento.target.value
+    this.emailEditado = email.replace(/ /g, "").toLowerCase();
   }
 
   static equalTo(group: AbstractControl): { [key: string]: boolean } {
@@ -63,6 +65,7 @@ export class CadastroAppPage {
 
   ionViewWillEnter() {
     this.menu.swipeEnable(false);
+
   }
 
   onBirthday() {
@@ -72,26 +75,27 @@ export class CadastroAppPage {
       androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_LIGHT
     }).then(date => {
 
-      this.dtNascimento =  date.toLocaleDateString();
-      console.log(this.dtNascimento)
-    },err => console.log('Error occurred while getting date: ', err)
+      this.dtNascimento = date.toLocaleDateString();
 
-    );
-
+    }, err => console.log('Error occurred while getting date: ', err));
+    console.log(this.cadastroForm.controls['data'].value);
   }
 
   SubmitForm() {
+
     let nome_form = this.cadastroForm.controls['nome'].value;
     let sexo_form = this.cadastroForm.controls['sexo'].value;
-    let dtNascimento_form = this.cadastroForm.controls['dtNascimento'].value;
+    let dtNascimento_form = this.cadastroForm.controls['data'].value;
     let dt_Nascimento = new Date(dtNascimento_form)
     var milliseconds = dt_Nascimento.getTime();
-    let email_form = this.cadastroForm.controls['email'].value;
+    let email_form: string = this.cadastroForm.controls['email'].value;
+    email_form = email_form.trim()
     let senha_form = this.cadastroForm.controls['senha'].value;
 
 
     this.permissao = {
-      descricao: "USER"
+      idPermissao:3,
+      descricao: "USUARIO"
     }
 
     let loading: Loading = this.showLoading();
@@ -105,7 +109,7 @@ export class CadastroAppPage {
       sexo: sexo_form,
       permissoes: [this.permissao]
     }
-
+    console.log(this.usuario);
     this.usuarioService.cadastrarUsuario(this.usuario)
       .subscribe(response => {
 

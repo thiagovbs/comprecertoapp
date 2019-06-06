@@ -1,10 +1,11 @@
 import { Component, ContentChild } from '@angular/core';
 import { NavController, NavParams, Loading, LoadingController, Events } from 'ionic-angular';
-import { FormBuilder, FormGroup, FormControlName, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControlName, Validators, FormControl } from '@angular/forms';
 import { Usuario, Permissao } from '../../models/usuario';
 import { UsuarioService } from '../../services/usuario.service';
 import { AuthService } from '../../services/auth.service';
 import { UserLogin } from '../../models/userLogin';
+import { DatePicker } from '@ionic-native/date-picker';
 
 @Component({
   selector: 'info-sign-popover',
@@ -22,6 +23,7 @@ export class InfoSignPopoverComponent {
   faceEmail: string;
   faceNome: string;
   permissao: Permissao;
+  dtNascimento: any = '';
 
   sexoList = [
     { nome: 'Masculino', value: 'M' },
@@ -36,12 +38,13 @@ export class InfoSignPopoverComponent {
     private usuarioService: UsuarioService,
     public loadingCtrl: LoadingController,
     private authService: AuthService,
-    private events: Events
+    private events: Events,
+    private datePicker: DatePicker
   ) {
 
-    this.cadastroPopUpForm = this.formBuilder.group({
-      sexo: this.formBuilder.control('', [Validators.required]),
-      dtNascimento: this.formBuilder.control('', [Validators.required])
+    this.cadastroPopUpForm = new FormGroup({
+      sexo:  new FormControl ('', [Validators.required]),
+      data:  new FormControl ({ value: '', disabled: true }, [Validators.required])
     })
 
     //Informação não nula
@@ -55,9 +58,22 @@ export class InfoSignPopoverComponent {
     this.faceId = face.password;
     this.faceNome = face.nome;
     this.faceEmail = face.username;
-
     
   }
+
+  onBirthday() {
+    this.datePicker.show({
+      date: new Date(),
+      mode: 'date',
+      androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_LIGHT
+    }).then(date => {
+
+      this.dtNascimento = date.toLocaleDateString();
+
+    }, err => console.log('Error occurred while getting date: ', err));
+    console.log(this.cadastroPopUpForm.controls['data'].value);
+  }
+
 
   SubmitMaisInfoForm() {
     let loading: Loading = this.showLoading();
@@ -67,7 +83,8 @@ export class InfoSignPopoverComponent {
     var milliseconds = dt_Nascimento.getTime();
 
     this.permissao = {
-      descricao: "USER"
+      idPermissao:3,
+      descricao: "USUARIO"
     }
 
     //preenchendo o usuário com todas as informações para seu cadastro
@@ -81,12 +98,11 @@ export class InfoSignPopoverComponent {
       permissoes: [this.permissao]
     }
 
-    
-
     this.loginUser ={
       username: this.user.email,
       password:this.user.senha
     }
+
     console.log(this.user)
     //Cadastro usuario
     this.usuarioService.cadastrarUsuario(this.user)
@@ -111,6 +127,7 @@ export class InfoSignPopoverComponent {
         loading.dismiss();
       })
   }
+  
   //metodo que retorna um loading na tela
   private showLoading(): Loading {
     let loading: Loading = this.loadingCtrl.create({

@@ -91,7 +91,7 @@
     </plugin>
     <plugin name="cordova-plugin-add-swift-support" spec="^2.0.2" />
     <plugin name="cordova-plugin-googleplus" spec="^7.0.1">
-        <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.975645392573-k5tmspd3nsgpn8hvqgg9g4ijslurf32v" />
+        <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.975645392573-845k654s5c0ss61tl66o6tl2o7uss0hn" />
     </plugin>
     <plugin name="cordova-plugin-facebook4" spec="4.2.1">
         <variable name="APP_ID" value="345951992720018" />

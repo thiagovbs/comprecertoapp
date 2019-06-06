@@ -3,6 +3,9 @@ import { BtnQntProdutoComponent } from './btn-qnt-produto/btn-qnt-produto';
 import { SacolaItemComponent } from './sacola-item/sacola-item';
 import { IonicModule } from 'ionic-angular';
 import { ProdutoItemComponent } from './produto-item/produto-item';
+import { PipesModule } from '../pipes/pipes.module';
+
+
 
 
 @NgModule({
@@ -10,11 +13,14 @@ import { ProdutoItemComponent } from './produto-item/produto-item';
 		BtnQntProdutoComponent,
 		SacolaItemComponent,
 		ProdutoItemComponent,
+		
 	],
 	imports: [
-		IonicModule
+		PipesModule,
+		IonicModule,
 	],
 	exports: [
+		
 		BtnQntProdutoComponent,
 		SacolaItemComponent,
 		ProdutoItemComponent,
