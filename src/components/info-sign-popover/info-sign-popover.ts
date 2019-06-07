@@ -77,8 +77,9 @@ export class InfoSignPopoverComponent {
 
   SubmitMaisInfoForm() {
     let loading: Loading = this.showLoading();
+
     let sexo_form = this.cadastroPopUpForm.controls['sexo'].value;
-    let dtNascimento_form = this.cadastroPopUpForm.controls['dtNascimento'].value;
+    let dtNascimento_form = this.cadastroPopUpForm.controls['data'].value;
     let dt_Nascimento = new Date(dtNascimento_form)
     var milliseconds = dt_Nascimento.getTime();
 
@@ -108,6 +109,7 @@ export class InfoSignPopoverComponent {
     this.usuarioService.cadastrarUsuario(this.user)
       .subscribe(response => {
         //JSON.parse(response.body);
+        
         loading.dismiss();
         if (response.status) {
           this.authService.autenticar(this.loginUser).subscribe(resp => {
@@ -120,6 +122,7 @@ export class InfoSignPopoverComponent {
 
           }, err => {
             console.log(err)
+            loading.dismiss();
           })
         }
       }, erro => {
