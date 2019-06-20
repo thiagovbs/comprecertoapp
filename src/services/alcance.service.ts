@@ -23,11 +23,11 @@ export class AlcanceService {
 
     //buscar bairros por cidades
     getBairros(cidadeId): Observable<Bairro[]> {
-        return this.http.get<Bairro[]>((`${API_CONFIG.baseUrl}/bairros/cidade/${cidadeId}&${false}`));
+        return this.http.get<Bairro[]>((`${API_CONFIG.baseUrl}/bairros/cidade/${cidadeId}&${true}`));
     }
     //buscar bairros por cidades
     getUnicoBairro(bairroId): Observable<Bairro[]> {
-        return this.http.get<Bairro[]>((`${API_CONFIG.baseUrl}/bairros/${bairroId}&${false}`));
+        return this.http.get<Bairro[]>((`${API_CONFIG.baseUrl}/bairros/${bairroId}&${true}`));
     }
 
 
