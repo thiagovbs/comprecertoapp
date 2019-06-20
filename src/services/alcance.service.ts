@@ -14,20 +14,20 @@ export class AlcanceService {
     }
 
     getEstados(): Observable<Estado[]> {
-        return this.http.get<Estado[]>((`${API_CONFIG.baseUrl}/estados`));
+        return this.http.get<Estado[]>((`${API_CONFIG.baseUrl}/estados/?fativo=${true}`));
     }
     //buscar cidades por estados
     getCidades(estadoId): Observable<Cidade[]> {
-        return this.http.get<Cidade[]>((`${API_CONFIG.baseUrl}/cidades/estado/${estadoId}`));
+        return this.http.get<Cidade[]>((`${API_CONFIG.baseUrl}/cidades/estado/${estadoId}&${true}`));
     }
 
     //buscar bairros por cidades
     getBairros(cidadeId): Observable<Bairro[]> {
-        return this.http.get<Bairro[]>((`${API_CONFIG.baseUrl}/bairros/cidade/${cidadeId}`));
+        return this.http.get<Bairro[]>((`${API_CONFIG.baseUrl}/bairros/cidade/${cidadeId}&${false}`));
     }
     //buscar bairros por cidades
     getUnicoBairro(bairroId): Observable<Bairro[]> {
-        return this.http.get<Bairro[]>((`${API_CONFIG.baseUrl}/bairros/${bairroId}`));
+        return this.http.get<Bairro[]>((`${API_CONFIG.baseUrl}/bairros/${bairroId}&${false}`));
     }
 
 

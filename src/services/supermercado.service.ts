@@ -26,7 +26,7 @@ export class SupermercadoService {
   }
 
   buscarMercadoprodutosPorBairro(lodalidadeMercado: Bairro) {
-    return this.http.get<any>(`${API_CONFIG.baseUrl}/mercados?idBairro=${lodalidadeMercado.idBairro}`)
+    return this.http.get<any>(`${API_CONFIG.baseUrl}/mercados?idBairro=${lodalidadeMercado.idBairro}&fativo=${true}`)
   }
 
 
