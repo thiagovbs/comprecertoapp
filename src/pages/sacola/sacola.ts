@@ -53,10 +53,12 @@ export class SacolaPage implements OnInit{
   }
 
   onCompraFacil() {
-    this.navCtrl.push('CompreFacilPage', {
-      produtos_sacola: this.produtos,
-      valorTotal: this.total()
-    })
+    this.navCtrl.push('CompreFacilPage', {})
   }
+
+    //ao sair da tela de produtos, os itens seão adicionados no localStorage
+    ionViewDidLeave(){
+      this.carrinhoService.setLocalSacola()
+    }
 }
 

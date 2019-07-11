@@ -14,6 +14,7 @@ export interface SacolaMercadoDTO {
     idMercadoLocalidade: number,
     idMercado: number,
     nomeMercado: string
+    imagemMercado?:string
 }
 
 

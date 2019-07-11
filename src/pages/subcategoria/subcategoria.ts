@@ -81,7 +81,6 @@ export class SubcategoriaPage implements OnInit {
       this.subcategoriaService.findProdutosPorCategoria(this.categoria.idCategoria, this.localidade.idBairro)
         .subscribe((resp: MercadoProduto[]) => {
           this.produtos = resp;
-          console.log(this.produtos)
           //settar os serviços por produto
           this.supermercadoService.setServicosPorProduto(this.produtos);
           //get os serviços por produto
@@ -162,6 +161,10 @@ export class SubcategoriaPage implements OnInit {
 
   onSearch() {
     this.navCtrl.push('PesquisaPage')
+  }
+
+  onCompraFacil() {
+    this.navCtrl.push('CompreFacilPage', {})
   }
 
   //ao sair da tela de produtos, os itens seão adicionados no localStorage

@@ -69,4 +69,10 @@ export class SupermercadoPage {
     }
     return retornoAlcance
   }
+
+  onCompraFacil(){
+    this.navCtrl.push('CompreFacilPage', {})
+  }
+
+
 }

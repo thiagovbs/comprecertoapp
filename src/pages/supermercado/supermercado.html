@@ -6,6 +6,9 @@
     </button>
     <ion-title text-center>Supermercados</ion-title>
     <ion-buttons end>
+      <button ion-button (click)="onCompraFacil()" class="back-button-md">
+        <img src="assets/imgs/Easy-Buy-08.svg" height="20px" class="search-icon  pull-icon">
+      </button>
       <button ion-button (click)="onSearch()" class="back-button-md">
         <ion-icon class="search-icon" name="ios-search-outline"></ion-icon>
       </button>
@@ -17,18 +20,17 @@
 
   <!--list of posts-->
   <ion-list class="list-full-border">
-    <ion-item  *ngFor="let supermercado of supermercados; let i = index " text-wrap (click)="onMercado(supermercado)">
+    <ion-item *ngFor="let supermercado of supermercados; let i = index " text-wrap (click)="onMercado(supermercado)">
       <ion-thumbnail item-left style="margin-top:15px">
         <!-- <div *ngIf="supermercado.logo !== null">
             <img class="img-rounded" src="{{bucketS3}}/mercado1.jpg" alt="">
         </div> -->
-        <img class="img-rounded" 
-            style="height:70px; width:70px" 
-            src="{{supermercado.imagemUrl}}" alt="">
+        <img class="img-rounded" style="height:70px; width:70px" src="{{supermercado.imagemUrl}}" alt="">
       </ion-thumbnail>
       <div>
         <div>{{ supermercado.nomeFantasia }}</div>
-        <p class="text-sm" ion-text color="light-dark">{{localidadeMercado.nome}} - {{localidadeMercado.cidade.nome}} - {{localidadeMercado.cidade.estado.sigla}}</p>
+        <p class="text-sm" ion-text color="light-dark">{{localidadeMercado.nome}} - {{localidadeMercado.cidade.nome}} -
+          {{localidadeMercado.cidade.estado.sigla}}</p>
       </div>
     </ion-item>
   </ion-list>

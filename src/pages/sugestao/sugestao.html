@@ -6,6 +6,9 @@
     </button>
     <ion-title text-center>Sugestão</ion-title>
     <ion-buttons end>
+      <button ion-button (click)="onCompraFacil()" class="back-button-md">
+        <img src="assets/imgs/Easy-Buy-08.svg" height="20px" class="search-icon  pull-icon">
+      </button>
       <button ion-button (click)="onSearch()" class="back-button-md">
         <ion-icon class="search-icon" name="ios-search-outline"></ion-icon>
       </button>
@@ -94,8 +97,8 @@
         </ion-row>
         <div class="expand-wrapper" [class.expandedplus]="item3.expanded">
           <ion-item class="gray-bg" no-lines style="margin-top:-10px;">
-            <textarea rows="5" class="input-form"
-             type="text" formControlName="descProblema" placeholder="Mensagem*"></textarea>
+            <textarea rows="5" class="input-form" type="text" formControlName="descProblema"
+              placeholder="Mensagem*"></textarea>
           </ion-item>
           <ion-item class="gray-bg">
             <button ion-button class="pull-right btn-sugestao" [disabled]="!sugestaoForm3.valid">Enviar </button>

@@ -104,12 +104,22 @@
     margin-top: 0.75em;
     border-radius: 50%;
   }
+
+  .toolbar-title-md{
+    font-weight: 400 !important;
+  }
   
   // card style
   .card {
     height:100%;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
   }
+
+    // card style
+    .card-no-shadow {
+      height:100%;
+      box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
+    }
   
   // list style
   .list-no-border {
@@ -308,8 +318,8 @@
 }
 
 .thumb-image-compra-sacola{
-  height: 100px !important;
-  min-width: 95px !important;
+  height: 85px !important;
+  min-width: 85px !important;
   border-radius: 50%;
   margin-top:-5px;
   border:1px solid #eee;
@@ -484,6 +494,13 @@ ion-alert {
   min-height: 58px;
 }
 
+.back-button-md {
+  margin: 0 10px;
+  min-width: 0 !important; 
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
 .cart-footer ion-item{
   background: map-get($colors, secondary) !important;
   color: #fff
@@ -504,12 +521,15 @@ ion-alert {
     .alert-button-default{
       color:#fff;
       width: 90%;
-      .button-inner{
-        
+      .button-inner{    
         justify-content: center !important;
       }
     }
   }
+}
+
+.pull-icon{
+  padding-right: -0px !important; 
 }
 
 .item-ios {

@@ -2,13 +2,11 @@ page-compre-facil {
 
     .main-text{
         white-space: pre-wrap;
-        font-size: 0.60em;
+        font-size: 0.62em;
         color: #1F1F1F;;
         letter-spacing: 0.027em;
     }
-    .col-position{
-        padding-left:23px !important; 
-    }
+  
     .cl-data{
         font-size:0.60em !important; 
         text-align: end;
@@ -23,16 +21,11 @@ page-compre-facil {
             color:#00836D;
         }
     }
-
-    .colum-1{
-        width:25%;
-        
-        float: right;
-        position: relative;
-    }
     .colum-2{
-        width:75%;
-        float: left;
+        flex: 0 0 19%;
+        width: 19%;
+        margin-top:-20px;
+        text-align: right !important;
     }
     .clearfix{
         clear:both
@@ -41,5 +34,21 @@ page-compre-facil {
     .item-md.item-block .item-inner {
         padding-right: 8px;
         border-bottom: 0px solid #dedede;
+    }
+
+    .card-sheap-buy{
+        margin-top: 80px;
+        padding-bottom: 0 !important;
+        padding: 8px 5px;
+
+        border-radius: 10px;
+        border: 1px solid rgb(196, 194, 194);
+    }
+
+    .pull-to-left{
+        flex: 0 0 81%;
+        width: 81%;
+        margin-top:-20px;
+        text-align: right !important;
     }
 }

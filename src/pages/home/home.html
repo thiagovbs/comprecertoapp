@@ -4,9 +4,12 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title text-center style="margin-top:5px"><img src="assets/icon/LogoSheapBranca-03.svg" height="50" alt="">
+    <ion-title text-center style="margin-top:5px; padding-left:40px "><img src="assets/icon/LogoSheapBranca-03.svg" height="50" alt="">
     </ion-title>
     <ion-buttons end>
+      <button ion-button (click)="onCompraFacil()" class="back-button-md" >
+        <img src="assets/imgs/Easy-Buy-08.svg" height="20px" class="search-icon  pull-icon">
+      </button>
       <button ion-button class="back-button-md" (click)="onSearch()">
         <ion-icon class="search-icon" name="ios-search-outline"></ion-icon>
       </button>
@@ -14,7 +17,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content class="gray-bg" >
+<ion-content class="gray-bg">
   <ion-scroll scrollX="true" class="menu-2">
     <ul>
       <a (click)="onMaisBarato('BARATOS')">

@@ -4,6 +4,7 @@ import { Events } from "ionic-angular";
 import { MercadoProduto } from "../models/mercado-produto.model";
 
 import { STORAGE_KEYS } from "../config/storage_keys.config";
+import { CompraFacilService } from "./compra-facil.service";
 
 @Injectable()
 export class CarrinhoService {
@@ -12,11 +13,11 @@ export class CarrinhoService {
 
     carrinhoItem: CarrinhoItem
 
-    constructor(public events: Events) {
+    constructor(public events: Events, private compraFacilService: CompraFacilService) {
         this.getLocaSacola()
     }
 
-    //Pegar o usuário ativo no localstorage
+    //Pegar o usuário e sacola ativo no localstorage
     getLocaSacola() {
         let dataAtual = new Date().getTime();
         let sacola = localStorage.getItem(STORAGE_KEYS.localSacola);
@@ -27,8 +28,8 @@ export class CarrinhoService {
             //Exclui produto na sacola caso a dt de validade seja ultrapassada
             this.items.map((item: CarrinhoItem) => {
                 let dtValidade = new Date(item.produto.dtValidadeMercadoProduto).getTime()
-                
-                if (dataAtual >= dtValidade) {    
+
+                if (dataAtual >= dtValidade) {
                     this.items.splice(this.items.indexOf(item), 1);
                     this.setLocalSacola()
                 }
@@ -37,7 +38,7 @@ export class CarrinhoService {
         }
     }
 
-    //Settar o usuário no localStorage
+    //Settar a sacola no localStorage
     setLocalSacola() {
         if (this.items === null) {
             localStorage.removeItem(STORAGE_KEYS.localSacola)
@@ -84,7 +85,6 @@ export class CarrinhoService {
 
     //deleta o produto do carrinho quando clicar no menos
     removeItemCarrinho(item: CarrinhoItem) {
-        console.log(item)
         this.items.splice(this.items.indexOf(item), 1);
         this.setLocalSacola()
         this.events.publish('deletar');
@@ -106,5 +106,11 @@ export class CarrinhoService {
             ).reduce((prev, value) => prev + value, 0)
         }
 
+    }
+
+    getItemsCarrinho() {
+        if (this.items) {
+            this.compraFacilService.setMercadoDTO(this.items);
+        }
     }
 }

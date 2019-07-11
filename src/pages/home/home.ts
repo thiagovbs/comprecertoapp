@@ -14,6 +14,8 @@ import { Usuario } from '../../models/usuario';
 import { Bairro } from '../../models/localidade';
 import { Filtros } from '../../util/filtros';
 import { PacoteTipoServico } from '../../models/pacote-tipo-servico.model';
+import { CompraFacilService } from '../../services/compra-facil.service';
+import { CarrinhoService } from '../../services/carrinho.service';
 
 
 @IonicPage()
@@ -36,7 +38,8 @@ export class HomePage {
     private mercadoService: SupermercadoService,
     private popoverCtrl: PopoverController,
     private events: Events,
-    private filtrosService: Filtros) {
+    private filtrosService: Filtros,
+    private carrinhoService:CarrinhoService) {
 
     //Carregando as Categorias
     this.categoriaService.findAll().subscribe(resp => {
@@ -45,6 +48,8 @@ export class HomePage {
   }
 
   ionViewDidLoad() {
+
+    console.log(this.carrinhoService.getLocaSacola()) 
     //imagens S3
     this.bucketS3 = API_CONFIG.s3Url;
 
@@ -101,6 +106,9 @@ export class HomePage {
     this.navCtrl.push('PesquisaPage')
   }
 
+  onCompraFacil(){
+    this.navCtrl.push('CompreFacilPage', {})
+  }
 
 
 }

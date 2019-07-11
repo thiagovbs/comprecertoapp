@@ -33,7 +33,6 @@ export class ProdutoItemComponent implements OnInit {
   }
 
   ngOnInit() {
-    
     this.bucketS3 = API_CONFIG.s3Url;
   }
 
@@ -64,9 +63,6 @@ export class ProdutoItemComponent implements OnInit {
     return this.foundItem ? true : false;
   }
 
-  getMercado(produto) {
-    console.log(produto)
-  }
 
   setSomaValor(produto: MercadoProduto): number {
     if (this.foundItem) {

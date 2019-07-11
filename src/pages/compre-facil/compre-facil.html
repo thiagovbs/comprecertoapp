@@ -10,148 +10,68 @@
         <button ion-button (click)="showInfoCompraFacil()" class="back-button-md">
           <ion-icon class="search-icon" name="ios-information-circle-outline"></ion-icon>
         </button>
+        
       </ion-buttons>
     </ion-navbar>
   </ion-header>
 </ion-header>
 
-
-<ion-content class="cart gray-bg">
-  <ion-list class="list-full-border" style="margin-top:60px;" *ngFor="let mercado of mercadosSacola">
-    <ion-item class="card"  *ngIf="verificaMercadoNoCarrinho(mercado)">
-      <ion-grid style="padding:0 !important">
-        <ion-row style="margin-left: -5px !important">
-          <ion-col col-3>
-            <ion-thumbnail>
-              <img class="thumb-image-compra-sacola" src="{{bucketS3}}/mercado{{mercado.sacolaMercado.idMercado}}.jpg" alt="" />
-            </ion-thumbnail>
-          </ion-col>
-          <ion-col col-6 class="col-position">
-            <p ion-text class="main-text">Compre seus produtos pelo whatsapp. Negocie de forma simples como vai ser o pagamento e a entrega.</p>
-            <ion-row>
-              <ion-col col-2>
-                <img src="assets/imgs/Icon-entrega.svg" height="20" alt="">
-              </ion-col>
-              <ion-col col-10 class="pull-left">
-                <p class="sub-text" style="margin-top:5px;">Entrega pelo supermercado</p>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col col-12 style="margin-top:-12px">
-                <p class="sub-text">Quantidade de produtos: {{setQuantidade()}}</p>
-              </ion-col>
-              <ion-col col-12 style="margin-top:-10px">
-                <p class="sub-text">Valor Total: <span>{{setValorTotal() | currency:'BRL'}}</span></p>
-              </ion-col>
-            </ion-row>
-          </ion-col>
-          <ion-col col-3 class="pull-left" style="margin-top:-5px;">
-            <p class="cl-data">24/04/2019</p>
-            <div style="margin-top:68px;">
-              <a (click)="showFormCompraFacil($event)">
-                <div class="colum-1">
-                    <ion-icon name="logo-whatsapp" style="color:#00836D; font-size: 0.8em;"></ion-icon>
-                </div>
-                <div class="colum-2">
-                    <p class="main-text" style="color:#00836D">Enviar sua compra</p>
-                </div>    
-              </a>
-            </div>
+<ion-content class="cart">
+  <ion-list class="list-full-border" >
+    <ion-card class="card-no-shadow card-sheap-buy" *ngFor="let mercado of mercadosSacola">
+      <ion-grid style="padding:0 !important" >
+        <ion-row>
+          <ion-col col-12 class="pull-left" style="margin-top:-10px;margin-left: 5px;">
+            <p class="cl-data">Válido até <span></span>24/04/2019</p>
           </ion-col>
         </ion-row>
-      </ion-grid>
-    </ion-item>
-    <ion-item class="card" *ngIf="false">
-        <ion-grid style="padding:0 !important">
-          <ion-row style="margin-left: -5px !important">
-            <ion-col col-3>
-              <ion-thumbnail>
-                <img class="thumb-image-compra-sacola" src="assets/imgs/supermercados-mundial---vaz-l.png" alt="" />
-              </ion-thumbnail>
-            </ion-col>
-            <ion-col col-6 class="col-position">
-              <p ion-text class="main-text">Compre seus produtos pelo whatsapp. Negocie de forma simples como vai ser o pagamento e a entrega.</p>
-              <ion-row>
-                <ion-col col-2>
-                  <img src="assets/imgs/Icon-Retirada.svg" height="20" alt="">
-                </ion-col>
-                <ion-col col-10 class="pull-left">
-                  <p class="sub-text" style="margin-top:5px;">Retirar no supermercado</p>
-                </ion-col>
-              </ion-row>
-              <ion-row>
-                <ion-col col-12 style="margin-top:-12px">
-                  <p class="sub-text">Quantidade de produtos: 10</p>
-                </ion-col>
-                <ion-col col-12 style="margin-top:-10px">
-                  <p class="sub-text">Valor Total: <span>R$ 20,00</span></p>
-                </ion-col>
-              </ion-row>
-            </ion-col>
-            <ion-col col-3 class="pull-left" style="margin-top:-5px;">
-              <p class="cl-data">24/04/2019</p>
-              <div style="margin-top:68px;">
-                <a >
-                  <div class="colum-1">
-                      <ion-icon name="logo-whatsapp" style="color:#00836D; font-size: 0.8em;"></ion-icon>
-                  </div>
-                  <div class="colum-2">
-                      <p class="main-text" style="color:#00836D">Enviar sua compra</p>
-                  </div>    
-                </a>
-              </div>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-item>
-      <ion-item class="card" *ngIf="false">
-          <ion-grid style="padding:0 !important">
-            <ion-row style="margin-left: -5px !important">
-              <ion-col col-3>
-                <ion-thumbnail>
-                  <img class="thumb-image-compra-sacola" src="assets/imgs/superz.jpg" alt="" />
-                </ion-thumbnail>
+        <ion-row style="margin-left: -5px !important; margin-top:-8px !important">
+          <ion-col col-3>
+            <ion-thumbnail>
+              <img class="thumb-image-compra-sacola" src="{{bucketS3}}/mercado{{mercado.sacolaMercado.idMercado}}.jpg"
+                alt="" />
+            </ion-thumbnail>
+          </ion-col>
+
+          <ion-col col-6 style="margin-top:6px;">
+            <ion-row>
+              <ion-col col-2>
+                <img src="assets/icon/prancheta.svg" height="15" alt="">
+                <img src="assets/icon/Calculadora-08.svg" height="15" alt="" style="margin-top: 6px">
+                <img src="assets/imgs/Icon-entrega.svg" height="15" alt="" style="margin-top: 4px">
               </ion-col>
-              <ion-col col-6 class="col-position">
-                <p ion-text class="main-text" style="color:#9b0d0d">Função não disponível, pois os preços anunciados são exclusivos para o ponto de venda.</p>
-                <ion-row style="margin-top:25px">
- 
-                </ion-row>
-                <ion-row>
-                  <ion-col col-12 >
-                    <p class="sub-text">Quantidade de produtos: 10</p>
-                  </ion-col>
-                  <ion-col col-12 style="margin-top:-10px">
-                    <p class="sub-text">Valor Total: <span>R$ 20,00</span></p>
-                  </ion-col>
-                </ion-row>
-              </ion-col>
-              <ion-col col-3 class="pull-left" style="margin-top:-5px;">
-                <p class="cl-data">24/04/2019</p>
-                <div style="margin-top:68px;">
-                  <a>
-                   <!--  <div class="colum-1">
-                        <ion-icon name="logo-whatsapp" style="color:#9b0d0d; font-size: 0.8em;"></ion-icon>
-                    </div> -->
-                    <div class="colum-2">
-                        <p class="main-text" style="color:#9b0d0d">Indisponível</p>
-                    </div>    
-                  </a>
-                </div>
+              <ion-col col-10 class="pull-left">
+                <p ion-text class="main-text" style="margin-top:5px;">Produtos: <span style="color: #00836D">{{mercado.carrinhoItem.length}}</span></p>
+                <p ion-text class="main-text" style="margin-top:5px;">Valor Total: <span style="color: #00836D">{{setValorTotal(mercado) | currency:'BRL'}}</span> </p>
+                <p ion-text class="main-text" style="margin-top:7px;">Entregue pelo supermercado</p>
               </ion-col>
             </ion-row>
-          </ion-grid>
-        </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row style="margin-top:15px; ">
+          <div  class="pull-to-left">
+            <a (click)="showFormCompraFacil($event)">
+              <p class="main-text" style="color:#00836D">Detalhes</p>
+            </a>
+          </div>
+          <div  class="colum-2">
+            <a (click)="showFormCompraFacil($event)">
+              <p class="main-text" style="color:#00836D">Enviar Pedido</p>
+            </a>
+          </div>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
   </ion-list>
 </ion-content>
 <!--Footer button-->
 <ion-footer class="cart-footer">
-    <ion-item style="max-height:20px;">
-      <div item-left>
-        <h2>Valor Total</h2>
-      </div>
-      <div class="pull-right">
-        <span ion-text style="font-size:15px; color:#fff">{{valorTotal  | currency:'BRL'}}</span>
-      </div>
-    </ion-item>
-  </ion-footer>
+  <ion-item style="max-height:20px;">
+    <div item-left>
+      <h2>Valor Total</h2>
+    </div>
+    <div class="pull-right">
+      <span ion-text style="font-size:15px; color:#fff">{{valorTotal  | currency:'BRL'}}</span>
+    </div>
+  </ion-item>
+</ion-footer>

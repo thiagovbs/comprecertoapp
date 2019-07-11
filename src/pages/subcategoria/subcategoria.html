@@ -2,21 +2,23 @@
   <ion-navbar color="secondary">
     <ion-title text-center>
       <div *ngIf="possuiMercadoNome ; else maisBarato" class="title-mercado">
-          <span>{{mercadoDetalhe.nomeMercado}}</span>
+        <span>{{mercadoDetalhe.nomeMercado}}</span>
         <bdo rlt="bottom">
           <p>{{mercadoDetalhe.nomeCategoria}}</p>
         </bdo>
       </div>
       <ng-template #maisBarato>
         <span>MAIS BARATOS</span>
-        <bdo dir="rtl">
+        <bdo>
           <p>{{categoriaNome}}</p>
         </bdo>
       </ng-template>
-
     </ion-title>
 
     <ion-buttons end>
+      <button ion-button (click)="onCompraFacil()" class="back-button-md">
+        <img src="assets/imgs/Easy-Buy-08.svg" height="20px" class="search-icon pull-icon">
+      </button>
       <button ion-button class="back-button-md" (click)="onSearch()">
         <ion-icon class="search-icon" name="ios-search-outline"></ion-icon>
       </button>

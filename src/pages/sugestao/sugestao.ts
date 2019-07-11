@@ -159,4 +159,9 @@ export class SugestaoPage {
     loading.present();
     return loading;
   }
+
+  
+  onCompraFacil(){
+    this.navCtrl.push('CompreFacilPage', {})
+  }
 }

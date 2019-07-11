@@ -56,14 +56,13 @@ export class CompreFacilPage {
   ionViewDidLoad() {
     this.bucketS3 = API_CONFIG.s3Url;
     //retorna o valor total da pagina sacola
-    this.valorTotal = this.navParams.get('valorTotal');
-    this.produtos = this.navParams.get('produtos_sacola');
+    this.produtos = this.carrinhoService.items;
+    this.valorTotal = this.carrinhoService.total();
 
     //produtos do carrinho para o serviço de compre-facil
-    this.compraFacilService.getItemsCarrinho(this.produtos);
+    this.carrinhoService.getItemsCarrinho();
     //serviço que modifica o carrinho para o modelo de SacolaMercados
-    this.mercadosSacola = this.compraFacilService.getSacolaMercados();
-
+    this.mercadosSacola = this.compraFacilService.sacolaMercados;
   }
 
   //popover mostrar a msg de politicas do compre facil
@@ -85,18 +84,11 @@ export class CompreFacilPage {
     }
   }
   //valor total de produtos na sacola de cada mercado
-  setValorTotal(): number {
-    if (this.foundItem) {
-      return this.compraFacilService.getValorProdutosPorMercado(this.foundItem.carrinhoItem);
-    }
-  }
-
-  //Verifica se mercado existe no carrinho 
-  verificaMercadoNoCarrinho(item: SacolaMercados): boolean {
+  setValorTotal(item) { 
     this.foundItem = this.mercadosSacola.find((produtoItem) => produtoItem.sacolaMercado.idMercadoLocalidade === item.sacolaMercado.idMercadoLocalidade);
-    return this.foundItem ? true : false;
+    return this.compraFacilService.getValorProdutosPorMercado(this.foundItem.carrinhoItem);
   }
 
-
+  
 }
 
