@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, PopoverController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, PopoverController, AlertController, ModalController } from 'ionic-angular';
 import { PopoverInfoCompraFacilComponent } from '../../components/popover-info-compra-facil/popover-info-compra-facil';
 import { FormCompraFacilPopoverComponent } from '../../components/form-compra-facil-popover/form-compra-facil-popover';
 
 import { CarrinhoItem } from '../../models/carrinho-item.model';
-import { SacolaMercados } from '../../models/SacolaMercados.model';
+import { SacolaMercados, SacolaMercadoDTO } from '../../models/SacolaMercados.model';
 import { CompraFacilService } from '../../services/compra-facil.service';
 import { API_CONFIG } from '../../config/api.config';
 import { CarrinhoService } from '../../services/carrinho.service';
@@ -29,7 +29,8 @@ export class CompreFacilPage {
     public popoverCtrl: PopoverController,
     private compraFacilService: CompraFacilService,
     private carrinhoService: CarrinhoService,
-    private alertCtl: AlertController) {
+    private alertCtl: AlertController,
+    public modalCtrl: ModalController) {
   }
 
   //Impedir que a página abra sem o alcance settado
@@ -59,10 +60,12 @@ export class CompreFacilPage {
     this.produtos = this.carrinhoService.items;
     this.valorTotal = this.carrinhoService.total();
 
+    
     //produtos do carrinho para o serviço de compre-facil
     this.carrinhoService.getItemsCarrinho();
     //serviço que modifica o carrinho para o modelo de SacolaMercados
     this.mercadosSacola = this.compraFacilService.sacolaMercados;
+    console.log(this.mercadosSacola)
   }
 
   //popover mostrar a msg de politicas do compre facil
@@ -89,6 +92,11 @@ export class CompreFacilPage {
     return this.compraFacilService.getValorProdutosPorMercado(this.foundItem.carrinhoItem);
   }
 
+  onFormPedido(mercado:SacolaMercados){
+    
+    let popover = this.modalCtrl.create('DynamicStepsPage', { pedido: mercado }  );
+    popover.present();
+  }
   
 }
 

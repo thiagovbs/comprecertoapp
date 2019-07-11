@@ -28,8 +28,8 @@
         <ion-row style="margin-left: -5px !important; margin-top:-8px !important">
           <ion-col col-3>
             <ion-thumbnail>
-              <img class="thumb-image-compra-sacola" src="{{bucketS3}}/mercado{{mercado.sacolaMercado.idMercado}}.jpg"
-                alt="" />
+              <img class="thumb-image-compra-sacola" [src]="mercado.sacolaMercado.imagemMercado"
+                alt="" height="20" />
             </ion-thumbnail>
           </ion-col>
 
@@ -55,7 +55,7 @@
             </a>
           </div>
           <div  class="colum-2">
-            <a (click)="showFormCompraFacil($event)">
+            <a (click)="onFormPedido(mercado)">
               <p class="main-text" style="color:#00836D">Enviar Pedido</p>
             </a>
           </div>

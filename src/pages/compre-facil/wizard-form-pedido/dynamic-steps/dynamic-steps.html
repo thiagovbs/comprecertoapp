@@ -1,0 +1,86 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>
+      Form Dinamico
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-simple-wizard [(step)]="step" [showSteps]="true" (finish)="onFinish()" [finishIcon]="'done-all'"
+    [(stepCondition)]="stepCondition">
+    <ion-wizard-step>
+      <ion-card>
+        <ion-card-header>
+          teste
+        </ion-card-header>
+        <ion-card-content>
+          <form novalidate [formGroup]="pedidoForm" (ngSubmit)="SubmitForm()">
+            <ion-item class="bg-transparent size">
+              <ion-label floating>Nome Completo</ion-label>
+              <ion-input name="nome" formControlName="nome" autocomplete="off"></ion-input>
+            </ion-item>
+            <ion-item class="bg-transparent size">
+              <ion-label floating>CPF</ion-label>
+              <ion-input name="cpf" formControlName="cpf" autocomplete="off"></ion-input>
+            </ion-item>
+            <ion-item class="bg-transparent size">
+              <ion-label floating>Celular</ion-label>
+              <ion-input name="celular" formControlName="celular" autocomplete="off"></ion-input>
+            </ion-item>
+            <ion-row>
+              <ion-col col-12>
+                <ion-item class="bg-transparent size">
+                  <ion-input type="text" name="endereco" style="height: 30px;" formControlName="endereco"
+                    autocomplete="off" placeholder="Endereço"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-3>
+                <ion-item class="bg-transparent size">
+                  <ion-input type="text" name="numero" style="height: 30px;" formControlName="numero" autocomplete="off"
+                    placeholder="Numero"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col col-5>
+                <ion-item class="bg-transparent size">
+                  <ion-input type="text" name="complemento" style="height: 30px;" formControlName="complemento"
+                    autocomplete="off" placeholder="Complemento"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col col-4>
+                <ion-item class="bg-transparent size">
+                  <ion-input type="text" name="bairro" style="height: 30px;" formControlName="bairro" autocomplete="off"
+                    placeholder="Bairro"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col col-4>
+                <ion-item class="bg-transparent size">
+                  <ion-input type="text" name="cidade" formControlName="cidade" autocomplete="off" placeholder="Cidade"
+                    style="height: 30px;"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col col-4>
+                <ion-item class="bg-transparent size">
+                  <ion-input type="text" name="estado" formControlName="estado" autocomplete="off" style="height: 30px;"
+                    placeholder="Estado"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col col-4 style="padding-left: 25px;">
+                <button ion-button clear class="btn-enviar" color="secondary" >Enviar</button>
+              </ion-col>
+            </ion-row>
+          </form>
+        </ion-card-content>
+      </ion-card>
+    </ion-wizard-step>
+
+
+  </ion-simple-wizard>
+
+
+</ion-content>

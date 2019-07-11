@@ -2,6 +2,9 @@ import { Injectable } from "@angular/core";
 import { CarrinhoItem } from "../models/carrinho-item.model";
 import { SacolaMercados, SacolaMercadoDTO } from "../models/SacolaMercados.model";
 import { MercadoProduto } from "../models/mercado-produto.model";
+import { Pedido } from "../models/pedido.model";
+import { HttpClient } from "@angular/common/http";
+import { API_CONFIG } from "../config/api.config";
 
 
 @Injectable()
@@ -14,11 +17,14 @@ export class CompraFacilService {
     sacolaMercados: SacolaMercados[] = [];
     sacolaMercado: SacolaMercados = {} as SacolaMercados;
 
+    constructor(private http: HttpClient) { }
+
     setMercadoDTO(item: CarrinhoItem[]) {
         item.map((carrinho: CarrinhoItem) => {
             this.sacolaMercadoDTO.idMercado = carrinho.produto.idMercado;
             this.sacolaMercadoDTO.idMercadoLocalidade = carrinho.produto.idMercadoLocalidade;
             this.sacolaMercadoDTO.nomeMercado = carrinho.produto.nomeFantasiaMercado;
+            this.sacolaMercadoDTO.imagemMercado = carrinho.produto.mercadoImagemUrl
             //this.sacolaMercadoDTO.imagemMercado = carrinho.
 
             let foundMercado: SacolaMercados = this.sacolaMercados.find((carditem: SacolaMercados) => carditem.sacolaMercado.idMercadoLocalidade === carrinho.produto.idMercadoLocalidade);
@@ -51,4 +57,8 @@ export class CompraFacilService {
         return valorTotal
     }
 
+
+    postPedido(pedido: Pedido) {
+        return this.http.post(`${API_CONFIG.baseUrl}/pedido`, pedido);
+    }
 }

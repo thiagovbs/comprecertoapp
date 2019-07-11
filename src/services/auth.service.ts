@@ -46,7 +46,8 @@ export class AuthService{
             nome: data.user.nome,
             email: data.user.email,
             login: data.user.login,
-            sexo: data.user.sexo
+            sexo: data.user.sexo,
+            idUsuario: data.user.idUsuario
         }; 
         this.usuarioService.setLocalUser(user);
     }
