@@ -2,6 +2,7 @@ import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PagamentoEnum } from '../../../models/pagamento-enum.model';
 import { Events } from 'ionic-angular';
+import { SacolaMercados } from '../../../models/SacolaMercados.model';
 
 @Component({
   selector: 'wizard-tipo-pagamento',
@@ -14,6 +15,10 @@ export class WizardTipoPagamentoComponent {
 
   @Input() valorTotalPedido:number;
 
+  @Input() valorFrete:number;
+
+  @Input() valorMimimoFrete:number;
+  
   pagamentoForm: FormGroup
   tipo: any
   tipoPagamentoEnum = PagamentoEnum
@@ -28,9 +33,10 @@ export class WizardTipoPagamentoComponent {
     })
 
     this.events.subscribe('step:next', () => {
+      
       this.pagamentoSubmit()
     });
-    console.log(this.valorTotalPedido)
+    
   }
 
   ionViewDidLoad(){
@@ -57,3 +63,4 @@ export class WizardTipoPagamentoComponent {
   }
 
 }
+

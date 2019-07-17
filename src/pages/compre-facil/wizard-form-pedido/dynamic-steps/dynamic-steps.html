@@ -18,12 +18,12 @@
       <ion-wizard-step class="position-step">
         <wizard-tipo-retirada 
         (infoTipoRetiradaPedido)="aoMudarTipoRetiradaPedido($event)"
-        (infoDataHoraPedido)="aoMudarTipoDataHora($event)"></wizard-tipo-retirada>
+        (infoDataHoraPedido)="aoMudarTipoDataHora($event)" [pedidosMercado]="pedidosMercado"></wizard-tipo-retirada>
       </ion-wizard-step>
 
       <ion-wizard-step class="position-step">
         <wizard-tipo-pagamento (infoTipoPagamento)="aoMudarTipoPagamento($event)" 
-                              [valorTotalPedido]="valorTotal"></wizard-tipo-pagamento>
+                              [valorTotalPedido]="valorTotal" [valorFrete]="valorFrete" [valorMimimoFrete]="valorMimimoFrete"></wizard-tipo-pagamento>
       </ion-wizard-step>
 
       <ion-wizard-step class="position-step" >

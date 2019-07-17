@@ -1,3 +1,4 @@
+import { Time } from "@angular/common";
 
 export interface MercadoProduto{
     caracteristicaProduto:string,
@@ -6,6 +7,9 @@ export interface MercadoProduto{
     mercadoImagemUrl?:string,
     idCategoria:number,
     idMercado:number,
+    valorFrete?: number,
+    valorMinimo?: number,
+    horarioMaximo?:Time,
     idMercadoLocalidade:number,
     idMercadoProduto:number,
     idProduto:number,

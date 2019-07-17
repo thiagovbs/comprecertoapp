@@ -1,6 +1,8 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { ViewController } from 'ionic-angular';
+import { ViewController, NavParams } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Time } from '@angular/common';
+import { SacolaMercados } from '../../../models/SacolaMercados.model';
 
 @Component({
   selector: 'popover-wizard-data-hora',
@@ -9,18 +11,28 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class PopoverWizardDataHoraComponent {
 
   dataHoraform: FormGroup
-
+  pedidoMercado: SacolaMercados={} as SacolaMercados
   datas: Date[] = []
+
   @Output() infoDataHoraPedido = new EventEmitter();
 
   constructor(private formBuilder: FormBuilder,
-    private viewControl: ViewController) {
+    private viewControl: ViewController,
+    private navParams: NavParams) {
 
-    this.getDataHoraRetirada()
+    
     this.dataHoraform = this.formBuilder.group({
       dataHora: this.formBuilder.control('', [Validators.required]),
     })
 
+   
+  }
+
+  ionViewDidLoad() {
+    console.log("ionViewDidLoad")
+    this.pedidoMercado = this.navParams.get('pedidosMercado');
+    console.log(this.pedidoMercado)    
+    this.getDataHoraRetirada()
   }
 
   btnSalvarDataHora() {
@@ -30,7 +42,7 @@ export class PopoverWizardDataHoraComponent {
   getDataHoraRetirada() {
     this.datas = [];
     ////////////////////////////////
-    let horarioMax: String = String('23:30:00');
+    let horarioMax: String = String(this.pedidoMercado.sacolaMercado.horarioMaximo);
     let hour = (horarioMax.split(':'))[0]
     let min = (horarioMax.split(':'))[1]
 

@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavParams, PopoverController, ViewController, Events } from 'ionic-angular';
 import { SacolaMercados } from '../../../models/SacolaMercados.model';
@@ -13,9 +13,9 @@ export class WizardTipoRetiradaComponent {
 
 
   pedidoForm: FormGroup;
-  pedidosMercado: SacolaMercados;
   @Output() infoTipoRetiradaPedido = new EventEmitter();
   @Output() infoDataHoraPedido = new EventEmitter();
+  @Input() pedidosMercado: SacolaMercados;
   step:number = 2;
   currentStep: any;
   stepCondition:boolean;
@@ -46,8 +46,10 @@ export class WizardTipoRetiradaComponent {
 
   //popover para mostrar o form para o cliente adicionar seu endereco que irá receber em casa
   showFormCompraFacil(ev) {
-    this.events.unsubscribe('step:next')
-    let popover = this.popoverCtrl.create(FormCompraFacilPopoverComponent, {}, { cssClass: 'form-compra-facil' });
+    
+    let popover = this.popoverCtrl.create(FormCompraFacilPopoverComponent, {
+      pedidosMercado: this.pedidosMercado
+    }, { cssClass: 'form-compra-facil' });
     popover.present();
     popover.onDidDismiss(data => {
       this.infoTipoRetiradaPedido.emit(data);
@@ -58,10 +60,9 @@ export class WizardTipoRetiradaComponent {
   //popover para mostrar o form de datas que o mercado pode entregar
   showFormdataHora(ev) {
     
-    this.events.unsubscribe('step:next')
- 
-
-    let popover = this.popoverCtrl.create(PopoverWizardDataHoraComponent, {}, { cssClass: 'form-compra-facil' });
+    let popover = this.popoverCtrl.create(PopoverWizardDataHoraComponent, {
+      pedidosMercado: this.pedidosMercado
+    }, { cssClass: 'form-compra-facil' });
     popover.present();
     popover.onDidDismiss(data => {
       this.infoDataHoraPedido.emit(data);

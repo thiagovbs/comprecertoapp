@@ -13,6 +13,7 @@ export class Pedido {
     usuario: Usuario;
     celular: string;
     endereco: string;
+    dataHoraRetirada: Date;
     pedidoProdutos: PedidoProduto[] =[];  
     mercadoLocalidade: MercadoLocalidade
     
