@@ -1,13 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Events, AlertController } from 'ionic-angular';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { IonicPage, NavController, NavParams, Events, AlertController, ViewController } from 'ionic-angular';
+
 import { SacolaMercados } from '../../../../models/SacolaMercados.model';
-import { PedidoProduto } from '../../../../models/pedidoProduto.model';
-import { Pedido } from '../../../../models/pedido.model';
-import { MercadoLocalidade } from '../../../../models/mercadoLocalidade.model';
-import { Produto } from '../../../../models/Produto.model';
-import { CompraFacilService } from '../../../../services/compra-facil.service';
-import { Usuario } from '../../../../models/usuario';
+
 import { UsuarioService } from '../../../../services/usuario.service';
 
 
@@ -18,56 +13,45 @@ import { UsuarioService } from '../../../../services/usuario.service';
 })
 export class DynamicStepsPage {
   step: any;
-  stepCondition: any;
-  stepDefaultCondition: any;
+  substituicao: any;
+  stepCondition: boolean = false;
+  stepDefaultCondition: boolean;
   currentStep: any;
-  stepsArray: Array<Object> = [];
-  stepsQuantidadeA: Array<any> = [0, 0, 0];
-  pedidoForm: FormGroup;
   pedidosMercado: SacolaMercados;
+  enderecoPedido: any;
+  dataHoraPedidoRetirada: any
+  pagamento: any;
+  valorTotal:number
 
   constructor(public navCtrl: NavController,
     public alertCtrl: AlertController,
     public evts: Events,
-    private formBuilder: FormBuilder,
     public navParams: NavParams,
-    private compraFacilService:CompraFacilService,
-    private userService:UsuarioService) {
-
-    this.pedidoForm = this.formBuilder.group({
-      celular: this.formBuilder.control('', [Validators.required]),
-      cpf: this.formBuilder.control('', [Validators.required]),
-      nome: this.formBuilder.control('', [Validators.required]),
-      endereco: this.formBuilder.control('', [Validators.required, Validators.minLength(3)]),
-      numero: this.formBuilder.control('', [Validators.required]),
-      complemento: this.formBuilder.control('', [Validators.required]),
-      bairro: this.formBuilder.control('', [Validators.required, Validators.minLength(3)]),
-      cidade: this.formBuilder.control('', [Validators.required, Validators.minLength(3)]),
-      estado: this.formBuilder.control('', [Validators.required, Validators.minLength(3)]),
-    })
+    private userService: UsuarioService,
+    public viewCtrl: ViewController) {
 
     this.step = 1;//The value of the first step, always 1
     this.stepCondition = false;//For each step the condition is set to this value, Set to true if you don't need condition in every step
     this.stepDefaultCondition = this.stepCondition;//Save the default condition for each step
 
-    //You can subscribe to the Event 'step:changed' to handle the current step
     this.evts.subscribe('step:changed', step => {
-      //Handle the current step if you need
       this.currentStep = step;
-      //Set the step condition to the default value
-      this.stepCondition = this.stepDefaultCondition;
-    });
-    this.evts.subscribe('step:next', () => {
-      //Do something if next
-      console.log('Next pressed: ', this.currentStep);
-    });
-    this.evts.subscribe('step:back', () => {
-      //Do something if back
-      console.log('Back pressed: ', this.currentStep);
+      console.log(step)
+      //this.stepCondition = false;
+      if(step === 3){
+        this.stepCondition = true;
+      }
     });
   }
 
   onFinish() {
+
+    if (this.dataHoraPedidoRetirada) {
+
+    } else {
+
+    }
+
     this.alertCtrl.create({
       message: 'Wizard Finished!!',
       title: 'Congrats!!',
@@ -83,12 +67,84 @@ export class DynamicStepsPage {
 
   ionViewDidLoad() {
     this.pedidosMercado = this.navParams.get('pedido');
-    this.userService.getLocalUser()
-    
+    this.valorTotal = this.navParams.get('valorTotal');
+    this.userService.getLocalUser();
+
+    console.log(this.pedidosMercado)
+    console.log(this.valorTotal)
   }
 
+  onClose() {
+    const prompt = this.alertCtrl.create({
+      title: 'Deseja cancelar sua compra ?',
+      message: "Você perderá as informações preenchidas nesse formulário",
+      cssClass: 'ConfirmCompraFacil',
+      buttons: [
+        {
+          text: 'Sair',
+          handler: data => {
+            console.log('Cancelado');
+            this.viewCtrl.dismiss()
+          }
+        },
+        {
+          text: 'Continuar',
+          handler: data => {
+            console.log('Saved clicked');
+          }
+        }
+      ]
+    });
+    prompt.present();
+  }
+
+  //evento recebe o valor da substituicao
+  aoSubstituir(evento) {
+    this.stepCondition = true
+    this.substituicao = evento
+    this.currentStep = 2
+  }
+
+  aoMudarTipoRetiradaPedido(evento) {
+    if (evento) {
+      this.stepCondition = true
+      this.enderecoPedido = evento
+      this.currentStep = 3
+    } else {
+      this.enderecoPedido = undefined;
+      this.stepCondition = false
+    }
+  }
+
+  aoMudarTipoDataHora(evento) {
+    if (evento) {
+      this.stepCondition = true;
+      this.dataHoraPedidoRetirada = evento
+      this.currentStep = 3
+    } else {
+      this.dataHoraPedidoRetirada = undefined
+      this.stepCondition = false;
+    }
+  }
+
+  aoMudarTipoPagamento(evento: any) {
+
+    if (evento.tipo) {
+      this.pagamento = evento;
+      this.stepCondition = true;
+      this.currentStep = 4
+    } else {
+      this.stepCondition = false;
+    }
+  }
+
+
+
+
   SubmitForm() {
-    let celularForm = this.pedidoForm.get('celular').value
+
+
+    /* let celularForm = this.pedidoForm.get('celular').value
     let nomeForm = this.pedidoForm.get('nome').value
     let cpf = this.pedidoForm.get('cpf').value
     let endereco = this.pedidoForm.get('endereco').value
@@ -100,6 +156,8 @@ export class DynamicStepsPage {
 
 
     let pedido: Pedido = {} as Pedido;
+    pedido.usuario = this.userService.getLocalUser()
+    pedido.usuario.permissoes = []
     pedido.pedidoProdutos = [];
     pedido.celular = celularForm;
     pedido.endereco = endereco;
@@ -107,9 +165,7 @@ export class DynamicStepsPage {
     pedido.pagamento = "D";
     pedido.valorFrete = 0;
     pedido.troco = 0;
-    pedido.telefone = "(21)2208-7717";
     pedido.status = "A";
-    pedido.usuario = this.userService.getLocalUser()
 
 
     let mercadoLocalidade: MercadoLocalidade = {} as MercadoLocalidade;
@@ -126,11 +182,12 @@ export class DynamicStepsPage {
       pedidoProduto.preco = 10;
       pedido.pedidoProdutos.push(pedidoProduto);
     }
-    this.compraFacilService.postPedido(pedido).subscribe(resp=>{
+    console.log(pedido)
+    this.compraFacilService.postPedido(pedido).subscribe(resp => {
       console.log(resp)
-    },erro=>{
+    }, erro => {
       console.log(erro)
     })
-    console.log(pedido)
+  } */
   }
 }

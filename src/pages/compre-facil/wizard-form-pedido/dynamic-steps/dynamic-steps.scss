@@ -1,3 +1,30 @@
 page-dynamic-steps {
+    .content-md {
+        background-color: #fff;
+    }
+    .close-position{
+        text-align: end;
+        padding: 20px;
+        font-size: 20px;
+    }
 
+    .conteudo-steps{
+        min-width: 100%;
+        margin:0px auto;
+        padding-left:0;
+        position: absolute !important;
+    }
+
+    ion-wizard-step.position-step{
+        text-align: center;
+        position: absolute !important;
+        top: 0px;
+        width: 100% !important;
+    }
+
+    ion-footer{
+        width: 0 !important;
+    }
+
+  
 }

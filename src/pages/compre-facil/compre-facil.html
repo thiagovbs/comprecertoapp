@@ -56,7 +56,7 @@
           </div>
           <div  class="colum-2">
             <a (click)="onFormPedido(mercado)">
-              <p class="main-text" style="color:#00836D">Enviar Pedido</p>
+              <p class="main-text" style="color:#00836D" (aoFechar)="fechar($event)">Enviar Pedido</p>
             </a>
           </div>
         </ion-row>

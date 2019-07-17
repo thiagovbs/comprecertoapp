@@ -1,0 +1,29 @@
+wizard-msg-step-1 {
+
+    h2{
+        color: #242323;
+        text-transform: uppercase;
+        font-size: 1.1em;
+     }
+
+     p{
+         color:#242323;
+         padding-left: 20px;
+         text-align: start;
+     }
+     .item-md {
+         width: 95%;
+         border: 0px solid transparent;
+        padding-left: 20px;
+        font-size: 1.25rem !important;
+     }
+
+     .radio-md .radio-checked .radio-inner {
+         -webkit-transform: scale3d(0, 0, 0) !important; 
+         transform: scale3d(0, 0, 0) !important;
+     }
+     .radio-md .radio-icon {
+        border-style: none !important;
+     }
+     
+}

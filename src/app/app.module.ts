@@ -31,9 +31,10 @@ import { SuporteService } from '../services/suporte.service';
 import { SupermercadoService } from '../services/supermercado.service';
 import { AlcanceService } from '../services/alcance.service';
 import { PopoverInfoCompraFacilComponent } from '../components/popover-info-compra-facil/popover-info-compra-facil';
-import { FormCompraFacilPopoverComponent } from '../components/form-compra-facil-popover/form-compra-facil-popover';
+import { FormCompraFacilPopoverComponent } from '../components/steps-pedido/form-compra-facil-popover/form-compra-facil-popover';
 import { CompraFacilService } from '../services/compra-facil.service';
 import { Filtros } from "../util/filtros";
+import { PopoverWizardDataHoraComponent } from '../components/steps-pedido/popover-wizard-data-hora/popover-wizard-data-hora';
 
 
 
@@ -44,11 +45,9 @@ import { Filtros } from "../util/filtros";
     InfoSignPopoverComponent,
     PopoverInfoCompraFacilComponent,
     FormCompraFacilPopoverComponent,
-    
-    
+    PopoverWizardDataHoraComponent
   ],
   imports: [
-    
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
@@ -63,6 +62,7 @@ import { Filtros } from "../util/filtros";
     InfoSignPopoverComponent,
     PopoverInfoCompraFacilComponent,
     FormCompraFacilPopoverComponent,
+    PopoverWizardDataHoraComponent
   ],
   providers: [
     DatePicker,

@@ -1,0 +1,23 @@
+<ion-grid>
+  <ion-row>
+    <ion-col col-12 style="width: 95%; padding-left: 15px;">
+      <p class="uppercase-cl">Informe a retirada do produto:</p>
+    </ion-col>
+  </ion-row>
+  <form [formGroup]="dataHoraform" (ngSubmit)="dataHoraSubmit()">
+    <ion-row novalidate>
+      <ion-col col-12 style="margin-top: 5px;">
+        <ion-item class="bg-transparent size">
+          <ion-select type="text" formControlName="dataHora" placeholder="Hora de retirada">
+            <ion-option *ngFor="let data of datas" [value]="data">{{data | date: 'dd/MM/yyyy - H:mm' }}</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12>
+        <button ion-button clear class="btn-enviar" color="secondary" [disabled]="!dataHoraform.valid">Salvar</button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-grid>

@@ -17,6 +17,8 @@ export class FormCompraFacilPopoverComponent {
               public viewCtrl: ViewController) {
 
     this.enderecoForm = this.formBuilder.group({
+      nome: this.formBuilder.control('', [Validators.required, Validators.minLength(3)]),
+      cpf: this.formBuilder.control('', [Validators.required, Validators.minLength(3)]),
       endereco: this.formBuilder.control('', [Validators.required, Validators.minLength(3)]),
       numero: this.formBuilder.control('', [Validators.required]),
       complemento: this.formBuilder.control('', [Validators.required]),
@@ -28,18 +30,10 @@ export class FormCompraFacilPopoverComponent {
   }
 
   SubmitForm(){
-    console.log(this.enderecoForm.value)
-
-    this.shareWhatsApp();
+    this.viewCtrl.dismiss(this.enderecoForm.value)
+    
   }
 
-  shareWhatsApp(){
-/*     this.socialSharing.shareViaWhatsApp(this.enderecoForm.value)
-    .then(()=>{
-      this.viewCtrl.dismiss();
-    }).catch(()=>{
-
-    }) */
-  }
+  
 
 }

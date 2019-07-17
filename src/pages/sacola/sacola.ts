@@ -37,7 +37,7 @@ export class SacolaPage implements OnInit{
       //filtra o array para que não haja categorias repetidas
       this.categorias = this.categorias.filter((el, i, a) => i === a.indexOf(el))
 
-      //evento para de disparar o evento de deletar
+      //evento parar de disparar o evento de deletar
       this.events.unsubscribe('deletar')
 
     }

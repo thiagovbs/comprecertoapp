@@ -1,0 +1,69 @@
+<ion-grid>
+  <ion-row margin-top>
+    <ion-col col-12>
+      <h2 class="uppercase-cl">Informe o tipo de pagamento:</h2>
+    </ion-col>
+  </ion-row>
+  <form [formGroup]="pagamentoForm" (ngSubmit)="pagamentoSubmit()">
+    <ion-row>
+      <ion-col col-12>
+        <ion-row>
+          <ion-col col-4 margin-top>
+            <label>Valor total:</label>
+          </ion-col>
+          <ion-col col-8 text-left>
+            <ion-item class="item-input">
+              <ion-input type="text" autocomplete="off" [value]="valorTotalPedido" disabled></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col col-12>
+        <ion-row>
+          <ion-col col-4 margin-top>
+            <label>Valor Frete:</label>
+          </ion-col>
+          <ion-col col-8 text-left>
+            <ion-item class="item-input">
+              <ion-input type="text" autocomplete="off"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col col-12 style="margin-top: 30px;">
+        <ion-list radio-group>
+          <ion-row>
+            <ion-col col-4 text-center *ngFor="let tipo of getTipoPagamentoEnum()" >
+              <ion-item class="item-md-no-border">
+                <ion-radio color="primary" 
+                           [value]="tipo" 
+                           (ionSelect)="tipoPagamento($event)">
+                </ion-radio>
+                <ion-label>{{tipoPagamentoEnum[tipo]}}</ion-label>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-list>
+      </ion-col>
+      <ion-col col-12 *ngIf="isTroco">
+        <ion-row>
+          <ion-col col-4 margin-top>
+            <label>Troco para:</label>
+          </ion-col>
+          <ion-col col-8 text-left>
+            <ion-item>
+              <ion-input type="text" autocomplete="off" formControlName="troco" placeholder="R$ 00,00"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+   <!--  <ion-row>
+      <ion-col col-12>
+        <button ion-button 
+                class="btn-salvar" 
+                outline block color="secondary" [disabled]="!pagamentoForm.valid">Salvar</button>
+      </ion-col>
+    </ion-row> -->
+  </form>
+</ion-grid>

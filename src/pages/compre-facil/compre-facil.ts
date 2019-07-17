@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, PopoverController, AlertController, ModalController } from 'ionic-angular';
 import { PopoverInfoCompraFacilComponent } from '../../components/popover-info-compra-facil/popover-info-compra-facil';
-import { FormCompraFacilPopoverComponent } from '../../components/form-compra-facil-popover/form-compra-facil-popover';
+import { FormCompraFacilPopoverComponent } from '../../components/steps-pedido/form-compra-facil-popover/form-compra-facil-popover';
 
 import { CarrinhoItem } from '../../models/carrinho-item.model';
 import { SacolaMercados, SacolaMercadoDTO } from '../../models/SacolaMercados.model';
@@ -94,9 +94,12 @@ export class CompreFacilPage {
 
   onFormPedido(mercado:SacolaMercados){
     
-    let popover = this.modalCtrl.create('DynamicStepsPage', { pedido: mercado }  );
+    let popover = this.modalCtrl.create('DynamicStepsPage', { 
+      pedido: mercado,
+      valorTotal:this.valorTotal 
+    });
     popover.present();
   }
-  
+
 }
 

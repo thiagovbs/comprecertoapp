@@ -1,0 +1,19 @@
+<ion-row margin-top>
+    <ion-col col-12 text-center>
+        <h2>Atenção!</h2>
+        <p>Caso o supermercado não tenha mais um de seus produtos selecionados, como você gostaria de ser atendido?</p>
+    </ion-col>
+    <ion-col col-12>
+        <ion-list radio-group>
+            <ion-item *ngFor="let s of  getSubstituicaoEnum()" >
+                <ion-label>{{substituicaoPedidoEnum[s]}}</ion-label>
+                <ion-radio color="primary" 
+                           [value]="s" 
+                           (ionSelect)="tipoSubstituicao($event)"></ion-radio>
+            </ion-item>
+            
+        </ion-list>
+    </ion-col>
+
+
+</ion-row>

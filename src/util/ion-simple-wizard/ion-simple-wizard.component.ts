@@ -16,7 +16,7 @@ export class IonSimpleWizard {
   @Output() stepChange = new EventEmitter();
   public steps = 0;//Innitial
   public hideWizard = false;//Default
-  @Input() stepCondition = true;//Default
+  @Input() stepCondition = false;//Default
 
   constructor(public evts: Events) {
   }

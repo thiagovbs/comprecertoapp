@@ -1,0 +1,17 @@
+<ion-row margin-top>
+  <ion-col col-12 text-center>
+    <h2>Informe a Retirada do produto:</h2>
+  </ion-col>
+  <ion-col col-12>
+    <ion-list radio-group>
+      <ion-item>
+        <ion-label>Entregue no meu endereço</ion-label>
+        <ion-radio color="primary" checked="false" value="excluir" (click)="showFormCompraFacil()"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-radio color="primary" value="ligar" (click)="showFormdataHora()"></ion-radio>
+        <ion-label>Vou buscar na loja</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-col>
+</ion-row>
