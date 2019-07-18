@@ -1,3 +1,34 @@
 wizard-pedido-finalizado {
 
+    .img-center{
+        margin: 0 auto;
+    }
+
+    .border-type{
+        border-bottom: 1px solid #eee; 
+        max-width: 90%;
+    }
+    .subtitle{
+        text-align: left;
+        font-size: 1.25rem;
+        margin-bottom: 0px;
+    }
+
+    .padding-left-column{
+        padding-left: 25px;  
+    }
+    .padding-right-column{
+        padding-right: 20px;
+    }
+    .side{
+        height: 20px;
+        font-size: 1.20rem; 
+    }
+    .side > .text-inline{
+        display: inline-block;
+    }
+    .side-produto{
+        margin-bottom: -20px;
+        font-size: 1.20rem; 
+    }
 }

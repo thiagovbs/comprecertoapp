@@ -22,13 +22,16 @@ export class DynamicStepsPage {
   stepCondition: boolean = false;
   stepDefaultCondition: boolean;
   currentStep: any;
-  pedidosMercado: SacolaMercados;
+  pedidosMercado: SacolaMercados = {} as SacolaMercados;
   enderecoPedido: any;
   dataHoraPedidoRetirada: any
   pagamento: any;
-  valorTotal:number
-  valorFrete:number
-  valorMimimoFrete:number
+  valorTotal: number
+  valorFrete: number
+  valorMimimoFrete: number
+  infoMercado: any;
+  isLastStep: boolean = false
+  produtosPedido:any
 
   constructor(public navCtrl: NavController,
     public alertCtrl: AlertController,
@@ -36,7 +39,8 @@ export class DynamicStepsPage {
     public navParams: NavParams,
     private userService: UsuarioService,
     public viewCtrl: ViewController,
-    private compraFacilService: CompraFacilService) {
+    private compraFacilService: CompraFacilService,
+    private alertCrtl: AlertController) {
 
     this.step = 1;//The value of the first step, always 1
     this.stepCondition = false;//For each step the condition is set to this value, Set to true if you don't need condition in every step
@@ -44,21 +48,41 @@ export class DynamicStepsPage {
 
     this.evts.subscribe('step:changed', step => {
       this.currentStep = step;
-      console.log(step)
-      //this.stepCondition = false;
-      if(step === 3){
+      this.stepCondition = true;
+
+      //Verifica se os atributos estão preenchidos e se o usuário estiver ido até o último passo
+      if ((this.enderecoPedido || this.dataHoraPedidoRetirada) && this.isLastStep) {
         this.stepCondition = true;
       }
+
+      //Se estiver na Finalização, deixa a condição verdadeira
+      if (this.currentStep === 4) {
+        console.log("entrei no step 4")
+        this.stepCondition = true;
+        this.isLastStep = true;
+      } else {
+        this.isLastStep = false;
+      }
     });
+
+    this.evts.subscribe('step:back', () => {
+      this.stepCondition = true;
+    });
+
+    this.pedidosMercado = this.navParams.get('pedido');
+    this.valorTotal = this.navParams.get('valorTotal');
+    this.userService.getLocalUser();
+    this.valorFrete = this.pedidosMercado.sacolaMercado.valorFrete
+    this.valorMimimoFrete = this.pedidosMercado.sacolaMercado.valorMinimo
+    this.produtosPedido = this.pedidosMercado.carrinhoItem;
+    this.infoMercado = this.pedidosMercado.sacolaMercado
+    console.log(this.pedidosMercado.carrinhoItem)
   }
 
+
   onFinish() {
-    this.montarPedido()
-    if (this.dataHoraPedidoRetirada) {
-
-    } else {
-
-    }
+    console.log(this.pagamento)
+    //this.montarPedido()
 
     this.alertCtrl.create({
       message: 'Wizard Finished!!',
@@ -74,14 +98,8 @@ export class DynamicStepsPage {
   }
 
   ionViewDidLoad() {
-    this.pedidosMercado = this.navParams.get('pedido');
-    this.valorTotal = this.navParams.get('valorTotal');
-    this.userService.getLocalUser();
-    this.valorFrete = this.pedidosMercado.sacolaMercado.valorFrete
-    this.valorMimimoFrete = this.pedidosMercado.sacolaMercado.valorMinimo
 
-    console.log(this.pedidosMercado)
-    console.log(this.valorTotal)
+
   }
 
   onClose() {
@@ -159,18 +177,18 @@ export class DynamicStepsPage {
     pedido.pedidoProdutos = [];
 
     pedido.celular = '2222222';
-    
-    if(this.enderecoPedido){
+
+    if (this.enderecoPedido) {
       pedido.entrega = "E";
-      pedido.endereco = this.enderecoPedido.endereco+ this.enderecoPedido.complemento + this.enderecoPedido.bairro + this.enderecoPedido.cidade + this.enderecoPedido.estado;
-    }else{
+      pedido.endereco = this.enderecoPedido.endereco + this.enderecoPedido.complemento + this.enderecoPedido.bairro + this.enderecoPedido.cidade + this.enderecoPedido.estado;
+    } else {
       /////////////////////////////
-      pedido.endereco=" foda-se";
+      pedido.endereco = " foda-se";
       ////////////////////////////////
       pedido.entrega = "R";
       pedido.dataHoraRetirada = this.dataHoraPedidoRetirada
     }
-    
+
     pedido.pagamento = this.pagamento.tipo;
     pedido.valorFrete = 0;
     pedido.troco = this.pagamento.troco;
@@ -197,6 +215,20 @@ export class DynamicStepsPage {
     }, erro => {
       console.log(erro)
     })
-  } 
-  
+  }
+
+
+  myAlert() {
+    let alert = this.alertCrtl.create({
+      title: '<img src="assets/imgs/icone-de-erro.svg" height="100">',
+      message: 'Não achamos nenhum produto com esse nome!',
+      enableBackdropDismiss: false,
+      cssClass: 'AlertCompraFacil',
+      buttons: [
+        { text: 'Ok' }
+      ]
+    })
+    alert.present()
+  }
+
 }

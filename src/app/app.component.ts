@@ -49,10 +49,13 @@ export class MyApp {
       { title: 'Home', component: 'HomePage', icon: 'assets/icon/home_Prancheta.svg' },
       { title: 'Minha Sacola', component: 'SacolaPage', icon: 'assets/icon/Minha_sacola_Prancheta.svg' },
       { title: 'Supermercados', component: 'SupermercadoPage', icon: 'assets/icon/supermercado_Prancheta.svg' },
+      { title: 'Meus Pedidos', component: 'HistoricoPedidosPage', icon: 'assets/imgs/Sugestão_Prancheta.svg' },
       { title: 'Sugestões', component: 'SugestaoPage', icon: 'assets/icon/Sugestão_Prancheta.svg' },
       { title: 'Cupons', component: 'PromocaoPage', icon: 'assets/icon/Cupons-Icon.svg' },
       { title: 'Localidade', component: 'Localidade', icon: 'assets/icon/Localidade_Prancheta.svg' },
       { title: 'Configurações', component: 'PoliticaPrivacidadePage', icon: 'assets/imgs/configuração_icon.svg' }
+
+      
     ];
   }
 

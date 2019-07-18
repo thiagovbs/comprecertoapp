@@ -27,7 +27,8 @@
       </ion-wizard-step>
 
       <ion-wizard-step class="position-step" >
-        <wizard-pedido-finalizado></wizard-pedido-finalizado>
+        <wizard-pedido-finalizado [infoMercado]="infoMercado"
+                                  [produtos]="produtosPedido"></wizard-pedido-finalizado>
       </ion-wizard-step>
     </ion-simple-wizard>
   </div>

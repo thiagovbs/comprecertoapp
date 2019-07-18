@@ -8,7 +8,7 @@ import { WizardTipoRetiradaComponent } from './steps-pedido/wizard-tipo-retirada
 import { WizardTipoPagamentoComponent } from './steps-pedido/wizard-tipo-pagamento/wizard-tipo-pagamento';
 import { WizardMsgStep_1Component } from './steps-pedido/wizard-msg-step-1/wizard-msg-step-1';
 import { WizardPedidoFinalizadoComponent } from './steps-pedido/wizard-pedido-finalizado/wizard-pedido-finalizado';
-
+import { BrMaskerModule } from 'brmasker-ionic-3';
 
 @NgModule({
 	declarations: [
@@ -23,6 +23,7 @@ import { WizardPedidoFinalizadoComponent } from './steps-pedido/wizard-pedido-fi
 	imports: [
 		PipesModule,
 		IonicModule,
+		BrMaskerModule
 	],
 	exports: [
 		BtnQntProdutoComponent,

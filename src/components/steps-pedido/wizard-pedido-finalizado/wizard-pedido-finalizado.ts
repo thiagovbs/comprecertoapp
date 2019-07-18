@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'wizard-pedido-finalizado',
@@ -7,6 +7,9 @@ import { Component } from '@angular/core';
 export class WizardPedidoFinalizadoComponent {
 
   text: string;
+  @Input() infoMercado:any;
+  @Input() infoPessoal:any;
+  @Input() produtos:any;
 
   constructor() {
     

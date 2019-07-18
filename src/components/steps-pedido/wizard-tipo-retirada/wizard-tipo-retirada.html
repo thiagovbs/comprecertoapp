@@ -14,4 +14,10 @@
       </ion-item>
     </ion-list>
   </ion-col>
+  <ion-col col-12>
+    <div *ngIf="isEnderecoCompleto" style="padding: 20px">
+        <img src="assets/imgs/ok.png" height="100">
+      <h2 style="color:#009b89" >Seu endereço foi adicionado com sucesso!</h2>
+    </div>
+  </ion-col>
 </ion-row>

@@ -36,7 +36,7 @@ import { CompraFacilService } from '../services/compra-facil.service';
 import { Filtros } from "../util/filtros";
 import { PopoverWizardDataHoraComponent } from '../components/steps-pedido/popover-wizard-data-hora/popover-wizard-data-hora';
 
-
+import { BrMaskerModule } from 'brmasker-ionic-3';
 
 @NgModule({
   declarations: [
@@ -53,6 +53,7 @@ import { PopoverWizardDataHoraComponent } from '../components/steps-pedido/popov
     HttpClientModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
+    BrMaskerModule
     
   ],
   bootstrap: [IonicApp],

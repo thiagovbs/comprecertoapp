@@ -16,10 +16,12 @@ export class WizardTipoRetiradaComponent {
   @Output() infoTipoRetiradaPedido = new EventEmitter();
   @Output() infoDataHoraPedido = new EventEmitter();
   @Input() pedidosMercado: SacolaMercados;
-  step:number = 2;
+  step: number = 2;
   currentStep: any;
-  stepCondition:boolean;
-  
+  stepCondition: boolean;
+  isEnderecoCompleto: boolean = false;
+  isDataHorarioPedido: boolean = false;
+
   constructor(private formBuilder: FormBuilder,
     public navParams: NavParams,
     public popoverCtrl: PopoverController,
@@ -40,33 +42,33 @@ export class WizardTipoRetiradaComponent {
   }
 
   ionViewDidLoad() {
-    console.log("tipo retirada")
-    this.stepCondition = false
   }
 
   //popover para mostrar o form para o cliente adicionar seu endereco que irá receber em casa
   showFormCompraFacil(ev) {
-    
+
     let popover = this.popoverCtrl.create(FormCompraFacilPopoverComponent, {
       pedidosMercado: this.pedidosMercado
     }, { cssClass: 'form-compra-facil' });
     popover.present();
     popover.onDidDismiss(data => {
       this.infoTipoRetiradaPedido.emit(data);
+      data ? this.isEnderecoCompleto = true : this.isEnderecoCompleto = false;
       console.log(data);
     });
   }
 
   //popover para mostrar o form de datas que o mercado pode entregar
   showFormdataHora(ev) {
-    
+
     let popover = this.popoverCtrl.create(PopoverWizardDataHoraComponent, {
       pedidosMercado: this.pedidosMercado
     }, { cssClass: 'form-compra-facil' });
     popover.present();
     popover.onDidDismiss(data => {
       this.infoDataHoraPedido.emit(data);
-
+      data ? this.isDataHorarioPedido = true : this.isDataHorarioPedido = false;
+      this.isEnderecoCompleto = false;
     });
   }
 
