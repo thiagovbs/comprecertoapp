@@ -1,10 +1,10 @@
 import { Injectable } from "@angular/core";
 import { CarrinhoItem } from "../models/carrinho-item.model";
 import { SacolaMercados, SacolaMercadoDTO } from "../models/SacolaMercados.model";
-import { MercadoProduto } from "../models/mercado-produto.model";
 import { Pedido } from "../models/pedido.model";
 import { HttpClient } from "@angular/common/http";
 import { API_CONFIG } from "../config/api.config";
+import { UsuarioService } from "./usuario.service";
 
 
 @Injectable()
@@ -17,7 +17,7 @@ export class CompraFacilService {
     sacolaMercados: SacolaMercados[] = [];
     sacolaMercado: SacolaMercados = {} as SacolaMercados;
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, private usuarioService: UsuarioService) { }
 
     setMercadoDTO(item: CarrinhoItem[]) {
         item.map((carrinho: CarrinhoItem) => {
@@ -65,4 +65,9 @@ export class CompraFacilService {
     postPedido(pedido: Pedido) {
         return this.http.post(`${API_CONFIG.baseUrl}/pedido`, pedido);
     }
+
+    getPedidos() {
+        let idUsuario = this.usuarioService.getLocalUser().idUsuario;
+        return this.http.get<any>(`${API_CONFIG.baseUrl}/pedido/usuario/${idUsuario}`)
+      }
 }
