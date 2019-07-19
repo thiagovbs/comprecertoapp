@@ -14,5 +14,9 @@ export class CarrinhoItem {
     value(): number {
         return this.produto.precoMercadoProduto * this.quantidade;
     }
+
+    value2(): number {
+        return this.produto.precoMercadoProduto;
+    }
     
 }

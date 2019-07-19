@@ -22,8 +22,9 @@
       <label for="cpf" class="text-inline">CPF:</label>
       <p class="text-inline">139-791-307-03</p>
     </ion-col>
-
-    <ion-col col-8 text-left class="padding-left-column side" *ngIf="compraFacilService.getEntregaOuRetirada() === 'E'">
+   
+    <ion-col col-8 text-left class="padding-left-column side" 
+    *ngIf="compraFacilService.getEntregaOuRetirada() === 'E'">
       <label for="endereco" class="text-inline">Endereco:</label>
       <p class="text-inline">{{compraFacilService.getEnderecoPedidoUsuario().endereco}}</p>
     </ion-col>
@@ -37,7 +38,8 @@
       <p class="text-inline">{{compraFacilService.getEnderecoPedidoUsuario().bairro}} ,</p>
       <p class="text-inline">{{compraFacilService.getEnderecoPedidoUsuario().cidade}}</p>
     </ion-col>
-    <ion-col col-2 text-right class="padding-right-column side">
+    <ion-col col-2 text-right class="padding-right-column side" 
+    *ngIf="compraFacilService.getEntregaOuRetirada() === 'E'">
       <p class="text-inline">{{this.compraFacilService.getEnderecoPedidoUsuario().estado}}</p>
     </ion-col>
 

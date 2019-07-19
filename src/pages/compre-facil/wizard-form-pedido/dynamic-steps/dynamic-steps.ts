@@ -82,7 +82,7 @@ export class DynamicStepsPage {
 
   onFinish() {
     console.log(this.pagamento)
-    //this.montarPedido()
+    this.montarPedido()
 
     this.alertCtrl.create({
       message: 'Wizard Finished!!',
@@ -129,8 +129,8 @@ export class DynamicStepsPage {
   //evento recebe o valor da substituicao
   aoSubstituir(evento) {
     this.stepCondition = true
-    this.substituicao = evento
-    this.compraFacilService.setEntregaOuRetirada(evento);
+    this.substituicao = evento    
+    //this.compraFacilService.setEntregaOuRetirada(evento);
     this.currentStep = 2
   }
 
@@ -139,9 +139,11 @@ export class DynamicStepsPage {
       this.stepCondition = true;
       this.enderecoPedido = evento;
       this.compraFacilService.setEnderecoPedidoUsuario(this.enderecoPedido)
+      this.compraFacilService.setEntregaOuRetirada('E');
     } else {
       this.enderecoPedido = undefined;
       this.stepCondition = false
+      
     }
   }
 
@@ -150,6 +152,7 @@ export class DynamicStepsPage {
       this.stepCondition = true;
       this.dataHoraPedidoRetirada = evento
       this.currentStep = 3
+      this.compraFacilService.setEntregaOuRetirada('R');
     } else {
       this.dataHoraPedidoRetirada = undefined
       this.stepCondition = false;
@@ -177,29 +180,29 @@ export class DynamicStepsPage {
     pedido.usuario = this.userService.getLocalUser()
     pedido.usuario.permissoes = []
     pedido.pedidoProdutos = [];
-
-    pedido.celular = '2222222';
+    console.log(this.enderecoPedido)
+    pedido.celular = this.enderecoPedido.celular;
+    pedido.substituicao= this.substituicao;
 
     if (this.enderecoPedido) {
       pedido.entrega = "E";
-      pedido.endereco = this.enderecoPedido.endereco + this.enderecoPedido.complemento + this.enderecoPedido.bairro + this.enderecoPedido.cidade + this.enderecoPedido.estado;
-    } else {
-      /////////////////////////////
-      pedido.endereco = " foda-se";
-      ////////////////////////////////
+      pedido.endereco = this.enderecoPedido.endereco + " " +this.enderecoPedido.complemento + " " + this.enderecoPedido.bairro + " " + this.enderecoPedido.cidade + " " + this.enderecoPedido.estado;
+      pedido.valorFrete = 0;      
+    } else {    
       pedido.entrega = "R";
       pedido.dataHoraRetirada = this.dataHoraPedidoRetirada
     }
 
     pedido.pagamento = this.pagamento.tipo;
-    pedido.valorFrete = 0;
     pedido.troco = this.pagamento.troco;
     pedido.status = "L";
 
 
     let mercadoLocalidade: MercadoLocalidade = {} as MercadoLocalidade;
     mercadoLocalidade.idMercadoLocalidade = this.pedidosMercado.sacolaMercado.idMercadoLocalidade
+    mercadoLocalidade.imagemUrl= this.pedidosMercado.sacolaMercado.imagemMercado;
     mercadoLocalidade.fAtivo = true;
+   
     pedido.mercadoLocalidade = mercadoLocalidade
 
     for (let carrinhoItem of this.pedidosMercado.carrinhoItem) {
@@ -208,7 +211,7 @@ export class DynamicStepsPage {
       produto.idProduto = carrinhoItem.produto.idProduto;
       pedidoProduto.produto = produto;
       pedidoProduto.quantidade = carrinhoItem.quantidade;
-      pedidoProduto.preco = 10;
+      pedidoProduto.preco = carrinhoItem.produto.precoMercadoProduto;
       pedido.pedidoProdutos.push(pedidoProduto);
     }
     console.log(pedido)

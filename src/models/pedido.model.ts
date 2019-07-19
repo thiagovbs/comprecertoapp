@@ -7,6 +7,7 @@ export class Pedido {
     idPedido: number;
     entrega?: string;
     status?: string;
+    substituicao?: string;
     pagamento?: string;
     valorFrete: number;
     troco: number;
