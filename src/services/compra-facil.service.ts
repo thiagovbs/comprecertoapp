@@ -13,12 +13,17 @@ export class CompraFacilService {
     itensCarrinho: CarrinhoItem[] = [];
 
     sacolaMercadoDTO: SacolaMercadoDTO = {} as SacolaMercadoDTO;
-
     sacolaMercados: SacolaMercados[] = [];
     sacolaMercado: SacolaMercados = {} as SacolaMercados;
 
+
     constructor(private http: HttpClient, private usuarioService: UsuarioService) { }
 
+    enderecoUsuarioPedido: any;
+    entregaOuRetirada: any;
+    formadePagamento:any
+
+    //settando os valores dentro do model produtos por mercado
     setMercadoDTO(item: CarrinhoItem[]) {
         item.map((carrinho: CarrinhoItem) => {
             this.sacolaMercadoDTO.idMercado = carrinho.produto.idMercado;
@@ -28,9 +33,7 @@ export class CompraFacilService {
             this.sacolaMercadoDTO.horarioMaximo = carrinho.produto.horarioMaximo
             this.sacolaMercadoDTO.valorFrete = carrinho.produto.valorFrete
             this.sacolaMercadoDTO.valorMinimo = carrinho.produto.valorMinimo
-
-            //this.sacolaMercadoDTO.imagemMercado = carrinho.
-
+        
             let foundMercado: SacolaMercados = this.sacolaMercados.find((carditem: SacolaMercados) => carditem.sacolaMercado.idMercadoLocalidade === carrinho.produto.idMercadoLocalidade);
             if (foundMercado) {
                 foundMercado.sacolaMercado = this.sacolaMercadoDTO;
@@ -66,8 +69,41 @@ export class CompraFacilService {
         return this.http.post(`${API_CONFIG.baseUrl}/pedido`, pedido);
     }
 
+
     getPedidos() {
         let idUsuario = this.usuarioService.getLocalUser().idUsuario;
         return this.http.get<any>(`${API_CONFIG.baseUrl}/pedido/usuario/${idUsuario}`)
       }
+
+
+    setEnderecoPedidoUsuario(endereco: any) {
+        this.enderecoUsuarioPedido = endereco;
+    }
+
+    getEnderecoPedidoUsuario() {
+        if (this.enderecoUsuarioPedido) {
+            return this.enderecoUsuarioPedido;
+        }
+    }
+
+    setEntregaOuRetirada(entregaOuRetirada: any) {
+        this.entregaOuRetirada = entregaOuRetirada
+    }
+
+    getEntregaOuRetirada() {
+        if (this.entregaOuRetirada) {
+            return this.entregaOuRetirada;
+        }
+    }
+
+    setPagamento(evento){
+        this.formadePagamento = evento
+    }
+
+    getPagamento(){
+        if(this.formadePagamento){
+            return this.formadePagamento;
+        }
+    }
+
 }

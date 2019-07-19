@@ -19,7 +19,7 @@ form-compra-facil-popover {
     }
     ::-webkit-input-placeholder {
         color: #686868 !important;
-        font-size: 0.83em !important;
+        font-size: 0.83rem !important;
        }
 
        .btn-enviar{
@@ -43,11 +43,15 @@ form-compra-facil-popover {
 
         ::-webkit-input-placeholder {
             color: #333333 !important;
-            font-size: 1.3rem !important;
+            font-size: 1.15rem !important;
            }
     
            .select-md .select-placeholder {
             color: #333333 !important;
-            font-size: 1.3rem !important;
+            font-size: 1.20rem !important;
+           }
+           .text-input-md {
+            margin: 20px 3px !important;
+            width: 100%;
            }
 }

@@ -23,7 +23,7 @@
             
 
           <ion-input type="tel" name="celular" style="height: 30px;" formControlName="celular" autocomplete="off"
-            placeholder="celular" [brmasker]="{mask:'(00)00000-0000', len:14}"></ion-input>
+            placeholder="Celular" [brmasker]="{mask:'(00)00000-0000', len:14}" maxlength="14"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col col-12>
@@ -49,22 +49,22 @@
     </ion-row>
 
     <ion-row>
-      <ion-col col-4>
+      <ion-col col-5>
         <ion-item class="bg-transparent size">
           <ion-input type="text" name="bairro" style="height: 30px;" formControlName="bairro" autocomplete="off"
-            placeholder="Bairro"></ion-input>
+            placeholder="Bairro" [value]="bairro"></ion-input>
         </ion-item>
       </ion-col>
-      <ion-col col-4>
+      <ion-col col-5>
         <ion-item class="bg-transparent size">
-          <ion-input type="text" name="cidade" formControlName="cidade" autocomplete="off" placeholder="Cidade"
-            style="height: 30px;"></ion-input>
+          <ion-input type="text" name="cidade" formControlName="cidade" placeholder="Cidade"
+            style="height: 30px;" [value]="nomeCidade" disabled></ion-input>
         </ion-item>
       </ion-col>
-      <ion-col col-4>
+      <ion-col col-2>
         <ion-item class="bg-transparent size">
           <ion-input type="text" name="estado" formControlName="estado" autocomplete="off" style="height: 30px;"
-            placeholder="UF" maxlength="2"></ion-input>
+            placeholder="UF" maxlength="2" [value]="nomeEstado" disabled ></ion-input>
         </ion-item>
       </ion-col>
       <ion-row>

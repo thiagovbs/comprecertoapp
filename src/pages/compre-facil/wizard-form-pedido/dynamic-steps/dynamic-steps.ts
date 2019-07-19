@@ -9,6 +9,7 @@ import { MercadoLocalidade } from '../../../../models/mercadoLocalidade.model';
 import { PedidoProduto } from '../../../../models/pedidoProduto.model';
 import { Produto } from '../../../../models/Produto.model';
 import { CompraFacilService } from '../../../../services/compra-facil.service';
+import { CarrinhoItem } from '../../../../models/carrinho-item.model';
 
 
 @IonicPage()
@@ -23,7 +24,7 @@ export class DynamicStepsPage {
   stepDefaultCondition: boolean;
   currentStep: any;
   pedidosMercado: SacolaMercados = {} as SacolaMercados;
-  enderecoPedido: any;
+  enderecoPedido: any = {} as any;
   dataHoraPedidoRetirada: any
   pagamento: any;
   valorTotal: number
@@ -31,7 +32,7 @@ export class DynamicStepsPage {
   valorMimimoFrete: number
   infoMercado: any;
   isLastStep: boolean = false
-  produtosPedido:any
+  produtosPedido: any
 
   constructor(public navCtrl: NavController,
     public alertCtrl: AlertController,
@@ -57,7 +58,6 @@ export class DynamicStepsPage {
 
       //Se estiver na Finalização, deixa a condição verdadeira
       if (this.currentStep === 4) {
-        console.log("entrei no step 4")
         this.stepCondition = true;
         this.isLastStep = true;
       } else {
@@ -76,7 +76,7 @@ export class DynamicStepsPage {
     this.valorMimimoFrete = this.pedidosMercado.sacolaMercado.valorMinimo
     this.produtosPedido = this.pedidosMercado.carrinhoItem;
     this.infoMercado = this.pedidosMercado.sacolaMercado
-    console.log(this.pedidosMercado.carrinhoItem)
+
   }
 
 
@@ -98,9 +98,9 @@ export class DynamicStepsPage {
   }
 
   ionViewDidLoad() {
-
-
+    
   }
+
 
   onClose() {
     const prompt = this.alertCtrl.create({
@@ -130,14 +130,15 @@ export class DynamicStepsPage {
   aoSubstituir(evento) {
     this.stepCondition = true
     this.substituicao = evento
+    this.compraFacilService.setEntregaOuRetirada(evento);
     this.currentStep = 2
   }
 
   aoMudarTipoRetiradaPedido(evento) {
     if (evento) {
-      this.stepCondition = true
-      this.enderecoPedido = evento
-      this.currentStep = 3
+      this.stepCondition = true;
+      this.enderecoPedido = evento;
+      this.compraFacilService.setEnderecoPedidoUsuario(this.enderecoPedido)
     } else {
       this.enderecoPedido = undefined;
       this.stepCondition = false
@@ -161,6 +162,7 @@ export class DynamicStepsPage {
       this.pagamento = evento;
       this.stepCondition = true;
       this.currentStep = 4
+      this.compraFacilService.setPagamento(evento)
     } else {
       this.stepCondition = false;
     }

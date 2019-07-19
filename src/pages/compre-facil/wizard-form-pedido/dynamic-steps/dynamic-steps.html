@@ -12,23 +12,26 @@
       [(stepCondition)]="stepCondition">
 
       <ion-wizard-step class="position-step">
-        <wizard-msg-step-1 (substituicaoPedido)="aoSubstituir($event)" ></wizard-msg-step-1>
+        <wizard-msg-step-1 (substituicaoPedido)="aoSubstituir($event)"></wizard-msg-step-1>
       </ion-wizard-step>
 
       <ion-wizard-step class="position-step">
-        <wizard-tipo-retirada 
-        (infoTipoRetiradaPedido)="aoMudarTipoRetiradaPedido($event)"
-        (infoDataHoraPedido)="aoMudarTipoDataHora($event)" [pedidosMercado]="pedidosMercado"></wizard-tipo-retirada>
+        <wizard-tipo-retirada (infoTipoRetiradaPedido)="aoMudarTipoRetiradaPedido($event)"
+          (infoDataHoraPedido)="aoMudarTipoDataHora($event)" [pedidosMercado]="pedidosMercado"></wizard-tipo-retirada>
       </ion-wizard-step>
 
       <ion-wizard-step class="position-step">
-        <wizard-tipo-pagamento (infoTipoPagamento)="aoMudarTipoPagamento($event)" 
-                              [valorTotalPedido]="valorTotal" [valorFrete]="valorFrete" [valorMimimoFrete]="valorMimimoFrete"></wizard-tipo-pagamento>
+        <!-- <div *ngIf="currentStep === 3"> -->
+          <wizard-tipo-pagamento (infoTipoPagamento)="aoMudarTipoPagamento($event)" [valorTotalPedido]="valorTotal"
+            [valorFrete]="valorFrete" [valorMimimoFrete]="valorMimimoFrete"></wizard-tipo-pagamento>
+        <!-- </div> -->
       </ion-wizard-step>
 
-      <ion-wizard-step class="position-step" >
-        <wizard-pedido-finalizado [infoMercado]="infoMercado"
-                                  [produtos]="produtosPedido"></wizard-pedido-finalizado>
+      <ion-wizard-step class="position-step">
+        <div *ngIf="currentStep === 4">
+          <wizard-pedido-finalizado [infoMercado]="infoMercado" [produtos]="produtosPedido"
+            [enderecoPedido]="enderecoPedido"></wizard-pedido-finalizado>
+        </div>
       </ion-wizard-step>
     </ion-simple-wizard>
   </div>
