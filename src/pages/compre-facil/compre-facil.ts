@@ -56,8 +56,10 @@ export class CompreFacilPage {
 
   ionViewDidLoad() {
     this.bucketS3 = API_CONFIG.s3Url;
-    //retorna o valor total da pagina sacola
+   
     this.produtos = this.carrinhoService.items;
+    
+     //retorna o valor total da pagina sacola
     this.valorTotal = this.carrinhoService.total();
 
     
@@ -65,7 +67,7 @@ export class CompreFacilPage {
     this.carrinhoService.getItemsCarrinho();
     //serviço que modifica o carrinho para o modelo de SacolaMercados
     this.mercadosSacola = this.compraFacilService.sacolaMercados;
-    console.log(this.mercadosSacola)
+    
   }
 
   //popover mostrar a msg de politicas do compre facil
@@ -101,5 +103,13 @@ export class CompreFacilPage {
     popover.present();
   }
 
+  onDetalhePedido(mercado:SacolaMercados){
+    
+    let popover = this.modalCtrl.create('DetalhePedidoPage', { 
+      pedido: mercado,
+      valorTotal:this.valorTotal 
+    });
+    popover.present();
+  }
 }
 

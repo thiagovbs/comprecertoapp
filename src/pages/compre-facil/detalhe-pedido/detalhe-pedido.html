@@ -1,0 +1,26 @@
+<ion-content padding>
+  <ion-row>
+    <ion-col col-12 class="close-position">
+      <ion-icon name="close" (click)="onClose()"></ion-icon>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col col-12 margin-top>
+      <ion-thumbnail>
+        <img class="thumb-image-compra-sacola img-center" [src]="infoMercado.imagemMercado" alt="" height="20" />
+      </ion-thumbnail>
+    </ion-col>
+  </ion-row>
+  <ion-row margin-top>
+    <ion-col col-12 class="border-type img-center">
+      <h2 class="subtitle">Informações de Compra</h2>
+    </ion-col>
+    <ion-col col-12 text-left class="padding-left-column side-produto  padding-right-column"
+      *ngFor="let produto of produtos ; index as i">
+      <p class="text-inline">{{i+ 1}} - {{produto.produto.nomeProduto}},
+        {{produto.produto.marcaProduto}} - {{produto.produto.caracteristicaProduto}},
+        {{produto.produto.quantidadeProduto}} - Quantidade: {{produto.quantidade}} - Valor total:
+      </p>
+    </ion-col>
+  </ion-row>
+</ion-content>

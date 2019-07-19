@@ -1,8 +1,9 @@
 import { Component, ContentChild } from '@angular/core';
-import { FormGroup, FormControlName, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormControlName, FormBuilder, Validators, FormControl } from '@angular/forms';
 
 import { ViewController } from 'ionic-angular';
 import { UsuarioService } from '../../../services/usuario.service';
+import { AlcanceService } from '../../../services/alcance.service';
 
 @Component({
   selector: 'form-compra-facil-popover',
@@ -11,25 +12,33 @@ import { UsuarioService } from '../../../services/usuario.service';
 export class FormCompraFacilPopoverComponent {
 
   enderecoForm: FormGroup
-  usuarioNome:string
+  usuarioNome:string;
+  nomeCidade:string;
+  nomeEstado:string;
+  bairro: string;
   @ContentChild(FormControlName) control: FormControlName;
 
 
-  constructor(private formBuilder: FormBuilder, 
+  constructor(
               public viewCtrl: ViewController,
-              private localUser:UsuarioService) {
+              private localUser:UsuarioService,
+              private localAlcance:AlcanceService) {
 
-    this.enderecoForm = this.formBuilder.group({
-      nome: this.formBuilder.control({value:this.usuarioNome, disabled: true}, [Validators.required, Validators.minLength(3)]),
-      cpf: this.formBuilder.control({value:'139-791-307-03', disabled: true}, [Validators.required, Validators.minLength(3)]),
-      celular: this.formBuilder.control('', [Validators.required]),
-      endereco: this.formBuilder.control('', [Validators.required, Validators.minLength(3)]),
-      numero: this.formBuilder.control('', [Validators.required]),
-      complemento: this.formBuilder.control(''),
-      bairro: this.formBuilder.control('', [Validators.required, Validators.minLength(3)]),
-      cidade: this.formBuilder.control('', [Validators.required, Validators.minLength(3)]),
-      estado: this.formBuilder.control('', [Validators.required, Validators.maxLength(2)]),
+    this.enderecoForm = new FormGroup({
+      nome:  new FormControl({value:this.usuarioNome, disabled: true}, [Validators.required]),
+      cpf:  new FormControl({value:'139-791-307-03', disabled: true}, [Validators.required]),
+      celular:  new FormControl('', [Validators.required, Validators.minLength(14)]),
+      endereco:  new FormControl('', [Validators.required, Validators.minLength(3)]),
+      numero:  new FormControl('', [Validators.required]),
+      complemento:  new FormControl(''),
+      bairro:  new FormControl({value:this.bairro}, [Validators.required, Validators.minLength(3)]),
+      cidade:  new FormControl({value:this.nomeCidade}),
+      estado:  new FormControl({value:this.nomeEstado}),
     })
+
+    this.nomeCidade = localAlcance.getLocaAlcance().cidade.nome;
+    this.nomeEstado = localAlcance.getLocaAlcance().cidade.estado.sigla
+    this.bairro = localAlcance.getLocaAlcance().nome;
 
   }
 
@@ -38,6 +47,7 @@ export class FormCompraFacilPopoverComponent {
   }
 
   SubmitForm(){
+    console.log(this.enderecoForm)
     this.viewCtrl.dismiss(this.enderecoForm.value)
     
   }
