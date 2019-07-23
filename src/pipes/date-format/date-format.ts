@@ -9,6 +9,7 @@ export class DateFormatPipe implements PipeTransform {
    */
   transform(value: string, ...args) {
     
+    console.log(value)
     let formatData = value.split('T');
     let formatData2 = formatData[0].split('-');
     let ano = formatData2[0];

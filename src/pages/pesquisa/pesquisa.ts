@@ -10,6 +10,8 @@ import { PacoteTipoServico } from '../../models/pacote-tipo-servico.model';
 import { Mercado } from '../../models/supermercado.model';
 import { AlcanceComponent } from '../../components/alcance/alcance';
 
+import { CarrinhoService } from '../../services/carrinho.service';
+
 @IonicPage()
 @Component({
   selector: 'page-pesquisa',
@@ -38,7 +40,8 @@ export class PesquisaPage {
     private alcanceService: AlcanceService,
     private supermercadoService: SupermercadoService,
     private filtrosService: Filtros,
-    public popoverCtrl: PopoverController) {
+    public popoverCtrl: PopoverController,
+    private carrinhoItemService:CarrinhoService) {
   }
 
   //Impedir que a página abra sem o alcance settado
@@ -163,6 +166,12 @@ export class PesquisaPage {
       ]
     })
     alert.present()
+  }
+
+  
+  //ao sair da tela de produtos, os itens seão adicionados no localStorage
+  ionViewDidLeave(){
+    this.carrinhoItemService.setLocalSacola()
   }
 
 }

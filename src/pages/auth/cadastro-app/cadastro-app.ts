@@ -37,6 +37,7 @@ export class CadastroAppPage {
     this.cadastroForm = new FormGroup({
       nome: new FormControl('', [Validators.required, Validators.minLength(3)]),
       sexo: new FormControl('', [Validators.required]),
+      cpf: new FormControl('', [Validators.required, Validators.minLength(14), Validators.maxLength(14)] ),
       data: new FormControl({ value: '', disabled: true }, [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.pattern(this.emailPattern)]),
       senha: new FormControl('', [Validators.required, Validators.minLength(3)]),

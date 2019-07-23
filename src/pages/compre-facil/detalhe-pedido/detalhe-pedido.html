@@ -1,4 +1,4 @@
-<ion-content padding>
+  <ion-content padding>
   <ion-row>
     <ion-col col-12 class="close-position">
       <ion-icon name="close" (click)="onClose()"></ion-icon>
@@ -19,7 +19,7 @@
       *ngFor="let produto of produtos ; index as i">
       <p class="text-inline">{{i+ 1}} - {{produto.produto.nomeProduto}},
         {{produto.produto.marcaProduto}} - {{produto.produto.caracteristicaProduto}},
-        {{produto.produto.quantidadeProduto}} - Quantidade: {{produto.quantidade}} - Valor total:
+        {{produto.produto.quantidadeProduto}} - Quantidade: {{produto.quantidade}} - Valor total:{{getValorTotalPorProduto(produto) | currency:'BRL'}}
       </p>
     </ion-col>
   </ion-row>

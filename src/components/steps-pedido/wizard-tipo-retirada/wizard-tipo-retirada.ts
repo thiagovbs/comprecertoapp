@@ -54,6 +54,7 @@ export class WizardTipoRetiradaComponent {
     popover.onDidDismiss(data => {
       this.infoTipoRetiradaPedido.emit(data);
       data ? this.isEnderecoCompleto = true : this.isEnderecoCompleto = false;
+      this.isDataHorarioPedido = false
       console.log(data);
     });
   }

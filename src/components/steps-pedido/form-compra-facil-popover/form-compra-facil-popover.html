@@ -20,8 +20,6 @@
       </ion-col>
       <ion-col col-12>
         <ion-item class="bg-transparent size">
-            
-
           <ion-input type="tel" name="celular" style="height: 30px;" formControlName="celular" autocomplete="off"
             placeholder="Celular" [brmasker]="{mask:'(00)00000-0000', len:14}" maxlength="14"></ion-input>
         </ion-item>
@@ -57,21 +55,22 @@
       </ion-col>
       <ion-col col-5>
         <ion-item class="bg-transparent size">
-          <ion-input type="text" name="cidade" formControlName="cidade" placeholder="Cidade"
-            style="height: 30px;" [value]="nomeCidade" disabled></ion-input>
+          <ion-input type="text" name="cidade" formControlName="cidade" placeholder="Cidade" style="height: 30px;"
+            [value]="nomeCidade" disabled></ion-input>
         </ion-item>
       </ion-col>
       <ion-col col-2>
         <ion-item class="bg-transparent size">
           <ion-input type="text" name="estado" formControlName="estado" autocomplete="off" style="height: 30px;"
-            placeholder="UF" maxlength="2" [value]="nomeEstado" disabled ></ion-input>
+            placeholder="UF" maxlength="2" [value]="nomeEstado" disabled></ion-input>
         </ion-item>
       </ion-col>
-      <ion-row>
-        <ion-col col-12>
-          <button ion-button clear class="btn-enviar" color="secondary" [disabled]="!enderecoForm.valid">Salvar</button>
-        </ion-col>
-      </ion-row>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12 text-center margin-top >
+        <button ion-button clear class="btn-enviar primary-bg" block color="secondary"
+          [disabled]="!enderecoForm.valid">Salvar</button>
+      </ion-col>
     </ion-row>
   </form>
 </ion-grid>

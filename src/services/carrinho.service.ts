@@ -19,7 +19,7 @@ export class CarrinhoService {
 
     //Pegar o usuário e sacola ativo no localstorage
     getLocaSacola() {
-        let dataAtual = new Date().getTime();
+        let dataAtual = new Date().getDate()
         let sacola = localStorage.getItem(STORAGE_KEYS.localSacola);
         if (sacola === null) {
             return null
@@ -27,9 +27,11 @@ export class CarrinhoService {
             this.items = JSON.parse(sacola);
             //Exclui produto na sacola caso a dt de validade seja ultrapassada
             this.items.map((item: CarrinhoItem) => {
-                let dtValidade = new Date(item.produto.dtValidadeMercadoProduto).getTime()
-
-                if (dataAtual >= dtValidade) {
+                let dtValidade = new Date(item.produto.dtValidadeMercadoProduto).getDate()
+                
+                console.log("data validade: " +dtValidade)
+                console.log("Data atual " +dataAtual)
+                if (dataAtual > dtValidade) {
                     this.items.splice(this.items.indexOf(item), 1);
                     this.setLocalSacola()
                 }
@@ -110,6 +112,7 @@ export class CarrinhoService {
 
     getItemsCarrinho() {
         if (this.items) {
+            console.log(this.items)
             this.compraFacilService.setMercadoDTO(this.items);
         }
     }

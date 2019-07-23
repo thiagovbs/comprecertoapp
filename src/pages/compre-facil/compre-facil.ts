@@ -4,7 +4,7 @@ import { PopoverInfoCompraFacilComponent } from '../../components/popover-info-c
 import { FormCompraFacilPopoverComponent } from '../../components/steps-pedido/form-compra-facil-popover/form-compra-facil-popover';
 
 import { CarrinhoItem } from '../../models/carrinho-item.model';
-import { SacolaMercados, SacolaMercadoDTO } from '../../models/SacolaMercados.model';
+import { SacolaMercados } from '../../models/SacolaMercados.model';
 import { CompraFacilService } from '../../services/compra-facil.service';
 import { API_CONFIG } from '../../config/api.config';
 import { CarrinhoService } from '../../services/carrinho.service';
@@ -18,11 +18,12 @@ import { CarrinhoService } from '../../services/carrinho.service';
 export class CompreFacilPage {
 
   valorTotal: number;
-  produtos: CarrinhoItem[];
-  mercadosSacola: SacolaMercados[];
+  produtos: CarrinhoItem[] = [];
+  mercadosSacola: SacolaMercados[] = [];
   foundItem: SacolaMercados;
   bucketS3: string;
   qntTotal: number = 0;
+  dtValidade:Date;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -56,18 +57,16 @@ export class CompreFacilPage {
 
   ionViewDidLoad() {
     this.bucketS3 = API_CONFIG.s3Url;
-   
     this.produtos = this.carrinhoService.items;
-    
+   
      //retorna o valor total da pagina sacola
     this.valorTotal = this.carrinhoService.total();
-
-    
+  
     //produtos do carrinho para o serviço de compre-facil
     this.carrinhoService.getItemsCarrinho();
     //serviço que modifica o carrinho para o modelo de SacolaMercados
     this.mercadosSacola = this.compraFacilService.sacolaMercados;
-    
+    console.log(this.mercadosSacola)
   }
 
   //popover mostrar a msg de politicas do compre facil
@@ -95,7 +94,6 @@ export class CompreFacilPage {
   }
 
   onFormPedido(mercado:SacolaMercados){
-    
     let popover = this.modalCtrl.create('DynamicStepsPage', { 
       pedido: mercado,
       valorTotal:this.valorTotal 
@@ -110,6 +108,13 @@ export class CompreFacilPage {
       valorTotal:this.valorTotal 
     });
     popover.present();
+  }
+
+  getDataValidade(mercado:SacolaMercados){
+    mercado.carrinhoItem.map(resp=>{
+      this.dtValidade = resp.produto.dtValidadeMercadoProduto; 
+    })
+    return this.dtValidade;
   }
 }
 

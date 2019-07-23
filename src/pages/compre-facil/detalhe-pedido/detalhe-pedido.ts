@@ -33,4 +33,7 @@ export class DetalhePedidoPage {
     this.viewCtrl.dismiss()
   }
 
+  getValorTotalPorProduto(produto:CarrinhoItem):number{
+    return  produto.produto.precoMercadoProduto * produto.quantidade;  
+ }
 }

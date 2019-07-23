@@ -6,6 +6,18 @@
   </ion-row>
   <form [formGroup]="dataHoraform" (ngSubmit)="dataHoraSubmit()">
     <ion-row novalidate>
+      <ion-col col-12>
+        <ion-item class="bg-transparent size">
+          <ion-input type="text" name="cpf" style="height: 30px;" formControlName="cpf" autocomplete="off"
+            placeholder="CPF"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col col-12>
+        <ion-item class="bg-transparent size">
+          <ion-input type="tel" name="celular" style="height: 30px;" formControlName="celular" autocomplete="off"
+            placeholder="Celular" [brmasker]="{mask:'(00)00000-0000', len:14}" maxlength="14"></ion-input>
+        </ion-item>
+      </ion-col>
       <ion-col col-12 style="margin-top: 5px;">
         <ion-item class="bg-transparent size">
           <ion-select type="text" formControlName="dataHora" placeholder="Hora de retirada">
@@ -16,7 +28,7 @@
     </ion-row>
     <ion-row>
       <ion-col col-12>
-        <button ion-button clear class="btn-enviar" color="secondary" [disabled]="!dataHoraform.valid">Salvar</button>
+        <button ion-button clear class="btn-enviar primary-bg" block [disabled]="!dataHoraform.valid">Salvar</button>
       </ion-col>
     </ion-row>
   </form>

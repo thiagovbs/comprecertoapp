@@ -9,7 +9,6 @@ import { MercadoLocalidade } from '../../../../models/mercadoLocalidade.model';
 import { PedidoProduto } from '../../../../models/pedidoProduto.model';
 import { Produto } from '../../../../models/Produto.model';
 import { CompraFacilService } from '../../../../services/compra-facil.service';
-import { CarrinhoItem } from '../../../../models/carrinho-item.model';
 
 
 @IonicPage()
@@ -33,6 +32,7 @@ export class DynamicStepsPage {
   infoMercado: any;
   isLastStep: boolean = false
   produtosPedido: any
+  celularRetirada:any
 
   constructor(public navCtrl: NavController,
     public alertCtrl: AlertController,
@@ -81,16 +81,7 @@ export class DynamicStepsPage {
 
 
   onFinish() {
-    console.log(this.pagamento)
     this.montarPedido()
-
-    this.alertCtrl.create({
-      message: 'Wizard Finished!!',
-      title: 'Congrats!!',
-      buttons: [{
-        text: 'Ok'
-      }]
-    }).present();
   }
 
   toggleCondition(_condition) {
@@ -130,7 +121,6 @@ export class DynamicStepsPage {
   aoSubstituir(evento) {
     this.stepCondition = true
     this.substituicao = evento    
-    //this.compraFacilService.setEntregaOuRetirada(evento);
     this.currentStep = 2
   }
 
@@ -149,10 +139,13 @@ export class DynamicStepsPage {
 
   aoMudarTipoDataHora(evento) {
     if (evento) {
+      console.log(evento)
       this.stepCondition = true;
-      this.dataHoraPedidoRetirada = evento
+      this.dataHoraPedidoRetirada = evento.dataHora
+      this.celularRetirada = evento.celular
       this.currentStep = 3
       this.compraFacilService.setEntregaOuRetirada('R');
+      
     } else {
       this.dataHoraPedidoRetirada = undefined
       this.stepCondition = false;
@@ -180,15 +173,15 @@ export class DynamicStepsPage {
     pedido.usuario = this.userService.getLocalUser()
     pedido.usuario.permissoes = []
     pedido.pedidoProdutos = [];
-    console.log(this.enderecoPedido)
+    
     pedido.celular = this.enderecoPedido.celular;
     pedido.substituicao= this.substituicao;
-
-    if (this.enderecoPedido) {
+    if (this.enderecoPedido.endereco) {
       pedido.entrega = "E";
       pedido.endereco = this.enderecoPedido.endereco + " " +this.enderecoPedido.complemento + " " + this.enderecoPedido.bairro + " " + this.enderecoPedido.cidade + " " + this.enderecoPedido.estado;
       pedido.valorFrete = 0;      
-    } else {    
+    } else {
+      pedido.celular = this.celularRetirada    
       pedido.entrega = "R";
       pedido.dataHoraRetirada = this.dataHoraPedidoRetirada
     }
@@ -216,6 +209,7 @@ export class DynamicStepsPage {
     }
     console.log(pedido)
     this.compraFacilService.postPedido(pedido).subscribe(resp => {
+      this.successAlert()
       console.log(resp)
     }, erro => {
       console.log(erro)
@@ -234,6 +228,17 @@ export class DynamicStepsPage {
       ]
     })
     alert.present()
+  }
+
+  successAlert(){
+    this.alertCtrl.create({
+      message: 'Seu pedido foi finalizado!!',
+      title: 'Parabéns!!',
+      cssClass: 'AlertCompraFacil',
+      buttons: [{
+        text: 'Ok'
+      }]
+    },).present();
   }
 
 }

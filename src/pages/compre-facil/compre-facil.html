@@ -22,7 +22,7 @@
       <ion-grid style="padding:0 !important" >
         <ion-row>
           <ion-col col-12 class="pull-left" style="margin-top:-10px;margin-left: 5px;">
-            <p class="cl-data">Válido até <span></span>24/04/2019</p>
+            <p class="cl-data">Válido até:  <span></span>{{getDataValidade(mercado) | dateFormat}}</p>
           </ion-col>
         </ion-row>
         <ion-row style="margin-left: -5px !important; margin-top:-8px !important">
@@ -33,7 +33,7 @@
             </ion-thumbnail>
           </ion-col>
 
-          <ion-col col-6 style="margin-top:6px;">
+          <ion-col col-6 style="margin-top:10px;">
             <ion-row>
               <ion-col col-2>
                 <img src="assets/icon/prancheta.svg" height="15" alt="">
