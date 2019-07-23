@@ -10,6 +10,7 @@ export interface MercadoProduto{
     valorFrete?: number,
     valorMinimo?: number,
     horarioMaximo?:Time,
+    horarioMaximoEntrega?:Time,
     idMercadoLocalidade:number,
     idMercadoProduto:number,
     idProduto:number,

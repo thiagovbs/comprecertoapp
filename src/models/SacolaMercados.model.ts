@@ -19,6 +19,7 @@ export interface SacolaMercadoDTO {
     valorFrete: number,
     valorMinimo: number,
     horarioMaximo:Time,
+    horarioMaximoEntrega?:Time;
 }
 
 

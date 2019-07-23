@@ -31,6 +31,7 @@ export class CompraFacilService {
             this.sacolaMercadoDTO.nomeMercado = carrinho.produto.nomeFantasiaMercado;
             this.sacolaMercadoDTO.imagemMercado = carrinho.produto.mercadoImagemUrl
             this.sacolaMercadoDTO.horarioMaximo = carrinho.produto.horarioMaximo
+            this.sacolaMercadoDTO.horarioMaximoEntrega = carrinho.produto.horarioMaximoEntrega
             this.sacolaMercadoDTO.valorFrete = carrinho.produto.valorFrete
             this.sacolaMercadoDTO.valorMinimo = carrinho.produto.valorMinimo
         

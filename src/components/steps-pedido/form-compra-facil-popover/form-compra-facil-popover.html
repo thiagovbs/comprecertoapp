@@ -1,6 +1,9 @@
 <ion-grid>
   <form novalidate [formGroup]="enderecoForm" (ngSubmit)="SubmitForm()">
     <ion-row>
+     <!--  <p class="uppercase-cl">{{pedidoMercado.sacolaMercado.horarioMaximoEntrega}}</p> -->
+    </ion-row>
+    <ion-row>
       <ion-col col-12 style="width: 95%; padding-left: 15px;">
         <p class="uppercase-cl">Informe os dados gerais:</p>
       </ion-col>
@@ -14,8 +17,7 @@
       </ion-col>
       <ion-col col-12>
         <ion-item class="bg-transparent size">
-          <ion-input type="text" name="cpf" style="height: 30px;" formControlName="cpf" autocomplete="off"
-            placeholder="CPF"></ion-input>
+          <ion-input type="text" name="cpf" style="height: 30px;" formControlName="cpf" autocomplete="off" placeholder="CPF"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col col-12>
@@ -40,8 +42,8 @@
       </ion-col>
       <ion-col col-8>
         <ion-item class="bg-transparent size">
-          <ion-input type="text" name="complemento" style="height: 30px;" formControlName="complemento"
-            autocomplete="off" placeholder="Complemento"></ion-input>
+          <ion-input type="text" name="complemento" style="height: 30px;" formControlName="complemento" autocomplete="off"
+            placeholder="Complemento"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -67,9 +69,8 @@
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col col-12 text-center margin-top >
-        <button ion-button clear class="btn-enviar primary-bg" block color="secondary"
-          [disabled]="!enderecoForm.valid">Salvar</button>
+      <ion-col col-12 text-center margin-top>
+        <button ion-button clear class="btn-enviar primary-bg" block color="secondary" [disabled]="!enderecoForm.valid">Salvar</button>
       </ion-col>
     </ion-row>
   </form>
