@@ -1,9 +1,10 @@
 import { Component, ContentChild } from '@angular/core';
 import { FormGroup, FormControlName, FormBuilder, Validators, FormControl } from '@angular/forms';
 
-import { ViewController } from 'ionic-angular';
+import { ViewController, NavParams } from 'ionic-angular';
 import { UsuarioService } from '../../../services/usuario.service';
 import { AlcanceService } from '../../../services/alcance.service';
+import { SacolaMercados } from '../../../models/SacolaMercados.model';
 
 @Component({
   selector: 'form-compra-facil-popover',
@@ -14,6 +15,7 @@ export class FormCompraFacilPopoverComponent {
   enderecoForm: FormGroup
   usuarioNome: string;
   nomeCidade: string;
+  pedidoMercado: SacolaMercados={} as SacolaMercados
   nomeEstado: string;
   bairro: string;
   @ContentChild(FormControlName) control: FormControlName;
@@ -22,6 +24,7 @@ export class FormCompraFacilPopoverComponent {
   constructor(
     public viewCtrl: ViewController,
     private localUser: UsuarioService,
+    private navParams: NavParams,
     private localAlcance: AlcanceService) {
 
     this.enderecoForm = new FormGroup({
@@ -44,6 +47,10 @@ export class FormCompraFacilPopoverComponent {
 
   ionViewDidLoad() {
     this.usuarioNome = this.localUser.getLocalUser().nome;
+    this.pedidoMercado = this.navParams.get('pedidosMercado');
+    console.log(this.pedidoMercado)
+/* 
+    this.pedidoMercado.sacolaMercado.horarioMaximoEntrega */
   }
 
   SubmitForm() {

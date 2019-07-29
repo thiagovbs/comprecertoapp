@@ -30,12 +30,12 @@ export class CompraFacilService {
             this.sacolaMercadoDTO.idMercado = carrinho.produto.idMercado;
             this.sacolaMercadoDTO.idMercadoLocalidade = carrinho.produto.idMercadoLocalidade;
             this.sacolaMercadoDTO.nomeMercado = carrinho.produto.nomeFantasiaMercado;
-            this.sacolaMercadoDTO.imagemMercado = carrinho.produto.mercadoImagemUrl;
-            this.sacolaMercadoDTO.horarioMaximo = carrinho.produto.horarioMaximo;
-            this.sacolaMercadoDTO.valorFrete = carrinho.produto.valorFrete;
-            this.sacolaMercadoDTO.valorMinimo = carrinho.produto.valorMinimo;
-            this.sacolaMercadoDTO.entrega = carrinho.produto.entrega;
-
+            this.sacolaMercadoDTO.imagemMercado = carrinho.produto.mercadoImagemUrl
+            this.sacolaMercadoDTO.horarioMaximo = carrinho.produto.horarioMaximo
+            this.sacolaMercadoDTO.horarioMaximoEntrega = carrinho.produto.horarioMaximoEntrega
+            this.sacolaMercadoDTO.valorFrete = carrinho.produto.valorFrete
+            this.sacolaMercadoDTO.valorMinimo = carrinho.produto.valorMinimo
+        
             let foundMercado: SacolaMercados = this.sacolaMercados.find((carditem: SacolaMercados) => carditem.sacolaMercado.idMercadoLocalidade === carrinho.produto.idMercadoLocalidade);
             if (foundMercado) {
                 foundMercado.sacolaMercado = this.sacolaMercadoDTO;
