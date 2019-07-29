@@ -34,6 +34,7 @@ export class PopoverWizardDataHoraComponent {
 
   ionViewDidLoad() {
     this.pedidoMercado = this.navParams.get('pedidosMercado');
+    console.log(this.pedidoMercado)
     this.getDataHoraRetirada()
   }
 
@@ -44,8 +45,8 @@ export class PopoverWizardDataHoraComponent {
   getDataHoraRetirada() {
     this.datas = [];
     ////////////////////////////////
-    this.pedidoMercado.sacolaMercado.horarioMaximo
-    let horarioMax: String = String("16:00");
+    
+    let horarioMax: String = String(this.pedidoMercado.sacolaMercado.horarioMaximo);
     let hour = (horarioMax.split(':'))[0]
     let min = (horarioMax.split(':'))[1]
 

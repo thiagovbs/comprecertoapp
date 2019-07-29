@@ -10,55 +10,60 @@
         <button ion-button (click)="showInfoCompraFacil()" class="back-button-md">
           <ion-icon class="search-icon" name="ios-information-circle-outline"></ion-icon>
         </button>
-        
+
       </ion-buttons>
     </ion-navbar>
   </ion-header>
 </ion-header>
 
 <ion-content class="cart">
-  <ion-list class="list-full-border" >
+  <ion-list class="list-full-border">
     <ion-card class="card-no-shadow card-sheap-buy" *ngFor="let mercado of mercadosSacola">
-      <ion-grid style="padding:0 !important" >
+      <ion-grid style="padding:0 !important">
         <ion-row>
-          <ion-col col-12 class="pull-left" style="margin-top:-10px;margin-left: 5px;">
-            <p class="cl-data">Válido até:  <span></span>{{getDataValidade(mercado) | dateFormat}}</p>
+          <ion-col col-12 class="pull-left" style="margin-top:-10px;">
+            <p class="cl-data">Válido até: <span></span>{{getDataValidade(mercado) | dateFormat}}</p>
           </ion-col>
         </ion-row>
-        <ion-row style="margin-left: -5px !important; margin-top:-8px !important">
+        <ion-row>
           <ion-col col-3>
             <ion-thumbnail>
-              <img class="thumb-image-compra-sacola" [src]="mercado.sacolaMercado.imagemMercado"
-                alt="" height="20" />
+              <img class="thumb-image-compra-sacola" [src]="mercado.sacolaMercado.imagemMercado" alt="" height="20" />
             </ion-thumbnail>
           </ion-col>
 
-          <ion-col col-6 style="margin-top:10px;">
+          <ion-col col-8 style="margin-top:10px;">
             <ion-row>
-              <ion-col col-2>
-                <img src="assets/icon/prancheta.svg" height="15" alt="">
-                <img src="assets/icon/Calculadora-08.svg" height="15" alt="" style="margin-top: 6px">
-                <img src="assets/imgs/Icon-entrega.svg" height="15" alt="" style="margin-top: 4px">
+              <ion-col col-2 no-padding>
+                <img src="assets/icon/prancheta.svg" height="15" alt="" style="margin-top: -2px">
+                <img src="assets/icon/Calculadora-08.svg" height="15" alt="" style="margin-top: 8px">
+                <img src="assets/imgs/Icon-entrega.svg" height="18" alt="" style="margin-top: 5px"
+                  *ngIf="mercado.sacolaMercado.entrega ==='E'">
+                <img src="assets/imgs/Icon-Retirada.svg" height="15" alt="" style="margin-top: 8px"
+                  *ngIf="mercado.sacolaMercado.entrega ==='R'">
               </ion-col>
-              <ion-col col-10 class="pull-left">
-                <p ion-text class="main-text" style="margin-top:5px;">Produtos: <span style="color: #00836D">{{mercado.carrinhoItem.length}}</span></p>
-                <p ion-text class="main-text" style="margin-top:5px;">Valor Total: <span style="color: #00836D">{{setValorTotal(mercado) | currency:'BRL'}}</span> </p>
-                <p ion-text class="main-text" style="margin-top:7px;">Entregue pelo supermercado</p>
+              <ion-col col-10 text-left style="margin-left:-8px;">
+                <p ion-text class="main-text" style="margin-top:-3px;">Produtos: <span
+                    style="color: #00836D">{{mercado.carrinhoItem.length}}</span></p>
+                <p ion-text class="main-text" style="margin-top:8px;">Valor Total: <span
+                    style="color: #00836D">{{setValorTotal(mercado) | currency:'BRL'}}</span> </p>
+                <p ion-text class="main-text" style="margin-top:7px;" *ngIf="mercado.sacolaMercado.entrega ==='E'">
+                  Entregue pelo supermercado</p>
+                <p ion-text class="main-text" style="margin-top:7px;" *ngIf="mercado.sacolaMercado.entrega ==='R'">
+                  Retirada no supermercado</p>
               </ion-col>
             </ion-row>
           </ion-col>
         </ion-row>
-        <ion-row style="margin-top:15px; ">
-          <div  class="pull-to-left">
+        <ion-row style="margin-top:5px; ">
+          <ion-col col-12 text-right >
             <a (click)="onDetalhePedido(mercado)">
-              <p class="main-text" style="color:#00836D">Detalhes</p>
+              <p class="main-text text-inline" style="color:#00836D">Detalhes</p>
             </a>
-          </div>
-          <div  class="colum-2">
             <a (click)="onFormPedido(mercado)">
-              <p class="main-text" style="color:#00836D">Enviar Pedido</p>
+              <p class="main-text text-inline" style="color:#00836D">Enviar Pedido</p>
             </a>
-          </div>
+          </ion-col>
         </ion-row>
       </ion-grid>
     </ion-card>

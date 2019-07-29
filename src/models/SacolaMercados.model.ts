@@ -1,5 +1,3 @@
-
-import { MercadoProduto } from "./mercado-produto.model";
 import { CarrinhoItem } from "./carrinho-item.model";
 import { Time } from "@angular/common";
 
@@ -18,7 +16,8 @@ export interface SacolaMercadoDTO {
     imagemMercado?:string,
     valorFrete: number,
     valorMinimo: number,
-    horarioMaximo:Time,
+    horarioMaximo:any,
+    entrega:any,
 }
 
 

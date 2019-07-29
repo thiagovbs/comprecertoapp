@@ -20,8 +20,9 @@ export class CompraFacilService {
     constructor(private http: HttpClient, private usuarioService: UsuarioService) { }
 
     enderecoUsuarioPedido: any;
+    dataEntradaPedido:any
     entregaOuRetirada: any;
-    formadePagamento:any
+    formadePagamento: any
 
     //settando os valores dentro do model produtos por mercado
     setMercadoDTO(item: CarrinhoItem[]) {
@@ -29,11 +30,12 @@ export class CompraFacilService {
             this.sacolaMercadoDTO.idMercado = carrinho.produto.idMercado;
             this.sacolaMercadoDTO.idMercadoLocalidade = carrinho.produto.idMercadoLocalidade;
             this.sacolaMercadoDTO.nomeMercado = carrinho.produto.nomeFantasiaMercado;
-            this.sacolaMercadoDTO.imagemMercado = carrinho.produto.mercadoImagemUrl
-            this.sacolaMercadoDTO.horarioMaximo = carrinho.produto.horarioMaximo
-            this.sacolaMercadoDTO.valorFrete = carrinho.produto.valorFrete
-            this.sacolaMercadoDTO.valorMinimo = carrinho.produto.valorMinimo
-        
+            this.sacolaMercadoDTO.imagemMercado = carrinho.produto.mercadoImagemUrl;
+            this.sacolaMercadoDTO.horarioMaximo = carrinho.produto.horarioMaximo;
+            this.sacolaMercadoDTO.valorFrete = carrinho.produto.valorFrete;
+            this.sacolaMercadoDTO.valorMinimo = carrinho.produto.valorMinimo;
+            this.sacolaMercadoDTO.entrega = carrinho.produto.entrega;
+
             let foundMercado: SacolaMercados = this.sacolaMercados.find((carditem: SacolaMercados) => carditem.sacolaMercado.idMercadoLocalidade === carrinho.produto.idMercadoLocalidade);
             if (foundMercado) {
                 foundMercado.sacolaMercado = this.sacolaMercadoDTO;
@@ -70,10 +72,6 @@ export class CompraFacilService {
     }
 
 
-    getPedidos() {
-        let idUsuario = this.usuarioService.getLocalUser().idUsuario;
-        return this.http.get<any>(`${API_CONFIG.baseUrl}/pedido/usuario/${idUsuario}`)
-      }
 
 
     setEnderecoPedidoUsuario(endereco: any) {
@@ -86,6 +84,17 @@ export class CompraFacilService {
         }
     }
 
+    
+    setDataRetiradaPedidoUsuario(dataEntrada: any) {
+        this.dataEntradaPedido = dataEntrada;
+    }
+
+    getDataRetiradaPedidoUsuario() {
+        if(this.dataEntradaPedido){
+            return this.dataEntradaPedido;
+        }
+    }
+
     setEntregaOuRetirada(entregaOuRetirada: any) {
         this.entregaOuRetirada = entregaOuRetirada
     }
@@ -95,13 +104,14 @@ export class CompraFacilService {
             return this.entregaOuRetirada;
         }
     }
+    
 
-    setPagamento(evento){
+    setPagamento(evento) {
         this.formadePagamento = evento
     }
 
-    getPagamento(){
-        if(this.formadePagamento){
+    getPagamento() {
+        if (this.formadePagamento) {
             return this.formadePagamento;
         }
     }

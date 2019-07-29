@@ -9,62 +9,75 @@
       <h2 class="subtitle">Informações de Entrega/Retirada </h2>
     </ion-col>
     <ion-col col-12 text-left class="padding-left-column side img-center" style="margin-top:-10px;">
-      <p class="subtitle"> - {{entregaOuRetirada(compraFacilService.getEntregaOuRetirada())}}</p>
+      <p class="subtitle">{{entregaOuRetirada(compraFacilService.getEntregaOuRetirada())}}</p>
     </ion-col>
+
+    <!-- ITEMS DE RETIRADA -->
+    <ion-col col-12 text-left class="padding-left-column side"
+      *ngIf="compraFacilService.getEntregaOuRetirada() === 'R'">
+      <label for="Horario_entrega" class="text-inline">Horario Retirada:</label>
+      <p class="text-inline">{{compraFacilService.getDataRetiradaPedidoUsuario()| date: 'dd/MM/yyyy - H:mm'}}</p>
+    </ion-col>
+    <ion-col col-10 text-left class="padding-left-column side"
+      *ngIf="compraFacilService.getEntregaOuRetirada() === 'R'">
+      <label for="Horario_entrega" class="text-inline">Local Retirada:</label>
+      <p class="text-inline">Rua Conde de Bonfim, 545 - 803</p>
+    </ion-col>
+    <!--FIM ITEMS DE RETIRADA -->
+
+     <!-- ITEMS DE ENTREGA EM DOMICILIO -->
+     <ion-col col-8 text-left class="padding-left-column side" *ngIf="compraFacilService.getEntregaOuRetirada() === 'E'">
+        <label for="endereco" class="text-inline">Endereco:</label>
+        <p class="text-inline">{{compraFacilService.getEnderecoPedidoUsuario().endereco}}</p>
+      </ion-col>
+      <ion-col col-4 text-right class="padding-right-column side"
+        *ngIf="compraFacilService.getEntregaOuRetirada() === 'E'">
+        <p class="text-inline">{{compraFacilService.getEnderecoPedidoUsuario().numero}} -
+          {{compraFacilService.getEnderecoPedidoUsuario().complemento}}</p>
+      </ion-col>
+      <ion-col col-10 text-left class="padding-left-column side"
+        *ngIf="compraFacilService.getEntregaOuRetirada() === 'E'">
+        <p class="text-inline">{{compraFacilService.getEnderecoPedidoUsuario().bairro}} ,</p>
+        <p class="text-inline">{{compraFacilService.getEnderecoPedidoUsuario().cidade}}</p>
+      </ion-col>
+      <ion-col col-2 text-right class="padding-right-column side"
+        *ngIf="compraFacilService.getEntregaOuRetirada() === 'E'">
+        <p class="text-inline">{{this.compraFacilService.getEnderecoPedidoUsuario().estado}}</p>
+      </ion-col>
+      <!-- FIM ITEMS DE ENTREGA EM DOMICILIO -->
+
     <ion-col col-12 class="border-type img-center">
       <h2 class="subtitle">Informações Pessoais</h2>
     </ion-col>
-    <ion-col col-6 text-left class="padding-left-column side">
+    <ion-col col-12 text-left class="padding-left-column side">
       <label for="nome" class="text-inline">Nome:</label>
       <p class="text-inline">{{usuarioService.getLocalUser().nome}}</p>
     </ion-col>
-    <ion-col col-6 text-right class="padding-right-column side">
+    <ion-col col-6 text-left class="padding-left-column side">
       <label for="cpf" class="text-inline">CPF:</label>
       <p class="text-inline">139-791-307-03</p>
     </ion-col>
-
-    <ion-col col-8 text-left class="padding-left-column side" *ngIf="compraFacilService.getEntregaOuRetirada() === 'E'">
-      <label for="endereco" class="text-inline">Endereco:</label>
-      <p class="text-inline">{{compraFacilService.getEnderecoPedidoUsuario().endereco}}</p>
+    <ion-col col-6 text-right class="padding-right-column side">
+      <label for="endereco" class="text-inline">Telefone:</label>
+      <p class="text-inline">{{celular}}</p>
     </ion-col>
-    <ion-col col-4 text-right class="padding-right-column side"
-      *ngIf="compraFacilService.getEntregaOuRetirada() === 'E'">
-      <p class="text-inline">{{compraFacilService.getEnderecoPedidoUsuario().numero}} -
-        {{compraFacilService.getEnderecoPedidoUsuario().complemento}}</p>
-    </ion-col>
-    <ion-col col-10 text-left class="padding-left-column side"
-      *ngIf="compraFacilService.getEntregaOuRetirada() === 'E'">
-      <p class="text-inline">{{compraFacilService.getEnderecoPedidoUsuario().bairro}} ,</p>
-      <p class="text-inline">{{compraFacilService.getEnderecoPedidoUsuario().cidade}}</p>
-    </ion-col>
-    <ion-col col-2 text-right class="padding-right-column side"
-      *ngIf="compraFacilService.getEntregaOuRetirada() === 'E'">
-      <p class="text-inline">{{this.compraFacilService.getEnderecoPedidoUsuario().estado}}</p>
-    </ion-col>
-
+    
+   
     <ion-col col-12 class="border-type img-center">
       <h2 class="subtitle">Informações de Compra</h2>
     </ion-col>
-    <ion-scroll scrollY="true" style=" width:100%;height: 80%;" class="padding-left-column side-produto  padding-right-column">
-      <div text-left
-        *ngFor="let produto of produtos ; index as i">
+    <ion-scroll scrollY="true" class=" side-produto scroll-lista-produto">
+      <div text-left *ngFor="let produto of produtos ; index as i">
         <p class="text-inline">{{i+ 1}} - {{produto.produto.nomeProduto}},
           {{produto.produto.marcaProduto}} - {{produto.produto.caracteristicaProduto}},
           {{produto.produto.quantidadeProduto}} - Quantidade: {{produto.quantidade}} - Valor total:
           {{getValorTotalPorProduto(produto) | currency:'BRL'}}</p>
-        </div>
-        <div text-left
-        *ngFor="let produto of produtos ; index as i">
-        <p class="text-inline">{{i+ 1}} - {{produto.produto.nomeProduto}},
-          {{produto.produto.marcaProduto}} - {{produto.produto.caracteristicaProduto}},
-          {{produto.produto.quantidadeProduto}} - Quantidade: {{produto.quantidade}} - Valor total:
-          {{getValorTotalPorProduto(produto) | currency:'BRL'}}</p>
-        </div>
+      </div>
     </ion-scroll>
-    <ion-col col-12 class="border-type img-center">
+    <ion-col col-12 class="border-type img-center" style="margin-top:-15px;">
       <h2 class="subtitle">Forma de Pagamento</h2>
     </ion-col>
-    <ion-col col-12 text-left class="padding-left-column side" style="margin-top:-10px;">
+    <ion-col col-12 text-left class="padding-left-column side">
       <p class="text-inline">- {{tipoPagamento(compraFacilService.getPagamento().tipo)}}</p>
     </ion-col>
   </ion-row>

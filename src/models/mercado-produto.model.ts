@@ -2,6 +2,7 @@ import { Time } from "@angular/common";
 
 export interface MercadoProduto{
     caracteristicaProduto:string,
+    entrega:any,
     dtValidadeMercadoProduto:Date,
     fDestaqueMercadoProduto:boolean,
     mercadoImagemUrl?:string,

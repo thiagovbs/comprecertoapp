@@ -92,7 +92,7 @@ export class CadastroAppPage {
     let email_form: string = this.cadastroForm.controls['email'].value;
     email_form = email_form.trim()
     let senha_form = this.cadastroForm.controls['senha'].value;
-
+    let cpf_form  = this.cadastroForm.controls['cpf'].value;
 
     this.permissao = {
       idPermissao:3,
@@ -108,6 +108,7 @@ export class CadastroAppPage {
       dtNascimento: milliseconds,
       senha: senha_form,
       sexo: sexo_form,
+      cpf:cpf_form,
       permissoes: [this.permissao]
     }
     console.log(this.usuario);

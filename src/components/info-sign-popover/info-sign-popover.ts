@@ -18,7 +18,7 @@ export class InfoSignPopoverComponent {
   @ContentChild(FormControlName) control: FormControlName;
 
   user: Usuario;
-  loginUser:UserLogin;
+  loginUser: UserLogin;
   faceId: string;
   faceEmail: string;
   faceNome: string;
@@ -43,8 +43,9 @@ export class InfoSignPopoverComponent {
   ) {
 
     this.cadastroPopUpForm = new FormGroup({
-      sexo:  new FormControl ('', [Validators.required]),
-      data:  new FormControl ({ value: '', disabled: true }, [Validators.required])
+      sexo: new FormControl('', [Validators.required]),
+      data: new FormControl({ value: '', disabled: true }, [Validators.required]),
+      cpf: new FormControl({ value: '' }, [Validators.required, Validators.minLength(14)]),
     })
 
     //Informação não nula
@@ -58,7 +59,7 @@ export class InfoSignPopoverComponent {
     this.faceId = face.password;
     this.faceNome = face.nome;
     this.faceEmail = face.username;
-    
+
   }
 
   onBirthday() {
@@ -67,11 +68,8 @@ export class InfoSignPopoverComponent {
       mode: 'date',
       androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_LIGHT
     }).then(date => {
-
       this.dtNascimento = date.toLocaleDateString();
-
     }, err => console.log('Error occurred while getting date: ', err));
-    console.log(this.cadastroPopUpForm.controls['data'].value);
   }
 
 
@@ -80,11 +78,12 @@ export class InfoSignPopoverComponent {
 
     let sexo_form = this.cadastroPopUpForm.controls['sexo'].value;
     let dtNascimento_form = this.cadastroPopUpForm.controls['data'].value;
+    let cpf_form = this.cadastroPopUpForm.controls['cpf'].value;
     let dt_Nascimento = new Date(dtNascimento_form)
     var milliseconds = dt_Nascimento.getTime();
 
     this.permissao = {
-      idPermissao:3,
+      idPermissao: 3,
       descricao: "USUARIO"
     }
 
@@ -93,23 +92,23 @@ export class InfoSignPopoverComponent {
       nome: this.faceNome,
       email: this.faceEmail,
       login: this.faceEmail,
+      cpf: cpf_form,
       dtNascimento: milliseconds,
       senha: this.faceId,
       sexo: sexo_form,
       permissoes: [this.permissao]
     }
 
-    this.loginUser ={
+    this.loginUser = {
       username: this.user.email,
-      password:this.user.senha
+      password: this.user.senha
     }
 
-    console.log(this.user)
     //Cadastro usuario
     this.usuarioService.cadastrarUsuario(this.user)
       .subscribe(response => {
         //JSON.parse(response.body);
-        
+
         loading.dismiss();
         if (response.status) {
           this.authService.autenticar(this.loginUser).subscribe(resp => {
@@ -130,7 +129,7 @@ export class InfoSignPopoverComponent {
         loading.dismiss();
       })
   }
-  
+
   //metodo que retorna um loading na tela
   private showLoading(): Loading {
     let loading: Loading = this.loadingCtrl.create({

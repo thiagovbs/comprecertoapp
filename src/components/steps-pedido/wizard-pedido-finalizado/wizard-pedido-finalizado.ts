@@ -14,6 +14,7 @@ export class WizardPedidoFinalizadoComponent {
   @Input() infoPessoal:any;
   @Input() produtos:any;
   @Input() enderecoPedido:any;
+  @Input() celular:any;
 
   constructor(private compraFacilService: CompraFacilService, private usuarioService:UsuarioService) {
     

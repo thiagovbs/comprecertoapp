@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { CompraFacilService } from '../../services/compra-facil.service';
 import { Pedido } from '../../models/pedido.model';
+import { PedidosService } from '../../services/pedidos.service';
 
 
 @IonicPage()
@@ -11,23 +11,45 @@ import { Pedido } from '../../models/pedido.model';
 })
 export class HistoricoPedidosPage {
 
+  activeEntrega: boolean = false
+
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    private compraFacilService: CompraFacilService) {
+    private pedidosService: PedidosService) {
   }
-  pedidos:Pedido[]=[];
+  pedidos: Pedido[] = [];
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad HistoricoPedidosPage');
-    this.compraFacilService.getPedidos().subscribe(resp => {
+    this.getPedidosHistorico()
+    this.setTimePedido()
+
+  }
+
+  onCompraFacil() {
+    this.navCtrl.push('CompreFacilPage', {})
+  }
+
+  setProgress() {
+    this.activeEntrega = true
+  }
+
+  setTimePedido() {
+    let i = 0;
+    setInterval(() => {
+      i++;
+      if (i === 60) {
+        this.getPedidosHistorico();
+        i = 0;
+      }
+    }, 1000)
+  }
+
+  getPedidosHistorico() {
+    this.pedidosService.getPedidos().subscribe(resp => {
       console.log(resp)
       this.pedidos = resp;
     }, erro => {
       console.log(erro)
     })
-  }
-
-  onCompraFacil() {
-    this.navCtrl.push('CompreFacilPage', {})
   }
 
 }

@@ -54,7 +54,6 @@ import { BrMaskerModule } from 'brmasker-ionic-3';
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
     BrMaskerModule
-    
   ],
   bootstrap: [IonicApp],
   entryComponents: [

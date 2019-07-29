@@ -15,7 +15,8 @@
 
       <ion-wizard-step class="position-step">
         <wizard-tipo-retirada (infoTipoRetiradaPedido)="aoMudarTipoRetiradaPedido($event)"
-          (infoDataHoraPedido)="aoMudarTipoDataHora($event)" [pedidosMercado]="pedidosMercado"></wizard-tipo-retirada>
+          (infoDataHoraPedido)="aoMudarTipoDataHora($event)" 
+          [pedidosMercado]="pedidosMercado" [infoMercado]="infoMercado"></wizard-tipo-retirada>
       </ion-wizard-step>
 
       <ion-wizard-step class="position-step">
@@ -28,7 +29,7 @@
       <ion-wizard-step class="position-step">
         <div *ngIf="currentStep === 4">
           <wizard-pedido-finalizado [infoMercado]="infoMercado" [produtos]="produtosPedido"
-            [enderecoPedido]="enderecoPedido"></wizard-pedido-finalizado>
+            [enderecoPedido]="enderecoPedido" [celular]="celularRetirada"></wizard-pedido-finalizado>
         </div>
       </ion-wizard-step>
     </ion-simple-wizard>

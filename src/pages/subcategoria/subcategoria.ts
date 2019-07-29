@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, PopoverController, LoadingController, Loading } from 'ionic-angular';
 import { SubCategoriaService } from '../../services/subcategorias.service';
 import { Subcategoria } from '../../models/subcategoria.model';
-import { Filtros } from "../../util/filtros";
 import { Categoria } from '../../models/categoria.model';
 import { Mercado } from '../../models/supermercado.model';
 
@@ -35,7 +34,7 @@ export class SubcategoriaPage implements OnInit {
   subcategorias: Subcategoria[];
 
   mercadoProdutos: MercadoProduto[]
-  produtos: MercadoProduto[];
+  produtos: MercadoProduto[] = [];
   filterProdutos: MercadoProduto[] = [];
 
   mercados: Mercado;
@@ -43,6 +42,7 @@ export class SubcategoriaPage implements OnInit {
 
   localidade: Bairro;
   possuiMercadoNome: boolean = false;
+  page: number = 0;
 
   constructor(
     private alcanceService: AlcanceService,
@@ -51,8 +51,8 @@ export class SubcategoriaPage implements OnInit {
     private subcategoriaService: SubCategoriaService,
     private popoverCtrl: PopoverController,
     private supermercadoService: SupermercadoService,
-    private filtrosService: Filtros,
-    private carrinhoService:CarrinhoService) {
+    private carrinhoService: CarrinhoService,
+    private loadingCtrl: LoadingController) {
   }
 
   ngOnInit() {
@@ -78,46 +78,10 @@ export class SubcategoriaPage implements OnInit {
     this.localidade = this.alcanceService.getLocaAlcance();
     //listar os produtos pelo mercado produto
     if (!this.mercadoDetalhe) {
-      this.subcategoriaService.findProdutosPorCategoria(this.categoria.idCategoria, this.localidade.idBairro)
-        .subscribe((resp: MercadoProduto[]) => {
-          this.produtos = resp;    
-          //settar os serviços por produto
-          this.supermercadoService.setServicosPorProduto(this.produtos);
-          //get os serviços por produto
-          this.tipoServico = this.supermercadoService.getServicosPorProduto();
-          //filtros
-          this.filtrosService.sortByServicoPosicionamentoMercado(this.tipoServico)
-          this.filtrosService.sortByFDestaque(this.produtos);
-          this.filtrosService.sortByPreco(this.produtos);
-
-          if (this.produtos.length === 0) {
-            this.produtos = undefined;
-          }
-        }, erro => { })
+      this.listaProdutosPorCategoria()
     } else {
-      
-      this.subcategoriaService.findProdutosPorCategoriaEMercado(this.mercadoDetalhe.idCategoria, this.mercadoDetalhe.idMercado)
-        .subscribe(resp => {
-          this.produtos = resp;
-          this.mercadoSubCategoria = this.supermercadoService
-            .filtrarSubcategoriasPorMercadoProduto(this.produtos);
-
-          //settar os serviços por produto
-          this.supermercadoService.setServicosPorProduto(this.produtos);
-          //get os serviços por produto
-          this.tipoServico = this.supermercadoService.getServicosPorProduto();
-
-          //filtros
-          this.filtrosService.sortByServicoPosicionamentoMercado(this.tipoServico)
-          this.filtrosService.sortByFDestaque(this.produtos);
-          this.filtrosService.sortByPreco(this.produtos)
-
-          if (this.produtos.length === 0) {
-            this.produtos = undefined;
-          }
-        })
+      this.listaProdutosPorMercadoECategoria()
     }
-    this.dataAtual = new Date().getTime();
   }
 
   //Impedir que a página abra sem o alcance settado
@@ -134,7 +98,6 @@ export class SubcategoriaPage implements OnInit {
   }
 
   onSubCategoria(sub: string): MercadoProduto[] {
-    console.log(this.possuiMercadoNome)
     this.subcategoriaNome = sub;
     //ao clicar no botão onSubCategoria o filterProdutos do html vai estar falso e o
     //conteúdo da div não vai aparecer quando houver uma subcategoria sem produto
@@ -154,6 +117,44 @@ export class SubcategoriaPage implements OnInit {
     return this.filterProdutos;
   }
 
+  listaProdutosPorCategoria() {
+    let loader = this.presenteLoading();
+    this.subcategoriaService.findProdutosPorCategoria(this.categoria.idCategoria, this.localidade.idBairro, this.page, 2)
+      .subscribe((resp: MercadoProduto[]) => {
+        //this.produtos = resp;
+        this.produtos = this.produtos.concat(resp)
+        console.log(this.produtos)
+        console.log(this.page)
+        //settar os serviços por produto
+        this.supermercadoService.setServicosPorProduto(this.produtos);
+        //get os serviços por produto
+        this.tipoServico = this.supermercadoService.getServicosPorProduto();
+
+        if (this.produtos.length === 0) {
+          this.produtos = undefined;
+        }
+        loader.dismiss()
+      }, erro => { })
+  }
+
+  listaProdutosPorMercadoECategoria() {
+    this.subcategoriaService.findProdutosPorCategoriaEMercado(this.mercadoDetalhe.idCategoria, this.mercadoDetalhe.idMercado)
+      .subscribe(resp => {
+        this.produtos = resp;
+        this.mercadoSubCategoria = this.supermercadoService
+          .filtrarSubcategoriasPorMercadoProduto(this.produtos);
+
+        //settar os serviços por produto
+        this.supermercadoService.setServicosPorProduto(this.produtos);
+        //get os serviços por produto
+        this.tipoServico = this.supermercadoService.getServicosPorProduto();
+
+        if (this.produtos.length === 0) {
+          this.produtos = undefined;
+        }
+      })
+  }
+
   onTodosProdutos(): MercadoProduto[] {
     return this.produtos
   }
@@ -167,9 +168,31 @@ export class SubcategoriaPage implements OnInit {
   }
 
   //ao sair da tela de produtos, os itens seão adicionados no localStorage
-  ionViewDidLeave(){
+  ionViewDidLeave() {
     this.carrinhoService.setLocalSacola()
   }
+
+  doInfinite(infiniteScroll) {
+    console.log("Infinite")
+    this.page++
+    this.listaProdutosPorCategoria()
+    setTimeout(() => {
+      infiniteScroll.complete()
+    }, 10000)
+  }
+
+  presenteLoading():Loading {
+
+    let loading = this.loadingCtrl.create({
+      spinner: 'dots',
+      //content: `<img src="assets/imgs/loading3.gif" height="50px" />`,
+      duration: 50000,
+      cssClass: 'my-loading-class'
+    });
+    loading.present();
+    return loading
+  }
+
 
 }
 

@@ -56,6 +56,7 @@ export class CarrinhoService {
 
     //adiciona item no carrinhoItem
     addItem(item: MercadoProduto, nomeCategoria?: string) {
+        console.log(item)
         let foundItem = this.items.find((carditem: CarrinhoItem) => carditem.produto.idMercadoProduto === item.idMercadoProduto);
         if (foundItem) {
             this.aumentaQnt(foundItem);

@@ -1,5 +1,5 @@
 import { Component, Output, EventEmitter, Input } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {FormGroup} from '@angular/forms';
 import { NavParams, PopoverController, ViewController, Events } from 'ionic-angular';
 import { SacolaMercados } from '../../../models/SacolaMercados.model';
 import { FormCompraFacilPopoverComponent } from '../form-compra-facil-popover/form-compra-facil-popover';
@@ -11,34 +11,25 @@ import { PopoverWizardDataHoraComponent } from '../popover-wizard-data-hora/popo
 })
 export class WizardTipoRetiradaComponent {
 
-
-  pedidoForm: FormGroup;
   @Output() infoTipoRetiradaPedido = new EventEmitter();
   @Output() infoDataHoraPedido = new EventEmitter();
   @Input() pedidosMercado: SacolaMercados;
+  @Input() infoMercado: any
+  
+
+  pedidoForm: FormGroup;
   step: number = 2;
   currentStep: any;
   stepCondition: boolean;
   isEnderecoCompleto: boolean = false;
   isDataHorarioPedido: boolean = false;
 
-  constructor(private formBuilder: FormBuilder,
-    public navParams: NavParams,
+  constructor(public navParams: NavParams,
     public popoverCtrl: PopoverController,
     public viewCtrl: ViewController,
     public events: Events) {
 
-    this.pedidoForm = this.formBuilder.group({
-      celular: this.formBuilder.control('', [Validators.required]),
-      cpf: this.formBuilder.control('', [Validators.required]),
-      nome: this.formBuilder.control('', [Validators.required]),
-      endereco: this.formBuilder.control('', [Validators.required, Validators.minLength(3)]),
-      numero: this.formBuilder.control('', [Validators.required]),
-      complemento: this.formBuilder.control('', [Validators.required]),
-      bairro: this.formBuilder.control('', [Validators.required, Validators.minLength(3)]),
-      cidade: this.formBuilder.control('', [Validators.required, Validators.minLength(3)]),
-      estado: this.formBuilder.control('', [Validators.required, Validators.minLength(3)]),
-    })
+    console.log(this.infoMercado)
   }
 
   ionViewDidLoad() {

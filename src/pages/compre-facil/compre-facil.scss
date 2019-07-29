@@ -1,8 +1,8 @@
 page-compre-facil {
 
     .main-text{
-        white-space: pre-wrap;
-        font-size: 0.62em;
+        
+        font-size: 0.65em;
         color: #1F1F1F;;
         letter-spacing: 0.027em;
     }
@@ -39,8 +39,7 @@ page-compre-facil {
     .card-sheap-buy{
         margin-top: 80px;
         padding-bottom: 0 !important;
-        padding: 8px 5px;
-
+        padding: 8px 0px;
         border-radius: 10px;
         border: 1px solid rgb(196, 194, 194);
     }
@@ -50,5 +49,10 @@ page-compre-facil {
         width: 81%;
         margin-top:-20px;
         text-align: right !important;
+    }
+
+    .text-inline{
+        display: inline-block;
+        margin-left: 10px;
     }
 }

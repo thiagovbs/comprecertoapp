@@ -55,16 +55,20 @@
     </div>
   </ion-toolbar>
 
-  <ion-list class="list-full-border" *ngIf="subcategoriaNome === 'Todos' && produtos">
-    <!-- Exemplo de produto -->
-    <produto-item [produto-itens]="produtos" [nomeCategoria]="categoriaNome" [possuiMercadoNome]="possuiMercadoNome">
-    </produto-item>
-    <!-- Exemplo de produto -->
-  </ion-list>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-list class="list-full-border" *ngIf="subcategoriaNome === 'Todos' && produtos">
+      <!-- Exemplo de produto -->
+      <produto-item [produto-itens]="produtos" [nomeCategoria]="categoriaNome" [possuiMercadoNome]="possuiMercadoNome">
+      </produto-item>
+      <!-- Exemplo de produto -->
+    </ion-list>
+  </ion-infinite-scroll>
 
-  <ion-list class="list-full-border" *ngIf="subcategoriaNome !== 'Todos' && filterProdutos">
-    <!-- Exemplo de produto -->
-    <produto-item [produto-itens]="filterProdutos" [possuiMercadoNome]="possuiMercadoNome"></produto-item>
-    <!-- Exemplo de produto -->
-  </ion-list>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-list class="list-full-border" *ngIf="subcategoriaNome !== 'Todos' && filterProdutos">
+      <!-- Exemplo de produto -->
+      <produto-item [produto-itens]="filterProdutos" [possuiMercadoNome]="possuiMercadoNome"></produto-item>
+      <!-- Exemplo de produto -->
+    </ion-list>
+  </ion-infinite-scroll>
 </ion-content>

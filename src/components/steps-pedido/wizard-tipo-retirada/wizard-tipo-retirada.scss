@@ -12,11 +12,19 @@ wizard-tipo-retirada {
          padding-left: 20px;
          text-align: start;
      }
+     .font-arrow{
+        color: #cbcbcb;
+        font-size: 20px;
+        padding-top: 4px;
+     }
      .item-md {
-        width: 95%;
-        border: 0px solid transparent;
-       padding-left: 20px;
-       font-size: 1.25rem !important;
+        margin-left: -5px !important;
+        width: 103%;
+        border: 1px solid #eee;
+        padding-left: 20px;
+        font-size: 1.25rem !important;
+        background: rgba(255, 255, 255, 0.7);
+        margin: 0 auto;
     }
 
     .radio-md .radio-checked .radio-inner {
@@ -27,12 +35,14 @@ wizard-tipo-retirada {
        border-style: none !important;
     }
 
-    
+    .list-md .item-block .item-inner {
+        border: 0px solid transparent !important;
+    }
+
     .card-sheap-buy{
         
         padding-bottom: 0 !important;
         padding:5px;
-
         border-radius: 10px;
         border: 1px solid rgb(196, 194, 194);
     }

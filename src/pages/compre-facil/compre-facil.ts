@@ -66,7 +66,6 @@ export class CompreFacilPage {
     this.carrinhoService.getItemsCarrinho();
     //serviço que modifica o carrinho para o modelo de SacolaMercados
     this.mercadosSacola = this.compraFacilService.sacolaMercados;
-    console.log(this.mercadosSacola)
   }
 
   //popover mostrar a msg de politicas do compre facil

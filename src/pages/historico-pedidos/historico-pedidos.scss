@@ -1,3 +1,66 @@
 page-historico-pedidos {
 
+
+    .main-text{
+        
+        font-size: 0.62em;
+        color: #1F1F1F;
+        letter-spacing: 0.027em;
+    }
+
+    .card-sheap-buy{
+        
+        padding-bottom: 0 !important;
+        padding: 8px 0px;
+        border-radius: 10px;
+        border: 1px solid rgb(196, 194, 194);
+    }
+
+    .cl-data{
+        font-size:0.60em !important; 
+        text-align: end;
+    }
+
+    .sub-text { 
+        margin-left: -5px;
+        font-size: 0.47em;
+        color: #000;
+
+        span{
+            color:#00836D;
+        }
+    }
+    .colum-2{
+        flex: 0 0 19%;
+        width: 19%;
+        margin-top:-20px;
+        text-align: right !important;
+    }
+    .clearfix{
+        clear:both
+    }
+
+    .item-md.item-block .item-inner {
+        padding-right: 8px;
+        border-bottom: 0px solid #dedede;
+    }
+
+    .list-md {
+        margin: 0 !important;
+    }
+
+    .font-icon{
+        font-size: 18px;
+        margin-top:4px; 
+        padding-left: 15px;
+        color: #000;
+    }
+
+    .h2-pedido-aguarde{
+        font-size: 1.15rem; 
+        color:red; 
+        padding: 5px; 
+        background-color: #eee; 
+        margin-top: -5px
+    }
 }

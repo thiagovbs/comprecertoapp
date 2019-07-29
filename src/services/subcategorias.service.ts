@@ -4,35 +4,35 @@ import { Observable } from "rxjs";
 import { API_CONFIG } from "../config/api.config";
 
 @Injectable()
-export class SubCategoriaService{
+export class SubCategoriaService {
 
-    constructor(private http:HttpClient){}
+    constructor(private http: HttpClient) { }
 
-    findSubCategorias():Observable<any>{
+    findSubCategorias(): Observable<any> {
         return this.http.get<any>(`${API_CONFIG.baseUrl}/subcategorias`)
     }
 
-    findProdutos():Observable<any>{
+    findProdutos(): Observable<any> {
         return this.http.get<any>(`${API_CONFIG.baseUrl}/mercado-produtos/dto`);
     }
 
-    findProdutosPorCategoria(categoriaId, idBairro):Observable<any>{
-        return this.http.get<any>(`${API_CONFIG.baseUrl}/mercado-produtos/dto/com-validade/?idCategoria=${categoriaId}&idBairro=${idBairro}`);
+    findProdutosPorCategoria(categoriaId, idBairro, page: number = 0, count: number = 20): Observable<any> {
+        return this.http.get<any>(`${API_CONFIG.baseUrl}/mercado-produtos/dto/com-validade/?idCategoria=${categoriaId}&idBairro=${idBairro}&page=${page}&count=${count}`);
     }
 
-    findProdutosComDtValidade(categoriaId):Observable<any>{
+    findProdutosComDtValidade(categoriaId): Observable<any> {
         return this.http.get<any>(`${API_CONFIG.baseUrl}/mercado-produtos/dto/com-validade/?idCategoria=${categoriaId}`);
     }
 
-    findProdutosPorCategoriaEMercado(categoriaId, mercadoId):Observable<any>{
-        return this.http.get<any>(`${API_CONFIG.baseUrl}/mercado-produtos/dto/com-validade/?idCategoria=${categoriaId}&idMercado=${mercadoId}`);
+    findProdutosPorCategoriaEMercado(categoriaId, mercadoId, page: number = 0, count: number = 20): Observable<any> {
+        return this.http.get<any>(`${API_CONFIG.baseUrl}/mercado-produtos/dto/com-validade/?idCategoria=${categoriaId}&idMercado=${mercadoId}&page${page}&count=${count}`);
     }
 
-    findProdutosPorMercado(mercadoId):Observable<any>{
+    findProdutosPorMercado(mercadoId): Observable<any> {
         return this.http.get<any>(`${API_CONFIG.baseUrl}/mercado-produtos/dto/com-validade/?idMercado=${mercadoId}`);
     }
 
-    findProdutosComDtValidadeEbairro(idBairro):Observable<any>{
+    findProdutosComDtValidadeEbairro(idBairro): Observable<any> {
         return this.http.get<any>(`${API_CONFIG.baseUrl}/mercado-produtos/dto/com-validade?idBairro=${idBairro}`);
     }
 

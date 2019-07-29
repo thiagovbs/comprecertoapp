@@ -49,7 +49,7 @@ export class DynamicStepsPage {
 
     this.evts.subscribe('step:changed', step => {
       this.currentStep = step;
-      this.stepCondition = true;
+      this.stepCondition = false;
 
       //Verifica se os atributos estão preenchidos e se o usuário estiver ido até o último passo
       if ((this.enderecoPedido || this.dataHoraPedidoRetirada) && this.isLastStep) {
@@ -76,6 +76,7 @@ export class DynamicStepsPage {
     this.valorMimimoFrete = this.pedidosMercado.sacolaMercado.valorMinimo
     this.produtosPedido = this.pedidosMercado.carrinhoItem;
     this.infoMercado = this.pedidosMercado.sacolaMercado
+    console.log(this.infoMercado)
 
   }
 
@@ -128,6 +129,7 @@ export class DynamicStepsPage {
     if (evento) {
       this.stepCondition = true;
       this.enderecoPedido = evento;
+      this.celularRetirada = evento.celular
       this.compraFacilService.setEnderecoPedidoUsuario(this.enderecoPedido)
       this.compraFacilService.setEntregaOuRetirada('E');
     } else {
@@ -142,6 +144,7 @@ export class DynamicStepsPage {
       console.log(evento)
       this.stepCondition = true;
       this.dataHoraPedidoRetirada = evento.dataHora
+      this.compraFacilService.setDataRetiradaPedidoUsuario(this.dataHoraPedidoRetirada)
       this.celularRetirada = evento.celular
       this.currentStep = 3
       this.compraFacilService.setEntregaOuRetirada('R');
@@ -210,8 +213,9 @@ export class DynamicStepsPage {
     console.log(pedido)
     this.compraFacilService.postPedido(pedido).subscribe(resp => {
       this.successAlert()
-      console.log(resp)
+      this.navCtrl.setRoot('HistoricoPedidosPage')
     }, erro => {
+      this.myAlert() 
       console.log(erro)
     })
   }
@@ -220,7 +224,7 @@ export class DynamicStepsPage {
   myAlert() {
     let alert = this.alertCrtl.create({
       title: '<img src="assets/imgs/icone-de-erro.svg" height="100">',
-      message: 'Não achamos nenhum produto com esse nome!',
+      message: 'Sua compra não foi finalizada, Tente novamente!',
       enableBackdropDismiss: false,
       cssClass: 'AlertCompraFacil',
       buttons: [
