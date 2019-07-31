@@ -4,42 +4,39 @@
             <ion-row>
                 <ion-col col-3>
                     <ion-thumbnail>
-                        <img class="thumb-image" height="100"
-                        src="{{produto.imagemUrl}}" alt="" />
+                        <img class="thumb-image" height="100" src="{{produto.imagemUrl}}" alt="" />
                     </ion-thumbnail>
                 </ion-col>
-                <ion-col col-6 class="col-card-meio">
+                <ion-col col-5 class="col-card-meio">
                     <h2 ion-text style="white-space: pre-wrap;">{{produto.nomeProduto}} {{produto.marcaProduto}} {{produto.caracteristicaProduto}} {{produto.quantidadeProduto}} {{produto.unidadeMedida}}</h2>
-                    
-                    <ion-row style="margin-top:30px;margin-left: -5px">
+
+                    <ion-row style="margin-top: 45px;;margin-left: -5px">
                         <ion-col col-6>
                             <h3 ion-text>{{produto.precoMercadoProduto | currency:'BRL' }}</h3>
                         </ion-col>
                         <ion-col col-6>
-                            <span ion-text color="primary" style="font-size: 0.85em;margin-left: -13px;">{{setSomaValor(produto) | currency:'BRL'  }}</span>
+                            <h3 ion-text color="primary"
+                                style="font-size: 0.85em;margin-left: 0px;">{{setSomaValor(produto) | currency:'BRL'  }}</h3>
                         </ion-col>
                     </ion-row>
                 </ion-col>
-                <ion-col col-3 class="col-card-fim" >
+                <ion-col col-4 class="col-card-fim">
                     <div class="pull-right">
-                        <p style=" font-size:0.80em !important; margin-right:2px;">{{produto.dtValidadeMercadoProduto  | dateFormat}}</p>
+                        <p style=" font-size:0.70em !important; margin-right:2px;">Válido até:
+                            {{produto.dtValidadeMercadoProduto  | dateFormat}}</p>
+                        <p style=" font-size:0.60em !important; text-align: end">ou até durar o estoque</p>
                     </div>
                     <div style="margin-top:41px;">
                         <!-- Se o produto não estiver no carrinho -->
                         <div *ngIf="!verificaProdutoNoCarrinho(produto)">
-                            <button ion-button 
-                                    class="pull-right btn-sacola" 
-                                    (click)="addCarrinho(produto)">
+                            <button ion-button class="pull-right btn-sacola" (click)="addCarrinho(produto)">
                                 Adicionar à sacola
                             </button>
                         </div>
                         <!--fechar -->
-                      <!-- Quando o produto estiver no carrinho -->  
+                        <!-- Quando o produto estiver no carrinho -->
                         <div *ngIf="verificaProdutoNoCarrinho(produto)" class="pull-right">
-                            <btn-qnt-produto  
-                                [nomePage]="'Produtos'"
-                                [itemFound]="foundItem" 
-                                (add)="aumentaQnt(produto)"
+                            <btn-qnt-produto [nomePage]="'Produtos'" [itemFound]="foundItem" (add)="aumentaQnt(produto)"
                                 (sub)="diminuiQnt(produto)"></btn-qnt-produto>
                         </div>
                         <!-- Fechar -->
@@ -51,10 +48,10 @@
     <!-- Exemplo de mercado por produto -->
     <ion-item *ngIf="!possuiMercadoNome" class="card">
         <div item-left>
-            <p>{{produto.nomeFantasiaMercado}}</p>
-        </div>
-        <div class="pull-right">
             <img src="assets/icon/supermercado-produto.svg" alt="">
+        </div>
+        <div class="pull-left">
+            <p> Visitar a página do {{produto.nomeFantasiaMercado}}</p>
         </div>
     </ion-item>
 </div>

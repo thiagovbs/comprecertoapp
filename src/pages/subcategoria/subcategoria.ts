@@ -53,10 +53,12 @@ export class SubcategoriaPage implements OnInit {
     private supermercadoService: SupermercadoService,
     private carrinhoService: CarrinhoService,
     private loadingCtrl: LoadingController) {
+
+      this.page =0;
   }
 
   ngOnInit() {
-
+    
     this.possuiMercadoNome = false;
     this.mercadoDetalhe = this.navParams.get('mercadoDetalhe');
 
@@ -75,6 +77,7 @@ export class SubcategoriaPage implements OnInit {
 
 
   ionViewWillEnter() {
+    
     this.localidade = this.alcanceService.getLocaAlcance();
     //listar os produtos pelo mercado produto
     if (!this.mercadoDetalhe) {
@@ -173,10 +176,11 @@ export class SubcategoriaPage implements OnInit {
   }
 
   doInfinite(infiniteScroll) {
-    console.log("Infinite")
-    this.page++
+    console.log(this.page)
+    
     this.listaProdutosPorCategoria()
     setTimeout(() => {
+      this.page++
       infiniteScroll.complete()
     }, 10000)
   }

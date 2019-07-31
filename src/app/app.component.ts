@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform, PopoverController } from 'ionic-angular';
+import { Nav, Platform, PopoverController, ToastController, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -7,7 +7,8 @@ import { AuthService } from '../services/auth.service';
 import { UsuarioService } from '../services/usuario.service';
 import { AlcanceComponent } from '../components/alcance/alcance';
 import { Usuario } from '../models/usuario';
-import {Events} from 'ionic-angular';
+import { Events } from 'ionic-angular';
+import { FCM } from '@ionic-native/fcm';
 
 
 
@@ -28,9 +29,11 @@ export class MyApp {
     public splashScreen: SplashScreen,
     private userService: UsuarioService,
     public popoverCtrl: PopoverController,
-    public events:Events) {
+    public events: Events,
+    private fcm: FCM,
+    private alertCtrl: AlertController) {
 
-    this.user  =this.userService.getLocalUser();
+    this.user = this.userService.getLocalUser();
 
     if (this.userService.getLocalUser() !== null) {
       this.rootPage = "HomePage";
@@ -38,10 +41,10 @@ export class MyApp {
       this.rootPage = "CadastroPage";
     }
 
-    events.subscribe('user:LoggedIn',()=>{
-      this.user =this.userService.getLocalUser();
+    events.subscribe('user:LoggedIn', () => {
+      this.user = this.userService.getLocalUser();
     })
-    
+
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -55,7 +58,7 @@ export class MyApp {
       { title: 'Localidade', component: 'Localidade', icon: 'assets/icon/Localidade_Prancheta.svg' },
       { title: 'Configurações', component: 'PoliticaPrivacidadePage', icon: 'assets/imgs/configuração_icon.svg' }
 
-      
+
     ];
   }
 
@@ -67,10 +70,36 @@ export class MyApp {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      
+
       this.statusBar.hide();
       this.splashScreen.hide();
     });
+
+    //this.fcm.subscribeToTopic('marketing');
+
+
+
+    this.fcm.onNotification().subscribe(data => {
+      console.log(data)
+      if (data.wasTapped) {
+        const toast = this.alertCtrl.create({
+          title:"Teste de notificacao",
+          message: data.body,
+          
+        });
+        toast.present()
+      } else {
+        const toast = this.alertCtrl.create({
+          title:"Teste de notificacao",
+          message: data.body,
+          
+        });
+        toast.present();
+      };
+    });
+    
+
+    //this.fcm.unsubscribeFromTopic('marketing');
   }
 
   openPage(page) {
@@ -90,7 +119,7 @@ export class MyApp {
   }
 
   alcanceAlert() {
-    let popover = this.popoverCtrl.create(AlcanceComponent,{}, { showBackdrop: true, cssClass: 'custom-popover' });
+    let popover = this.popoverCtrl.create(AlcanceComponent, {}, { showBackdrop: true, cssClass: 'custom-popover' });
     popover.present();
   }
 

@@ -5,7 +5,7 @@ import { CategoriaService } from '../../services/categoria.service';
 import { Categoria } from '../../models/categoria.model';
 import { SupermercadoService } from '../../services/supermercado.service';
 import { Mercado } from '../../models/supermercado.model';
-import { Observable } from 'rxjs';
+
 import { API_CONFIG } from '../../config/api.config';
 import { AlcanceComponent } from '../../components/alcance/alcance';
 import { AlcanceService } from '../../services/alcance.service';
@@ -14,8 +14,8 @@ import { Usuario } from '../../models/usuario';
 import { Bairro } from '../../models/localidade';
 import { Filtros } from '../../util/filtros';
 import { PacoteTipoServico } from '../../models/pacote-tipo-servico.model';
-import { CompraFacilService } from '../../services/compra-facil.service';
-import { CarrinhoService } from '../../services/carrinho.service';
+
+import { FCM } from '@ionic-native/fcm';
 
 
 @IonicPage()
@@ -39,7 +39,7 @@ export class HomePage {
     private popoverCtrl: PopoverController,
     private events: Events,
     private filtrosService: Filtros,
-    private carrinhoService:CarrinhoService) {
+    private fcm: FCM) {
 
     //Carregando as Categorias
     this.categoriaService.findAll().subscribe(resp => {
@@ -49,7 +49,15 @@ export class HomePage {
 
   ionViewDidLoad() {
 
-    console.log(this.carrinhoService.getLocaSacola()) 
+    this.fcm.getToken().then(token => {
+      console.log("get token")
+      console.log(token)
+    });
+
+    this.fcm.onTokenRefresh().subscribe(token => {
+      console.log(token)
+    });
+
     //imagens S3
     this.bucketS3 = API_CONFIG.s3Url;
 

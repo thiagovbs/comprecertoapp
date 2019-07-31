@@ -106,6 +106,7 @@
   }
 
   .toolbar-title-md{
+    font-size: 1.85rem !important;
     font-weight: 400 !important;
   }
   
@@ -292,7 +293,7 @@
 
   .btn-sacola{
     width: 102px;
-    margin-top:26px;
+    margin-top: 40px;
     font-size:9px !important;
     border-radius: 5px;
     height: 20px !important;
@@ -306,15 +307,17 @@
     border-radius: 5px;
     padding: 10px !important;
     background-color: color($colors, danger);
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
 
   .thumb-image{
     margin-top: 0px;
-    margin-left:-26px;
-    min-height: 95px !important;
-    min-width: 100px !important;
-    max-height: 95px !important;
-    max-width: 100px !important;
+    margin-left:-10px;
+    min-height: 90px !important;
+    min-width: 90px !important;
+    max-height: 90px !important;
+    max-width: 90px !important;
 }
 
 .thumb-image-compra-sacola{
@@ -344,6 +347,7 @@
       font-size: 0.85em;
       display: inline;
       padding: 3px 8px; 
+      text-transform: initial;
     }
 
   }
@@ -358,7 +362,7 @@
 
 li {
     color:#f8f8f8;
-    font-size: 0.78em;
+    font-size: 1.2rem;
     display: inline;
     padding: 7px 10px;
     
@@ -567,13 +571,13 @@ font-size: 1.7rem !important;
 }
   
 .col-card-meio{
-  margin-top:3px ;
-  margin-left:-16px;
+  margin-top: -5px;
+  margin-left:0px;
 }
 
 .col-card-fim{
-  margin-top:5px ;
-  margin-left:16px;
+  margin-top:0px ;
+  margin-left:0px;
 }
 
 .stepsPage .popover-content{

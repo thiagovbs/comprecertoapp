@@ -33,11 +33,10 @@ import { AlcanceService } from '../services/alcance.service';
 import { PopoverInfoCompraFacilComponent } from '../components/popover-info-compra-facil/popover-info-compra-facil';
 import { FormCompraFacilPopoverComponent } from '../components/steps-pedido/form-compra-facil-popover/form-compra-facil-popover';
 import { CompraFacilService } from '../services/compra-facil.service';
-import { Filtros } from "../util/filtros";
 import { PopoverWizardDataHoraComponent } from '../components/steps-pedido/popover-wizard-data-hora/popover-wizard-data-hora';
-
 import { BrMaskerModule } from 'brmasker-ionic-3';
-
+import { FCM } from '@ionic-native/fcm';
+import { Filtros } from '../util/filtros';
 @NgModule({
   declarations: [
     MyApp,
@@ -82,7 +81,8 @@ import { BrMaskerModule } from 'brmasker-ionic-3';
     SubCategoriaService,
     SuporteService,
     CompraFacilService,
-    Filtros
+    Filtros,
+    FCM
   ]
 })
 export class AppModule {}

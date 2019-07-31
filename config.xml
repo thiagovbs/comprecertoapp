@@ -21,7 +21,6 @@
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="3000" />
     <platform name="android">
-        <allow-intent href="market:*" />
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
         <icon density="mdpi" src="resources/android/icon/drawable-mdpi-icon.png" />
         <icon density="hdpi" src="resources/android/icon/drawable-hdpi-icon.png" />
@@ -100,5 +99,7 @@
         <variable name="FACEBOOK_ANDROID_SDK_VERSION" value="4.40.0" />
     </plugin>
     <plugin name="cordova-plugin-datepicker" spec="0.9.3" />
-    <engine name="android" spec="^8.0.0" />
+    <allow-navigation href="http://192.168.15.5:8100" />
+    <plugin name="cordova-plugin-fcm-with-dependecy-updated" spec="~2.4.0" />
+    <engine name="android" spec="8.0.0" />
 </widget>

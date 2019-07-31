@@ -1,7 +1,7 @@
 <ion-header no-border>
 
   <ion-navbar color="secondary">
-    <ion-title text-center style="padding-right:40px;">
+    <ion-title text-center style="padding-right:50px;">
       Cadastro
     </ion-title>
   </ion-navbar>
@@ -17,24 +17,24 @@
         </ion-item>
         <ion-row margin-top>
           <ion-item class="bg-transparent" class="size-select-item">
-            <ion-select formControlName="sexo" placeholder="sexo" class="size-select">
+            <ion-select formControlName="sexo" placeholder="Gênero" class="size-select">
               <ion-option *ngFor="let sexo of sexoList" value="{{sexo.value}}">{{sexo.nome}}</ion-option>
             </ion-select>
           </ion-item>
         </ion-row>
-        <ion-item class="bg-transparent size">
+        <ion-item class="bg-transparent size-data" (click)="onBirthday()">
           <ion-input placeholder="Data de nascimento" [(ngModel)]="dtNascimento" formControlName="data"></ion-input>
-          <button clear item-right ion-button type="button" (click)="onBirthday()">
+          <button clear item-right ion-button type="button">
             <ion-icon name="calendar"></ion-icon>
           </button>
         </ion-item>
         <ion-item class="bg-transparent size">
-          <ion-label floating>Digite seu cpf</ion-label>
-          <ion-input type="text" formControlName="cpf"  [brmasker]="{mask:'000.000.000-00', len:14}" 
-          autocapitalize="none" maxlength="14"></ion-input>
+          <ion-label floating>Digite seu CPF</ion-label>
+          <ion-input type="text" formControlName="cpf" [brmasker]="{mask:'000.000.000-00', len:14}"
+            autocapitalize="none" maxlength="14"></ion-input>
         </ion-item>
         <ion-item class="bg-transparent size">
-          <ion-label floating>Digite seu email</ion-label>
+          <ion-label floating>Digite seu E-mail</ion-label>
           <ion-input type="text" formControlName="email" (keyup)="changeInput($event)" autocapitalize="none"
             value="{{emailEditado}}"></ion-input>
         </ion-item>

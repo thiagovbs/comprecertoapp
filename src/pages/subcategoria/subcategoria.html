@@ -1,6 +1,6 @@
 <ion-header no-border>
   <ion-navbar color="secondary">
-    <ion-title text-center>
+    <ion-title text-center class="titulo-meio">
       <div *ngIf="possuiMercadoNome ; else maisBarato" class="title-mercado">
         <span>{{mercadoDetalhe.nomeMercado}}</span>
         <bdo rlt="bottom">
@@ -8,7 +8,7 @@
         </bdo>
       </div>
       <ng-template #maisBarato>
-        <span>MAIS BARATOS</span>
+        <span style="font-size: 1.9 rem !important">MAIS BARATOS</span>
         <bdo>
           <p>{{categoriaNome}}</p>
         </bdo>

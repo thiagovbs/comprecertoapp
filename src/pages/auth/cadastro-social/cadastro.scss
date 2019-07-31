@@ -3,7 +3,7 @@ page-cadastro {
 
     .socialLogin {
         
-        margin:0 auto;
+        margin:30px auto;
         width: 70%;
       }
       .facebook{
@@ -22,18 +22,21 @@ page-cadastro {
       .google{
         text-transform: initial;
         background-color: rgba(209, 61, 53, 0.75) !important;
-        padding: 33px;
+        padding: 40px;
         border-radius: 10px;
+        font-size:1.4rem !important;
       }
 
       .google:active, .google:focus, .google:hover{ 
         background-color: rgba(255, 82, 79, 1);
       }
       .register{
+        margin-top: 10px;
         text-transform: initial;
         background-color: rgba(0, 152, 128,0.75);
-        padding: 33px;
+        padding: 40px;
         border-radius: 10px;
+        font-size:1.4rem !important;
       }
 
       .overlay {
@@ -49,12 +52,12 @@ page-cadastro {
         margin-top:5px;
         text-transform: uppercase; 
         float: right;
-        font-size: 0.45em;
+        font-size:1.2rem;
         color: #eee;
       }
       
       ion-icon{
-        padding-right: 1.5em !important;
+        padding-right: 1.0em !important;
       }
       
 }

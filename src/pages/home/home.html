@@ -4,7 +4,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title text-center style="margin-top:5px; padding-left:40px "><img src="assets/icon/LogoSheapBranca-03.svg" height="50" alt="">
+    <ion-title text-center style="margin-top:5px; padding-left:35px "><img src="assets/icon/LogoSheapBranca-03.svg" height="50" alt="">
     </ion-title>
     <ion-buttons end>
       <button ion-button (click)="onCompraFacil()" class="back-button-md" >
@@ -21,7 +21,7 @@
   <ion-scroll scrollX="true" class="menu-2">
     <ul>
       <a (click)="onMaisBarato('BARATOS')">
-        <li class="active">Mais baratos</li>
+        <li class="active">Mais Baratos</li>
       </a>
       <a *ngFor="let mercado of mercados" (click)="onMercados(mercado)">
         <li>{{mercado.nomeFantasia}}</li>
