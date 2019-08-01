@@ -35,9 +35,9 @@ export class LoginPage {
         this.authService.armazenarToken(data['access_token']);
         this.authService.armazenarRefreshToken(data['refresh_token']);
         this.authService.successfullLogin(data);
-
+        console.log(data);
         this.fcm.getToken().then(token => {
-          console.log(token)
+        
         });
         this.events.publish('user:LoggedIn');
         this.navCtrl.setRoot('HomePage');

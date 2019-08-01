@@ -21,13 +21,13 @@ export class UsuarioService {
     }
 
     buscarPorLogin(login) {
-        console.log(login)
         return this.http.get(`${API_CONFIG.baseUrl}/usuarios/?login=${login}`);
     }
 
     buscarPorEmail(login) {
         return this.http.post(`${API_CONFIG.baseUrl}/usuarios/login`, login)
     }
+
 
     //Pegar o usuário ativo no localstorage
     getLocalUser(): Usuario {

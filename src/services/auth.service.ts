@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders} from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { UserLogin } from "../models/userLogin";
 
 import { API_CONFIG } from "../config/api.config";
@@ -13,47 +13,52 @@ import { STORAGE_KEYS } from "../config/storage_keys.config";
 
 
 @Injectable()
-export class AuthService{
+export class AuthService {
 
-    constructor(public http:HttpClient,
-                public usuarioService: UsuarioService,
-                public alcanceService:AlcanceService,
-                public carrinhoService:CarrinhoService){
-        
+    constructor(public http: HttpClient,
+        public usuarioService: UsuarioService,
+        public alcanceService: AlcanceService,
+        public carrinhoService: CarrinhoService) {
+
     }
 
-    autenticar(userLogin:UserLogin){
+    autenticar(userLogin: UserLogin) {
         console.log(userLogin)
         const hds = new HttpHeaders({
             'Content-Type': 'application/x-www-form-urlencoded',
             'Authorization': 'Basic aW9uaWM6MTBuMWMw'
-          });
-          const body = `username=${userLogin.username}&password=${encodeURIComponent(userLogin.password)}&grant_type=password`;
-        return  this.http.post(API_CONFIG.authUrl, body, {headers: hds, withCredentials:true})   
+        });
+        const body = `username=${userLogin.username}&password=${encodeURIComponent(userLogin.password)}&grant_type=password`;
+        return this.http.post(API_CONFIG.authUrl, body, { headers: hds, withCredentials: true })
     }
 
     armazenarToken(token: string) {
         localStorage.setItem('token', token);
-      }
-    armazenarRefreshToken(token:string){
+    }
+    armazenarRefreshToken(token: string) {
         localStorage.setItem('refresh_token', token);
     }
 
-    successfullLogin(data){
+    successfullLogin(data) {
         this.usuarioService.setLocalUser(null);
-        
-         let user:Usuario={
+
+        let user: Usuario = {
             nome: data.user.nome,
             email: data.user.email,
             login: data.user.login,
             sexo: data.user.sexo,
             cpf: data.user.cpf,
             idUsuario: data.user.idUsuario
-        }; 
+        };
         this.usuarioService.setLocalUser(user);
     }
 
-    logout(){
+
+    salvarToken(token, userId: number) {
+        return this.http.put(`${API_CONFIG.baseUrl}/usuarios/token?=${userId}`, token)
+    }
+
+    logout() {
         //remove usuario loggado
         this.usuarioService.setLocalUser(null);
         //remove localização
@@ -65,14 +70,14 @@ export class AuthService{
         localStorage.removeItem('token');
     }
 
-    getRefreshToken(refreshToken){
-        
+    getRefreshToken(refreshToken) {
+
         const hds = new HttpHeaders({
             'Content-Type': 'application/x-www-form-urlencoded',
             'Authorization': 'Basic aW9uaWM6MTBuMWMw'
-          });
+        });
         const body = `grant_type=refresh_token&refresh_token=${refreshToken}`;
-        return  this.http.post(API_CONFIG.authUrl, body, {headers: hds, withCredentials:true})          
+        return this.http.post(API_CONFIG.authUrl, body, { headers: hds, withCredentials: true })
     }
 
 }
