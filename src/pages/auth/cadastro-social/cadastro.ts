@@ -7,6 +7,7 @@ import { InfoSignPopoverComponent } from '../../../components/info-sign-popover/
 import { UserLogin } from '../../../models/userLogin';
 import { UsuarioService } from '../../../services/usuario.service';
 import { AuthService } from '../../../services/auth.service';
+import { FCM } from '@ionic-native/fcm';
 
 @IonicPage()
 @Component({
@@ -24,11 +25,9 @@ export class CadastroPage {
     public alertCrtl: AlertController,
     public loadingCtrl: LoadingController,
     private authService: AuthService,
-    private events: Events
-  ) {
-
-
-  }
+    private events: Events,
+    private fcm: FCM
+  ) {  }
 
   user: Usuario
   login: boolean;
@@ -44,7 +43,7 @@ export class CadastroPage {
 
   //Login Pelo Facebook
   fbLogin() {
-    this.fb.login(['profile_picture','email'])
+    this.fb.login(['profile_picture', 'email'])
       .then((res: FacebookLoginResponse) => {
         console.log("facebook")
         if (res.status === 'connected') {
@@ -110,9 +109,14 @@ export class CadastroPage {
             this.authService.armazenarToken(resp['access_token']);
             this.authService.armazenarRefreshToken(resp['refresh_token']);
             this.authService.successfullLogin(resp);
+
+            this.fcm.getToken().then(token => {
+              console.log("get token");
+              console.log(token)
+            });
             this.events.publish('user:LoggedIn');
             this.navCtrl.setRoot('HomePage');
-            
+
           }, err => {
             loading.dismiss();
             console.log(err)

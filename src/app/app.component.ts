@@ -31,7 +31,7 @@ export class MyApp {
     public popoverCtrl: PopoverController,
     public events: Events,
     private fcm: FCM,
-    private alertCtrl: AlertController) {
+    private toastCrtl: ToastController) {
 
     this.user = this.userService.getLocalUser();
 
@@ -82,17 +82,12 @@ export class MyApp {
     this.fcm.onNotification().subscribe(data => {
       console.log(data)
       if (data.wasTapped) {
-        const toast = this.alertCtrl.create({
-          title:"Teste de notificacao",
-          message: data.body,
-          
-        });
-        toast.present()
+        console.log("notification");
       } else {
-        const toast = this.alertCtrl.create({
-          title:"Teste de notificacao",
+        const toast = this.toastCrtl.create({
           message: data.body,
-          
+          duration: 3000,
+          position: 'top'
         });
         toast.present();
       };

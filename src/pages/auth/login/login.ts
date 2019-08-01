@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, MenuController, Loading, LoadingController, Events } from 'ionic-angular';
 import { UserLogin } from '../../../models/userLogin';
 import { AuthService } from '../../../services/auth.service';
+import { FCM } from '@ionic-native/fcm';
 
 
 
@@ -12,13 +13,14 @@ import { AuthService } from '../../../services/auth.service';
 })
 export class LoginPage {
 
-  login: UserLogin= {} as UserLogin;
+  login: UserLogin = {} as UserLogin;
 
   constructor(private navCtrl: NavController,
     private menu: MenuController,
     private authService: AuthService,
     public loadingCtrl: LoadingController,
-    private events: Events) {
+    private events: Events,
+    private fcm: FCM) {
   }
 
   onPageWillLeave(): void {
@@ -33,8 +35,13 @@ export class LoginPage {
         this.authService.armazenarToken(data['access_token']);
         this.authService.armazenarRefreshToken(data['refresh_token']);
         this.authService.successfullLogin(data);
-        this.events.publish('user:LoggedIn')
-        this.navCtrl.setRoot('HomePage')
+
+        this.fcm.getToken().then(token => {
+          console.log(token)
+        });
+        this.events.publish('user:LoggedIn');
+        this.navCtrl.setRoot('HomePage');
+
       }, error => {
         loading.dismiss();
       })

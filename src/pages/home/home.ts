@@ -44,15 +44,10 @@ export class HomePage {
     //Carregando as Categorias
     this.categoriaService.findAll().subscribe(resp => {
       this.categorias = Lodash.orderBy(resp, 'nome', 'asc')
-    })
+    });
   }
 
   ionViewDidLoad() {
-
-    this.fcm.getToken().then(token => {
-      console.log("get token")
-      console.log(token)
-    });
 
     this.fcm.onTokenRefresh().subscribe(token => {
       console.log(token)
