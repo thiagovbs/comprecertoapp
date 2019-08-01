@@ -6,6 +6,7 @@ import { UsuarioService } from '../../services/usuario.service';
 import { AuthService } from '../../services/auth.service';
 import { UserLogin } from '../../models/userLogin';
 import { DatePicker } from '@ionic-native/date-picker';
+import { FCM } from '@ionic-native/fcm';
 
 @Component({
   selector: 'info-sign-popover',
@@ -39,8 +40,8 @@ export class InfoSignPopoverComponent {
     public loadingCtrl: LoadingController,
     private authService: AuthService,
     private events: Events,
-    private datePicker: DatePicker
-  ) {
+    private datePicker: DatePicker,
+    private fcm: FCM) {
 
     this.cadastroPopUpForm = new FormGroup({
       sexo: new FormControl('', [Validators.required]),
@@ -106,7 +107,7 @@ export class InfoSignPopoverComponent {
 
     //Cadastro usuario
     this.usuarioService.cadastrarUsuario(this.user)
-      .subscribe(response => {
+      .subscribe((response: any) => {
         //JSON.parse(response.body);
 
         loading.dismiss();
@@ -116,6 +117,11 @@ export class InfoSignPopoverComponent {
             this.authService.armazenarToken(resp['access_token']);
             this.authService.armazenarRefreshToken(resp['refresh_token']);
             this.authService.successfullLogin(resp);
+            this.fcm.getToken().then(token => {
+              this.authService.salvarToken(token, response.user.idUsuario).subscribe(resp => {
+                console.log(resp)
+              })
+            });
             this.events.publish('user:LoggedIn');
             this.navCntl.setRoot('HomePage');
 

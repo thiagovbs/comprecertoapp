@@ -49,10 +49,6 @@ export class HomePage {
 
   ionViewDidLoad() {
 
-    this.fcm.onTokenRefresh().subscribe(token => {
-      console.log(token)
-    });
-
     //imagens S3
     this.bucketS3 = API_CONFIG.s3Url;
 

@@ -55,7 +55,7 @@ export class AuthService {
 
 
     salvarToken(token, userId: number) {
-        return this.http.put(`${API_CONFIG.baseUrl}/usuarios/token?=${userId}`, token)
+        return this.http.put(`${API_CONFIG.baseUrl}/usuarios/token/${userId}`, token)
     }
 
     logout() {
