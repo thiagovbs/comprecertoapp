@@ -25,15 +25,15 @@ export class SubCategoriaService {
     }
 
     findProdutosPorCategoriaEMercado(categoriaId, mercadoId, page: number = 0, count: number = 20): Observable<any> {
-        return this.http.get<any>(`${API_CONFIG.baseUrl}/mercado-produtos/dto/com-validade/?idCategoria=${categoriaId}&idMercado=${mercadoId}&page${page}&count=${count}`);
+        return this.http.get<any>(`${API_CONFIG.baseUrl}/mercado-produtos/dto/com-validade/?idCategoria=${categoriaId}&idMercado=${mercadoId}&page=${page}&count=${count}`);
     }
 
     findProdutosPorMercado(mercadoId, page:number = 0, count:number =10): Observable<any> {
         return this.http.get<any>(`${API_CONFIG.baseUrl}/mercado-produtos/dto/com-validade/?idMercado=${mercadoId}&page=${page}&count=${count}`);
     }
 
-    findProdutosComDtValidadeEbairro(idBairro): Observable<any> {
-        return this.http.get<any>(`${API_CONFIG.baseUrl}/mercado-produtos/dto/com-validade?idBairro=${idBairro}`);
+    findProdutosComDtValidadeEbairro(idBairro, page: number = 0, count: number = 20): Observable<any> {
+        return this.http.get<any>(`${API_CONFIG.baseUrl}/mercado-produtos/dto/com-validade?idBairro=${idBairro}&page=${page}&count=${count}`);
     }
 
 }

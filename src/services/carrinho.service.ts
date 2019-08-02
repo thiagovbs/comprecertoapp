@@ -28,9 +28,6 @@ export class CarrinhoService {
             //Exclui produto na sacola caso a dt de validade seja ultrapassada
             this.items.map((item: CarrinhoItem) => {
                 let dtValidade = new Date(item.produto.dtValidadeMercadoProduto).getDate()
-                
-                console.log("data validade: " +dtValidade)
-                console.log("Data atual " +dataAtual)
                 if (dataAtual > dtValidade) {
                     this.items.splice(this.items.indexOf(item), 1);
                     this.setLocalSacola()
@@ -56,7 +53,6 @@ export class CarrinhoService {
 
     //adiciona item no carrinhoItem
     addItem(item: MercadoProduto, nomeCategoria?: string) {
-        console.log(item)
         let foundItem = this.items.find((carditem: CarrinhoItem) => carditem.produto.idMercadoProduto === item.idMercadoProduto);
         if (foundItem) {
             this.aumentaQnt(foundItem);
@@ -113,7 +109,6 @@ export class CarrinhoService {
 
     getItemsCarrinho() {
         if (this.items) {
-            console.log(this.items)
             this.compraFacilService.setMercadoDTO(this.items);
         }
     }

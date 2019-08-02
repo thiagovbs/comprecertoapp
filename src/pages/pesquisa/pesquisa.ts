@@ -4,8 +4,6 @@ import { SubCategoriaService } from '../../services/subcategorias.service';
 import { MercadoProduto } from '../../models/mercado-produto.model';
 import { Bairro } from '../../models/localidade';
 import { AlcanceService } from '../../services/alcance.service';
-import { Filtros } from '../../util/filtros';
-import { SupermercadoService } from '../../services/supermercado.service';
 import { PacoteTipoServico } from '../../models/pacote-tipo-servico.model';
 import { Mercado } from '../../models/supermercado.model';
 import { AlcanceComponent } from '../../components/alcance/alcance';
@@ -38,8 +36,6 @@ export class PesquisaPage {
     public mercadoProdutosService: SubCategoriaService,
     public alertCrtl: AlertController,
     private alcanceService: AlcanceService,
-    private supermercadoService: SupermercadoService,
-    private filtrosService: Filtros,
     public popoverCtrl: PopoverController,
     private carrinhoItemService:CarrinhoService) {
   }
@@ -69,7 +65,7 @@ export class PesquisaPage {
       .subscribe((response: MercadoProduto[]) => {
         this.produtos = response;
 
-        //servico de posicionamento por produto
+/*         //servico de posicionamento por produto
         this.supermercadoService.setServicosPorProduto(this.produtos);
         this.servicosProduto = this.supermercadoService.getServicosPorProduto();
 
@@ -77,7 +73,7 @@ export class PesquisaPage {
         this.filtrosService.sortByFDestaque(this.produtos);
         this.filtrosService.sortByServicoPosicionamentoMercado(this.servicosProduto);
         this.filtrosService.sortByPreco(this.produtos)
-
+ */
         //pega os produtos e cria um array por (nome - marca - caracteristica)
         this.produtos.map((produto: MercadoProduto) => {
           this.arrayNomeCompletoProdutos.push({

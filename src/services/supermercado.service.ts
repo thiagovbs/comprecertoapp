@@ -88,7 +88,7 @@ export class SupermercadoService {
   }
 
 
-  setServicosPorMercado(mercadoService: Mercado[]) {
+/*   setServicosPorMercado(mercadoService: Mercado[]) {
     let mercadoLocalidade: any
     if (mercadoService) {
       mercadoService.map((mercado: Mercado) => {
@@ -109,5 +109,5 @@ export class SupermercadoService {
 
   getServicosPorMercado(): PacoteTipoServico[] {
     return this.tipoServicoMercado;
-  }
+  } */
 }

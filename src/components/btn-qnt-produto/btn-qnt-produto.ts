@@ -18,7 +18,6 @@ export class BtnQntProdutoComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.nomePage)
   }
 
   //aumenta quantidade de produtos

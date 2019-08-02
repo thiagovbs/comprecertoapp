@@ -54,11 +54,11 @@ export class SubcategoriaPage implements OnInit {
     private carrinhoService: CarrinhoService,
     private loadingCtrl: LoadingController) {
 
-      this.page =0;
+
   }
 
   ngOnInit() {
-    
+
     this.possuiMercadoNome = false;
     this.mercadoDetalhe = this.navParams.get('mercadoDetalhe');
 
@@ -77,7 +77,8 @@ export class SubcategoriaPage implements OnInit {
 
 
   ionViewWillEnter() {
-    
+    this.page = 0;
+    this.produtos = []
     this.localidade = this.alcanceService.getLocaAlcance();
     //listar os produtos pelo mercado produto
     if (!this.mercadoDetalhe) {
@@ -126,8 +127,6 @@ export class SubcategoriaPage implements OnInit {
       .subscribe((resp: MercadoProduto[]) => {
         //this.produtos = resp;
         this.produtos = this.produtos.concat(resp)
-        console.log(this.produtos)
-        console.log(this.page)
         //settar os serviços por produto
         this.supermercadoService.setServicosPorProduto(this.produtos);
         //get os serviços por produto
@@ -137,13 +136,15 @@ export class SubcategoriaPage implements OnInit {
           this.produtos = undefined;
         }
         loader.dismiss()
-      }, erro => { })
+      }, erro => { loader.dismiss() })
   }
 
   listaProdutosPorMercadoECategoria() {
-    this.subcategoriaService.findProdutosPorCategoriaEMercado(this.mercadoDetalhe.idCategoria, this.mercadoDetalhe.idMercado)
+    let loader = this.presenteLoading();
+    this.subcategoriaService.findProdutosPorCategoriaEMercado(this.mercadoDetalhe.idCategoria, this.mercadoDetalhe.idMercado, this.page, 2)
       .subscribe(resp => {
         this.produtos = resp;
+        //Não repetir as categorias
         this.mercadoSubCategoria = this.supermercadoService
           .filtrarSubcategoriasPorMercadoProduto(this.produtos);
 
@@ -155,7 +156,8 @@ export class SubcategoriaPage implements OnInit {
         if (this.produtos.length === 0) {
           this.produtos = undefined;
         }
-      })
+        loader.dismiss()
+      },erro=>{loader.dismiss()})
   }
 
   onTodosProdutos(): MercadoProduto[] {
@@ -176,16 +178,18 @@ export class SubcategoriaPage implements OnInit {
   }
 
   doInfinite(infiniteScroll) {
-    console.log(this.page)
-    
-    this.listaProdutosPorCategoria()
+    if (this.possuiMercadoNome) {
+      this.listaProdutosPorCategoria()
+    } else {
+      this.listaProdutosPorMercadoECategoria()
+    }
     setTimeout(() => {
       this.page++
       infiniteScroll.complete()
     }, 10000)
   }
 
-  presenteLoading():Loading {
+  presenteLoading(): Loading {
 
     let loading = this.loadingCtrl.create({
       spinner: 'dots',

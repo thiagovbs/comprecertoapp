@@ -34,10 +34,8 @@ export class SupermercadoPage {
     this.supermercadoService.buscarMercadoprodutosPorBairro(this.localidadeMercado)
       .subscribe((resp: Mercado[]) => {
         this.supermercados = resp
-        this.supermercadoService.setServicosPorMercado(this.supermercados);
-        this.tiposServico = this.supermercadoService.getServicosPorMercado()
-        this.filtrosService.sortByServicoPosicionamentoMercado(this.tiposServico)
-        console.log(this.tiposServico)
+        /* this.supermercadoService.setServicosPorMercado(this.supermercados);
+        this.tiposServico = this.supermercadoService.getServicosPorMercado() */
       })
 
     //imagens S3
@@ -46,7 +44,6 @@ export class SupermercadoPage {
 
 
   onMercado(supermercado: Mercado) {
-    console.log(supermercado)
     this.navCtrl.push("SupermercadoDetalhePage", {
       mercado: supermercado
 
