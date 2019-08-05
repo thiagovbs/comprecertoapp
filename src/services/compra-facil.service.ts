@@ -20,33 +20,43 @@ export class CompraFacilService {
     constructor(private http: HttpClient, private usuarioService: UsuarioService) { }
 
     enderecoUsuarioPedido: any;
-    dataEntradaPedido:any
+    dataEntradaPedido: any
     entregaOuRetirada: any;
     formadePagamento: any
 
     //settando os valores dentro do model produtos por mercado
-    setMercadoDTO(item: CarrinhoItem[]) {
-        item.map((carrinho: CarrinhoItem) => {
-            this.sacolaMercadoDTO.idMercado = carrinho.produto.idMercado;
-            this.sacolaMercadoDTO.idMercadoLocalidade = carrinho.produto.idMercadoLocalidade;
-            this.sacolaMercadoDTO.nomeMercado = carrinho.produto.nomeFantasiaMercado;
-            this.sacolaMercadoDTO.imagemMercado = carrinho.produto.mercadoImagemUrl
-            this.sacolaMercadoDTO.horarioMaximo = carrinho.produto.horarioMaximo;
-            this.sacolaMercadoDTO.horarioMaximoEntrega = carrinho.produto.horarioMaximoEntrega;
-            this.sacolaMercadoDTO.valorFrete = carrinho.produto.valorFrete;
-            this.sacolaMercadoDTO.valorMinimo = carrinho.produto.valorMinimo;
-            this.sacolaMercadoDTO.entrega = carrinho.produto.entrega;
-        
-            let foundMercado: SacolaMercados = this.sacolaMercados.find((carditem: SacolaMercados) => carditem.sacolaMercado.idMercadoLocalidade === carrinho.produto.idMercadoLocalidade);
-            if (foundMercado) {
-                foundMercado.sacolaMercado = this.sacolaMercadoDTO;
-            } else {
-                this.sacolaMercados.push(new SacolaMercados(this.sacolaMercadoDTO, item))
-            }
+    setMercadoDTO(items: CarrinhoItem[]) {
+
+        let carrinhoItem: CarrinhoItem[] = []
+
+
+        items.map((carrinho: CarrinhoItem) => {
+            let sacolaMercado: SacolaMercadoDTO = {} as SacolaMercadoDTO;
+            sacolaMercado.idMercado = carrinho.produto.idMercado;
+            sacolaMercado.idMercadoLocalidade = carrinho.produto.idMercadoLocalidade;
+            sacolaMercado.nomeMercado = carrinho.produto.nomeFantasiaMercado;
+            sacolaMercado.imagemMercado = carrinho.produto.mercadoImagemUrl;
+            sacolaMercado.horarioMaximo = carrinho.produto.horarioMaximo;
+            sacolaMercado.horarioMaximoEntrega = carrinho.produto.horarioMaximoEntrega;
+            sacolaMercado.valorFrete = carrinho.produto.valorFrete;
+            sacolaMercado.valorMinimo = carrinho.produto.valorMinimo;
+            sacolaMercado.entrega = carrinho.produto.entrega;
+
+            this.sacolaMercados.push(new SacolaMercados(sacolaMercado, carrinhoItem))
+        })
+        //filtra o array para que não haja categorias repetidas
+        let teste = this.sacolaMercados.find(sacola => sacola.sacolaMercado.idMercadoLocalidade)
+        if (teste) {
+            this.sacolaMercados.splice(this.sacolaMercados.indexOf(teste), 1);
+        }
+        //mapeio os mercados gerados filtro os items dos respectivos mercados
+        this.sacolaMercados.map(mercado => {
+          let findItem =  items.filter(item=> item.produto.idMercadoLocalidade === mercado.sacolaMercado.idMercadoLocalidade);
+          mercado.carrinhoItem =findItem;
         })
     }
 
-    getSacolaMercados(): SacolaMercados[] {
+    setSacolaMercados(): SacolaMercados[] {
         return this.sacolaMercados;
     }
 
@@ -85,13 +95,13 @@ export class CompraFacilService {
         }
     }
 
-    
+
     setDataRetiradaPedidoUsuario(dataEntrada: any) {
         this.dataEntradaPedido = dataEntrada;
     }
 
     getDataRetiradaPedidoUsuario() {
-        if(this.dataEntradaPedido){
+        if (this.dataEntradaPedido) {
             return this.dataEntradaPedido;
         }
     }
@@ -105,7 +115,7 @@ export class CompraFacilService {
             return this.entregaOuRetirada;
         }
     }
-    
+
 
     setPagamento(evento) {
         this.formadePagamento = evento
