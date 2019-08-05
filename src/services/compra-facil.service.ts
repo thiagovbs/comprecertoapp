@@ -5,6 +5,9 @@ import { Pedido } from "../models/pedido.model";
 import { HttpClient } from "@angular/common/http";
 import { API_CONFIG } from "../config/api.config";
 import { UsuarioService } from "./usuario.service";
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/timeout';
+import 'rxjs/add/operator/catch';
 
 
 @Injectable()
@@ -16,6 +19,7 @@ export class CompraFacilService {
     sacolaMercados: SacolaMercados[] = [];
     sacolaMercado: SacolaMercados = {} as SacolaMercados;
 
+    public listaProdutosMercado: Map<SacolaMercados, CarrinhoItem[]> = new Map<SacolaMercados, CarrinhoItem[]>();
 
     constructor(private http: HttpClient, private usuarioService: UsuarioService) { }
 
@@ -27,7 +31,7 @@ export class CompraFacilService {
     //settando os valores dentro do model produtos por mercado
     setMercadoDTO(items: CarrinhoItem[]) {
 
-        this.sacolaMercados =[]
+        this.sacolaMercados = [];
 
         items.map((carrinho: CarrinhoItem) => {
             let sacolaMercado: SacolaMercadoDTO = {} as SacolaMercadoDTO;
@@ -41,17 +45,16 @@ export class CompraFacilService {
             sacolaMercado.valorMinimo = carrinho.produto.valorMinimo;
             sacolaMercado.entrega = carrinho.produto.entrega;
 
-            this.sacolaMercados.push(new SacolaMercados(sacolaMercado, []))
+            let foundMercado: SacolaMercados = this.sacolaMercados.find((carditem: SacolaMercados) => carditem.sacolaMercado.idMercadoLocalidade === carrinho.produto.idMercadoLocalidade);
+            if (!foundMercado) {
+                this.sacolaMercados.push(new SacolaMercados(sacolaMercado, []))
+            }
         })
-        //filtra o array para que não haja categorias repetidas
-        let findMercadoRepeated = this.sacolaMercados.find(sacola => sacola.sacolaMercado.idMercadoLocalidade)
-        if (findMercadoRepeated) {
-            this.sacolaMercados.splice(this.sacolaMercados.indexOf(findMercadoRepeated), 1);
-        }
+
         //mapeio os mercados gerados filtro os items dos respectivos mercados
         this.sacolaMercados.map(mercado => {
-          let findProdutos =  items.filter(item=> item.produto.idMercadoLocalidade === mercado.sacolaMercado.idMercadoLocalidade);
-          mercado.carrinhoItem =findProdutos;
+            let findItem = items.filter(item => item.produto.idMercadoLocalidade === mercado.sacolaMercado.idMercadoLocalidade);
+            mercado.carrinhoItem = findItem;
         })
     }
 
@@ -76,13 +79,9 @@ export class CompraFacilService {
         return valorTotal
     }
 
-
     postPedido(pedido: Pedido) {
         return this.http.post(`${API_CONFIG.baseUrl}/pedido`, pedido);
     }
-
-
-
 
     setEnderecoPedidoUsuario(endereco: any) {
         this.enderecoUsuarioPedido = endereco;
@@ -125,5 +124,4 @@ export class CompraFacilService {
             return this.formadePagamento;
         }
     }
-
 }
