@@ -27,8 +27,7 @@ export class CompraFacilService {
     //settando os valores dentro do model produtos por mercado
     setMercadoDTO(items: CarrinhoItem[]) {
 
-        let carrinhoItem: CarrinhoItem[] = []
-
+        this.sacolaMercados =[]
 
         items.map((carrinho: CarrinhoItem) => {
             let sacolaMercado: SacolaMercadoDTO = {} as SacolaMercadoDTO;
@@ -42,17 +41,17 @@ export class CompraFacilService {
             sacolaMercado.valorMinimo = carrinho.produto.valorMinimo;
             sacolaMercado.entrega = carrinho.produto.entrega;
 
-            this.sacolaMercados.push(new SacolaMercados(sacolaMercado, carrinhoItem))
+            this.sacolaMercados.push(new SacolaMercados(sacolaMercado, []))
         })
         //filtra o array para que não haja categorias repetidas
-        let teste = this.sacolaMercados.find(sacola => sacola.sacolaMercado.idMercadoLocalidade)
-        if (teste) {
-            this.sacolaMercados.splice(this.sacolaMercados.indexOf(teste), 1);
+        let findMercadoRepeated = this.sacolaMercados.find(sacola => sacola.sacolaMercado.idMercadoLocalidade)
+        if (findMercadoRepeated) {
+            this.sacolaMercados.splice(this.sacolaMercados.indexOf(findMercadoRepeated), 1);
         }
         //mapeio os mercados gerados filtro os items dos respectivos mercados
         this.sacolaMercados.map(mercado => {
-          let findItem =  items.filter(item=> item.produto.idMercadoLocalidade === mercado.sacolaMercado.idMercadoLocalidade);
-          mercado.carrinhoItem =findItem;
+          let findProdutos =  items.filter(item=> item.produto.idMercadoLocalidade === mercado.sacolaMercado.idMercadoLocalidade);
+          mercado.carrinhoItem =findProdutos;
         })
     }
 
