@@ -36,4 +36,8 @@ export class SubCategoriaService {
         return this.http.get<any>(`${API_CONFIG.baseUrl}/mercado-produtos/dto/com-validade?idBairro=${idBairro}&page=${page}&count=${count}`);
     }
 
+    findProdutosComDtValidadeEbairro2(idBairro, buscar:string, page: number = 0, count: number = 20, ): Observable<any> {
+        return this.http.get<any>(`${API_CONFIG.baseUrl}/mercado-produtos/dto2/com-validade?idBairro=${idBairro}&page=${page}&count=${count}&busca=${buscar}`);
+    }
+
 }

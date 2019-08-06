@@ -37,7 +37,7 @@ export class PesquisaPage {
     public alertCrtl: AlertController,
     private alcanceService: AlcanceService,
     public popoverCtrl: PopoverController,
-    private carrinhoItemService:CarrinhoService) {
+    private carrinhoItemService: CarrinhoService) {
   }
 
   //Impedir que a página abra sem o alcance settado
@@ -65,15 +65,6 @@ export class PesquisaPage {
       .subscribe((response: MercadoProduto[]) => {
         this.produtos = response;
 
-/*         //servico de posicionamento por produto
-        this.supermercadoService.setServicosPorProduto(this.produtos);
-        this.servicosProduto = this.supermercadoService.getServicosPorProduto();
-
-        //filtros
-        this.filtrosService.sortByFDestaque(this.produtos);
-        this.filtrosService.sortByServicoPosicionamentoMercado(this.servicosProduto);
-        this.filtrosService.sortByPreco(this.produtos)
- */
         //pega os produtos e cria um array por (nome - marca - caracteristica)
         this.produtos.map((produto: MercadoProduto) => {
           this.arrayNomeCompletoProdutos.push({
@@ -89,32 +80,15 @@ export class PesquisaPage {
 
     this.filterProdutos = [];
     this.filterProdutosUnico = []
-    let novoArrayNomeCompletoProdutos: Array<{ id: number, nome: string }> = []
 
+    console.log("pesquisar")
     //verificar se há texto no campo e se possui produtos no array inicial
     if (this.searchTerm && this.arrayNomeCompletoProdutos) {
-      //filtro que compara a string digitada com o array do nome completo de produtos
-      novoArrayNomeCompletoProdutos = this.arrayNomeCompletoProdutos.filter((produto) => {
-        return produto.nome.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1
-      })
-      //transformar a string novoArrayNomeCompletoProdutos em um tipo produto
-      this.produtos.filter((produto: MercadoProduto) => {
-        novoArrayNomeCompletoProdutos.map(p => {
-          if (produto.idMercadoProduto === p.id && this.filterProdutosUnico.length === 0) {
-            return this.filterProdutosUnico.push(produto);
-          }
-        })
-      })
-
-      //filtro para produtos sugeridos
-      this.produtos.filter((produto: MercadoProduto) => {
-        novoArrayNomeCompletoProdutos.map(p => {
-          if (produto.idMercadoProduto === p.id && p.id !== this.filterProdutosUnico[0].idMercadoProduto) {
-            return this.filterProdutos.push(produto)
-          }
-        })
-      });
-
+      this.mercadoProdutosService.findProdutosComDtValidadeEbairro2(this.localidadeMercado.idBairro, this.searchTerm)
+        .subscribe((response: MercadoProduto[]) => {
+          console.log(response)
+        });
+    
       if (this.filterProdutosUnico.length === 0) {
         this.myAlert()
         this.filterProdutosUnico = undefined;
@@ -164,9 +138,9 @@ export class PesquisaPage {
     alert.present()
   }
 
-  
+
   //ao sair da tela de produtos, os itens seão adicionados no localStorage
-  ionViewDidLeave(){
+  ionViewDidLeave() {
     this.carrinhoItemService.setLocalSacola()
   }
 
