@@ -60,9 +60,9 @@ export class HomePage {
           .subscribe((resp: Mercado[]) => {
             this.mercados = resp;
             
-            this.mercadoService.setServicosPorMercado(this.mercados);
-            this.tiposServico = this.mercadoService.getServicosPorMercado()
-            this.filtrosService.sortByServicoPosicionamentoMercado(this.tiposServico)
+           /*  this.mercadoService.setServicosPorMercado(this.mercados);
+            this.tiposServico = this.mercadoService.getServicosPorMercado() */
+            //this.filtrosService.sortByServicoPosicionamentoMercado(this.tiposServico)
           })
       }
     })

@@ -113,7 +113,7 @@ export class AlcanceComponent implements OnInit {
             text: 'Continuar',
             handler: () => {
               this.sendLocal()
-              this.carrinhoService.clear()
+              this.carrinhoService.clear();
             }
           }
 
@@ -123,6 +123,7 @@ export class AlcanceComponent implements OnInit {
       prompt.onWillDismiss(() => { this.viewCtrl.dismiss() })
     } else if (this.bairroEscolhido) {
       this.sendLocal()
+      this.viewCtrl.dismiss();
     } else {
       this.viewCtrl.dismiss();
     }
