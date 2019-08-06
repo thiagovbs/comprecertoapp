@@ -18,20 +18,18 @@
 
 <ion-content>
 
-  <!--list of posts-->
-  <ion-list class="list-full-border">
-    <ion-item *ngFor="let supermercado of supermercados; let i = index " text-wrap (click)="onMercado(supermercado)">
-      <ion-thumbnail item-left style="margin-top:15px">
-        <!-- <div *ngIf="supermercado.logo !== null">
-            <img class="img-rounded" src="{{bucketS3}}/mercado1.jpg" alt="">
-        </div> -->
-        <img class="img-rounded" style="height:70px; width:70px" src="{{supermercado.imagemUrl}}" alt="">
-      </ion-thumbnail>
-      <div>
-        <div>{{ supermercado.nomeFantasia }}</div>
-        <p class="text-sm" ion-text color="light-dark">{{localidadeMercado.nome}} - {{localidadeMercado.cidade.nome}} -
-          {{localidadeMercado.cidade.estado.sigla}}</p>
-      </div>
-    </ion-item>
-  </ion-list>
+  <!--list of mercados-->
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-list class="list-full-border">
+      <ion-item *ngFor="let supermercado of supermercados; let i = index " text-wrap (click)="onMercado(supermercado)">
+        <ion-thumbnail item-left style="margin-top:15px">
+          <img class="img-rounded" style="height:70px; width:70px" src="{{supermercado.imagemUrl}}" alt="">
+        </ion-thumbnail>
+        <div>
+          <div>{{ supermercado.nomeFantasia }}</div>
+          <p class="text-sm" ion-text color="light-dark"> {{supermercado.mercadoLocalidades[0].endereco}}
+        </div>
+      </ion-item>
+    </ion-list>
+  </ion-infinite-scroll>
 </ion-content>

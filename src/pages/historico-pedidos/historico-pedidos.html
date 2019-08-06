@@ -45,7 +45,7 @@
                 <img src="assets/imgs/Icon-Retirada.svg" height="15" alt="" style="margin-top: 6px"
                   *ngIf="pedido.entrega ==='R'">
 
-                <ion-icon item-left name="ios-pin-outline" class="font-icon"></ion-icon>
+                <ion-icon item-left name="ios-pin-outline" class="font-icon" *ngIf="pedido.entrega ==='R'"></ion-icon>
 
               </ion-col>
               <ion-col col-10 text-left style="margin-left: -10px">
@@ -59,8 +59,7 @@
                 <p ion-text class="main-text" style="margin-top:7px;" *ngIf="pedido.entrega ==='R'">
                   Retirada no supermercado</p>
 
-                <p ion-text class="main-text" style="margin-top:9px;" *ngIf="pedido.entrega ==='R'">Rua Conde de Bonfim,
-                  545 - 803</p>
+                <p ion-text class="main-text" style="margin-top:9px;" *ngIf="pedido.entrega ==='R'">{{pedido.mercadoLocalidade.endereco}}</p>
               </ion-col>
             </ion-row>
           </ion-col>

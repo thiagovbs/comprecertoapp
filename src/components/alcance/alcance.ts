@@ -2,7 +2,8 @@ import { Component, ContentChild, OnInit } from '@angular/core';
 import { FormGroup, FormControlName, Validators, FormControl } from '@angular/forms';
 import { AlcanceService } from '../../services/alcance.service';
 import { Bairro, Cidade, Estado } from '../../models/localidade';
-import { ViewController, App, Events, NavController } from 'ionic-angular';
+import { ViewController, App, Events, NavController, AlertController } from 'ionic-angular';
+import { CarrinhoService } from '../../services/carrinho.service';
 
 @Component({
   selector: 'alcance',
@@ -25,7 +26,9 @@ export class AlcanceComponent implements OnInit {
     public viewCtrl: ViewController,
     public appCtrl: App,
     private events: Events,
-    private navCtrl: NavController) {
+    private navCtrl: NavController,
+    private carrinhoService: CarrinhoService,
+    private alertCrtl: AlertController) {
 
     this.alcanceForm = new FormGroup({
       estado: new FormControl({ value: '' }, [Validators.required]),
@@ -43,6 +46,7 @@ export class AlcanceComponent implements OnInit {
     this.alcanceService.getEstados().subscribe((estados: Estado[]) => {
       this.estados = estados;
     })
+
 
     //caso já exista o alcance
     if (this.alcanceService.getLocaAlcance()) {
@@ -89,21 +93,45 @@ export class AlcanceComponent implements OnInit {
     this.bairroEscolhido = bairro
   }
 
-  SubmitForm() {
+  showAlert() {
 
-    if (this.bairroEscolhido) {
-      this.alcanceService.setLocalAlcance(null);
-      this.alcanceService.setLocalAlcance(this.bairroEscolhido);
-      this.events.publish('alcance')
-      this.navCtrl.setRoot(this.navCtrl.getActive());
+    if (this.carrinhoService.items.length !== 0) {
 
+      const prompt = this.alertCrtl.create({
+        title: 'Você possui produtos no carrinho!',
+        message: "Caso você mude sua localidade, seus carrinho será esvaziado!",
+        cssClass: 'ConfirmCompraFacil',
+        buttons: [
+          {
+            text: 'Sair',
+            handler: () => {
+
+              this.viewCtrl.dismiss();
+            }
+          },
+          {
+            text: 'Continuar',
+            handler: () => {
+              this.sendLocal()
+              this.carrinhoService.clear()
+            }
+          }
+
+        ]
+      })
+      prompt.present();
+      prompt.onWillDismiss(() => { this.viewCtrl.dismiss() })
+    } else if (this.bairroEscolhido) {
+      this.sendLocal()
+    } else {
+      this.viewCtrl.dismiss();
     }
-    this.viewCtrl.dismiss();
-
   }
 
-
-
-
-
+  sendLocal() {
+    this.alcanceService.setLocalAlcance(null);
+    this.alcanceService.setLocalAlcance(this.bairroEscolhido);
+    this.events.publish('alcance')
+    this.navCtrl.setRoot(this.navCtrl.getActive());
+  }
 }

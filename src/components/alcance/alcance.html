@@ -4,7 +4,7 @@
             <label style="font-size: 1.0em; font-weight: 500;color:#fff">Localidade</label>
         </ion-col>
     </ion-row>
-    <form [formGroup]="alcanceForm" (ngSubmit)="SubmitForm()">
+    <form [formGroup]="alcanceForm">
         <ion-row>
             <ion-col col-2>
                 <label for="Estado" class="lbl_eselect">Estado</label>
@@ -39,7 +39,7 @@
                 </ion-item>
             </ion-col>
             <ion-col col-2 style="margin-top:15px" text-center>
-                <button ion-button icon-only 
+                <button ion-button icon-only (click)="showAlert()"
                 style="background:#fff; width:2.6em; height: 2.0em;"  [disabled]="!alcanceForm.valid">
                     <ion-icon name="compass" color="secondary"></ion-icon>
                 </button>

@@ -28,6 +28,7 @@ export class CarrinhoService {
             //Exclui produto na sacola caso a dt de validade seja ultrapassada
             this.items.map((item: CarrinhoItem) => {
                 let dtValidade = new Date(item.produto.dtValidadeMercadoProduto).getDate()
+
                 if (dataAtual > dtValidade) {
                     this.items.splice(this.items.indexOf(item), 1);
                     this.setLocalSacola()
@@ -49,6 +50,7 @@ export class CarrinhoService {
     //deleta todos os produtos da lista
     clear() {
         this.items = [];
+        localStorage.removeItem(STORAGE_KEYS.localSacola)
     }
 
     //adiciona item no carrinhoItem
