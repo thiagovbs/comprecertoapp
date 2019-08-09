@@ -19,9 +19,9 @@
 <ion-content class="cart">
   <ion-list class="list-full-border" style="margin-top:75px">
     <ion-card class="card-no-shadow card-sheap-buy" *ngFor="let mercado of mercadosSacola">
-      <ion-grid style="padding:0 !important" >
+      <ion-grid style="padding:0 !important">
         <ion-row>
-          <ion-col col-12 class="pull-left" style="margin-top:-10px;">
+          <ion-col col-12 class="pull-left" style="margin-top:-10px;margin-left: -7px;">
             <p class="cl-data">Válido até: <span></span>{{getDataValidade(mercado) | dateFormat}}</p>
           </ion-col>
         </ion-row>
@@ -55,14 +55,16 @@
             </ion-row>
           </ion-col>
         </ion-row>
-        <ion-row style="margin-top:5px; ">
-          <ion-col col-12 text-right >
-            <a (click)="onDetalhePedido(mercado)">
-              <p class="main-text text-inline" style="color:#00836D">Detalhes</p>
-            </a>
-            <a (click)="onFormPedido(mercado)" *ngIf="mercado.sacolaMercado.entrega !== null">
-              <p class="main-text text-inline" style="color:#00836D">Enviar Pedido</p>
-            </a>
+        <ion-row>
+          <ion-col col-12 text-right>
+            <button ion-button class="pull-right btn-enviar-pedido" (click)="onFormPedido(mercado)"
+            *ngIf="mercado.sacolaMercado.entrega !==null">
+              Enviar Pedido
+            </button>
+            <button ion-button class="pull-right btn-detalhe" (click)="onDetalhePedido(mercado)">
+              Detalhes
+            </button>
+
           </ion-col>
         </ion-row>
       </ion-grid>

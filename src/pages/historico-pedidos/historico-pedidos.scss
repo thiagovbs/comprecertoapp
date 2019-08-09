@@ -3,7 +3,7 @@ page-historico-pedidos {
 
     .main-text{
         
-        font-size: 0.62em;
+        font-size: 0.90rem;
         color: #1F1F1F;
         letter-spacing: 0.027em;
     }
@@ -17,8 +17,13 @@ page-historico-pedidos {
     }
 
     .cl-data{
-        font-size:0.60em !important; 
+        font-size: 0.90rem !important; 
         text-align: end;
+    }
+
+    .text-inline{
+        margin-right: 15px;
+        margin-top: -15px;
     }
 
     .sub-text { 

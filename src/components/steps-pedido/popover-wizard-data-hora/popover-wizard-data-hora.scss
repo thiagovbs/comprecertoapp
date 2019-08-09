@@ -34,13 +34,23 @@ popover-wizard-data-hora {
         max-width: 100% !important;
     }
 
-    ::-webkit-input-placeholder {
-        color: #333333 !important;
-        font-size: 1.3rem !important;
-       }
 
-       .select-md .select-placeholder {
+
+      .select-md .select-placeholder {
         color: #333333 !important;
         font-size: 1.3rem !important;
-       }
+        margin-left: -5px !important;
+    }
+
+    .select-md {
+        padding: 15px 8px 0px 8px !important;
+        width: 100% !important;
+    }
+
+    .text-input-md {
+        margin-left: 1px !important;
+        margin: 13px 8px;
+        padding: 0;
+        width: calc(100% - 8px - 8px);
+    }
 }

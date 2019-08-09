@@ -94,7 +94,7 @@ export class DynamicStepsPage {
 
   onClose() {
     const prompt = this.alertCtrl.create({
-      title: 'Deseja cancelar sua compra ?',
+      title: 'Deseja cancelar sua compra?',
       message: "Você perderá as informações preenchidas nesse formulário",
       cssClass: 'ConfirmCompraFacil',
       buttons: [

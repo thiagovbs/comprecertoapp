@@ -119,7 +119,7 @@ img.profile-picture {
   // card style
   .card-no-shadow {
     height:100%;
-    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3);
   }
 
 // list style
@@ -298,7 +298,26 @@ ion-slides[pager] {
   border-radius: 5px;
   height: 20px !important;
   margin-right: 1px;
+}
+
+.btn-detalhe{
+  width: 102px;
+  padding-left: 10px;
+  background: transparent;
+  font-size:9px !important;
+  border-radius: 5px;
+  color:color($colors, secondary);
+  height: 20px !important;
+  margin-right: 10px; 
+}
+
+.btn-enviar-pedido{
+  width: 102px;  
   
+  font-size:9px !important;
+  border-radius: 5px;
+  height: 20px !important;
+  margin-right: 1px; 
 }
 
 .btn-sacola-remove{
@@ -329,6 +348,15 @@ margin-top:-5px;
 border:1px solid #eee;
 padding: 10px;
 }
+
+.thumb-image-finalizacao{
+  height: 110px !important;
+  min-width: 110px !important;
+  border-radius: 50%;
+  margin-top:-5px;
+  border:1px solid #eee;
+  padding: 5px;
+  }
 
 
 //Segundo menu
@@ -539,23 +567,34 @@ font-size: 1.7rem !important;
 }
 
 .ConfirmCompraFacil{
-text-align: center;
+text-align: start;
 
 .alert-head{
   margin:0 auto;
 }
 .alert-message{
   color:#1d1d1d !important;
+  max-height: 240px;
+    font-size: 1.4rem;
+    text-align: justify;
+    padding-left: 29px;
+    padding-right: 31px;
+    letter-spacing: 1px;
+    line-height: 20px;
+    margin-top: -10px;
+  
 }
 .alert-button-group{
   justify-content: flex-start;
   -webkit-box-pack: center;
-  padding: 8px 20px 6px 5px;
+  padding: 8px 0px 6px 0px;
   background: map-get($colors, secondary) !important;
   .alert-button-default{
     margin: 0 auto;
     color:#fff;
     font-weight: 700;
+    width: 50%;
+    padding-right: 50px;
   }
 }
 }
@@ -602,7 +641,7 @@ li{
   float: left;
   width: 25%;
   position: relative;  
-  font-size: 1.0rem;
+  font-size: 0.90rem;
   text-align: center;
   
 }

@@ -1,7 +1,7 @@
-<ion-row>
+<ion-row style="    margin-top: -30px;">
   <ion-col col-12 mt-10>
     <ion-thumbnail>
-      <img class="thumb-image-compra-sacola img-center" [src]="infoMercado.imagemMercado" alt="" height="20" />
+      <img class="thumb-image-finalizacao img-center" [src]="infoMercado.imagemMercado" alt="" height="30" />
     </ion-thumbnail>
   </ion-col>
   <ion-row>
@@ -49,7 +49,7 @@
     <ion-col col-12 class="border-type img-center">
       <h2 class="subtitle">Informações Pessoais</h2>
     </ion-col>
-    <ion-col col-12 text-left class="padding-left-column side">
+    <ion-col col-12 text-left class="padding-left-column side" style="margin-top: -10px;">
       <label for="nome" class="text-inline">Nome:</label>
       <p class="text-inline">{{usuarioService.getLocalUser().nome}}</p>
     </ion-col>
@@ -77,8 +77,8 @@
     <ion-col col-12 class="border-type img-center" style="margin-top:-15px;">
       <h2 class="subtitle">Forma de Pagamento</h2>
     </ion-col>
-    <ion-col col-12 text-left class="padding-left-column side">
-      <p class="text-inline">- {{tipoPagamento(compraFacilService.getPagamento().tipo)}}</p>
+    <ion-col col-12 text-left class="padding-left-column side" >
+      <p class="text-inline" style="margin-top: 0px;">- {{tipoPagamento(compraFacilService.getPagamento().tipo)}}</p>
     </ion-col>
   </ion-row>
 

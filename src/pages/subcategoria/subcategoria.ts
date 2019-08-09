@@ -125,8 +125,6 @@ export class SubcategoriaPage implements OnInit {
     let loader = this.presenteLoading();
     this.subcategoriaService.findProdutosPorCategoria(this.categoria.idCategoria, this.localidade.idBairro, this.page, 4)
       .subscribe((resp: MercadoProduto[]) => {
-        console.log(resp)
-        //this.produtos = resp;
         this.produtos = this.produtos.concat(resp)
         if (this.produtos.length === 0) {
           this.produtos = undefined;
@@ -139,8 +137,8 @@ export class SubcategoriaPage implements OnInit {
     let loader = this.presenteLoading();
     this.subcategoriaService.findProdutosPorCategoriaEMercado(this.mercadoDetalhe.idCategoria, this.mercadoDetalhe.idMercado, this.page, 4)
       .subscribe(resp => {
-        this.produtos = resp;
-
+        
+        this.produtos = this.produtos.concat(resp)
         //Não repetir as categorias
         this.mercadoSubCategoria = this.supermercadoService
           .filtrarSubcategoriasPorMercadoProduto(this.produtos);
