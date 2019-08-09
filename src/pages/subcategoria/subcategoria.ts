@@ -123,16 +123,11 @@ export class SubcategoriaPage implements OnInit {
 
   listaProdutosPorCategoria() {
     let loader = this.presenteLoading();
-    this.subcategoriaService.findProdutosPorCategoria(this.categoria.idCategoria, this.localidade.idBairro, this.page, 20)
+    this.subcategoriaService.findProdutosPorCategoria(this.categoria.idCategoria, this.localidade.idBairro, this.page, 4)
       .subscribe((resp: MercadoProduto[]) => {
         console.log(resp)
         //this.produtos = resp;
         this.produtos = this.produtos.concat(resp)
-        //settar os serviços por produto
-        this.supermercadoService.setServicosPorProduto(this.produtos);
-        //get os serviços por produto
-        this.tipoServico = this.supermercadoService.getServicosPorProduto();
-
         if (this.produtos.length === 0) {
           this.produtos = undefined;
         }
@@ -142,24 +137,19 @@ export class SubcategoriaPage implements OnInit {
 
   listaProdutosPorMercadoECategoria() {
     let loader = this.presenteLoading();
-    this.subcategoriaService.findProdutosPorCategoriaEMercado(this.mercadoDetalhe.idCategoria, this.mercadoDetalhe.idMercado, this.page, 20)
+    this.subcategoriaService.findProdutosPorCategoriaEMercado(this.mercadoDetalhe.idCategoria, this.mercadoDetalhe.idMercado, this.page, 4)
       .subscribe(resp => {
         this.produtos = resp;
-        
+
         //Não repetir as categorias
         this.mercadoSubCategoria = this.supermercadoService
           .filtrarSubcategoriasPorMercadoProduto(this.produtos);
-
-        //settar os serviços por produto
-        this.supermercadoService.setServicosPorProduto(this.produtos);
-        //get os serviços por produto
-        this.tipoServico = this.supermercadoService.getServicosPorProduto();
 
         if (this.produtos.length === 0) {
           this.produtos = undefined;
         }
         loader.dismiss()
-      },erro=>{loader.dismiss()})
+      }, erro => { loader.dismiss() })
   }
 
   onTodosProdutos(): MercadoProduto[] {
@@ -180,13 +170,15 @@ export class SubcategoriaPage implements OnInit {
   }
 
   doInfinite(infiniteScroll) {
+    this.page++
     if (this.possuiMercadoNome) {
-      this.listaProdutosPorCategoria()
-    } else {
       this.listaProdutosPorMercadoECategoria()
+    } else {
+
+      this.listaProdutosPorCategoria()
     }
     setTimeout(() => {
-      this.page++
+
       infiniteScroll.complete()
     }, 10000)
   }

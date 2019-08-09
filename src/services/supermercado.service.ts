@@ -6,17 +6,14 @@ import { API_CONFIG } from "../config/api.config";
 import { Bairro } from "../models/localidade";
 import { MercadoDetalheProd, MercadoDetalheSubcategoria } from "../pages/supermercado-detalhe/supermercado-detalhe";
 import { MercadoProduto } from "../models/mercado-produto.model";
-import { PacoteTipoServico } from "../models/pacote-tipo-servico.model";
-import { Mercado } from "../models/supermercado.model";
+
 
 @Injectable()
 export class SupermercadoService {
 
   mercadoCategoria: MercadoDetalheProd[] = [];
   mercadoSubCategoria: MercadoDetalheSubcategoria[] = []
-  tipoServicoProduto: PacoteTipoServico[] = [];
-  tipoServicoMercado: PacoteTipoServico[] = [];
-
+  mercadoLocalidade:any= [];
 
   constructor(public http: HttpClient) {
   }
@@ -57,57 +54,19 @@ export class SupermercadoService {
         idCategoria: mercado.idCategoria
       });
     })
+
     //filtra o array para que não haja categorias repetidas
     this.mercadoSubCategoria = this.mercadoSubCategoria.filter((thing, index, self) => {
       return index === self.findIndex((t) => (t.idSubcategoria === thing.idSubcategoria))
     })
-
     return this.mercadoSubCategoria;
   }
 
-  setServicosPorProduto(mercadoProdutoServico: MercadoProduto[]) {
-    if (mercadoProdutoServico) {
-      mercadoProdutoServico.map((mercadoServico: MercadoProduto) => {
-        //console.log(mercadoServico)
-        mercadoServico.mercadoServicos.map((resp: any) => {
-          //8 é o Id que o pacote de posicionamento pertence na base
-          if (resp.idMercadoServico === 8) {
-            this.tipoServicoProduto = resp.pacoteServico;
-            this.tipoServicoProduto;
-          }
-        })
-      })
-    } else {
-      console.log("não entrei no servico")
-      return this.tipoServicoProduto = [];
-    }
-
+  setMercadoLocalidadePopOverSearch(idMercadoLocalidade: any): void {
+    this.mercadoLocalidade = idMercadoLocalidade;
   }
-  getServicosPorProduto(): PacoteTipoServico[] {
-    return this.tipoServicoProduto;
+  getMercadoLocalidadePopOverSearch(): Array<number> {
+    return this.mercadoLocalidade;
   }
 
-
-/*   setServicosPorMercado(mercadoService: Mercado[]) {
-    let mercadoLocalidade: any
-    if (mercadoService) {
-      mercadoService.map((mercado: Mercado) => {
-        mercadoLocalidade = mercado.mercadoLocalidades[0];
-
-        mercadoLocalidade.mercadoServicos.map((resp: any) => {
-          //8 é o Id que o pacote de posicionamento pertence na base
-          if (resp.pacoteServico.descricao === "x") {
-            this.tipoServicoMercado.push(resp.pacoteServico);
-          }
-        })
-      })
-    } else {
-      console.log("não entrei no servico")
-      return this.tipoServicoMercado = [];
-    }
-  }
-
-  getServicosPorMercado(): PacoteTipoServico[] {
-    return this.tipoServicoMercado;
-  } */
 }

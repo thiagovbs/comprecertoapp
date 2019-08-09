@@ -1,6 +1,6 @@
 import { Component, ContentChild } from '@angular/core';
 import { NavController, NavParams, Loading, LoadingController, Events } from 'ionic-angular';
-import { FormBuilder, FormGroup, FormControlName, Validators, FormControl } from '@angular/forms';
+import { FormGroup, FormControlName, Validators, FormControl } from '@angular/forms';
 import { Usuario, Permissao } from '../../models/usuario';
 import { UsuarioService } from '../../services/usuario.service';
 import { AuthService } from '../../services/auth.service';
@@ -34,7 +34,6 @@ export class InfoSignPopoverComponent {
   ];
 
   constructor(private navCntl: NavController,
-    private formBuilder: FormBuilder,
     private params: NavParams,
     private usuarioService: UsuarioService,
     public loadingCtrl: LoadingController,

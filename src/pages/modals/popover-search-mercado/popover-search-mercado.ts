@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, ViewController } from 'ionic-angular';
 import { SupermercadoService } from '../../../services/supermercado.service';
 import { AlcanceService } from '../../../services/alcance.service';
-import { Filtros } from '../../../util/filtros';
 import { Mercado } from '../../../models/supermercado.model';
 import { Bairro } from '../../../models/localidade';
-import { PacoteTipoServico } from '../../../models/pacote-tipo-servico.model';
-
 
 @IonicPage()
 @Component({
@@ -18,23 +15,29 @@ export class PopoverSearchMercadoPage {
   supermercados: Mercado[];
   supermercadosFilter: Mercado[];
   localidadeMercado: Bairro;
-  tiposServico: PacoteTipoServico[];
   buscar: string
-  verficaBuscar:boolean = false;
-  selectedMercados:Mercado[] =[];
+  verficaBuscar: boolean = false;
+  selectedMercados: Mercado[] = [];
+  myAlcance: any;
+  mercadoLocalidades = [];
+  
 
   constructor(public navCtrl: NavController,
     public supermercadoService: SupermercadoService,
     private alcanceService: AlcanceService,
-    private filtrosService: Filtros) {
+    public viewCtrl: ViewController) {
   }
 
   ionViewDidLoad() {
-    this.getMercados()
+    
+    this.mercadoLocalidades = this.supermercadoService.getMercadoLocalidadePopOverSearch();
+
+    this.getMercados();
+    this.myAlcance = this.alcanceService.getLocaAlcance()
   }
 
   searchMercado() {
-    
+
     if (this.supermercados && this.buscar) {
       this.verficaBuscar = true;
       this.supermercadosFilter = this.supermercados.filter((mercado: Mercado) => (mercado.nomeFantasia.toLowerCase()
@@ -42,8 +45,8 @@ export class PopoverSearchMercadoPage {
     }
   }
 
-  changeMercado(evento){
-    if(evento.target.value === ""){
+  changeMercado(evento) {
+    if (evento.target.value === "") {
       this.verficaBuscar = false;
     }
   }
@@ -53,24 +56,45 @@ export class PopoverSearchMercadoPage {
     this.supermercadoService.buscarMercadoprodutosPorBairro(this.localidadeMercado)
       .subscribe((resp: Mercado[]) => {
         this.supermercados = resp
-       /*  this.supermercadoService.setServicosPorMercado(this.supermercados);
-        this.tiposServico = this.supermercadoService.getServicosPorMercado() */
-       //this.filtrosService.sortByServicoPosicionamentoMercado(this.tiposServico)
       })
   }
 
-  showMercado( mercado:Mercado,checked:boolean){
-    if(checked){
-      this.selectedMercados.push(mercado)
+  showMercado(mercado: Mercado, checked: boolean) {
+    console.log(checked)
+    if (checked) {
+      this.selectedMercados.push(mercado);
     }else{
+      console.log("exclusão")
       this.selectedMercados.splice(this.selectedMercados.indexOf(mercado),1);
     }
+  }
 
+  onFiltrar() {
+  
+    let tempIdLocalidades:Array<number>=[];
+    
+    
+    this.selectedMercados.map(mercado => {
+      let mercadoLocalidade = mercado.mercadoLocalidades.find(localidade => localidade.bairro.idBairro === this.myAlcance.idBairro)
+      if (mercadoLocalidade) {
+        tempIdLocalidades.push(mercadoLocalidade.idMercadoLocalidade)
+      }
+    });
+    this.mercadoLocalidades = tempIdLocalidades;
+    this.supermercadoService.setMercadoLocalidadePopOverSearch(this.mercadoLocalidades)
+    this.viewCtrl.dismiss(this.mercadoLocalidades)
+  }
+
+  getMercadoSelected(mercadoLocalidadesSelect: any):boolean {
+    let found:boolean =false;
+    mercadoLocalidadesSelect.map(localidade => {
+      this.mercadoLocalidades.map(id=>{
+        if( id === localidade.idMercadoLocalidade){
+          found = true;
+        }
+      })
+    })
+    return found;
     
   }
-
-  onFiltrar(){
-    console.log(this.selectedMercados)
-  }
-
 }

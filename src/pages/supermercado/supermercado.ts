@@ -6,8 +6,7 @@ import { API_CONFIG } from '../../config/api.config';
 import { AlcanceService } from '../../services/alcance.service';
 import { AlcanceComponent } from '../../components/alcance/alcance';
 import { Bairro } from '../../models/localidade';
-import { Filtros } from '../../util/filtros';
-import { PacoteTipoServico } from '../../models/pacote-tipo-servico.model';
+
 
 @IonicPage()
 @Component({
@@ -19,13 +18,11 @@ export class SupermercadoPage {
   supermercados: Mercado[];
   localidadeMercado: Bairro;
   bucketS3: string;
-  tiposServico: PacoteTipoServico[]
 
   constructor(public navCtrl: NavController,
     public supermercadoService: SupermercadoService,
     private alcanceService: AlcanceService,
-    private popoverCtrl: PopoverController,
-    private filtrosService: Filtros) {
+    private popoverCtrl: PopoverController) {
 
   }
 
@@ -34,8 +31,6 @@ export class SupermercadoPage {
     this.supermercadoService.buscarMercadoprodutosPorBairro(this.localidadeMercado)
       .subscribe((resp: Mercado[]) => {
         this.supermercados = resp
-        /* this.supermercadoService.setServicosPorMercado(this.supermercados);
-        this.tiposServico = this.supermercadoService.getServicosPorMercado() */
       })
 
     //imagens S3

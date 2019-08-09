@@ -58,10 +58,6 @@ export class CompraFacilService {
         })
     }
 
-    setSacolaMercados(): SacolaMercados[] {
-        return this.sacolaMercados;
-    }
-
     getQntProdutosPorMercado(carrinhoMercado: CarrinhoItem[]): number {
         let quantidade: number = 0;
         carrinhoMercado.map((carrinho: CarrinhoItem) => {

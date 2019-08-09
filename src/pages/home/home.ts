@@ -12,10 +12,7 @@ import { AlcanceService } from '../../services/alcance.service';
 import * as Lodash from "lodash";
 import { Usuario } from '../../models/usuario';
 import { Bairro } from '../../models/localidade';
-import { Filtros } from '../../util/filtros';
 import { PacoteTipoServico } from '../../models/pacote-tipo-servico.model';
-
-import { FCM } from '@ionic-native/fcm';
 
 
 @IonicPage()
@@ -37,9 +34,7 @@ export class HomePage {
     private categoriaService: CategoriaService,
     private mercadoService: SupermercadoService,
     private popoverCtrl: PopoverController,
-    private events: Events,
-    private filtrosService: Filtros,
-    private fcm: FCM) {
+    private events: Events) {
 
     //Carregando as Categorias
     this.categoriaService.findAll().subscribe(resp => {
@@ -59,10 +54,6 @@ export class HomePage {
         this.mercadoService.buscarMercadoprodutosPorBairro(this.localidadeMercado)
           .subscribe((resp: Mercado[]) => {
             this.mercados = resp;
-            
-           /*  this.mercadoService.setServicosPorMercado(this.mercados);
-            this.tiposServico = this.mercadoService.getServicosPorMercado() */
-            //this.filtrosService.sortByServicoPosicionamentoMercado(this.tiposServico)
           })
       }
     })
@@ -95,7 +86,7 @@ export class HomePage {
     console.log(barato)
   }
 
-  onMercados(mercado) {
+  onMercados(mercado: Mercado) {
     this.navCtrl.push("SupermercadoDetalhePage", {
       mercado: mercado
     });
@@ -105,7 +96,7 @@ export class HomePage {
     this.navCtrl.push('PesquisaPage')
   }
 
-  onCompraFacil(){
+  onCompraFacil() {
     this.navCtrl.push('CompreFacilPage', {})
   }
 

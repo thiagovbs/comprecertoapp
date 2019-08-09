@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Pedido } from '../../models/pedido.model';
 import { PedidosService } from '../../services/pedidos.service';
+import { AlcanceService } from '../../services/alcance.service';
 
 
 @IonicPage()
@@ -12,15 +13,23 @@ import { PedidosService } from '../../services/pedidos.service';
 export class HistoricoPedidosPage {
 
   activeEntrega: boolean = false
+  endereco:string;
+  numero:string;
+  complemento:string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    private pedidosService: PedidosService) {
+    private pedidosService: PedidosService,
+    private alcanceService:AlcanceService) {
   }
   pedidos: Pedido[] = [];
 
   ionViewDidLoad() {
     this.getPedidosHistorico()
     this.setTimePedido()
+
+    this.endereco = this.alcanceService.getLocalEndereco().endereco;
+    this.numero = this.alcanceService.getLocalEndereco().numero;
+    this.complemento = this.alcanceService.getLocalEndereco().complemento;
 
   }
 
@@ -33,23 +42,33 @@ export class HistoricoPedidosPage {
   }
 
   setTimePedido() {
-    let i = 0;
     setInterval(() => {
-      i++;
-      if (i === 60) {
-        this.getPedidosHistorico();
-        i = 0;
-      }
-    }, 1000)
+      this.getPedidosHistorico();
+    }, 60000)
+  }
+
+  setQtdPedido(pedido: Pedido): number {
+    let total = 0;   
+    pedido.pedidoProdutos.map(produto => {
+      total = produto.quantidade + total
+    })
+    return total
   }
 
   getPedidosHistorico() {
     this.pedidosService.getPedidos().subscribe(resp => {
-      console.log(resp)
       this.pedidos = resp;
     }, erro => {
       console.log(erro)
     })
+  }
+
+  setValorTotalPedido(pedido:Pedido):number{
+    let total = 0;
+    pedido.pedidoProdutos.map(produto => {
+      total = produto.preco * produto.quantidade + total
+    })
+    return total;
   }
 
 }

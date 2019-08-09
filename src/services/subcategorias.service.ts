@@ -12,10 +12,6 @@ export class SubCategoriaService {
         return this.http.get<any>(`${API_CONFIG.baseUrl}/subcategorias`)
     }
 
-    findProdutos(): Observable<any> {
-        return this.http.get<any>(`${API_CONFIG.baseUrl}/mercado-produtos/dto`);
-    }
-
     findProdutosPorCategoria(categoriaId, idBairro, page: number = 0, count: number = 20): Observable<any> {
         return this.http.get<any>(`${API_CONFIG.baseUrl}/mercado-produtos/dto/com-validade/?idCategoria=${categoriaId}&idBairro=${idBairro}&page=${page}&count=${count}`);
     }
@@ -28,16 +24,16 @@ export class SubCategoriaService {
         return this.http.get<any>(`${API_CONFIG.baseUrl}/mercado-produtos/dto/com-validade/?idCategoria=${categoriaId}&idMercado=${mercadoId}&page=${page}&count=${count}`);
     }
 
-    findProdutosPorMercado(mercadoId, page:number = 0, count:number =10): Observable<any> {
+    findProdutosPorMercado(mercadoId, page: number = 0, count: number = 10): Observable<any> {
         return this.http.get<any>(`${API_CONFIG.baseUrl}/mercado-produtos/dto/com-validade/?idMercado=${mercadoId}&page=${page}&count=${count}`);
     }
 
-    findProdutosComDtValidadeEbairro(idBairro, page: number = 0, count: number = 20): Observable<any> {
-        return this.http.get<any>(`${API_CONFIG.baseUrl}/mercado-produtos/dto/com-validade?idBairro=${idBairro}&page=${page}&count=${count}`);
+    findProdutosComDtValidadeEbairro(idBairro, buscar: string, page: number = 0, count: number = 20): Observable<any> {
+        return this.http.get<any>(`${API_CONFIG.baseUrl}/mercado-produtos/dto/com-validade?idBairro=${idBairro}&page=${page}&count=${count}&busca=${buscar}`);
     }
 
-    findProdutosComDtValidadeEbairro2(idBairro, buscar:string, page: number = 0, count: number = 20, ): Observable<any> {
-        return this.http.get<any>(`${API_CONFIG.baseUrl}/mercado-produtos/dto2/com-validade?idBairro=${idBairro}&page=${page}&count=${count}&busca=${buscar}`);
+    findProdutosComDtValidadeEmercado( idMercalocalidades, buscar: string, page: number = 0, count: number = 20): Observable<any> {
+        return this.http.get<any>(`${API_CONFIG.baseUrl}/mercado-produtos/dto/com-validade?localidades=${idMercalocalidades}&page=${page}&count=${count}&busca=${buscar}`);
     }
 
 }

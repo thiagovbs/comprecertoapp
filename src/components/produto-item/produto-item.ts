@@ -1,11 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { Mercado } from '../../models/supermercado.model';
 import { CarrinhoService } from '../../services/carrinho.service';
 import { CarrinhoItem } from '../../models/carrinho-item.model';
 import { MercadoProduto } from '../../models/mercado-produto.model';
 import { API_CONFIG } from '../../config/api.config';
-import { SupermercadoService } from '../../services/supermercado.service';
+import { NavController } from 'ionic-angular';
 
 @Component({
   selector: 'produto-item',
@@ -28,7 +27,7 @@ export class ProdutoItemComponent implements OnInit {
 
 
 
-  constructor(private carrinhoService: CarrinhoService, private mercadoService: SupermercadoService) {
+  constructor(private carrinhoService: CarrinhoService, public navCtrl: NavController) {
     this.carrinhoItem = carrinhoService.carrinhoItem
   }
 
@@ -72,6 +71,13 @@ export class ProdutoItemComponent implements OnInit {
     return this.somaProduto = 0;
   }
 
+  sendToMercado(mercadoProduto:MercadoProduto){
+    console.log(mercadoProduto)
+    let sedMercado:{idMercado:number, nomeFantasia:string}= {idMercado:mercadoProduto.idMercado, nomeFantasia: mercadoProduto.nomeFantasiaMercado}
+    this.navCtrl.push("SupermercadoDetalhePage", {
+      mercado: sedMercado
+    });
+  }
 
  
 }

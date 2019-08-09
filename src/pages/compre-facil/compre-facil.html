@@ -19,7 +19,7 @@
 <ion-content class="cart">
   <ion-list class="list-full-border" style="margin-top:75px">
     <ion-card class="card-no-shadow card-sheap-buy" *ngFor="let mercado of mercadosSacola">
-      <ion-grid style="padding:0 !important">
+      <ion-grid style="padding:0 !important" >
         <ion-row>
           <ion-col col-12 class="pull-left" style="margin-top:-10px;">
             <p class="cl-data">Válido até: <span></span>{{getDataValidade(mercado) | dateFormat}}</p>
@@ -44,7 +44,7 @@
               </ion-col>
               <ion-col col-10 text-left style="margin-left:-8px;">
                 <p ion-text class="main-text" style="margin-top:-3px;">Produtos: <span
-                    style="color: #00836D">{{mercado.carrinhoItem.length}}</span></p>
+                    style="color: #00836D">{{setQuantidade(mercado)}}</span></p>
                 <p ion-text class="main-text" style="margin-top:8px;">Valor Total: <span
                     style="color: #00836D">{{setValorTotal(mercado) | currency:'BRL'}}</span> </p>
                 <p ion-text class="main-text" style="margin-top:7px;" *ngIf="mercado.sacolaMercado.entrega ==='E'">
@@ -60,7 +60,7 @@
             <a (click)="onDetalhePedido(mercado)">
               <p class="main-text text-inline" style="color:#00836D">Detalhes</p>
             </a>
-            <a (click)="onFormPedido(mercado)">
+            <a (click)="onFormPedido(mercado)" *ngIf="mercado.sacolaMercado.entrega !== null">
               <p class="main-text text-inline" style="color:#00836D">Enviar Pedido</p>
             </a>
           </ion-col>

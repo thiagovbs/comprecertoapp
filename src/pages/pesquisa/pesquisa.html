@@ -19,16 +19,19 @@
 </ion-header>
 
 <ion-content class="gray-bg">
-  <ion-list *ngIf="filterProdutos && searchTerm">
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-list *ngIf="filterProdutosUnico.length !== 0  && searchTerm">
 
-    <produto-item [produto-itens]="filterProdutosUnico" [possuiMercadoNome]="possuiMercadoNome">
-    </produto-item>
-    <div text-center class="secondary-bg" *ngIf="filterProdutos.length !==0" style="margin-bottom: -13px;">
-      <p style="color:#fff; font-size:0.98em !important;"><small>Produtos sugeridos</small></p>
-    </div>
-    <produto-item [produto-itens]="filterProdutos" [possuiMercadoNome]="possuiMercadoNome">
-    </produto-item>
-  </ion-list>
+      <produto-item [produto-itens]="filterProdutosUnico" [possuiMercadoNome]="possuiMercadoNome">
+      </produto-item>
+      <div text-center class="secondary-bg" *ngIf="filterProdutos.length !==0" style="margin-bottom: -13px;">
+        <p style="color:#fff; font-size:0.98em !important;"><small>Produtos sugeridos</small></p>
+      </div>
 
- 
+      <produto-item [produto-itens]="filterProdutos" [possuiMercadoNome]="possuiMercadoNome">
+      </produto-item>
+
+    </ion-list>
+  </ion-infinite-scroll>
+
 </ion-content>

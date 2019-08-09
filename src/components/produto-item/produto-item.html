@@ -46,7 +46,7 @@
         </ion-grid>
     </ion-item>
     <!-- Exemplo de mercado por produto -->
-    <ion-item *ngIf="!possuiMercadoNome" class="card">
+    <ion-item *ngIf="!possuiMercadoNome" class="card" (click)="sendToMercado(produto)">
         <div item-left>
             <img src="assets/icon/supermercado-produto.svg" alt="">
         </div>

@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Time } from '@angular/common';
 import { SacolaMercados } from '../../../models/SacolaMercados.model';
 import { AlcanceService } from '../../../services/alcance.service';
+import { EnderecoLocalStorage } from '../../../models/endereco-localstorage';
 
 @Component({
   selector: 'popover-wizard-data-hora',
@@ -12,7 +13,7 @@ import { AlcanceService } from '../../../services/alcance.service';
 export class PopoverWizardDataHoraComponent {
 
   dataHoraform: FormGroup
-  pedidoMercado: SacolaMercados={} as SacolaMercados
+  pedidoMercado: SacolaMercados = {} as SacolaMercados
   datas: Date[] = []
 
   @Output() infoDataHoraPedido = new EventEmitter();
@@ -20,21 +21,26 @@ export class PopoverWizardDataHoraComponent {
   constructor(private formBuilder: FormBuilder,
     private viewControl: ViewController,
     private navParams: NavParams,
-    private localAlcance:AlcanceService) {
+    private localAlcance: AlcanceService) {
 
-    
+
     this.dataHoraform = this.formBuilder.group({
       dataHora: this.formBuilder.control('', [Validators.required]),
-      cpf:this.formBuilder.control({value:'139.791.307-03', disabled:true}, [Validators.required]),
-      celular:  this.formBuilder.control('', [Validators.required, Validators.minLength(14)]),
+      cpf: this.formBuilder.control({ value: '139.791.307-03', disabled: true }, [Validators.required]),
+      celular: this.formBuilder.control('', [Validators.required, Validators.minLength(14)]),
     })
 
-   
+
   }
 
   ionViewDidLoad() {
     this.pedidoMercado = this.navParams.get('pedidosMercado');
-    console.log(this.pedidoMercado)
+    if (this.localAlcance.getLocalEndereco()) {
+      this.dataHoraform.get('celular').setValue(this.localAlcance.getLocalEndereco().celular);
+    }
+
+
+    this.localAlcance.getLocalEndereco()
     this.getDataHoraRetirada()
   }
 
@@ -45,7 +51,7 @@ export class PopoverWizardDataHoraComponent {
   getDataHoraRetirada() {
     this.datas = [];
     ////////////////////////////////
-    
+
     let horarioMax: String = String(this.pedidoMercado.sacolaMercado.horarioMaximo);
     let hour = (horarioMax.split(':'))[0]
     let min = (horarioMax.split(':'))[1]
@@ -94,7 +100,7 @@ export class PopoverWizardDataHoraComponent {
       dataLimite.setDate(dataLimite.getDate() + 1)
 
       let dataTmp = dataAtual;
-      
+
       while (dataTmp <= dataLimite) {
         this.datas.push(new Date(dataTmp))
         dataTmp.setHours(dataTmp.getHours() + 1);
@@ -103,7 +109,21 @@ export class PopoverWizardDataHoraComponent {
   }
 
   dataHoraSubmit() {
-    console.log(this.dataHoraform.value)
+    let celular = this.dataHoraform.controls['celular'].value;
+
+    if (this.localAlcance.getLocalEndereco()){
+      let localEndereco: EnderecoLocalStorage = {
+        endereco: this.localAlcance.getLocalEndereco().endereco,
+        numero: this.localAlcance.getLocalEndereco().numero,
+        complemento: this.localAlcance.getLocalEndereco().complemento,
+        celular: celular,
+      };
+      this.localAlcance.setLocalEndereco(localEndereco);
+    } else {
+      let localEndereco: EnderecoLocalStorage = { endereco: "", numero: "", complemento: "", celular: celular };
+      this.localAlcance.setLocalEndereco(localEndereco);
+    }
+
     this.viewControl.dismiss(this.dataHoraform.value)
 
   }

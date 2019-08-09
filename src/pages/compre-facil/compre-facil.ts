@@ -20,7 +20,6 @@ export class CompreFacilPage {
   valorTotal: number;
   produtos: CarrinhoItem[] = [];
   mercadosSacola: SacolaMercados[] = [];
-  foundItem: SacolaMercados;
   bucketS3: string;
   qntTotal: number = 0;
   dtValidade:Date;
@@ -66,6 +65,7 @@ export class CompreFacilPage {
     this.carrinhoService.getItemsCarrinho();
     //serviço que modifica o carrinho para o modelo de SacolaMercados
     this.mercadosSacola = this.compraFacilService.sacolaMercados;
+    console.log(this.mercadosSacola)
   }
 
   //popover mostrar a msg de politicas do compre facil
@@ -81,15 +81,16 @@ export class CompreFacilPage {
   }
 
   //quantidade total de produtos na sacola de cada mercado
-  setQuantidade(): number {
-    if (this.foundItem) {
-      return this.compraFacilService.getQntProdutosPorMercado(this.foundItem.carrinhoItem);
+  setQuantidade(item): number {
+    let foundItem = this.mercadosSacola.find((produtoItem) => produtoItem.sacolaMercado.idMercadoLocalidade === item.sacolaMercado.idMercadoLocalidade);
+    if (foundItem) {
+      return this.compraFacilService.getQntProdutosPorMercado(foundItem.carrinhoItem);
     }
   }
   //valor total de produtos na sacola de cada mercado
   setValorTotal(item) { 
-    this.foundItem = this.mercadosSacola.find((produtoItem) => produtoItem.sacolaMercado.idMercadoLocalidade === item.sacolaMercado.idMercadoLocalidade);
-    return this.compraFacilService.getValorProdutosPorMercado(this.foundItem.carrinhoItem);
+    let foundItem = this.mercadosSacola.find((produtoItem) => produtoItem.sacolaMercado.idMercadoLocalidade === item.sacolaMercado.idMercadoLocalidade);
+    return this.compraFacilService.getValorProdutosPorMercado(foundItem.carrinhoItem);
   }
 
   onFormPedido(mercado:SacolaMercados){

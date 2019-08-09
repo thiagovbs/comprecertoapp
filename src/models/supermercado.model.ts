@@ -15,4 +15,5 @@ export interface Mercado{
   title:string,
   bairro:any,
   mercadoProdutos:MercadoProduto,
+  selecionado?:boolean
 }

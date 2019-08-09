@@ -4,13 +4,14 @@ import { API_CONFIG } from "../config/api.config";
 import { Observable } from "rxjs";
 import { Bairro, Estado, Cidade } from "../models/localidade";
 import { STORAGE_KEYS } from "../config/storage_keys.config";
+import { EnderecoLocalStorage } from "../models/endereco-localstorage";
 
 
 @Injectable()
 export class AlcanceService {
 
     constructor(public http: HttpClient) {
-        
+
     }
 
     getEstados(): Observable<Estado[]> {
@@ -42,9 +43,8 @@ export class AlcanceService {
     }
 
     //Pegar o usuário ativo no localstorage
-    getLocaAlcance() {     
+    getLocaAlcance() {
         let alcance = localStorage.getItem(STORAGE_KEYS.localAlcance);
-        
         if (alcance === null) {
             return null
         } else {
@@ -52,6 +52,22 @@ export class AlcanceService {
         }
     }
 
+    //Settar o Endereco no localStorage
+    setLocalEndereco(obj: EnderecoLocalStorage) {
+        if (obj === null) {
+            localStorage.removeItem(STORAGE_KEYS.localEndereco)
+        } else {
+            localStorage.setItem(STORAGE_KEYS.localEndereco, JSON.stringify(obj))
+        }
+    }
 
-
+    //Pegar o Endereco ativo no localstorage
+    getLocalEndereco() {
+        let endereco = localStorage.getItem(STORAGE_KEYS.localEndereco);
+        if (endereco === null) {
+            return null
+        } else {
+            return JSON.parse(endereco);
+        }
+    }
 }

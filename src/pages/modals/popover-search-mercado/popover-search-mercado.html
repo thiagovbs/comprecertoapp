@@ -18,10 +18,9 @@
     <ion-item class="item-title" no-lines margin-top>
       <h2 style=" font-size:0.88em; color:#fff;">Supermercados</h2>
     </ion-item>
-    <ion-item *ngFor="let mercado of supermercadosFilter" style="background:#eee"
-      (click)="showMercado(mercado,mercado.checked)">
+    <ion-item *ngFor="let mercado of supermercadosFilter" style="background:#eee">
       <ion-label style="color:#000">{{mercado.nomeFantasia}}</ion-label>
-      <ion-checkbox red item-right [(ngModel)]="mercado.checked" (click)="showMercado(mercado,mercado.checked)">
+      <ion-checkbox red item-right [(ngModel)]="mercado.checked" (ionChange)="showMercado(mercado,mercado.checked)">
       </ion-checkbox>
     </ion-item>
   </ion-list>
@@ -29,16 +28,18 @@
     <ion-item class="item-title" no-lines margin-top>
       <h2 style=" font-size:0.88em; color:#fff;">Supermercados</h2>
     </ion-item>
-    <ion-item *ngFor="let mercado of supermercados" style="background:#eee">
+    <ion-item *ngFor="let mercado of supermercados; let i = index " style="background:#eee">
       <ion-label style="color:#000">{{mercado.nomeFantasia}}</ion-label>
-      <ion-checkbox item-right [(ngModel)]="mercado.checked" (click)="showMercado(mercado,mercado.checked)">
+      <ion-checkbox item-right (click)="showMercado(mercado,$event)" 
+      [(ngModel)]="mercado.checked">
       </ion-checkbox>
     </ion-item>
   </ion-list>
 
 </ion-content>
 <ion-footer class="cart-footer">
-  <button ion-button block style="width:100%; margin: 0px auto" class="register" (click)="onFiltrar()" color="secondary" margin-bottom>
+  <button ion-button block style="width:100%; margin: 0px auto" class="register" (click)="onFiltrar()" color="secondary"
+    margin-bottom>
     Filtrar
   </button>
 </ion-footer>

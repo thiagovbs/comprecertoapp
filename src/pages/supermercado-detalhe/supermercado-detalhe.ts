@@ -19,7 +19,7 @@ export class SupermercadoDetalhePage {
   mercadoProduto: MercadoProduto[];
   //categorias: Array<number> = [];
   categorias: Observable<Categoria[]>
-  mercado: Mercado
+  mercado: any
   mercadoNome: string;
   bucketS3: string;
   mercadoCategoria: MercadoDetalheProd[] = [];
@@ -40,6 +40,7 @@ export class SupermercadoDetalhePage {
 
     //this.categorias =this.categoriaService.categorias;
     this.mercado = this.navParams.get('mercado');
+    console.log(this.mercado)
     this.mercadoNome = this.mercado.nomeFantasia;
 
     this.subcategoriaService.findProdutosPorMercado(this.mercado.idMercado)

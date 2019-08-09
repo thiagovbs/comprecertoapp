@@ -5,6 +5,7 @@ import { MercadoProduto } from "../models/mercado-produto.model";
 
 import { STORAGE_KEYS } from "../config/storage_keys.config";
 import { CompraFacilService } from "./compra-facil.service";
+import { SacolaMercados } from "../models/SacolaMercados.model";
 
 @Injectable()
 export class CarrinhoService {
@@ -113,5 +114,13 @@ export class CarrinhoService {
         if (this.items) {
             this.compraFacilService.setMercadoDTO(this.items);
         }
+    }
+
+    changeMercadoSacolaToCarrinhoItem(sacolaMercados:SacolaMercados){
+        
+        sacolaMercados.carrinhoItem.map(produto =>{
+            this.items.splice(this.items.indexOf(produto), 1)
+        })
+        console.log(this.items)
     }
 }

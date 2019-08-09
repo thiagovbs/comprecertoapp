@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Events, AlertController, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events, AlertController, ViewController, App } from 'ionic-angular';
 
 import { SacolaMercados } from '../../../../models/SacolaMercados.model';
 
@@ -9,6 +9,7 @@ import { MercadoLocalidade } from '../../../../models/mercadoLocalidade.model';
 import { PedidoProduto } from '../../../../models/pedidoProduto.model';
 import { Produto } from '../../../../models/Produto.model';
 import { CompraFacilService } from '../../../../services/compra-facil.service';
+import { CarrinhoService } from '../../../../services/carrinho.service';
 
 
 @IonicPage()
@@ -41,7 +42,9 @@ export class DynamicStepsPage {
     private userService: UsuarioService,
     public viewCtrl: ViewController,
     private compraFacilService: CompraFacilService,
-    private alertCrtl: AlertController) {
+    private alertCrtl: AlertController,
+    private carrinhoService:CarrinhoService,
+    private app:App) {
 
     this.step = 1;//The value of the first step, always 1
     this.stepCondition = false;//For each step the condition is set to this value, Set to true if you don't need condition in every step
@@ -76,7 +79,7 @@ export class DynamicStepsPage {
     this.valorMimimoFrete = this.pedidosMercado.sacolaMercado.valorMinimo
     this.produtosPedido = this.pedidosMercado.carrinhoItem;
     this.infoMercado = this.pedidosMercado.sacolaMercado
-    console.log(this.infoMercado)
+    
 
   }
 
@@ -88,11 +91,6 @@ export class DynamicStepsPage {
   toggleCondition(_condition) {
     this.stepCondition = _condition.checked;
   }
-
-  ionViewDidLoad() {
-    
-  }
-
 
   onClose() {
     const prompt = this.alertCtrl.create({
@@ -167,16 +165,13 @@ export class DynamicStepsPage {
     }
   }
 
-
-
-
   montarPedido() {
 
     let pedido: Pedido = {} as Pedido;
     pedido.usuario = this.userService.getLocalUser()
     pedido.usuario.permissoes = []
     pedido.pedidoProdutos = [];
-    
+     console.log(this.enderecoPedido.celular) 
     pedido.celular = this.enderecoPedido.celular;
     pedido.substituicao= this.substituicao;
     if (this.enderecoPedido.endereco) {
@@ -198,8 +193,10 @@ export class DynamicStepsPage {
     mercadoLocalidade.idMercadoLocalidade = this.pedidosMercado.sacolaMercado.idMercadoLocalidade
     mercadoLocalidade.imagemUrl= this.pedidosMercado.sacolaMercado.imagemMercado;
     mercadoLocalidade.fAtivo = true;
-   
-    pedido.mercadoLocalidade = mercadoLocalidade
+    pedido.mercadoLocalidade = mercadoLocalidade;
+
+    console.log(this.pedidosMercado)
+    
 
     for (let carrinhoItem of this.pedidosMercado.carrinhoItem) {
       let pedidoProduto: PedidoProduto = {} as PedidoProduto;
@@ -212,12 +209,14 @@ export class DynamicStepsPage {
     }
     console.log(pedido)
     this.compraFacilService.postPedido(pedido).subscribe(resp => {
+      this.carrinhoService.changeMercadoSacolaToCarrinhoItem(this.pedidosMercado)
       this.successAlert()
-      this.navCtrl.setRoot('HistoricoPedidosPage')
+      this.viewCtrl.dismiss();
+      this.app.getRootNav().setRoot("HistoricoPedidosPage");
     }, erro => {
       this.myAlert() 
       console.log(erro)
-    })
+    });
   }
 
 

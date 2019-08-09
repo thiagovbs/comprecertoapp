@@ -5,6 +5,7 @@ import { ViewController, NavParams } from 'ionic-angular';
 import { UsuarioService } from '../../../services/usuario.service';
 import { AlcanceService } from '../../../services/alcance.service';
 import { SacolaMercados } from '../../../models/SacolaMercados.model';
+import { EnderecoLocalStorage } from '../../../models/endereco-localstorage';
 
 @Component({
   selector: 'form-compra-facil-popover',
@@ -15,7 +16,7 @@ export class FormCompraFacilPopoverComponent {
   enderecoForm: FormGroup
   usuarioNome: string;
   nomeCidade: string;
-  pedidoMercado: SacolaMercados={} as SacolaMercados
+  pedidoMercado: SacolaMercados = {} as SacolaMercados
   nomeEstado: string;
   bairro: string;
   @ContentChild(FormControlName) control: FormControlName;
@@ -48,12 +49,29 @@ export class FormCompraFacilPopoverComponent {
   ionViewDidLoad() {
     this.usuarioNome = this.localUser.getLocalUser().nome;
     this.pedidoMercado = this.navParams.get('pedidosMercado');
-    console.log(this.pedidoMercado)
-/* 
-    this.pedidoMercado.sacolaMercado.horarioMaximoEntrega */
+
+    if (this.localAlcance.getLocalEndereco()) {
+      this.enderecoForm.get('endereco').setValue(this.localAlcance.getLocalEndereco().endereco);
+      this.enderecoForm.get('numero').setValue(this.localAlcance.getLocalEndereco().numero);
+      this.enderecoForm.get('complemento').setValue(this.localAlcance.getLocalEndereco().complemento);
+      this.enderecoForm.get('celular').setValue(this.localAlcance.getLocalEndereco().celular);
+    }
+
+    /* 
+        this.pedidoMercado.sacolaMercado.horarioMaximoEntrega */
   }
 
   SubmitForm() {
+    let localEndereco:EnderecoLocalStorage;
+
+    let endereco = this.enderecoForm.controls['endereco'].value;
+    let celular = this.enderecoForm.controls['celular'].value;
+    let numero = this.enderecoForm.controls['numero'].value;
+    let complemento = this.enderecoForm.controls['complemento'].value;
+
+    localEndereco = { endereco: endereco, celular: celular, numero: numero, complemento: complemento };
+
+    this.localAlcance.setLocalEndereco(localEndereco);
     this.viewCtrl.dismiss(this.enderecoForm.value)
   }
 

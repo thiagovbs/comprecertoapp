@@ -25,12 +25,12 @@ export class PesquisaPage {
   possuiMercadoNome: boolean;
   categoriaNome: string;
   localidadeMercado: Bairro;
-  arrayNomeCompletoProdutos: Array<{ id: number, nome: string }> = [];
-  tiposServico: PacoteTipoServico[]
   supermercados: Mercado[];
   filterSupermercados: Mercado[] = [];
   activeStar: boolean = false;
   nameIcon: string = "ios-funnel-outline";
+  page: number = 0
+  idMercadoLocalidades:Array<number> = null
 
   constructor(public navCtrl: NavController,
     public mercadoProdutosService: SubCategoriaService,
@@ -38,6 +38,7 @@ export class PesquisaPage {
     private alcanceService: AlcanceService,
     public popoverCtrl: PopoverController,
     private carrinhoItemService: CarrinhoService) {
+    this.page = 0;
   }
 
   //Impedir que a página abra sem o alcance settado
@@ -54,64 +55,61 @@ export class PesquisaPage {
   }
 
   ionViewDidLoad() {
-
+    this.filterProdutosUnico = []
+    this.idMercadoLocalidades = null
     this.possuiMercadoNome = false;
     this.produtos = null;
+
     //pegando a localidade para filtro de produtos
     this.localidadeMercado = this.alcanceService.getLocaAlcance();
-
-    //serviço que retorna produtos de mercados por localidade
-    this.mercadoProdutosService.findProdutosComDtValidadeEbairro(this.localidadeMercado.idBairro)
-      .subscribe((response: MercadoProduto[]) => {
-        this.produtos = response;
-
-        //pega os produtos e cria um array por (nome - marca - caracteristica)
-        this.produtos.map((produto: MercadoProduto) => {
-          this.arrayNomeCompletoProdutos.push({
-            id: produto.idMercadoProduto,
-            nome: `${produto.nomeProduto} ${produto.marcaProduto} ${produto.caracteristicaProduto}`
-          })
-        })
-      }, erro => { })
   }
 
   //Clicar no botão filtrar deve aparecer um único produto e uma lista de produtos sugeridos pela pesquisa
   filtrarProduto() {
-
+    this.page = 0;
     this.filterProdutos = [];
-    this.filterProdutosUnico = []
-
-    console.log("pesquisar")
-    //verificar se há texto no campo e se possui produtos no array inicial
-    if (this.searchTerm && this.arrayNomeCompletoProdutos) {
-      this.mercadoProdutosService.findProdutosComDtValidadeEbairro2(this.localidadeMercado.idBairro, this.searchTerm)
-        .subscribe((response: MercadoProduto[]) => {
-          console.log(response)
+    //filtro com mercados localidades 
+    if (this.idMercadoLocalidades !== null && this.searchTerm) {
+      this.mercadoProdutosService.findProdutosComDtValidadeEmercado(this.idMercadoLocalidades, this.searchTerm, this.page, 4)
+        .subscribe(resp => {
+          this.filterProdutos = this.filterProdutos.concat(resp)
+          this.filterProdutosUnico = new Array(this.filterProdutos[0]);
+          this.filterProdutos.shift()
+          if (this.filterProdutosUnico.length === 0) {
+            this.myAlert("Não achamos nenhum produto com esse nome!")
+            this.filterProdutosUnico = undefined;
+            this.filterProdutos = undefined;
+          }
+        })
+    }
+    //filtro sem mercados localidades 
+    else if (this.idMercadoLocalidades === null && this.searchTerm) {
+      this.mercadoProdutosService.findProdutosComDtValidadeEbairro(this.localidadeMercado.idBairro, this.searchTerm, this.page, 4)
+        .subscribe(response => {
+          this.filterProdutos = response
+          this.filterProdutosUnico = new Array(this.filterProdutos[0]);
+          this.filterProdutos.shift()
+          if (this.filterProdutosUnico.length === 0) {
+            this.myAlert("Não achamos nenhum produto com esse nome!")
+            this.filterProdutosUnico = undefined;
+            this.filterProdutos = undefined;
+          }
         });
-    
-      if (this.filterProdutosUnico.length === 0) {
-        this.myAlert()
-        this.filterProdutosUnico = undefined;
-        this.filterProdutos = undefined;
-      }
-
     }
   }
 
+
   //Apagar as listas caso o usuário mude a pesquisa
   changeInput() {
-    this.filterProdutos = [];
-    this.filterProdutosUnico = [];
+
   }
 
   filtrarMercado() {
     this.activeStar = !this.activeStar;
     this.nameIcon = this.activeStar ? 'ios-funnel' : 'ios-funnel-outline'
     if (this.activeStar) {
-
       this.localidadeMercado = this.alcanceService.getLocaAlcance();
       this.showInfoCompraFacil()
-
     }
   }
 
@@ -119,16 +117,22 @@ export class PesquisaPage {
   showInfoCompraFacil() {
     let popover = this.popoverCtrl.create('PopoverSearchMercadoPage', {}, { cssClass: 'search-mercado' });
     popover.present();
-    popover.onDidDismiss(() => {
+    popover.onDidDismiss((data) => {
       this.activeStar = false
       this.nameIcon = this.activeStar ? 'ios-funnel' : 'ios-funnel-outline'
+      this.idMercadoLocalidades = data;
+      if(this.searchTerm){
+        this.filtrarProduto()
+      }else{
+        this.myAlert("Digite o nome do seu produto")
+      }
     })
   }
 
-  myAlert() {
+  myAlert(text:string) {
     let alert = this.alertCrtl.create({
       title: '<img src="assets/imgs/icone-de-erro.svg" height="100">',
-      message: 'Não achamos nenhum produto com esse nome!',
+      message: text,
       enableBackdropDismiss: false,
       cssClass: 'AlertCompraFacil',
       buttons: [
@@ -136,6 +140,26 @@ export class PesquisaPage {
       ]
     })
     alert.present()
+  }
+
+  doInfinite(infiniteScroll) {
+    this.page++;
+    if (this.idMercadoLocalidades !== null) {
+      this.mercadoProdutosService.findProdutosComDtValidadeEmercado(this.idMercadoLocalidades, this.searchTerm, this.page, 4)
+        .subscribe(resp => {
+          this.filterProdutos = this.filterProdutos.concat(resp)
+        })
+    } else {
+      this.mercadoProdutosService.findProdutosComDtValidadeEbairro(this.localidadeMercado.idBairro, this.searchTerm, this.page, 3)
+        .subscribe((response: MercadoProduto[]) => {
+
+          this.filterProdutos = this.filterProdutos.concat(response)
+        });
+    }
+
+    setTimeout(() => {
+      infiniteScroll.complete()
+    }, 10000)
   }
 
 
