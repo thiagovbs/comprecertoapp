@@ -87,9 +87,16 @@ export class PesquisaPage {
       this.mercadoProdutosService.findProdutosComDtValidadeEbairro(this.localidadeMercado.idBairro, this.searchTerm, this.page, 4)
         .subscribe(response => {
           this.filterProdutos = response
-          this.filterProdutosUnico = new Array(this.filterProdutos[0]);
-          this.filterProdutos.shift()
-          if (this.filterProdutosUnico.length === 0) {
+          console.log(this.filterProdutos.length)
+          if(this.filterProdutos.length !== 0){
+            this.filterProdutosUnico = new Array(this.filterProdutos[0]);
+            this.filterProdutos.shift()
+          }else{
+            console.log("entrei")
+            this.filterProdutosUnico = undefined
+          }
+          
+          if (!this.filterProdutosUnico) {
             this.myAlert("Não achamos nenhum produto com esse nome!")
             this.filterProdutosUnico = undefined;
             this.filterProdutos = undefined;

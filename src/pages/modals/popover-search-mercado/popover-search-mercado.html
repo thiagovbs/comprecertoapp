@@ -15,9 +15,7 @@
 </ion-header>
 <ion-content style="background:#eee;">
   <ion-list *ngIf="verficaBuscar">
-    <ion-item class="item-title" no-lines margin-top>
-      <h2 style=" font-size:0.88em; color:#fff;">Supermercados</h2>
-    </ion-item>
+    
     <ion-item *ngFor="let mercado of supermercadosFilter" style="background:#eee">
       <ion-label style="color:#000">{{mercado.nomeFantasia}}</ion-label>
       <ion-checkbox red item-right [(ngModel)]="mercado.checked" (ionChange)="showMercado(mercado,mercado.checked)">
@@ -25,9 +23,6 @@
     </ion-item>
   </ion-list>
   <ion-list *ngIf="!verficaBuscar">
-    <ion-item class="item-title" no-lines margin-top>
-      <h2 style=" font-size:0.88em; color:#fff;">Supermercados</h2>
-    </ion-item>
     <ion-item *ngFor="let mercado of supermercados; let i = index " style="background:#eee">
       <ion-label style="color:#000">{{mercado.nomeFantasia}}</ion-label>
       <ion-checkbox item-right (click)="showMercado(mercado,$event)" 

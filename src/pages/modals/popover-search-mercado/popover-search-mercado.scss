@@ -1,11 +1,12 @@
 page-popover-search-mercado {
 
-
+    
     
     .item-search{
         background:transparent;
-        width: 85%;
+        width: 95%;
         margin: -15px auto;
+        padding-left: 9px;
     }
 
     
@@ -23,7 +24,7 @@ page-popover-search-mercado {
     }
 
     .text-input{
-        margin:0px 8px !important
+        margin:0px 0px !important
     }
     .text-type{
         font-size: .9em;
@@ -63,5 +64,9 @@ page-popover-search-mercado {
 
     .toolbar-content{
         height: 30px !important;
+    }
+
+    .item.item-md .checkbox-md[item-right], .item.item-md .checkbox-md[item-end] {
+        margin: 11px 7px 10px 0;
     }
 }
