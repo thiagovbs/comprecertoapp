@@ -123,7 +123,7 @@ export class SubcategoriaPage implements OnInit {
 
   listaProdutosPorCategoria() {
     let loader = this.presenteLoading();
-    this.subcategoriaService.findProdutosPorCategoria(this.categoria.idCategoria, this.localidade.idBairro, this.page, 4)
+    this.subcategoriaService.findProdutosPorCategoria(this.categoria.idCategoria, this.localidade.idBairro, this.page, 20)
       .subscribe((resp: MercadoProduto[]) => {
         this.produtos = this.produtos.concat(resp)
         if (this.produtos.length === 0) {
@@ -135,7 +135,7 @@ export class SubcategoriaPage implements OnInit {
 
   listaProdutosPorMercadoECategoria() {
     let loader = this.presenteLoading();
-    this.subcategoriaService.findProdutosPorCategoriaEMercado(this.mercadoDetalhe.idCategoria, this.mercadoDetalhe.idMercado, this.page, 4)
+    this.subcategoriaService.findProdutosPorCategoriaEMercadoEBairro(this.localidade.idBairro,this.mercadoDetalhe.idCategoria, this.mercadoDetalhe.idMercado, this.page, 20)
       .subscribe(resp => {
         
         this.produtos = this.produtos.concat(resp)

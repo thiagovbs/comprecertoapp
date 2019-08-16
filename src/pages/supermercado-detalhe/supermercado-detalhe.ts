@@ -7,6 +7,7 @@ import { API_CONFIG } from '../../config/api.config';
 import { SupermercadoService } from '../../services/supermercado.service';
 import { MercadoProduto } from '../../models/mercado-produto.model';
 import { SubCategoriaService } from '../../services/subcategorias.service';
+import { AlcanceService } from '../../services/alcance.service';
 
 
 @IonicPage()
@@ -23,13 +24,17 @@ export class SupermercadoDetalhePage {
   mercadoNome: string;
   bucketS3: string;
   mercadoCategoria: MercadoDetalheProd[] = [];
-  
+  idBairro:number
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     private supermercadoService: SupermercadoService,
-    private subcategoriaService: SubCategoriaService
+    private subcategoriaService: SubCategoriaService,
+    private alcanceService:AlcanceService
+
   ) {
+
+
   }
 
 
@@ -38,12 +43,14 @@ export class SupermercadoDetalhePage {
     //imagens S3
     this.bucketS3 = API_CONFIG.s3Url;
 
+    this.idBairro =this.alcanceService.getLocaAlcance().idBairro
+
     //this.categorias =this.categoriaService.categorias;
     this.mercado = this.navParams.get('mercado');
-    console.log(this.mercado)
+    
     this.mercadoNome = this.mercado.nomeFantasia;
 
-    this.subcategoriaService.findProdutosPorMercado(this.mercado.idMercado)
+    this.subcategoriaService.findProdutosPorMercadoEBairro(this.idBairro,this.mercado.idMercado)
       .subscribe((resp: MercadoProduto[]) => {
         this.mercadoCategoria = this.supermercadoService.filtrarCategoriasPorMercadoProduto(resp);
         this.mercadoCategoria.sort((a,b)=>{

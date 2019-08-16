@@ -7,7 +7,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DatePicker } from '@ionic-native/date-picker';
-
+import { CallNumber } from '@ionic-native/call-number';
 //Login Rede social
 import { Facebook} from '@ionic-native/facebook';
 import { GooglePlus } from '@ionic-native/google-plus';
@@ -44,7 +44,8 @@ import { Filtros } from '../util/filtros';
     InfoSignPopoverComponent,
     PopoverInfoCompraFacilComponent,
     FormCompraFacilPopoverComponent,
-    PopoverWizardDataHoraComponent
+    PopoverWizardDataHoraComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -52,7 +53,8 @@ import { Filtros } from '../util/filtros';
     HttpClientModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
-    BrMaskerModule
+    BrMaskerModule,
+    
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -82,7 +84,8 @@ import { Filtros } from '../util/filtros';
     SuporteService,
     CompraFacilService,
     Filtros,
-    FCM
+    FCM,
+    CallNumber
   ]
 })
 export class AppModule {}

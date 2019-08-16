@@ -22,8 +22,8 @@ page-historico-pedidos {
     }
 
     .text-inline{
-        margin-right: 15px;
-        margin-top: -15px;
+        margin-right: 0px;
+        margin-top: -13px;
     }
 
     .sub-text { 
@@ -68,4 +68,26 @@ page-historico-pedidos {
         background-color: #eee; 
         margin-top: -5px
     }
+
+    .h2-pedido-recusado{
+        font-size: 1.15rem; 
+        color:red; 
+        padding: 4px; 
+        font-weight: 500;
+        background-color: #eee; 
+        margin-top: -5px;    
+    }
+
+    .btn-saiba-mais{
+        width: 102px;
+        border: 1px solid #999;
+        background: transparent;
+        font-size:9px !important;
+        padding: 4px;
+        background: rgb(255, 255, 255);
+        border-radius: 5px;
+        color:red;
+        text-transform: uppercase;
+        height: 20px !important;
+      }
 }

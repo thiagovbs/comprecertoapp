@@ -292,7 +292,7 @@ ion-slides[pager] {
 }
 
 .btn-sacola{
-  width: 102px;
+  width: 87%;
   margin-top: 40px;
   font-size:9px !important;
   border-radius: 5px;
@@ -321,7 +321,7 @@ ion-slides[pager] {
 }
 
 .btn-sacola-remove{
-  width: 101px;
+  width: 92%;
   max-height: 20px !important;
   font-size: 9px !important;
   border-radius: 5px;
@@ -542,13 +542,19 @@ color: #fff
 }
 
 .AlertCompraFacil{
-text-align: center;
+
 
 .alert-head{
   margin:0 auto;
 }
 .alert-message{
   color:#000;
+  text-align: justify;
+  font-size: 1.45rem !important;
+  padding-left: 25px;
+  font-weight: 400;
+  padding-right: 25px;
+  line-height: 23px;
 }
 .alert-button-group{
   justify-content: center !important;

@@ -20,6 +20,7 @@
     "@angular/http": "5.2.11",
     "@angular/platform-browser": "5.2.11",
     "@angular/platform-browser-dynamic": "5.2.11",
+    "@ionic-native/call-number": "^4.20.0",
     "@ionic-native/core": "^4.11.0",
     "@ionic-native/date-picker": "^4.20.0",
     "@ionic-native/email-composer": "^4.20.0",
@@ -31,6 +32,7 @@
     "@ionic-native/status-bar": "~4.15.0",
     "@ionic/storage": "2.2.0",
     "brmasker-ionic-3": "^1.6.3",
+    "call-number": "1.0.1",
     "cordova-android": "8.0.0",
     "cordova-android-play-services-gradle-release": "^1.4.6",
     "cordova-ios": "^4.5.5",
@@ -82,7 +84,8 @@
         "FACEBOOK_ANDROID_SDK_VERSION": "4.40.0"
       },
       "cordova-plugin-datepicker": {},
-      "cordova-plugin-fcm-with-dependecy-updated": {}
+      "cordova-plugin-fcm-with-dependecy-updated": {},
+      "mx.ferreyra.callnumber": {}
     },
     "platforms": [
       "android"
