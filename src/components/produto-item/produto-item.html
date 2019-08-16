@@ -26,7 +26,7 @@
                             {{produto.dtValidadeMercadoProduto  | dateFormat}}</p>
                         <p style=" font-size:0.60em !important; text-align: end">ou até durar o estoque</p>
                     </div>
-                    <div style="margin-top:41px;">
+                    <div style="margin-top:44px;">
                         <!-- Se o produto não estiver no carrinho -->
                         <div *ngIf="!verificaProdutoNoCarrinho(produto)">
                             <button ion-button class="pull-right btn-sacola" (click)="addCarrinho(produto)">
