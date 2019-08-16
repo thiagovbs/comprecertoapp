@@ -287,6 +287,20 @@ ion-slides[pager] {
   }
 }
 
+.md-menu-title{
+  width: 235px;
+  height: 50px;
+  text-align: center;
+  margin: 0px auto;
+}
+
+.md-menu-home{
+  width: 250px;
+  height: 50px;
+  text-align: center;
+  margin: 0px auto;
+}
+
 .swiper-pagination-bullet {
   background: color($colors, light)
 }

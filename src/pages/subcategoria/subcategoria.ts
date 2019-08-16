@@ -182,7 +182,6 @@ export class SubcategoriaPage implements OnInit {
   }
 
   presenteLoading(): Loading {
-
     let loading = this.loadingCtrl.create({
       spinner: 'dots',
       //content: `<img src="assets/imgs/loading3.gif" height="50px" />`,

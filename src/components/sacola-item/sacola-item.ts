@@ -3,6 +3,7 @@ import { CarrinhoItem } from '../../models/carrinho-item.model';
 import { CarrinhoService } from '../../services/carrinho.service';
 import { Events, NavController, App } from 'ionic-angular';
 import { API_CONFIG } from '../../config/api.config';
+import { MercadoProduto } from '../../models/mercado-produto.model';
 
 @Component({
   selector: 'sacola-item',
@@ -15,8 +16,8 @@ export class SacolaItemComponent implements OnInit {
 
   @Output() filterProdutos: EventEmitter<CarrinhoItem[]>;
 
-  somaProduto:number
-  bucketS3:string;
+  somaProduto: number
+  bucketS3: string;
 
   constructor(private navCtrl: NavController,
     private carrinhoService: CarrinhoService,
@@ -45,8 +46,16 @@ export class SacolaItemComponent implements OnInit {
 
   }
 
-  setSomaValor(produto:CarrinhoItem):number{
-     return this.somaProduto=  produto.produto.precoMercadoProduto * produto.quantidade;  
+  setSomaValor(produto: CarrinhoItem): number {
+    return this.somaProduto = produto.produto.precoMercadoProduto * produto.quantidade;
+  }
+
+  sendToMercado(item: MercadoProduto) {
+
+    let sedMercado: { idMercado: number, nomeFantasia: string } = { idMercado: item.idMercado, nomeFantasia: item.nomeFantasiaMercado }
+    this.navCtrl.push("SupermercadoDetalhePage", {
+      mercado: sedMercado
+    });
   }
 
 

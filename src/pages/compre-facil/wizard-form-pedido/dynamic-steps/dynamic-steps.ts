@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Events, AlertController, ViewController, App } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events, AlertController, ViewController, App, LoadingController, Loading } from 'ionic-angular';
 
 import { SacolaMercados } from '../../../../models/SacolaMercados.model';
 
@@ -44,7 +44,8 @@ export class DynamicStepsPage {
     private compraFacilService: CompraFacilService,
     private alertCrtl: AlertController,
     private carrinhoService:CarrinhoService,
-    private app:App) {
+    private app:App,
+    private loadingCtrl: LoadingController) {
 
     this.step = 1;//The value of the first step, always 1
     this.stepCondition = false;//For each step the condition is set to this value, Set to true if you don't need condition in every step
@@ -168,10 +169,12 @@ export class DynamicStepsPage {
   montarPedido() {
 
     let pedido: Pedido = {} as Pedido;
+
+    let loader = this.presenteLoading()
+
     pedido.usuario = this.userService.getLocalUser()
     pedido.usuario.permissoes = []
     pedido.pedidoProdutos = [];
-     console.log(this.enderecoPedido.celular) 
     pedido.celular = this.enderecoPedido.celular;
     pedido.substituicao= this.substituicao;
     if (this.enderecoPedido.endereco) {
@@ -193,10 +196,7 @@ export class DynamicStepsPage {
     mercadoLocalidade.idMercadoLocalidade = this.pedidosMercado.sacolaMercado.idMercadoLocalidade
     mercadoLocalidade.imagemUrl= this.pedidosMercado.sacolaMercado.imagemMercado;
     mercadoLocalidade.fAtivo = true;
-    pedido.mercadoLocalidade = mercadoLocalidade;
-
-    console.log(this.pedidosMercado)
-    
+    pedido.mercadoLocalidade = mercadoLocalidade;    
 
     for (let carrinhoItem of this.pedidosMercado.carrinhoItem) {
       let pedidoProduto: PedidoProduto = {} as PedidoProduto;
@@ -207,15 +207,15 @@ export class DynamicStepsPage {
       pedidoProduto.preco = carrinhoItem.produto.precoMercadoProduto;
       pedido.pedidoProdutos.push(pedidoProduto);
     }
-    console.log(pedido)
+
     this.compraFacilService.postPedido(pedido).subscribe(resp => {
+      loader.dismiss();
       this.carrinhoService.changeMercadoSacolaToCarrinhoItem(this.pedidosMercado)
       this.successAlert()
       this.viewCtrl.dismiss();
       this.app.getRootNav().setRoot("HistoricoPedidosPage");
     }, erro => {
       this.myAlert() 
-      console.log(erro)
     });
   }
 
@@ -242,6 +242,17 @@ export class DynamicStepsPage {
         text: 'Ok'
       }]
     },).present();
+  }
+
+  presenteLoading(): Loading {
+    let loading = this.loadingCtrl.create({
+      spinner: 'dots',
+      //content: `<img src="assets/imgs/loading3.gif" height="50px" />`,
+      duration: 50000,
+      cssClass: 'my-loading-class'
+    });
+    loading.present();
+    return loading
   }
 
 }

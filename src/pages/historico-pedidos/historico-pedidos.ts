@@ -81,7 +81,7 @@ export class HistoricoPedidosPage {
   }
 
   onSuporte(pedido) {
-    console.log(pedido.mercadoLocalidade.telefone)
+    
     this.callNumber.callNumber(pedido.mercadoLocalidade.telefone, true)
       .then(res => console.log('Launched dialer!', res))
       .catch(err => console.log('Error launching dialer', err));

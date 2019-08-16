@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, IonicPage, PopoverController, Events, } from 'ionic-angular';
+import { NavController, IonicPage, PopoverController, Events, LoadingController, Loading, } from 'ionic-angular';
 import { CategoriaService } from '../../services/categoria.service';
 
 import { Categoria } from '../../models/categoria.model';
@@ -34,12 +34,16 @@ export class HomePage {
     private categoriaService: CategoriaService,
     private mercadoService: SupermercadoService,
     private popoverCtrl: PopoverController,
-    private events: Events) {
+    private events: Events,
+    private loadingCtrl: LoadingController) {
+
+      let loader = this.presenteLoading();
 
     //Carregando as Categorias
     this.categoriaService.findAll().subscribe(resp => {
+      loader.dismiss();
       this.categorias = Lodash.orderBy(resp, 'nome', 'asc')
-    });
+    },erro=>loader.dismiss());
   }
 
   ionViewDidLoad() {
@@ -100,5 +104,15 @@ export class HomePage {
     this.navCtrl.push('CompreFacilPage', {})
   }
 
+  presenteLoading(): Loading{
+    let loading = this.loadingCtrl.create({
+      spinner: 'dots',
+      //content: `<img src="assets/imgs/loading3.gif" height="50px" />`,
+      duration: 50000,
+      cssClass: 'my-loading-class'
+    });
+    loading.present();
+    return loading
+  }
 
 }

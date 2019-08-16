@@ -1,9 +1,9 @@
 <ion-header>
   <ion-navbar color="secondary">
+    <ion-title class="md-menu-title">Meus Pedidos</ion-title>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title style="margin-top:5px; padding-left:60px ">Meus Pedidos</ion-title>
     <ion-buttons end>
       <button ion-button (click)="onCompraFacil()" class="back-button-md">
         <img src="assets/imgs/Easy-Buy-08.svg" height="20px" class="search-icon  pull-icon">
@@ -32,7 +32,8 @@
             </p>
           </ion-col>
           <ion-col col-5 style="margin-top:0px;  " *ngIf="pedido.status === 'N'">
-            <p class="cl-data" style="margin-top:-4px ;margin-right: -12px;">Número do pedido: <span></span>#{{pedido.idPedido}}
+            <p class="cl-data" style="margin-top:-4px ;margin-right: -12px;">Número do pedido:
+              <span></span>#{{pedido.idPedido}}
             </p>
           </ion-col>
 
