@@ -4,7 +4,7 @@
   </div>
   <ion-grid>
     <ion-row style="margin:0 auto;">
-      <strong><label style="font-size: 1.2em; color:#1f1e1e">Complete seu cadastro</label></strong>
+      <strong><label style="font-size: 1.7rem; color:#464444; font-weight: 400">Complete seu cadastro</label></strong>
     </ion-row>
     <form novalidate [formGroup]="cadastroPopUpForm" (ngSubmit)="SubmitMaisInfoForm()">
       <ion-row margin-top>
@@ -16,16 +16,16 @@
       </ion-row>
       <ion-row margin-top>
         <ion-item class="bg-transparent size">
-          <ion-label floating>Digite seu cpf</ion-label>
-          <ion-input type="text" formControlName="cpf" [brmasker]="{mask:'000.000.000-00', len:14}" maxlength="14">
-          </ion-input>
+          <ion-label floating>Digite seu CPF</ion-label>
+          <ion-input type="tel" formControlName="cpf" [brmasker]="{mask:'000.000.000-00', len:14}" value=""
+            maxlength="14"></ion-input>
         </ion-item>
       </ion-row>
       <ion-row margin-top>
-        <ion-col col-12>
-          <ion-item class="bg-transparent size">
+        <ion-col col-12 >
+          <ion-item class="bg-transparent size" (tap)="onBirthday()">
             <ion-input placeholder="Data de nascimento" [(ngModel)]="dtNascimento" formControlName="data"></ion-input>
-            <button clear item-right ion-button type="button" (click)="onBirthday()">
+            <button clear item-right ion-button type="button" (click)="onBirthday()" >
               <ion-icon name="calendar"></ion-icon>
             </button>
           </ion-item>

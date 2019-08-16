@@ -44,6 +44,7 @@ export class AuthService {
 
         let user: Usuario = {
             nome: data.user.nome,
+            sobrenome: data.user.sobrenome,
             email: data.user.email,
             login: data.user.login,
             sexo: data.user.sexo,

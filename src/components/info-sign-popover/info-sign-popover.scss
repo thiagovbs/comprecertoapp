@@ -4,26 +4,70 @@ info-sign-popover {
     }
 
     .size{
-        font-size: 0.9em !important;
+        font-size: 1.25rem;
         font-weight:500; 
         width: 95%;
         margin: 0 auto !important;
         padding: 0 !important;
-    }
-
-    .error{
-        color:red;
         
     }
+
+    .select-md .select-icon {
+        position: relative;
+        width: 16px;
+        height: 19px;
+    }
+
+
+    
+    .size-data{
+        font-size: 1.25rem;
+        font-weight:500; 
+        width: 95%;
+        margin: 0 auto !important;
+        padding: 0 !important;
+        min-height: 60px !important;  
+        max-height: 60px !important;  
+        color: #000;  
+    }
+
+    
+
+    .item-label-stacked .text-input-md, .item-label-floating .text-input-md {
+        margin-left: 1px;
+        margin-bottom: 10px;
+        width: calc(100% - 8px);
+    }
+
+    .item-md .item-button {
+        padding: 0 !important;
+        height: 25px;
+        font-size: 1.2rem;
+    }
+
+    .text-input-md {
+        margin: 15px 0px;
+        padding: 0;
+        width: calc(100%);
+    }
+
+
+    .error{
+        color:red;       
+    }
+
     .size-select-item{
         background-color: transparent;
         width:100%;
-        padding:10px !important;
+        padding:7px !important;
         
         .size-select{
-            min-width: 98%;
-            padding-left: 5px;
-            font-size: 0.9em;
+            min-width: 100%;
+            font-weight:500; 
+            padding-left: 0px;
+            font-size: 1.25rem;
         }
     }
 }
+
+

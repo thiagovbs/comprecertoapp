@@ -23,6 +23,7 @@ export class InfoSignPopoverComponent {
   faceId: string;
   faceEmail: string;
   faceNome: string;
+  faceSobrenome:string;
   permissao: Permissao;
   dtNascimento: any = '';
 
@@ -52,6 +53,8 @@ export class InfoSignPopoverComponent {
     this.faceId = "";
     this.faceEmail = "";
     this.faceNome = "";
+    this.faceSobrenome = "";
+
   }
 
   ionViewWillEnter() {
@@ -59,6 +62,7 @@ export class InfoSignPopoverComponent {
     this.faceId = face.password;
     this.faceNome = face.nome;
     this.faceEmail = face.username;
+    this.faceSobrenome = face.sobrenome;
 
   }
 
@@ -90,6 +94,7 @@ export class InfoSignPopoverComponent {
     //preenchendo o usuário com todas as informações para seu cadastro
     this.user = {
       nome: this.faceNome,
+      sobrenome: this.faceSobrenome,
       email: this.faceEmail,
       login: this.faceEmail,
       cpf: cpf_form,

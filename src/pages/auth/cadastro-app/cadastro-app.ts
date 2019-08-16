@@ -36,8 +36,9 @@ export class CadastroAppPage {
 
     this.cadastroForm = new FormGroup({
       nome: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      sobrenome: new FormControl('', [Validators.required, Validators.minLength(3)]),
       sexo: new FormControl('', [Validators.required]),
-      cpf: new FormControl('', [Validators.required, Validators.minLength(14), Validators.maxLength(14)] ),
+      cpf: new FormControl('', [Validators.required, Validators.minLength(14), Validators.maxLength(14)]),
       data: new FormControl({ value: '', disabled: true }, [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.pattern(this.emailPattern)]),
       senha: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -85,6 +86,7 @@ export class CadastroAppPage {
   SubmitForm() {
 
     let nome_form = this.cadastroForm.controls['nome'].value;
+    let sobrenome_form = this.cadastroForm.controls['sobrenome'].value;
     let sexo_form = this.cadastroForm.controls['sexo'].value;
     let dtNascimento_form = this.cadastroForm.controls['data'].value;
     let dt_Nascimento = new Date(dtNascimento_form)
@@ -103,6 +105,7 @@ export class CadastroAppPage {
 
     this.usuario = {
       nome: nome_form,
+      sobrenome: sobrenome_form,
       email: email_form,
       login: email_form,
       dtNascimento: milliseconds,
@@ -111,7 +114,7 @@ export class CadastroAppPage {
       cpf:cpf_form,
       permissoes: [this.permissao]
     }
-    console.log(this.usuario);
+    
     this.usuarioService.cadastrarUsuario(this.usuario)
       .subscribe(response => {
 

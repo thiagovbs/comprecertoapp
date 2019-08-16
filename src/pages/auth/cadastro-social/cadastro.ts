@@ -45,13 +45,17 @@ export class CadastroPage {
   fbLogin() {
     this.fb.login(['profile_picture', 'email'])
       .then((res: FacebookLoginResponse) => {
-        console.log("facebook")
+        
         if (res.status === 'connected') {
           this.fb.api('me?fields=id,name,email', [])
             .then(profile => {
-              console.log(profile)
+              
+              let fullName = profile.name.split(" ");
+              let firstName = fullName[0];
+              let lastName = fullName[1];
               this.userLogin = {
-                nome: profile.name,
+                nome: firstName,
+                sobrenome: lastName,
                 username: profile.email,
                 password: profile.id
               }
@@ -59,7 +63,7 @@ export class CadastroPage {
               this.usuarioService.buscarPorEmail(this.userLogin.username).subscribe((response: Usuario) => {
                 let loading: Loading = this.showLoading();
                 this.meuAlert(response.nome);
-                console.log(response)
+
                 //Loggar Usuario automaticamente
                 this.authService.autenticar(this.userLogin).subscribe(resp => {
                   loading.dismiss();
@@ -69,7 +73,6 @@ export class CadastroPage {
                   this.authService.successfullLogin(resp);
                   this.events.publish('user:LoggedIn')
                   this.navCtrl.setRoot('HomePage')
-                  console.log("usuario loggado")
                 }, err => {
                   loading.dismiss();
                   console.log(err)
@@ -93,15 +96,18 @@ export class CadastroPage {
     })
       .then(res => {
         loading.dismiss();
+        let fullName = res.displayName.split(" ");
+              let firstName = fullName[0];
+              let lastName = fullName[1];
         this.userLogin = {
-          nome: res.displayName,
+          nome: firstName,
+          sobrenome:lastName,
           username: res.email,
           password: res.userId
         }
         //buscar usuario no banco
         this.usuarioService.buscarPorEmail(this.userLogin.username).subscribe((response: Usuario) => {
           let loading: Loading = this.showLoading();
-          console.log("achei o usuario")
           //loggar usuario caso exista
           this.authService.autenticar(this.userLogin).subscribe(resp => {
             loading.dismiss();
@@ -110,10 +116,11 @@ export class CadastroPage {
             this.authService.armazenarRefreshToken(resp['refresh_token']);
             this.authService.successfullLogin(resp);
 
+            //token push notification
             this.fcm.getToken().then(token => {
               console.log("get token");
-              console.log(token)
             });
+            
             this.events.publish('user:LoggedIn');
             this.navCtrl.setRoot('HomePage');
 

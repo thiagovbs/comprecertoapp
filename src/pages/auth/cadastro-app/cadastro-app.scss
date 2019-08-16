@@ -27,7 +27,19 @@ page-cadastro-app {
         width: 95%;
         margin: 0 auto !important;
         padding: 0 !important;
-        height: 60px !important;  
+        min-height: 60px !important;  
+        max-height: 60px !important;  
+        color: #000;  
+    }
+
+        
+    .btn-dt-nascimento{
+        font-size: 1.25rem;
+        font-weight:400; 
+        width: 95%;
+        margin: 0 auto !important;
+        padding: 0 !important;
+        position: relative;
         color: #000;  
     }
 
@@ -35,8 +47,7 @@ page-cadastro-app {
 
     .item-label-stacked .text-input-md, .item-label-floating .text-input-md {
         margin-left: 1px;
-        margin-top: 10px;
-        margin-bottom: 15px;
+        margin-bottom: 10px;
         width: calc(100% - 8px);
     }
 
@@ -47,7 +58,7 @@ page-cadastro-app {
     }
 
     .text-input-md {
-        margin: 13px 0px;
+        margin: 15px 0px;
         padding: 0;
         width: calc(100%);
     }
