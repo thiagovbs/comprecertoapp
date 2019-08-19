@@ -49,7 +49,7 @@ export class CadastroAppPage {
   //condiciona ao usuário digital o email com letra minúscula e sem espaço
   changeInput(evento) {
     let email: string = evento.target.value
-    this.emailEditado = email.replace(/ /g, "").toLowerCase();
+    this.emailEditado = email.replace(/\s/g, "").toLowerCase();
   }
 
   static equalTo(group: AbstractControl): { [key: string]: boolean } {

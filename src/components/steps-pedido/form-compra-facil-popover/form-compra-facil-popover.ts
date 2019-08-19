@@ -15,6 +15,8 @@ export class FormCompraFacilPopoverComponent {
 
   enderecoForm: FormGroup
   usuarioNome: string;
+  nomeCompleto:string;
+  usuarioCPF:any;
   nomeCidade: string;
   pedidoMercado: SacolaMercados = {} as SacolaMercados
   nomeEstado: string;
@@ -30,7 +32,7 @@ export class FormCompraFacilPopoverComponent {
 
     this.enderecoForm = new FormGroup({
       nome: new FormControl({ value: this.usuarioNome, disabled: true }, [Validators.required]),
-      cpf: new FormControl({ value: '139-791-307-03', disabled: true }, [Validators.required]),
+      cpf: new FormControl({ value: this.usuarioCPF, disabled: true }, [Validators.required]),
       celular: new FormControl('', [Validators.required, Validators.minLength(14)]),
       endereco: new FormControl('', [Validators.required, Validators.minLength(3)]),
       numero: new FormControl('', [Validators.required]),
@@ -48,8 +50,12 @@ export class FormCompraFacilPopoverComponent {
 
   ionViewDidLoad() {
     this.usuarioNome = this.localUser.getLocalUser().nome;
+    this.usuarioCPF = this.localUser.getLocalUser().cpf; 
+   
+    this.nomeCompleto = this.usuarioNome + " " + this.localUser.getLocalUser().sobrenome ;
+    
+     console.log(this.usuarioCPF)
     this.pedidoMercado = this.navParams.get('pedidosMercado');
-
     if (this.localAlcance.getLocalEndereco()) {
       this.enderecoForm.get('endereco').setValue(this.localAlcance.getLocalEndereco().endereco);
       this.enderecoForm.get('numero').setValue(this.localAlcance.getLocalEndereco().numero);

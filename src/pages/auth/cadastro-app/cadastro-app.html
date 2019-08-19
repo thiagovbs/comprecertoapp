@@ -6,63 +6,58 @@
     </ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content class="gray-bg">
+<ion-content class="gray-bg login-content" padding style="-webkit-overflow-scrolling:touch; overflow:auto;">
 
-  <div class="login-content">
-    <form novalidate [formGroup]="cadastroForm" (ngSubmit)="SubmitForm()">
-      <div padding>
-        <ion-item class="bg-transparent size">
-          <ion-label floating>Digite seu nome</ion-label>
-          <ion-input name="nome" formControlName="nome" autocomplete="off"></ion-input>
-        </ion-item>
-        <ion-item class="bg-transparent size">
-          <ion-label floating>Digite seu sobrenome</ion-label>
-          <ion-input name="sobrenome" formControlName="sobrenome" autocomplete="off"></ion-input>
-        </ion-item>
-        <ion-row margin-top>
-          <ion-item class="bg-transparent" class="size-select-item">
-            <ion-select formControlName="sexo" placeholder="Gênero" class="size-select">
-              <ion-option *ngFor="let sexo of sexoList" value="{{sexo.value}}">{{sexo.nome}}</ion-option>
-            </ion-select>
-          </ion-item>
-        </ion-row>
-        <ion-item class="bg-transparent size-data" (tap)="onBirthday()">   
-          <ion-input placeholder="Data de nascimento" [(ngModel)]="dtNascimento" formControlName="data"></ion-input>
-          <button clear item-right ion-button (click)="onBirthday()">
-            <ion-icon name="calendar" ></ion-icon>
-          </button>
-        </ion-item>
-        <ion-item class="bg-transparent size">
-          <ion-label floating>Digite seu CPF</ion-label>
-          <ion-input type="tel" formControlName="cpf" [brmasker]="{mask:'000.000.000-00', len:14}" autocapitalize="none"
-            maxlength="14"></ion-input>
-        </ion-item>
-        <ion-item class="bg-transparent size">
-          <ion-label floating>Digite seu E-mail</ion-label>
-          <ion-input type="text" formControlName="email" (keyup)="changeInput($event)" autocapitalize="none"
-            value="{{emailEditado}}"></ion-input>
-        </ion-item>
-        <ion-item class="bg-transparent size">
-          <ion-label floating>Digite sua senha</ion-label>
-          <ion-input formControlName="senha" type="password"></ion-input>
-        </ion-item>
-        <ion-item class="bg-transparent size">
-          <ion-label floating>Confirme sua senha</ion-label>
-          <ion-input type="password" formControlName="confirmSenha"></ion-input>
-        </ion-item>
-        <ion-item class="bg-transparent size" *ngIf="cadastroForm.hasError('senhaNaoCompara')" no-lines>
-          <span class="error">Senhas não são iguais</span>
-        </ion-item>
+  <form novalidate [formGroup]="cadastroForm" (ngSubmit)="SubmitForm()">
 
-        <button ion-button block style="width:95%; margin: 12px auto" class="register" color="secondary" margin-top
-          [disabled]="!cadastroForm.valid">
-          <ion-icon name="ios-create-outline" style="margin-right: 12px;">
-          </ion-icon> Cadastrar
-        </button>
-      </div>
+    <ion-item class="bg-transparent size">
+      <ion-label floating>Digite seu nome</ion-label>
+      <ion-input name="nome" formControlName="nome" autocomplete="off"></ion-input>
+    </ion-item>
+    <ion-item class="bg-transparent size">
+      <ion-label floating>Digite seu sobrenome</ion-label>
+      <ion-input name="sobrenome" formControlName="sobrenome" autocomplete="off"></ion-input>
+    </ion-item>
+    <ion-row margin-top>
+      <ion-item class="bg-transparent" class="size-select-item">
+        <ion-select formControlName="sexo" placeholder="Gênero" class="size-select">
+          <ion-option *ngFor="let sexo of sexoList" value="{{sexo.value}}">{{sexo.nome}}</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-row>
+    <ion-item class="bg-transparent size-data" (tap)="onBirthday()">
+      <ion-input placeholder="Data de nascimento" [(ngModel)]="dtNascimento" formControlName="data"></ion-input>
+      <button clear item-right ion-button (click)="onBirthday()" style="margin-top: 35px">
+        <ion-icon name="calendar"></ion-icon>
+      </button>
+    </ion-item>
+    <ion-item class="bg-transparent size">
+      <ion-label floating>Digite seu CPF</ion-label>
+      <ion-input type="tel" formControlName="cpf" [brmasker]="{mask:'000.000.000-00', len:14}" autocapitalize="none"
+        maxlength="14"></ion-input>
+    </ion-item>
+    <ion-item class="bg-transparent size">
+      <ion-label floating>Digite seu E-mail</ion-label>
+      <ion-input type="text" formControlName="email" (keyup)="changeInput($event)" autocapitalize="none"
+        value="{{emailEditado}}"></ion-input>
+    </ion-item>
+    <ion-item class="bg-transparent size">
+      <ion-label floating>Digite sua senha</ion-label>
+      <ion-input formControlName="senha" type="password"></ion-input>
+    </ion-item>
+    <ion-item class="bg-transparent size">
+      <ion-label floating>Confirme sua senha</ion-label>
+      <ion-input type="password" formControlName="confirmSenha"></ion-input>
+    </ion-item>
+    <ion-item class="bg-transparent size" *ngIf="cadastroForm.hasError('senhaNaoCompara')" no-lines>
+      <span class="error">Senhas não são iguais</span>
+    </ion-item>
 
-    </form>
-  </div>
-
+    <button ion-button block style="width:95%; margin: 12px auto" class="register" color="secondary" margin-top
+      [disabled]="!cadastroForm.valid">
+      <ion-icon name="ios-create-outline" style="margin-right: 12px;">
+      </ion-icon> Cadastrar
+    </button>
+  </form>
 
 </ion-content>

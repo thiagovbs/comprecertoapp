@@ -14,7 +14,7 @@ import { FCM } from '@ionic-native/fcm';
 export class LoginPage {
 
   login: UserLogin = {} as UserLogin;
-
+  emailEditado: string = "";
   constructor(private navCtrl: NavController,
     private menu: MenuController,
     private authService: AuthService,
@@ -22,6 +22,13 @@ export class LoginPage {
     private events: Events,
     private fcm: FCM) {
   }
+
+    //condiciona ao usuário digital o email com letra minúscula e sem espaço
+    changeInput(evento) {
+      let email: string = evento.target.value
+      this.emailEditado = email.replace(/\s/g, '').toLowerCase();
+      this.login.username = this.emailEditado
+    }
 
   onPageWillLeave(): void {
     this.events.unsubscribe('user:LoggedIn');

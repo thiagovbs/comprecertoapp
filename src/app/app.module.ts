@@ -8,6 +8,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DatePicker } from '@ionic-native/date-picker';
 import { CallNumber } from '@ionic-native/call-number';
+import { Keyboard } from '@ionic-native/keyboard';
 //Login Rede social
 import { Facebook} from '@ionic-native/facebook';
 import { GooglePlus } from '@ionic-native/google-plus';
@@ -51,7 +52,7 @@ import { Filtros } from '../util/filtros';
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, { scrollAssist: false, autoFocusAssist: false }),
     IonicStorageModule.forRoot(),
     BrMaskerModule,
     
@@ -85,7 +86,9 @@ import { Filtros } from '../util/filtros';
     CompraFacilService,
     Filtros,
     FCM,
-    CallNumber
+    CallNumber,
+    Keyboard
+    
   ]
 })
 export class AppModule {}

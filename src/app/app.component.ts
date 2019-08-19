@@ -71,13 +71,13 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
 
-      this.statusBar.hide();
+      //this.statusBar.hide();
       this.splashScreen.hide();
     });
 
     //this.fcm.subscribeToTopic('marketing');
 
-    this.fcm.onNotification().subscribe(data => {
+/*     this.fcm.onNotification().subscribe(data => {
       console.log(data)
       if (data.wasTapped) {
         console.log("notification");
@@ -89,7 +89,7 @@ export class MyApp {
         });
         toast.present();
       };
-    });
+    }); */
     
 
     //this.fcm.unsubscribeFromTopic('marketing');

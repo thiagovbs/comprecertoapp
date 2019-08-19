@@ -69,6 +69,9 @@ export class AuthService {
         localStorage.removeItem(STORAGE_KEYS.localSacola)
         //remove token
         localStorage.removeItem('token');
+         //remove endereco
+         localStorage.removeItem(STORAGE_KEYS.localEndereco)
+
     }
 
     getRefreshToken(refreshToken) {

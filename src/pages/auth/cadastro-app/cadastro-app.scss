@@ -13,13 +13,21 @@ page-cadastro-app {
         
     }
 
+    .select-md {
+        padding: 12px 12px 0px 0px !important;
+    }
+
     .select-md .select-icon {
         position: relative;
         width: 16px;
         height: 19px;
     }
 
-
+    .item-md.item-block .item-inner {
+        padding-right: 8px;
+        border-bottom: 1px solid #dedede;
+        margin-top: -3px;
+    }
     
     .size-data{
         font-size: 1.25rem;
@@ -43,6 +51,10 @@ page-cadastro-app {
         color: #000;  
     }
 
+    .text-input[disabled] {
+         opacity: 1 !important;
+        margin-top: 40px;
+    }
     
 
     .item-label-stacked .text-input-md, .item-label-floating .text-input-md {

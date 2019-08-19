@@ -18,7 +18,8 @@
         <div class="socialLogin" padding>
           <ion-item class="bg-transparent size">
             <ion-label floating>Digite seu e-mail</ion-label>
-            <ion-input name="username" required [(ngModel)]="login.username"></ion-input>
+            <ion-input name="username" required  
+            (keyup)="changeInput($event)" value="{{emailEditado}}"></ion-input>
           </ion-item>
           <ion-item class="bg-transparent size">
             <ion-label  floating>Digite sua senha</ion-label>
