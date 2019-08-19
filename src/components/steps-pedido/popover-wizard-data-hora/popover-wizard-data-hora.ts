@@ -51,11 +51,11 @@ export class PopoverWizardDataHoraComponent {
   getDataHoraRetirada() {
     this.datas = [];
     ////////////////////////////////
-
+    
     let horarioMax: String = String(this.pedidoMercado.sacolaMercado.horarioMaximo);
     let hour = (horarioMax.split(':'))[0]
     let min = (horarioMax.split(':'))[1]
-
+    
     let dataLimite = new Date()
     dataLimite.setHours(Number(hour))
     dataLimite.setMinutes(Number(min))
