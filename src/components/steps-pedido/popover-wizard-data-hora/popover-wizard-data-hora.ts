@@ -5,6 +5,7 @@ import { Time } from '@angular/common';
 import { SacolaMercados } from '../../../models/SacolaMercados.model';
 import { AlcanceService } from '../../../services/alcance.service';
 import { EnderecoLocalStorage } from '../../../models/endereco-localstorage';
+import { UsuarioService } from '../../../services/usuario.service';
 
 @Component({
   selector: 'popover-wizard-data-hora',
@@ -15,18 +16,20 @@ export class PopoverWizardDataHoraComponent {
   dataHoraform: FormGroup
   pedidoMercado: SacolaMercados = {} as SacolaMercados
   datas: Date[] = []
+  usuarioCPF:any;
 
   @Output() infoDataHoraPedido = new EventEmitter();
 
   constructor(private formBuilder: FormBuilder,
     private viewControl: ViewController,
     private navParams: NavParams,
-    private localAlcance: AlcanceService) {
+    private localAlcance: AlcanceService,
+    private localUser: UsuarioService) {
 
 
     this.dataHoraform = this.formBuilder.group({
       dataHora: this.formBuilder.control('', [Validators.required]),
-      cpf: this.formBuilder.control({ value: '139.791.307-03', disabled: true }, [Validators.required]),
+      cpf: this.formBuilder.control({ value: this.usuarioCPF, disabled: true }, [Validators.required]),
       celular: this.formBuilder.control('', [Validators.required, Validators.minLength(14)]),
     })
 
@@ -34,6 +37,7 @@ export class PopoverWizardDataHoraComponent {
   }
 
   ionViewDidLoad() {
+    this.usuarioCPF = this.localUser.getLocalUser().cpf;
     this.pedidoMercado = this.navParams.get('pedidosMercado');
     if (this.localAlcance.getLocalEndereco()) {
       this.dataHoraform.get('celular').setValue(this.localAlcance.getLocalEndereco().celular);

@@ -54,7 +54,7 @@ export class FormCompraFacilPopoverComponent {
    
     this.nomeCompleto = this.usuarioNome + " " + this.localUser.getLocalUser().sobrenome ;
     
-     console.log(this.usuarioCPF)
+     
     this.pedidoMercado = this.navParams.get('pedidosMercado');
     if (this.localAlcance.getLocalEndereco()) {
       this.enderecoForm.get('endereco').setValue(this.localAlcance.getLocalEndereco().endereco);
