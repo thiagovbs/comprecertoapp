@@ -23,17 +23,36 @@ page-politica-privacidade {
         height: 4.7rem !important;
         border-radius: 7px !important;
         border: 1.18px solid #009b89;
+
+        .item-md.item-block .item-inner {
+            border-bottom: 0 !important;
+            color: #00836D;
+            font-size: 1.4rem;
+            margin-left:21px !important;
+        }
         
         .icon-sair{
             color:#00836D; 
             font-weight:600; 
             font-size:1.5em;
             margin-bottom:5px;
-            padding-left: 56px;
+            padding-left: 44px;
         }
     }
 
     .item-ios.item-block .item-inner {
         border-bottom: 0!important;
       }
+
+    .footer-add{
+        
+        font-weight:400; 
+        font-size:1.2rem;
+        text-align: center;
+        color: #898989;
+    }
+
+    .footer-position{
+        padding: 0 20px 0 20px !important;
+    }
 }

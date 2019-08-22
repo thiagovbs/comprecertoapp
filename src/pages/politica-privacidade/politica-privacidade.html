@@ -26,12 +26,15 @@
     </ion-icon>
     Termos de Uso
   </button>
-
+  <ion-row style="margin-top:107%" >
+    <button outline ion-item full (click)="sair()" class="sair-button">
+      <ion-icon item-left name="ios-log-out-outline" class="icon-sair"></ion-icon>
+      Sair
+    </button>
+  </ion-row>
 
 </ion-content>
-<ion-footer class="cart-footer" style="padding: 16px !important" no-border>
-  <button outline ion-item full (click)="sair()"  class="sair-button">
-    <ion-icon item-left name="ios-log-out-outline" class="icon-sair"></ion-icon>
-    Sair
-  </button>
+<ion-footer class="cart-footer footer-position" no-border>
+
+  <p class="footer-add">Propriedades do SHEAP, desenvolvido por ProjeTI em parceria com Zeituneinformatica</p>
 </ion-footer>

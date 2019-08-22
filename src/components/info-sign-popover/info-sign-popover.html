@@ -8,22 +8,22 @@
     </ion-row>
     <form novalidate [formGroup]="cadastroPopUpForm" (ngSubmit)="SubmitMaisInfoForm()">
       <ion-row margin-top>
-        <ion-item class="bg-transparent" class="size-select-item">
-          <ion-select formControlName="sexo" placeholder="sexo" class="size-select">
+        <ion-item class="bg-transparent size" class="size-select-item" style="padding-left: 12px!important;">
+          <ion-select formControlName="sexo" placeholder="sexo" class="size-select" >
             <ion-option *ngFor="let sexo of sexoList" value="{{sexo.value}}">{{sexo.nome}}</ion-option>
           </ion-select>
         </ion-item>
       </ion-row>
-      <ion-row margin-top>
+      <ion-row>
         <ion-item class="bg-transparent size">
           <ion-label floating>Digite seu CPF</ion-label>
           <ion-input type="tel" formControlName="cpf" [brmasker]="{mask:'000.000.000-00', len:14}" value=""
             maxlength="14"></ion-input>
         </ion-item>
       </ion-row>
-      <ion-row margin-top>
-        <ion-col col-12 >
-          <ion-item class="bg-transparent size" (tap)="onBirthday()">
+      <ion-row>
+        <ion-col col-12 margin-top>
+          <ion-item class="bg-transparent size-dt" (tap)="onBirthday()" >
             <ion-input placeholder="Data de nascimento" [(ngModel)]="dtNascimento" formControlName="data"></ion-input>
             <button clear item-right ion-button type="button" (click)="onBirthday()" >
               <ion-icon name="calendar"></ion-icon>

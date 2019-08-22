@@ -21,7 +21,7 @@
     <ion-card class="card-no-shadow card-sheap-buy" *ngFor="let mercado of mercadosSacola">
       <ion-grid style="padding:0 !important">
         <ion-row>
-          <ion-col col-12 class="pull-left" style="margin-top:-10px;margin-left: 0px;">
+          <ion-col col-12 class="pull-left" style="margin-top:-10px;margin-left: 1px;">
             <p class="cl-data">Válido até: <span></span>{{getDataValidade(mercado) | dateFormat}}</p>
           </ion-col>
         </ion-row>
@@ -41,6 +41,7 @@
                   *ngIf="mercado.sacolaMercado.entrega ==='E'">
                 <img src="assets/imgs/Icon-Retirada.svg" height="15" alt="" style="margin-top: 8px"
                   *ngIf="mercado.sacolaMercado.entrega ==='R'">
+
               </ion-col>
               <ion-col col-10 text-left style="margin-left:-8px;">
                 <p ion-text class="main-text" style="margin-top:-3px;">Produtos: <span
@@ -51,6 +52,8 @@
                   Entregue pelo supermercado</p>
                 <p ion-text class="main-text" style="margin-top:7px;" *ngIf="mercado.sacolaMercado.entrega ==='R'">
                   Retirada no supermercado</p>
+                <p ion-text class="pos-text" *ngIf="mercado.sacolaMercado.entrega ===null">
+                  Preços exclusivos para compra no ponto de venda.</p>
               </ion-col>
             </ion-row>
           </ion-col>
@@ -58,13 +61,12 @@
         <ion-row>
           <ion-col col-12 text-right>
             <button ion-button class="pull-right btn-enviar-pedido" (click)="onFormPedido(mercado)"
-            *ngIf="mercado.sacolaMercado.entrega !==null">
+              *ngIf="mercado.sacolaMercado.entrega !==null">
               Enviar Pedido
             </button>
             <button ion-button class="pull-right btn-detalhe" (click)="onDetalhePedido(mercado)">
               Detalhes
             </button>
-
           </ion-col>
         </ion-row>
       </ion-grid>

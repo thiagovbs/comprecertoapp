@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, PopoverController } from 'ionic-angular';
+import { IonicPage, NavController, PopoverController, LoadingController, Loading } from 'ionic-angular';
 import { SupermercadoService } from '../../services/supermercado.service';
 import { Mercado } from '../../models/supermercado.model';
 import { API_CONFIG } from '../../config/api.config';
@@ -22,16 +22,19 @@ export class SupermercadoPage {
   constructor(public navCtrl: NavController,
     public supermercadoService: SupermercadoService,
     private alcanceService: AlcanceService,
-    private popoverCtrl: PopoverController) {
+    private popoverCtrl: PopoverController,
+    private loadingCtrl: LoadingController) {
 
   }
 
   ionViewDidLoad() {
+    let loader = this.presenteLoading();
     this.localidadeMercado = this.alcanceService.getLocaAlcance();
     this.supermercadoService.buscarMercadoprodutosPorBairro(this.localidadeMercado)
       .subscribe((resp: Mercado[]) => {
         this.supermercados = resp
-      })
+        loader.dismiss()
+      },erro=>loader.dismiss())
 
     //imagens S3
     this.bucketS3 = API_CONFIG.s3Url;
@@ -64,6 +67,17 @@ export class SupermercadoPage {
 
   onCompraFacil(){
     this.navCtrl.push('CompreFacilPage', {})
+  }
+
+  presenteLoading(): Loading {
+    let loading = this.loadingCtrl.create({
+      spinner: 'dots',
+      //content: `<img src="assets/imgs/loading3.gif" height="50px" />`,
+      duration: 50000,
+      cssClass: 'my-loading-class'
+    });
+    loading.present();
+    return loading
   }
 
 

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController, Loading } from 'ionic-angular';
 import { Pedido } from '../../models/pedido.model';
 import { PedidosService } from '../../services/pedidos.service';
 import { AlcanceService } from '../../services/alcance.service';
@@ -22,7 +22,8 @@ export class HistoricoPedidosPage {
     private pedidosService: PedidosService,
     private alcanceService: AlcanceService,
     private callNumber: CallNumber,
-    private alertCrtl:AlertController) {
+    private alertCrtl: AlertController,
+    private loadingCtrl: LoadingController) {
   }
   pedidos: Pedido[] = [];
 
@@ -30,10 +31,11 @@ export class HistoricoPedidosPage {
     this.getPedidosHistorico()
     this.setTimePedido()
 
-    this.endereco = this.alcanceService.getLocalEndereco().endereco;
-    this.numero = this.alcanceService.getLocalEndereco().numero;
-    this.complemento = this.alcanceService.getLocalEndereco().complemento;
-
+    if (this.alcanceService.getLocalEndereco() !== null) {
+      this.endereco = this.alcanceService.getLocalEndereco().endereco;
+      this.numero = this.alcanceService.getLocalEndereco().numero;
+      this.complemento = this.alcanceService.getLocalEndereco().complemento;
+    }
   }
 
   onCompraFacil() {
@@ -59,10 +61,13 @@ export class HistoricoPedidosPage {
   }
 
   getPedidosHistorico() {
+    let loader = this.presenteLoading();
     this.pedidosService.getPedidos().subscribe(resp => {
+      loader.dismiss();
       console.log(resp)
       this.pedidos = resp;
     }, erro => {
+      loader.dismiss();
       console.log(erro)
     })
   }
@@ -81,14 +86,14 @@ export class HistoricoPedidosPage {
   }
 
   onSuporte(pedido) {
-    
+
     this.callNumber.callNumber(pedido.mercadoLocalidade.telefone, true)
       .then(res => console.log('Launched dialer!', res))
       .catch(err => console.log('Error launching dialer', err));
   }
 
-  onSaibaMais(){
-    this.myAlert()  
+  onSaibaMais() {
+    this.myAlert()
   }
 
   myAlert() {
@@ -104,6 +109,18 @@ export class HistoricoPedidosPage {
     })
     alert.present()
   }
+
+  presenteLoading(): Loading {
+    let loading = this.loadingCtrl.create({
+      spinner: 'dots',
+      //content: `<img src="assets/imgs/loading3.gif" height="50px" />`,
+      duration: 50000,
+      cssClass: 'my-loading-class'
+    });
+    loading.present();
+    return loading
+  }
+
 
 
 }

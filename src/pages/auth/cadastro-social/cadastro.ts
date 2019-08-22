@@ -27,7 +27,7 @@ export class CadastroPage {
     private authService: AuthService,
     private events: Events,
     private fcm: FCM
-  ) {  }
+  ) { }
 
   user: Usuario
   login: boolean;
@@ -45,11 +45,11 @@ export class CadastroPage {
   fbLogin() {
     this.fb.login(['profile_picture', 'email'])
       .then((res: FacebookLoginResponse) => {
-        
+
         if (res.status === 'connected') {
           this.fb.api('me?fields=id,name,email', [])
             .then(profile => {
-              
+
               let fullName = profile.name.split(" ");
               let firstName = fullName[0];
               let lastName = fullName[1];
@@ -97,11 +97,11 @@ export class CadastroPage {
       .then(res => {
         loading.dismiss();
         let fullName = res.displayName.split(" ");
-              let firstName = fullName[0];
-              let lastName = fullName[1];
+        let firstName = fullName[0];
+        let lastName = fullName[1];
         this.userLogin = {
           nome: firstName,
-          sobrenome:lastName,
+          sobrenome: lastName,
           username: res.email,
           password: res.userId
         }
@@ -109,7 +109,7 @@ export class CadastroPage {
         this.usuarioService.buscarPorEmail(this.userLogin.username).subscribe((response: Usuario) => {
           let loading: Loading = this.showLoading();
           //loggar usuario caso exista
-          this.authService.autenticar(this.userLogin).subscribe(resp => {
+          this.authService.autenticar(this.userLogin).subscribe((resp: any) => {
             loading.dismiss();
             //armazena informações no localStorage
             this.authService.armazenarToken(resp['access_token']);
@@ -118,12 +118,12 @@ export class CadastroPage {
 
             //token push notification
             this.fcm.getToken().then(token => {
-              console.log("get token");
+              this.authService.salvarToken(token, resp.user.idUsuario).subscribe(resp => {
+                //console.log(resp)
+                this.events.publish('user:LoggedIn');
+                this.navCtrl.setRoot('HomePage');
+              })
             });
-            
-            this.events.publish('user:LoggedIn');
-            this.navCtrl.setRoot('HomePage');
-
           }, err => {
             loading.dismiss();
             console.log(err)

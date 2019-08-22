@@ -708,20 +708,26 @@ li.active:before{
 li.active+ li:after{
   background-color: color($colors, secondary);
 }
+}
 
-ion-loading.my-loading-class {
-  .loading-wrapper {
-    border-radius: 10px !important;
-    max-width: 130px !important;
-    max-height: 90%;
-    color: rgba(0, 0, 0, 0.5);
-    background: #fafafa;
-    -webkit-box-shadow: 0 16px 20px rgba(0, 0, 0, 0.4);
-    box-shadow: 0 16px 20px rgba(0, 0, 0, 0.4);
-    padding: 10px !important;
+.loading-md .loading-wrapper {
+  border-radius: 100%;
+  background-color: transparent;
+  -webkit-box-shadow: 0 16px 20px rgba(0, 0, 0, 0);
+  box-shadow: 0 16px 20px rgba(0, 0, 0, 0);
+  ion-spinner > svg {
+    width: 120px !important;
+    height: 120px !important;
+   
+    margin-top:-48px;
+    margin-left:-45px;
   }
 }
+ion-spinner * {
+  stroke: #5868a6 !important;
+  fill: #00965e !important;
 }
 
+/* 9ce785 */
 
 

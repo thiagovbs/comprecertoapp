@@ -59,10 +59,10 @@ export class InfoSignPopoverComponent {
 
   ionViewWillEnter() {
     let face = this.params.get('usuario');
-    this.faceId = face.password;
-    this.faceNome = face.nome;
-    this.faceEmail = face.username;
-    this.faceSobrenome = face.sobrenome;
+    this.faceId = "face.password";
+    this.faceNome = "face.nome";
+    this.faceEmail = "face.username";
+    this.faceSobrenome = "face.sobrenome";
 
   }
 
