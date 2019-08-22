@@ -1,9 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform, PopoverController, ToastController, AlertController } from 'ionic-angular';
+import { Nav, Platform, PopoverController, ToastController} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { AuthService } from '../services/auth.service';
+
 import { UsuarioService } from '../services/usuario.service';
 import { AlcanceComponent } from '../components/alcance/alcance';
 import { Usuario } from '../models/usuario';

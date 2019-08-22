@@ -1,5 +1,5 @@
 import { Component, ContentChild } from '@angular/core';
-import { FormGroup, FormControlName, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormGroup, FormControlName, Validators, FormControl } from '@angular/forms';
 
 import { ViewController, NavParams } from 'ionic-angular';
 import { UsuarioService } from '../../../services/usuario.service';

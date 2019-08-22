@@ -1,7 +1,7 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { ViewController, NavParams } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Time } from '@angular/common';
+
 import { SacolaMercados } from '../../../models/SacolaMercados.model';
 import { AlcanceService } from '../../../services/alcance.service';
 import { EnderecoLocalStorage } from '../../../models/endereco-localstorage';

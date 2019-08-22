@@ -1,5 +1,4 @@
 import { CarrinhoItem } from "./carrinho-item.model";
-import { Time } from "@angular/common";
 
 export class SacolaMercados {
 

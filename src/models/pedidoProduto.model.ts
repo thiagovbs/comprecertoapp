@@ -1,4 +1,4 @@
-import { MercadoProduto } from "./mercado-produto.model";
+
 import { Produto } from "./Produto.model";
 
 export interface PedidoProduto {

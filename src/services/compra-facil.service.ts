@@ -4,7 +4,7 @@ import { SacolaMercados, SacolaMercadoDTO } from "../models/SacolaMercados.model
 import { Pedido } from "../models/pedido.model";
 import { HttpClient } from "@angular/common/http";
 import { API_CONFIG } from "../config/api.config";
-import { UsuarioService } from "./usuario.service";
+
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/timeout';
 import 'rxjs/add/operator/catch';
@@ -21,7 +21,7 @@ export class CompraFacilService {
 
     public listaProdutosMercado: Map<SacolaMercados, CarrinhoItem[]> = new Map<SacolaMercados, CarrinhoItem[]>();
 
-    constructor(private http: HttpClient, private usuarioService: UsuarioService) { }
+    constructor(private http: HttpClient) { }
 
     enderecoUsuarioPedido: any;
     dataEntradaPedido: any
