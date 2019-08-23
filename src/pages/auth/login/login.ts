@@ -62,7 +62,7 @@ export class LoginPage {
   //metodo que retorna um loading na tela
   private showLoading(): Loading {
     let loading: Loading = this.loadingCtrl.create({
-      content: 'Aguarde...'
+      spinner: 'dots',
     })
     loading.present();
     return loading;

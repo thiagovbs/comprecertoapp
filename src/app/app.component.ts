@@ -80,7 +80,7 @@ export class MyApp {
     this.fcm.onNotification().subscribe(data => {
       console.log(data)
       if (data.wasTapped) {
-        console.log("notification");
+        this.nav.setRoot('HistoricoPedidosPage', {});
       } else {
         const toast = this.toastCrtl.create({
           message: data.body,

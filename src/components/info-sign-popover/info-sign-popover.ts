@@ -116,13 +116,13 @@ export class InfoSignPopoverComponent {
 
         loading.dismiss();
         if (response.status) {
-          this.authService.autenticar(this.loginUser).subscribe(resp => {
+          this.authService.autenticar(this.loginUser).subscribe((data:any) => {
             //armazena informações no localStorage
-            this.authService.armazenarToken(resp['access_token']);
-            this.authService.armazenarRefreshToken(resp['refresh_token']);
-            this.authService.successfullLogin(resp);
+            this.authService.armazenarToken(data['access_token']);
+            this.authService.armazenarRefreshToken(data['refresh_token']);
+            this.authService.successfullLogin(data);
             this.fcm.getToken().then(token => {
-              this.authService.salvarToken(token, response.user.idUsuario).subscribe(resp => {
+              this.authService.salvarToken(token, data.user.idUsuario).subscribe(resp => {
                 console.log(resp)
               })
             });
@@ -143,7 +143,7 @@ export class InfoSignPopoverComponent {
   //metodo que retorna um loading na tela
   private showLoading(): Loading {
     let loading: Loading = this.loadingCtrl.create({
-      content: 'Aguarde...'
+      spinner: 'dots',
     })
     loading.present();
     return loading;

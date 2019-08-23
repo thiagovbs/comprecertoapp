@@ -109,21 +109,16 @@ export class CadastroPage {
         this.usuarioService.buscarPorEmail(this.userLogin.username).subscribe((response: Usuario) => {
           let loading: Loading = this.showLoading();
           //loggar usuario caso exista
-          this.authService.autenticar(this.userLogin).subscribe((resp: any) => {
+          this.authService.autenticar(this.userLogin).subscribe((data: any) => {
             loading.dismiss();
             //armazena informações no localStorage
-            this.authService.armazenarToken(resp['access_token']);
-            this.authService.armazenarRefreshToken(resp['refresh_token']);
-            this.authService.successfullLogin(resp);
+            this.authService.armazenarToken(data['access_token']);
+            this.authService.armazenarRefreshToken(data['refresh_token']);
+            this.authService.successfullLogin(data);
 
-            //token push notification
-            this.fcm.getToken().then(token => {
-              this.authService.salvarToken(token, resp.user.idUsuario).subscribe(resp => {
-                //console.log(resp)
-                this.events.publish('user:LoggedIn');
-                this.navCtrl.setRoot('HomePage');
-              })
-            });
+            this.events.publish('user:LoggedIn');
+            this.navCtrl.setRoot('HomePage');
+  
           }, err => {
             loading.dismiss();
             console.log(err)
@@ -167,7 +162,7 @@ export class CadastroPage {
   //metodo que retorna um loading na tela
   private showLoading(): Loading {
     let loading: Loading = this.loadingCtrl.create({
-      content: 'Aguarde...'
+      spinner: 'dots',
     })
     loading.present();
     return loading;

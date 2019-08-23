@@ -28,7 +28,16 @@ export class HistoricoPedidosPage {
   pedidos: Pedido[] = [];
 
   ionViewDidLoad() {
-    this.getPedidosHistorico()
+    let loading: Loading = this.presenteLoading();
+    this.pedidosService.getPedidos().subscribe(resp => {
+      loading.dismiss();
+      console.log(resp)
+      this.pedidos = resp;
+      
+    }, erro => {
+      loading.dismiss();
+      console.log(erro)
+    })
     this.setTimePedido()
 
     if (this.alcanceService.getLocalEndereco() !== null) {
@@ -61,13 +70,11 @@ export class HistoricoPedidosPage {
   }
 
   getPedidosHistorico() {
-    let loader = this.presenteLoading();
+
     this.pedidosService.getPedidos().subscribe(resp => {
-      loader.dismiss();
       console.log(resp)
       this.pedidos = resp;
     }, erro => {
-      loader.dismiss();
       console.log(erro)
     })
   }
