@@ -135,8 +135,6 @@ export class CadastroAppPage {
         });
   }
 
-
-
   //metodo que retorna um loading na tela
   private showLoading(): Loading {
     let loading: Loading = this.loadingCtrl.create({

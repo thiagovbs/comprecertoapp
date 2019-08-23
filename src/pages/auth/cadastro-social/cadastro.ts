@@ -77,7 +77,6 @@ export class CadastroPage {
                   loading.dismiss();
                   console.log(err)
                 })
-
               }, erro => {
                 this.AddModalAlert(this.userLogin);
               })
@@ -91,7 +90,7 @@ export class CadastroPage {
 
   //Login pelo Google Plus
   googleLogin() {
-    let loading: Loading = this.showLoading();
+    let loading: Loading = this.showLoading();    
     this.googlePlus.login({
     })
       .then(res => {
@@ -118,7 +117,6 @@ export class CadastroPage {
 
             this.events.publish('user:LoggedIn');
             this.navCtrl.setRoot('HomePage');
-  
           }, err => {
             loading.dismiss();
             console.log(err)

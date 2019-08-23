@@ -1,5 +1,5 @@
 import { Component, ContentChild } from '@angular/core';
-import { NavController, NavParams, Loading, LoadingController, Events } from 'ionic-angular';
+import { NavController, NavParams, Loading, LoadingController, Events, App, ViewController } from 'ionic-angular';
 import { FormGroup, FormControlName, Validators, FormControl } from '@angular/forms';
 import { Usuario, Permissao } from '../../models/usuario';
 import { UsuarioService } from '../../services/usuario.service';
@@ -41,7 +41,10 @@ export class InfoSignPopoverComponent {
     private authService: AuthService,
     private events: Events,
     private datePicker: DatePicker,
-    private fcm: FCM) {
+    private fcm: FCM,
+    private app:App,
+    public viewCtrl: ViewController) {
+      
 
     this.cadastroPopUpForm = new FormGroup({
       sexo: new FormControl('', [Validators.required]),
@@ -59,6 +62,7 @@ export class InfoSignPopoverComponent {
 
   ionViewWillEnter() {
     let face = this.params.get('usuario');
+    //this.faceId = face.password;
     this.faceId = face.password;
     this.faceNome = face.nome;
     this.faceEmail = face.username;
@@ -112,8 +116,6 @@ export class InfoSignPopoverComponent {
     //Cadastro usuario
     this.usuarioService.cadastrarUsuario(this.user)
       .subscribe((response: any) => {
-        //JSON.parse(response.body);
-
         loading.dismiss();
         if (response.status) {
           this.authService.autenticar(this.loginUser).subscribe((data:any) => {
@@ -123,14 +125,13 @@ export class InfoSignPopoverComponent {
             this.authService.successfullLogin(data);
             this.fcm.getToken().then(token => {
               this.authService.salvarToken(token, data.user.idUsuario).subscribe(resp => {
-                console.log(resp)
+                this.viewCtrl.dismiss();
+                this.events.publish('user:LoggedIn');
+                this.app.getRootNav().setRoot("HomePage");
               })
             });
-            this.events.publish('user:LoggedIn');
-            this.navCntl.setRoot('HomePage');
-
           }, err => {
-            console.log(err)
+            //console.log(err)
             loading.dismiss();
           })
         }
@@ -147,6 +148,10 @@ export class InfoSignPopoverComponent {
     })
     loading.present();
     return loading;
+  }
+
+  onPageWillLeave(): void {
+    this.events.unsubscribe('user:LoggedIn');
   }
 
 }

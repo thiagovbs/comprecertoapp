@@ -55,4 +55,11 @@ page-politica-privacidade {
     .footer-position{
         padding: 0 20px 0 20px !important;
     }
+
+    .bottom-sair{
+        min-height: 0;
+        width: 91%;
+        bottom: 0;
+        position: absolute;
+    }
 }
