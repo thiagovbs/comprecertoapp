@@ -563,7 +563,7 @@ color: #fff
 }
 .alert-message{
   color:#000;
-  text-align: justify;
+  text-align: center;
   font-size: 1.45rem !important;
   padding-left: 25px;
   font-weight: 400;
@@ -582,6 +582,32 @@ color: #fff
   }
 }
 }
+
+.AlertLoginCadastro{
+  .alert-head{
+    margin:0 auto;
+  }
+  .alert-message{
+    color:#000;
+    text-align: center;
+    font-size: 1.45rem !important;
+    padding-left: 25px;
+    font-weight: 400;
+    padding-right: 25px;
+    line-height: 23px;
+  }
+  .alert-button-group{
+    justify-content: center !important;
+    background: map-get($colors, secondary) !important;
+    .alert-button-default{
+      color:#fff;
+      width: 90%;
+      .button-inner{    
+        justify-content: center !important;
+      }
+    }
+  }
+  }
 
 .alert-md .alert-title {
 font-size: 1.7rem !important;

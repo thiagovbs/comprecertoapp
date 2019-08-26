@@ -21,9 +21,9 @@ export class InterceptorProvider implements HttpInterceptor {
         console.log("Erro Interceptado pelo Interceptor");
         if (erroObj instanceof HttpErrorResponse) {
           switch (erroObj.status) {
-            case 400:
+           /*  case 400:
               this.userFail();
-              break;
+              break; */
             case 403:
               this.handle403();
               break;

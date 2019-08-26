@@ -32,7 +32,8 @@ export class CadastroAppPage {
     private usuarioService: UsuarioService,
     private alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
-    private datePicker: DatePicker) {
+    private datePicker: DatePicker,
+    private alertCrtl: AlertController) {
 
     this.cadastroForm = new FormGroup({
       nome: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -131,6 +132,7 @@ export class CadastroAppPage {
         }
       },
         error => {
+          this.alertUserFail();
           loading.dismiss();
         });
   }
@@ -138,10 +140,24 @@ export class CadastroAppPage {
   //metodo que retorna um loading na tela
   private showLoading(): Loading {
     let loading: Loading = this.loadingCtrl.create({
-      content: 'Aguarde...'
+      spinner: 'dots',
     })
     loading.present();
     return loading;
   }
+
+    //Erro ao Loggar
+    alertUserFail() {
+      let alert = this.alertCrtl.create({
+        title: '<img src="assets/imgs/icone-de-erro.svg" height="100">',
+        message: "Seu email já está cadastrado na nossa base!",
+        enableBackdropDismiss: false,
+        cssClass: 'AlertLoginCadastro',
+        buttons: [
+          { text: 'Ok' }
+        ]
+      })
+      alert.present()
+    }
 
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, MenuController, Loading, LoadingController, Events } from 'ionic-angular';
+import { IonicPage, NavController, MenuController, Loading, LoadingController, Events, AlertController } from 'ionic-angular';
 import { UserLogin } from '../../../models/userLogin';
 import { AuthService } from '../../../services/auth.service';
 import { FCM } from '@ionic-native/fcm';
@@ -20,15 +20,16 @@ export class LoginPage {
     private authService: AuthService,
     public loadingCtrl: LoadingController,
     private events: Events,
-    private fcm: FCM) {
+    private fcm: FCM,
+    private alertCrtl: AlertController) {
   }
 
-    //condiciona ao usuário digital o email com letra minúscula e sem espaço
-    changeInput(evento) {
-      let email: string = evento.target.value
-      this.emailEditado = email.replace(/\s/g, '').toLowerCase();
-      this.login.username = this.emailEditado
-    }
+  //condiciona ao usuário digital o email com letra minúscula e sem espaço
+  changeInput(evento) {
+    let email: string = evento.target.value
+    this.emailEditado = email.replace(/\s/g, '').toLowerCase();
+    this.login.username = this.emailEditado
+  }
 
   onPageWillLeave(): void {
     this.events.unsubscribe('user:LoggedIn');
@@ -51,6 +52,7 @@ export class LoginPage {
         this.navCtrl.setRoot('HomePage');
 
       }, error => {
+        this.alertUserFail();
         loading.dismiss();
       })
   }
@@ -70,5 +72,19 @@ export class LoginPage {
 
   onMinhaSenha() {
     this.navCtrl.push('EsqueciMinhaSenhaPage')
+  }
+
+  //Erro ao Loggar
+  alertUserFail() {
+    let alert = this.alertCrtl.create({
+      title: '<img src="assets/imgs/icone-de-erro.svg" height="100">',
+      message: "Seu email ou senha estão incorretos!",
+      enableBackdropDismiss: false,
+      cssClass: 'AlertLoginCadastro',
+      buttons: [
+        { text: 'Ok' }
+      ]
+    })
+    alert.present()
   }
 }

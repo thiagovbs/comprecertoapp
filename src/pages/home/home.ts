@@ -41,6 +41,7 @@ export class HomePage {
 
     //Carregando as Categorias
     this.categoriaService.findAll().subscribe(resp => {
+      console.log(resp);
       loader.dismiss();
       this.categorias = Lodash.orderBy(resp, 'nome', 'asc')
     },erro=>loader.dismiss());
@@ -66,6 +67,7 @@ export class HomePage {
     if (this.localidadeMercado) {
       this.mercadoService.buscarMercadoprodutosPorBairro(this.localidadeMercado)
         .subscribe((resp: Mercado[]) => {
+         
           this.mercados = resp;
         })
     }
