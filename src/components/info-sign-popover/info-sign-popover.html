@@ -8,8 +8,8 @@
     </ion-row>
     <form novalidate [formGroup]="cadastroPopUpForm" (ngSubmit)="SubmitMaisInfoForm()">
       <ion-row margin-top>
-        <ion-item class="bg-transparent size" class="size-select-item" style="padding-left: 12px!important;">
-          <ion-select formControlName="sexo" placeholder="sexo" class="size-select" >
+        <ion-item class="bg-transparent size" class="size-select-item" style="padding-left: 15px!important;">
+          <ion-select formControlName="sexo" placeholder="Sexo" class="size-select" >
             <ion-option *ngFor="let sexo of sexoList" value="{{sexo.value}}">{{sexo.nome}}</ion-option>
           </ion-select>
         </ion-item>

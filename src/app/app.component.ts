@@ -70,9 +70,9 @@ export class MyApp {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-
-      //this.statusBar.hide();
-      this.splashScreen.hide();
+      setTimeout(()=>{
+        this.splashScreen.hide();  
+      },1000);
     });
 
     //this.fcm.subscribeToTopic('marketing');

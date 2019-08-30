@@ -32,8 +32,8 @@ export class AlcanceComponent implements OnInit {
 
     this.alcanceForm = new FormGroup({
       estado: new FormControl({ value: '' }, [Validators.required]),
-      cidade: new FormControl({ value: '', disabled: true }, [Validators.required]),
-      bairro: new FormControl({ value: '', disabled: true }, [Validators.required]),
+      cidade: new FormControl({ value: ''}, [Validators.required]),
+      bairro: new FormControl({ value: ''}, [Validators.required]),
     })
   }
 

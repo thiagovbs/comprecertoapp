@@ -1,5 +1,5 @@
 import { Component, ContentChild } from '@angular/core';
-import { NavController, NavParams, Loading, LoadingController, Events, App, ViewController } from 'ionic-angular';
+import { NavController, NavParams, Loading, LoadingController, Events, App, ViewController, AlertController } from 'ionic-angular';
 import { FormGroup, FormControlName, Validators, FormControl } from '@angular/forms';
 import { Usuario, Permissao } from '../../models/usuario';
 import { UsuarioService } from '../../services/usuario.service';
@@ -23,7 +23,7 @@ export class InfoSignPopoverComponent {
   faceId: string;
   faceEmail: string;
   faceNome: string;
-  faceSobrenome:string;
+  faceSobrenome: string;
   permissao: Permissao;
   dtNascimento: any = '';
 
@@ -34,7 +34,7 @@ export class InfoSignPopoverComponent {
 
   ];
 
-  constructor(private navCntl: NavController,
+  constructor(
     private params: NavParams,
     private usuarioService: UsuarioService,
     public loadingCtrl: LoadingController,
@@ -42,9 +42,10 @@ export class InfoSignPopoverComponent {
     private events: Events,
     private datePicker: DatePicker,
     private fcm: FCM,
-    private app:App,
-    public viewCtrl: ViewController) {
-      
+    private app: App,
+    public viewCtrl: ViewController,
+    private alertCrtl: AlertController) {
+
 
     this.cadastroPopUpForm = new FormGroup({
       sexo: new FormControl('', [Validators.required]),
@@ -113,12 +114,18 @@ export class InfoSignPopoverComponent {
       password: this.user.senha
     }
 
+    if (dtNascimento_form == "" || dtNascimento_form == undefined) {
+      this.alertUserFail("Opa, você deixou a data de nascimento em branco!");
+      loading.dismiss();
+      return '';
+    }
+
     //Cadastro usuario
     this.usuarioService.cadastrarUsuario(this.user)
       .subscribe((response: any) => {
         loading.dismiss();
         if (response.status) {
-          this.authService.autenticar(this.loginUser).subscribe((data:any) => {
+          this.authService.autenticar(this.loginUser).subscribe((data: any) => {
             //armazena informações no localStorage
             this.authService.armazenarToken(data['access_token']);
             this.authService.armazenarRefreshToken(data['refresh_token']);
@@ -131,13 +138,16 @@ export class InfoSignPopoverComponent {
               })
             });
           }, err => {
-            //console.log(err)
+            this.alertUserFail("Servidor está fora do ar, tente mais tarde!")
             loading.dismiss();
+            this.viewCtrl.dismiss();
           })
         }
       }, erro => {
         console.log(erro)
+        this.alertUserFail("Servidor está fora do ar, tente mais tarde!")
         loading.dismiss();
+        this.viewCtrl.dismiss();
       })
   }
 
@@ -154,4 +164,18 @@ export class InfoSignPopoverComponent {
     this.events.unsubscribe('user:LoggedIn');
   }
 
+
+  //Erro ao Loggar
+  alertUserFail(msg: string) {
+    let alert = this.alertCrtl.create({
+      title: '<img src="assets/imgs/icone-de-erro.svg" height="100">',
+      message: msg,
+      enableBackdropDismiss: false,
+      cssClass: 'AlertLoginCadastro',
+      buttons: [
+        { text: 'Ok' }
+      ]
+    })
+    alert.present()
+  }
 }
