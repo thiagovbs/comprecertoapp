@@ -71,14 +71,16 @@ export class InfoSignPopoverComponent {
 
   }
 
-  onBirthday() {
-    this.datePicker.show({
-      date: new Date(),
-      mode: 'date',
-      androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_LIGHT
-    }).then(date => {
-      this.dtNascimento = date.toLocaleDateString();
-    }, err => console.log('Error occurred while getting date: ', err));
+  onBirthday(data) {
+    if (data) {
+      this.datePicker.show({
+        date: new Date(),
+        mode: 'date',
+        androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_LIGHT
+      }).then(date => {
+        this.dtNascimento = date.toLocaleDateString();
+      }, err => console.log('Error occurred while getting date: ', err));
+    }
   }
 
 

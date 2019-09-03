@@ -70,9 +70,7 @@ export class HistoricoPedidosPage {
   }
 
   getPedidosHistorico() {
-
     this.pedidosService.getPedidos().subscribe(resp => {
-      console.log(resp)
       this.pedidos = resp;
     }, erro => {
       console.log(erro)

@@ -177,6 +177,11 @@ export class DynamicStepsPage {
     pedido.pedidoProdutos = [];
     pedido.celular = this.enderecoPedido.celular;
     pedido.substituicao= this.substituicao;
+
+    if(!this.enderecoPedido.complemento){
+      this.enderecoPedido.complemento = " "
+    }
+
     if (this.enderecoPedido.endereco) {
       pedido.entrega = "E";
       pedido.endereco = this.enderecoPedido.endereco + " " +this.enderecoPedido.complemento + " " + this.enderecoPedido.bairro + " " + this.enderecoPedido.cidade + " " + this.enderecoPedido.estado;

@@ -3,7 +3,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CarrinhoService } from '../../services/carrinho.service';
 import { CarrinhoItem } from '../../models/carrinho-item.model';
 import { MercadoProduto } from '../../models/mercado-produto.model';
-import { API_CONFIG } from '../../config/api.config';
 import { NavController } from 'ionic-angular';
 
 @Component({
@@ -32,7 +31,8 @@ export class ProdutoItemComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.bucketS3 = API_CONFIG.s3Url;
+    
+    //console.log(this.produtos)
   }
 
   //retorna todos os items no carrinho

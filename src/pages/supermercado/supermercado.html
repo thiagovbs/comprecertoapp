@@ -20,17 +20,17 @@
 <ion-content>
 
   <!--list of mercados-->
-  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-    <ion-list class="list-full-border">
-      <ion-item *ngFor="let supermercado of supermercados; let i = index " text-wrap (click)="onMercado(supermercado)">
-        <ion-thumbnail item-left style="margin-top:15px">
-          <img class="img-rounded" style="height:70px; width:70px" src="{{supermercado.imagemUrl}}" alt="">
-        </ion-thumbnail>
-        <div>
-          <div>{{ supermercado.nomeFantasia }}</div>
-          <p class="text-sm" ion-text color="light-dark"> {{supermercado.mercadoLocalidades[0].endereco}}
-        </div>
-      </ion-item>
-    </ion-list>
-  </ion-infinite-scroll>
+
+  <ion-list class="list-full-border">
+    <ion-item *ngFor="let supermercado of supermercados; let i = index " text-wrap (click)="onMercado(supermercado)">
+      <ion-thumbnail item-left style="margin-top:15px">
+        <img class="img-rounded" style="height:70px; width:70px" src="{{supermercado.imagemURL}}" alt="">
+      </ion-thumbnail>
+      
+        <div style="text-transform: capitalize">{{ supermercado.nomeFantasia }}</div>
+        <p class="text-sm" ion-text color="light-dark"> {{supermercado.endereco}}
+      
+    </ion-item>
+  </ion-list>
+
 </ion-content>

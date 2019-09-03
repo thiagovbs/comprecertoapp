@@ -46,12 +46,14 @@ export class CadastroAppPage {
       confirmSenha: new FormControl('', [Validators.required])
     }, { validators: CadastroAppPage.equalTo })
 
+
   }
   //condiciona ao usuário digital o email com letra minúscula e sem espaço
   changeInput(evento) {
     let email: string = evento.target.value
     this.emailEditado = email.replace(/\s/g, "").toLowerCase();
   }
+
 
   static equalTo(group: AbstractControl): { [key: string]: boolean } {
     const senha = group.get('senha');
@@ -71,17 +73,20 @@ export class CadastroAppPage {
 
   }
 
-  onBirthday() {
-    this.datePicker.show({
-      date: new Date(),
-      mode: 'date',
-      androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_LIGHT
-    }).then(date => {
+  onBirthday(data) {
+  
+    if (data) {
+      this.datePicker.show({
+        date: new Date(),
+        mode: 'date',
+        androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_LIGHT
+      }).then(date => {
 
-      this.dtNascimento = date.toLocaleDateString();
+        this.dtNascimento = date.toLocaleDateString();
 
-    }, err => console.log('Error occurred while getting date: ', err));
-    console.log(this.cadastroForm.controls['data'].value);
+      }, err => console.log('Error occurred while getting date: ', err));
+      console.log(this.cadastroForm.controls['data'].value);
+    }
   }
 
   SubmitForm() {
@@ -95,10 +100,10 @@ export class CadastroAppPage {
     let email_form: string = this.cadastroForm.controls['email'].value;
     email_form = email_form.trim()
     let senha_form = this.cadastroForm.controls['senha'].value;
-    let cpf_form  = this.cadastroForm.controls['cpf'].value;
+    let cpf_form = this.cadastroForm.controls['cpf'].value;
 
     this.permissao = {
-      idPermissao:3,
+      idPermissao: 3,
       descricao: "USUARIO"
     }
 
@@ -112,13 +117,12 @@ export class CadastroAppPage {
       dtNascimento: milliseconds,
       senha: senha_form,
       sexo: sexo_form,
-      cpf:cpf_form,
+      cpf: cpf_form,
       permissoes: [this.permissao]
     }
-    
+
     this.usuarioService.cadastrarUsuario(this.usuario)
       .subscribe(response => {
-
         loading.dismiss();
         if (response.status) {
           let alert = this.alertCtrl.create({
@@ -146,18 +150,18 @@ export class CadastroAppPage {
     return loading;
   }
 
-    //Erro ao Loggar
-    alertUserFail() {
-      let alert = this.alertCrtl.create({
-        title: '<img src="assets/imgs/icone-de-erro.svg" height="100">',
-        message: "Seu email já está cadastrado na nossa base!",
-        enableBackdropDismiss: false,
-        cssClass: 'AlertLoginCadastro',
-        buttons: [
-          { text: 'Ok' }
-        ]
-      })
-      alert.present()
-    }
+  //Erro ao Loggar
+  alertUserFail() {
+    let alert = this.alertCrtl.create({
+      title: '<img src="assets/imgs/icone-de-erro.svg" height="100">',
+      message: "Seu email já está cadastrado na nossa base!",
+      enableBackdropDismiss: false,
+      cssClass: 'AlertLoginCadastro',
+      buttons: [
+        { text: 'Ok' }
+      ]
+    })
+    alert.present()
+  }
 
 }

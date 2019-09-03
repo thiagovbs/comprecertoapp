@@ -23,7 +23,7 @@
       </ion-row>
       <ion-row>
         <ion-col col-12 margin-top>
-          <ion-item class="bg-transparent size-dt" (tap)="onBirthday()" >
+          <ion-item class="bg-transparent size-dt" (tap)="onBirthday('data')" >
             <ion-input placeholder="Data de nascimento" [(ngModel)]="dtNascimento" formControlName="data"></ion-input>
             <button clear item-right ion-button type="button" (click)="onBirthday()" >
               <ion-icon name="calendar"></ion-icon>

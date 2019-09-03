@@ -23,8 +23,14 @@ export class SupermercadoService {
   }
 
   buscarMercadoprodutosPorBairro(lodalidadeMercado: Bairro) {
-    return this.http.get<any>(`${API_CONFIG.baseUrl}/mercados?idBairro=${lodalidadeMercado.idBairro}&fativo=${true}`)
+    return this.http.get<any>(`${API_CONFIG.baseUrl}/mercado-localidades/dto/bairro/${lodalidadeMercado.idBairro}`)
   }
+
+  buscarMercadoprodutosPorBairro2(lodalidadeMercado: Bairro) {
+    return this.http.get<any>(`${API_CONFIG.baseUrl}/mercado-localidades?idBairro=${lodalidadeMercado.idBairro}&fativo=${true}`)
+  }
+
+
 
 
   filtrarCategoriasPorMercadoProduto(mercadoProduto: MercadoProduto[]): MercadoDetalheProd[] {

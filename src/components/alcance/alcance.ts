@@ -32,8 +32,8 @@ export class AlcanceComponent implements OnInit {
 
     this.alcanceForm = new FormGroup({
       estado: new FormControl({ value: '' }, [Validators.required]),
-      cidade: new FormControl({ value: ''}, [Validators.required]),
-      bairro: new FormControl({ value: ''}, [Validators.required]),
+      cidade: new FormControl({ value: '' }, [Validators.required]),
+      bairro: new FormControl({ value: '' }, [Validators.required]),
     })
   }
 
@@ -57,6 +57,9 @@ export class AlcanceComponent implements OnInit {
       //pesquisar cidades pelo valor do alcance existente
       this.alcanceService.getCidades(this.alcance.cidade.estado.idEstado).subscribe((cidade: Cidade[]) => {
         this.cidades = cidade;
+        this.cidades.sort((a, b) => {
+          if (a.nome <= b.nome) return -1
+        })
         this.alcanceForm.get('cidade').setValue(this.alcance.cidade.idCidade);
 
       }, erro => console.log(erro))
@@ -64,6 +67,11 @@ export class AlcanceComponent implements OnInit {
       //pesquisar bairros pelo valor do alcance existente
       this.alcanceService.getBairros(this.alcance.cidade.idCidade).subscribe((bairro: Bairro[]) => {
         this.bairros = bairro;
+
+        this.bairros.sort((a, b) => {
+          if (a.nome <= b.nome) return -1
+        })
+
         this.alcanceForm.get('bairro').setValue(this.alcance.idBairro);
       }, erro => console.log(erro))
 
@@ -75,6 +83,9 @@ export class AlcanceComponent implements OnInit {
   selectEstado(event, estado) {
     this.alcanceService.getCidades(estado.idEstado).subscribe((cidade: Cidade[]) => {
       this.cidades = cidade;
+      this.cidades.sort((a, b) => {
+        if (a.nome <= b.nome) return -1
+      })
     }, erro => console.log(erro))
     this.alcanceForm.controls['cidade'].enable({ onlySelf: true })
     this.alcanceForm.get('cidade').setValue('');
@@ -84,6 +95,9 @@ export class AlcanceComponent implements OnInit {
   selectCidade(event, cidade) {
     this.alcanceService.getBairros(cidade.idCidade).subscribe((bairro: Bairro[]) => {
       this.bairros = bairro;
+      this.cidades.sort((a, b) => {
+        if (a.nome <= b.nome) return -1
+      })
       this.alcanceForm.controls['bairro'].enable({ onlySelf: true })
       this.alcanceForm.get('bairro').setValue('');
     })

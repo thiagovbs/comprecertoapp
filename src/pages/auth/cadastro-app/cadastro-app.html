@@ -8,7 +8,7 @@
 </ion-header>
 <ion-content class="gray-bg login-content" padding style="-webkit-overflow-scrolling:touch; overflow:auto;">
 
-  <form novalidate [formGroup]="cadastroForm" (ngSubmit)="SubmitForm()">
+  <form novalidate [formGroup]="cadastroForm" >
 
     <ion-item class="bg-transparent size">
       <ion-label floating>Digite seu nome</ion-label>
@@ -25,7 +25,7 @@
         </ion-select>
       </ion-item>
     </ion-row>
-    <ion-item class="bg-transparent size-data" (tap)="onBirthday()">
+    <ion-item class="bg-transparent size-data" (tap)="onBirthday('data')">
       <ion-input placeholder="Data de nascimento" [(ngModel)]="dtNascimento" formControlName="data"></ion-input>
       <button clear item-right ion-button (click)="onBirthday()" style="margin-top: 35px">
         <ion-icon name="calendar"></ion-icon>
@@ -33,17 +33,17 @@
     </ion-item>
     <ion-item class="bg-transparent size">
       <ion-label floating>Digite seu CPF</ion-label>
-      <ion-input type="tel" formControlName="cpf" [brmasker]="{mask:'000.000.000-00', len:14}" autocapitalize="none"
+      <ion-input type="tel" formControlName="cpf" [brmasker]="{mask:'000.000.000-00', len:14}"
         maxlength="14"></ion-input>
     </ion-item>
     <ion-item class="bg-transparent size">
       <ion-label floating>Digite seu E-mail</ion-label>
       <ion-input type="text" formControlName="email" (keyup)="changeInput($event)" autocapitalize="none"
-        value="{{emailEditado}}"></ion-input>
+        value="{{emailEditado}}" ></ion-input>
     </ion-item>
     <ion-item class="bg-transparent size">
       <ion-label floating>Digite sua senha</ion-label>
-      <ion-input formControlName="senha" type="password"></ion-input>
+      <ion-input formControlName="senha" type="password" ></ion-input>
     </ion-item>
     <ion-item class="bg-transparent size">
       <ion-label floating>Confirme sua senha</ion-label>
@@ -53,11 +53,14 @@
       <span class="error">Senhas não são iguais</span>
     </ion-item>
 
-    <button ion-button block style="width:95%; margin: 12px auto" class="register" color="secondary" margin-top
+    <button type="submit" ion-button block 
+      style="width:95%; margin: 12px auto" 
+      class="register" color="secondary" 
+      margin-top
+      (click)="SubmitForm()"
       [disabled]="!cadastroForm.valid">
       <ion-icon name="ios-create-outline" style="margin-right: 12px;">
       </ion-icon> Cadastrar
     </button>
   </form>
-
 </ion-content>
