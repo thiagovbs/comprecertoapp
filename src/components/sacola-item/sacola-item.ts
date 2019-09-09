@@ -58,5 +58,9 @@ export class SacolaItemComponent implements OnInit {
     });
   }
 
+  getProdutoToCaptalized(nomeProduto: string, marcaProduto: string) {
+    return nomeProduto.toLowerCase() + " " + marcaProduto.toLowerCase();
+  }
+
 
 }

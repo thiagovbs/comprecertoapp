@@ -20,19 +20,19 @@ alcance {
 
     .resize{
         max-width: 15% !important;
-        padding: 4px 95px 0px 5px!important;
+        padding: 4px 110px 0px 1px !important;
     }
 
-    .resize.select-icon-inner{
-        left: 15px !important;
-    }
+/*     .resize.select-icon-inner{
+        left: 12px !important;
+    } */
 
     .resize2{
-        max-width: 15% !important;
-        padding: 4px 50px 0px 5px;
+        max-width: 16% !important;
+        padding: 4px 60px 0px 1px;
 
         .select-text{
-            min-width: 20px !important;
+            min-width: 18px !important;
         }
     }
 

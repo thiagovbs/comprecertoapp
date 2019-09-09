@@ -129,15 +129,17 @@ export class SubcategoriaPage implements OnInit {
         if (this.produtos.length === 0) {
           this.produtos = undefined;
         }
+        this.getImageProdutos(this.produtos)
         loader.dismiss()
       }, erro => { loader.dismiss() })
+
   }
 
   listaProdutosPorMercadoECategoria() {
     let loader = this.presenteLoading();
-    this.subcategoriaService.findProdutosPorCategoriaEMercadoEBairro(this.localidade.idBairro,this.mercadoDetalhe.idCategoria, this.mercadoDetalhe.idMercado, this.page, 20)
+    this.subcategoriaService.findProdutosPorCategoriaEMercadoEBairro(this.localidade.idBairro, this.mercadoDetalhe.idCategoria, this.mercadoDetalhe.idMercado, this.page, 20)
       .subscribe(resp => {
-        
+
         this.produtos = this.produtos.concat(resp)
         //Não repetir as categorias
         this.mercadoSubCategoria = this.supermercadoService
@@ -146,6 +148,7 @@ export class SubcategoriaPage implements OnInit {
         if (this.produtos.length === 0) {
           this.produtos = undefined;
         }
+        this.getImageProdutos(this.produtos)
         loader.dismiss()
       }, erro => { loader.dismiss() })
   }
@@ -192,6 +195,18 @@ export class SubcategoriaPage implements OnInit {
     return loading
   }
 
-
+  getImageProdutos(produtosLista: MercadoProduto[]) {
+    if (produtosLista) {
+      for (let produto of produtosLista) {
+        this.carrinhoService.getImageFromS3Bucket(produto.imagemUrl)
+          .subscribe(resp => {
+            console.log(resp)
+          }, erro => {
+            console.log(erro)
+            produto.imagemUrl = undefined;
+          });
+      }
+    }
+  }
 }
 

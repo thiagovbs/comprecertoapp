@@ -6,6 +6,9 @@ import { MercadoProduto } from "../models/mercado-produto.model";
 import { STORAGE_KEYS } from "../config/storage_keys.config";
 import { CompraFacilService } from "./compra-facil.service";
 import { SacolaMercados } from "../models/SacolaMercados.model";
+import { HttpClient } from "@angular/common/http";
+import { API_CONFIG } from "../config/api.config";
+import { Observable } from "rxjs";
 
 @Injectable()
 export class CarrinhoService {
@@ -14,7 +17,9 @@ export class CarrinhoService {
 
     carrinhoItem: CarrinhoItem
 
-    constructor(public events: Events, private compraFacilService: CompraFacilService) {
+    constructor(public events: Events, 
+                private compraFacilService: CompraFacilService,
+                private http:HttpClient) {
         this.getLocaSacola()
     }
 
@@ -122,5 +127,9 @@ export class CarrinhoService {
             this.items.splice(this.items.indexOf(produto), 1)
         })
         console.log(this.items)
+    }
+
+    getImageFromS3Bucket(imageUrl):Observable<any>{
+        return this.http.get(imageUrl,{responseType:'blob'});
     }
 }

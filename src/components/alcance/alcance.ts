@@ -65,16 +65,13 @@ export class AlcanceComponent implements OnInit {
       }, erro => console.log(erro))
 
       //pesquisar bairros pelo valor do alcance existente
-      this.alcanceService.getBairros(this.alcance.cidade.idCidade).subscribe((bairro: Bairro[]) => {
-        this.bairros = bairro;
-
+      this.alcanceService.getBairros(this.alcance.cidade.idCidade).subscribe((bairros: Bairro[]) => {
+        this.bairros = bairros;
         this.bairros.sort((a, b) => {
           if (a.nome <= b.nome) return -1
         })
-
         this.alcanceForm.get('bairro').setValue(this.alcance.idBairro);
       }, erro => console.log(erro))
-
       this.alcanceForm.updateValueAndValidity();
     }
   }
@@ -95,7 +92,7 @@ export class AlcanceComponent implements OnInit {
   selectCidade(event, cidade) {
     this.alcanceService.getBairros(cidade.idCidade).subscribe((bairro: Bairro[]) => {
       this.bairros = bairro;
-      this.cidades.sort((a, b) => {
+      this.bairros.sort((a, b) => {
         if (a.nome <= b.nome) return -1
       })
       this.alcanceForm.controls['bairro'].enable({ onlySelf: true })

@@ -11,8 +11,8 @@ import { NavController } from 'ionic-angular';
 })
 export class ProdutoItemComponent implements OnInit {
 
-  @Input('produto-itens') produtos: MercadoProduto;
-  
+  @Input('produto-itens') produtos: MercadoProduto[];
+
   @Input() nomeCategoria: string
   @Input() possuiMercadoNome: boolean;
 
@@ -31,8 +31,7 @@ export class ProdutoItemComponent implements OnInit {
   }
 
   ngOnInit() {
-    
-    //console.log(this.produtos)
+
   }
 
   //retorna todos os items no carrinho
@@ -71,13 +70,16 @@ export class ProdutoItemComponent implements OnInit {
     return this.somaProduto = 0;
   }
 
-  sendToMercado(mercadoProduto:MercadoProduto){
+  sendToMercado(mercadoProduto: MercadoProduto) {
     console.log(mercadoProduto)
-    let sedMercado:{idMercado:number, nomeFantasia:string}= {idMercado:mercadoProduto.idMercado, nomeFantasia: mercadoProduto.nomeFantasiaMercado}
+    let sedMercado: { idMercado: number, nomeFantasia: string } = { idMercado: mercadoProduto.idMercado, nomeFantasia: mercadoProduto.nomeFantasiaMercado }
     this.navCtrl.push("SupermercadoDetalhePage", {
       mercado: sedMercado
     });
   }
 
- 
+  getProdutoToCaptalized(nomeProduto: string, marcaProduto: string) {
+    return nomeProduto.toLowerCase() + " " + marcaProduto.toLowerCase();
+  }
+
 }

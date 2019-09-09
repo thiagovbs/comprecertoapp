@@ -2,10 +2,10 @@ export const API_CONFIG = {
     
     //baseUrl: "https://sheap.herokuapp.com/rest",
     //authUrl: "https://sheap.herokuapp.com/oauth/token",
-    //baseUrl:"http://167.86.118.44:8080/rest",
-    //authUrl: "http://167.86.118.44:8080/oauth/token",
-    authUrl: 'http://localhost:8080/oauth/token',
-    baseUrl: 'http://localhost:8080/rest',
+    baseUrl:"http://167.86.118.44:8080/rest",
+    authUrl: "http://167.86.118.44:8080/oauth/token",
+    //authUrl: 'http://localhost:8080/oauth/token',
+    //baseUrl: 'http://localhost:8080/rest',
 
     //authUrl: 'http://26.100.22.112:8080/oauth/token',
     //baseUrl: 'http://26.100.22.112:8080/rest',

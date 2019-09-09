@@ -6,6 +6,7 @@ export interface MercadoProduto{
     dtValidadeMercadoProduto:Date,
     fDestaqueMercadoProduto:boolean,
     mercadoImagemUrl?:string,
+    imagemUrl?:string,
     idCategoria:number,
     idMercado:number,
     valorFrete?: number,

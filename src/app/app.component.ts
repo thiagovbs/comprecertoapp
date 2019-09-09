@@ -77,7 +77,7 @@ export class MyApp {
 
     //this.fcm.subscribeToTopic('marketing');
 
-/*     this.fcm.onNotification().subscribe(data => {
+    this.fcm.onNotification().subscribe(data => {
       console.log(data)
       if (data.wasTapped) {
         this.nav.setRoot('HistoricoPedidosPage', {});
@@ -89,7 +89,7 @@ export class MyApp {
         });
         toast.present();
       };
-    }); */
+    });
     
     //this.fcm.unsubscribeFromTopic('marketing');
   }

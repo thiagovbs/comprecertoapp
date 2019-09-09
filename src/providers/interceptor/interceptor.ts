@@ -98,7 +98,8 @@ export class InterceptorProvider implements HttpInterceptor {
   }
 
   handle403() {
-    this.usuarioService.setLocalUser(null);
+    console.log("requisição proibida")
+    //this.usuarioService.setLocalUser(null);
   }
 }
 
