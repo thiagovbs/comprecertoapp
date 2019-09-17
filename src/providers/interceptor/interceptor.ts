@@ -1,7 +1,6 @@
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HTTP_INTERCEPTORS, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
-import { UsuarioService } from '../../services/usuario.service';
 import { AlertController } from 'ionic-angular';
 
 import { AuthService } from '../../services/auth.service';
@@ -11,14 +10,13 @@ export class InterceptorProvider implements HttpInterceptor {
 
   constructor(
     private alertCrtl: AlertController,
-    private usuarioService: UsuarioService,private authService: AuthService) {
+   private authService: AuthService) {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request)
       .catch((error: any) => {
         let erroObj = error;
-        console.log("Erro Interceptado pelo Interceptor");
         if (erroObj instanceof HttpErrorResponse) {
           switch (erroObj.status) {
            /*  case 400:

@@ -35,7 +35,7 @@ export class SupermercadoService {
 
   filtrarCategoriasPorMercadoProduto(mercadoProduto: MercadoProduto[]): MercadoDetalheProd[] {
     this.mercadoCategoria = [];
-
+    console.log(mercadoProduto)
     mercadoProduto.map((mercado: MercadoProduto) => {
       this.mercadoCategoria.push({
         idCategoria: mercado.idCategoria,

@@ -78,8 +78,8 @@ export class ProdutoItemComponent implements OnInit {
     });
   }
 
-  getProdutoToCaptalized(nomeProduto: string, marcaProduto: string) {
-    return nomeProduto.toLowerCase() + " " + marcaProduto.toLowerCase();
+  getProdutoToCaptalized(nomeProduto: string) {
+    return nomeProduto.toLowerCase();
   }
 
 }

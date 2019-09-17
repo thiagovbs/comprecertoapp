@@ -31,6 +31,31 @@ page-detalhe-pedido {
     .text-inline{
         margin-top:0px;
         line-height: 1.5em;
+        text-transform: capitalize;
     }
 
+    
+    .colx{
+        
+        text-transform: capitalize; 
+        font-size: 0.90em;
+        width: 19%;
+    }
+
+      
+    .coly{
+        text-transform: capitalize;
+        font-size: 0.90em;
+        background: #eee;
+        
+    }
+
+    
+    .grid-tabel{
+        width: 90% !important;
+        border-radius: 10px;
+        -webkit-box-shadow: 0px 0px 21px -5px rgba(0,0,0,0.55);
+        -moz-box-shadow: 0px 0px 21px -5px rgba(0,0,0,0.55);
+        box-shadow: 0px 0px 21px -5px rgba(0,0,0,0.55);
+    }
 }

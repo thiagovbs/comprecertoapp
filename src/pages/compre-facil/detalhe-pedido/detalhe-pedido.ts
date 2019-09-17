@@ -11,10 +11,10 @@ import { CarrinhoItem } from '../../../models/carrinho-item.model';
   templateUrl: 'detalhe-pedido.html',
 })
 export class DetalhePedidoPage {
-  pedidosMercado:SacolaMercados = {} as SacolaMercados;
-  produtos:CarrinhoItem[]=[]
-  valorTotal:number;
-  infoMercado:any
+  pedidosMercado: SacolaMercados = {} as SacolaMercados;
+  produtos: CarrinhoItem[] = []
+  valorTotal: number;
+  infoMercado: any
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private viewCtrl: ViewController) {
@@ -22,18 +22,24 @@ export class DetalhePedidoPage {
     this.valorTotal = this.navParams.get('valorTotal');
 
     this.infoMercado = this.pedidosMercado.sacolaMercado
-    this.produtos = this.pedidosMercado.carrinhoItem
+    this.produtos = this.pedidosMercado.carrinhoItem;
+    
   }
 
   ionViewDidLoad() {
-
+    console.log(this.produtos)
   }
 
   onClose() {
     this.viewCtrl.dismiss()
   }
 
-  getValorTotalPorProduto(produto:CarrinhoItem):number{
-    return  produto.produto.precoMercadoProduto * produto.quantidade;  
- }
+  getValorTotalPorProduto(produto: CarrinhoItem): number {
+    return produto.produto.precoMercadoProduto * produto.quantidade;
+  }
+
+
+  getProdutoToCaptalized(nomeProduto: string) {
+    return nomeProduto.toLowerCase();
+  }
 }

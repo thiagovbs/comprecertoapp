@@ -68,8 +68,8 @@
     </ion-col>
     <ion-scroll scrollY="true" class=" side-produto scroll-lista-produto">
       <div text-left *ngFor="let produto of produtos ; index as i">
-        <p class="text-inline">{{i+ 1}} - {{produto.produto.nomeProduto}},
-          {{produto.produto.marcaProduto}} - {{produto.produto.caracteristicaProduto}},
+        <p class="text-inline">{{i+ 1}} - {{getProdutoToCaptalized(produto.produto.nomeProduto)}},
+          {{getProdutoToCaptalized(oduto.produto.marcaProduto)}} - {{getProdutoToCaptalized(produto.produto.caracteristicaProduto)}},
           {{produto.produto.quantidadeProduto}} - Quantidade: {{produto.quantidade}} - Valor total:
           {{getValorTotalPorProduto(produto) | currency:'BRL'}}</p>
       </div>

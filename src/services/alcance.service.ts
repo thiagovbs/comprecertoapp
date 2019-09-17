@@ -37,7 +37,6 @@ export class AlcanceService {
         if (obj === null) {
             localStorage.removeItem(STORAGE_KEYS.localAlcance)
         } else {
-            console.log(obj)
             localStorage.setItem(STORAGE_KEYS.localAlcance, JSON.stringify(obj))
         }
     }

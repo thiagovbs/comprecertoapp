@@ -50,4 +50,8 @@ export class WizardPedidoFinalizadoComponent {
       return "Crédito"
     }
   }
+
+  getProdutoToCaptalized(nomeProduto: string) {
+    return nomeProduto.toLowerCase();
+  }
 }

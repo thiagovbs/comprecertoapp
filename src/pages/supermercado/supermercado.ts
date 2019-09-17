@@ -32,7 +32,6 @@ export class SupermercadoPage {
     this.localidadeMercado = this.alcanceService.getLocaAlcance();
     this.supermercadoService.buscarMercadoprodutosPorBairro(this.localidadeMercado)
       .subscribe((resp: Mercado[]) => {
-        console.log(resp)
         this.supermercados = resp
         loader.dismiss()
       },erro=>loader.dismiss())

@@ -1,4 +1,4 @@
-  <ion-content padding>
+<ion-content padding>
   <ion-row>
     <ion-col col-12 class="close-position">
       <ion-icon name="close" (click)="onClose()"></ion-icon>
@@ -15,12 +15,28 @@
     <ion-col col-12 class="border-type img-center">
       <h2 class="subtitle">Informações de Compra</h2>
     </ion-col>
-    <ion-col col-12 text-left class="padding-left-column side-produto  padding-right-column"
-      *ngFor="let produto of produtos ; index as i">
-      <p class="text-inline">{{i+ 1}} - {{produto.produto.nomeProduto}},
-        {{produto.produto.marcaProduto}} - {{produto.produto.caracteristicaProduto}},
-        {{produto.produto.quantidadeProduto}} - Quantidade: {{produto.quantidade}} - Valor total:{{getValorTotalPorProduto(produto) | currency:'BRL'}}
-      </p>
-    </ion-col>
   </ion-row>
+  <ion-grid *ngFor="let produto of produtos ; index as i" class="grid-tabel" margin-top>
+    <ion-row class="rowx">
+      <ion-col class="coly" col-4>Nome</ion-col>
+      <ion-col class="colx" col-8> {{getProdutoToCaptalized(produto.produto.nomeProduto)}}</ion-col>
+    </ion-row>
+    <ion-row class="rowx">
+      <ion-col class="coly" col-4>Marca</ion-col>
+      <ion-col class="colx" col-8>{{getProdutoToCaptalized(produto.produto.marcaProduto)}}</ion-col>
+    </ion-row>
+    <ion-row class="rowx">
+      <ion-col class="coly" col-4 *ngIf="produto.produto.caracteristicaProduto">Caracteristica</ion-col>
+      <ion-col class="colx" col-8 *ngIf="produto.produto.caracteristicaProduto">
+        {{getProdutoToCaptalized(produto.produto.caracteristicaProduto)}}</ion-col>
+    </ion-row>
+    <ion-row class="rowx">
+      <ion-col class="coly" col-4>Peso</ion-col>
+      <ion-col class="colx" col-8>{{produto.produto.quantidadeProduto}} {{produto.produto.unidadeMedida}}</ion-col>
+    </ion-row>
+    <ion-row class="rowx">
+      <ion-col class="coly" col-4>Quantidade</ion-col>
+      <ion-col class="colx" col-8>{{produto.quantidade}}</ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

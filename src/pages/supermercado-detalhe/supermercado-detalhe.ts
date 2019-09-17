@@ -49,9 +49,11 @@ export class SupermercadoDetalhePage {
     
     this.mercadoNome = this.mercado.nomeFantasia;
 
-    this.subcategoriaService.findProdutosPorMercadoEBairro(this.idBairro,this.mercado.idMercado)
-      .subscribe((resp: MercadoProduto[]) => {
-        this.mercadoCategoria = this.supermercadoService.filtrarCategoriasPorMercadoProduto(resp);
+    this.subcategoriaService.findCategoriasPorMercadoEBairro(this.idBairro,this.mercado.idMercado)
+      .subscribe((resp: MercadoDetalheProd[]) => {
+        console.log(resp)
+        this.mercadoCategoria = resp;
+        //this.mercadoCategoria = this.supermercadoService.filtrarCategoriasPorMercadoProduto(resp);
         this.mercadoCategoria.sort((a,b)=>{
            if (a.nomeCategoria <= b.nomeCategoria) return -1
         })

@@ -29,7 +29,7 @@ export class SubCategoriaService {
         return this.http.get<any>(`${API_CONFIG.baseUrl}/mercado-produtos/dto/com-validade/?idCategoria=${categoriaId}&idMercado=${mercadoId}&idBairro=${bairroId}&page=${page}&count=${count}`);
     }
 
-    findProdutosPorMercadoEBairro(bairroId,mercadoId, page: number = 0, count: number = 10): Observable<any> {
+    findProdutosPorMercadoEBairro(bairroId,mercadoId, page: number = 0, count: number = 20): Observable<any> {
         return this.http.get<any>(`${API_CONFIG.baseUrl}/mercado-produtos/dto/com-validade/?idMercado=${mercadoId}&idBairro=${bairroId}&page=${page}&count=${count}`);
     }
 
@@ -41,4 +41,8 @@ export class SubCategoriaService {
         return this.http.get<any>(`${API_CONFIG.baseUrl}/mercado-produtos/dto/com-validade?localidades=${idMercalocalidades}&page=${page}&count=${count}&busca=${buscar}`);
     }
 
+    
+    findCategoriasPorMercadoEBairro(bairroId,mercadoId): Observable<any> {
+        return this.http.get<any>(`${API_CONFIG.baseUrl}/mercado-produtos/categorias/?idMercado=${mercadoId}&idBairro=${bairroId}`);
+    }
 }
