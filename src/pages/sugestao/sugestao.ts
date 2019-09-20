@@ -21,7 +21,7 @@ export class SugestaoPage {
 
   subject: string = 'Meu Titulo';
   body: string = '';
-  to: string = 'philipe.lopes07@gmail.com ';
+  to: string = 'sheap.mkt@gmail.com ';
 
   envioFormSuporte: { titulo: string, formSuporte: any };
 
@@ -68,21 +68,11 @@ export class SugestaoPage {
       descProblema: this.formBuilder.control('', [Validators.required, Validators.minLength(3)]),
     })
 
-    this.alert = this.alertCrtl.create({
-      title: '<img src="assets/icon/Logo-Sheap-icone-03.svg" height="100">',
-      message: 'Obrigado, seu email é muito importante para nós!',
-      enableBackdropDismiss: true,
-      cssClass: 'AlertCompraFacil',
-      buttons: [
-        { text: 'Ok' }
-      ]
-    })
 
   }
 
   ionViewWillEnter(){
     this.user = this.usuarioService.getLocalUser()
-    console.log(this.user)
   }
 
   expandItem(item) {
@@ -100,10 +90,10 @@ export class SugestaoPage {
 
     this.suporteService.enviarMensagemQualMercado(this.user.email,this.envioFormSuporte)
       .subscribe(response => {
-        console.log(response)
-        this.sugestaoForm.reset();
+        
         loading.dismiss();
-        this.alert.present()
+        this.alertPresent();
+        this.sugestaoForm.reset();
       }, erro => {
         loading.dismiss();
       })
@@ -123,10 +113,9 @@ export class SugestaoPage {
 
     this.suporteService.enviarMensagemIndiqueUmaCidade(this.user.email,this.envioFormSuporte)
       .subscribe(response => {
-        console.log(response)
-        this.sugestaoForm.reset();
+        this.sugestaoForm2.reset();
         loading.dismiss();
-        this.alert.present()
+        this.alertPresent();
       }, erro => {
         loading.dismiss();
       })
@@ -141,10 +130,9 @@ export class SugestaoPage {
 
     this.suporteService.enviarMensagemProblemas(this.user.email,this.envioFormSuporte)
     .subscribe(response => {
-      console.log(response)
-      this.sugestaoForm.reset();
+      this.sugestaoForm3.reset();
       loading.dismiss();
-      this.alert.present()
+      this.alertPresent();
     }, erro => {
       loading.dismiss();
     })
@@ -154,7 +142,9 @@ export class SugestaoPage {
   //metodo que retorna um loading na tela
   private showLoading(): Loading {
     let loading: Loading = this.loadingCtrl.create({
-      content: 'Aguarde...'
+      spinner: 'dots',
+      duration: 50000,
+      cssClass: 'my-loading-class'
     })
     loading.present();
     return loading;
@@ -164,4 +154,16 @@ export class SugestaoPage {
   onCompraFacil(){
     this.navCtrl.push('CompreFacilPage', {})
   }
+
+  private alertPresent(){
+    this.alertCrtl.create({
+      title: '<img src="assets/icon/Logo-Sheap-icone-03.svg" height="100">',
+      message: 'Obrigado, seu email é muito importante para nós!',
+      enableBackdropDismiss: true,
+      cssClass: 'AlertCompraFacil',
+      buttons: [
+        { text: 'Ok' }
+      ]
+    }).present()
+  } 
 }

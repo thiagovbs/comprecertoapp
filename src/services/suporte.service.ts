@@ -24,8 +24,11 @@ export class SuporteService {
         
         let bairroMercado = envioFormSuporte.formSuporte.bairroMercado;
         bairroMercado = bairroMercado.trim();
+
+        let resposta = tituloEmail+"/" +nomeMercado+"/"+estadoMercado+"/"+cidadeMercado+"/"+bairroMercado +"/"+email
+        console.log(resposta)
        return this.http
-       .post(`${API_CONFIG.baseUrl}/rest/suporte/1`,tituloEmail+"/" +nomeMercado+"/"+estadoMercado+"/"+cidadeMercado+"/"+bairroMercado +"/"+email,
+       .post(`${API_CONFIG.baseUrl}/suporte/1`,tituloEmail+"/" +nomeMercado+"/"+estadoMercado+"/"+cidadeMercado+"/"+bairroMercado +"/"+email,
         {
             observe:'response',
             responseType:'text'
@@ -42,7 +45,7 @@ export class SuporteService {
         cidadeMercado = cidadeMercado.trim();
 
         return this.http
-        .post(`${API_CONFIG.baseUrl}/rest/suporte/2`,tituloEmail+"/"+estadoMercado+"/"+cidadeMercado+"/"+email,
+        .post(`${API_CONFIG.baseUrl}/suporte/2`,tituloEmail+"/"+estadoMercado+"/"+cidadeMercado+"/"+email,
          {
              observe:'response',
              responseType:'text'
@@ -52,10 +55,10 @@ export class SuporteService {
     enviarMensagemProblemas(email:string,envioFormSuporte:any){
         let tituloEmail = envioFormSuporte.titulo; 
         let msg = envioFormSuporte.formSuporte.descProblema;
-        console.log(msg)
+        
        
         return this.http
-        .post(`${API_CONFIG.baseUrl}/rest/suporte/3`,tituloEmail+"/"+msg+"/"+email,
+        .post(`${API_CONFIG.baseUrl}/suporte/3`,tituloEmail+"/"+msg+"/"+email,
          {
              observe:'response',
              responseType:'text'
