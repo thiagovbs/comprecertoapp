@@ -2,7 +2,7 @@
 <widget id="br.com.sheap" version="1.2.5" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Sheap</name>
     <description>Aplicativo para compra mais barata em produtos de supermercados.</description>
-    <author email="contato@gmail.com" href="philipe.lopes@projeti.org">ProjeTI</author>
+    <author email="sheap.mkt@gmail.com" href="www.projeti.net">ProjeTI</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
