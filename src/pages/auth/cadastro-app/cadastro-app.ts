@@ -39,7 +39,6 @@ export class CadastroAppPage {
       nome: new FormControl('', [Validators.required, Validators.minLength(3)]),
       sobrenome: new FormControl('', [Validators.required, Validators.minLength(3)]),
       sexo: new FormControl('', [Validators.required]),
-      cpf: new FormControl('', [Validators.required, Validators.minLength(14), Validators.maxLength(14)]),
       data: new FormControl({ value: '', disabled: true }, [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.pattern(this.emailPattern)]),
       senha: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -100,7 +99,7 @@ export class CadastroAppPage {
     let email_form: string = this.cadastroForm.controls['email'].value;
     email_form = email_form.trim()
     let senha_form = this.cadastroForm.controls['senha'].value;
-    let cpf_form = this.cadastroForm.controls['cpf'].value;
+
 
     this.permissao = {
       idPermissao: 3,
@@ -117,7 +116,6 @@ export class CadastroAppPage {
       dtNascimento: milliseconds,
       senha: senha_form,
       sexo: sexo_form,
-      cpf: cpf_form,
       permissoes: [this.permissao]
     }
 

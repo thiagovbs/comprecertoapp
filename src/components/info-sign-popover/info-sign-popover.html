@@ -15,13 +15,6 @@
         </ion-item>
       </ion-row>
       <ion-row>
-        <ion-item class="bg-transparent size">
-          <ion-label floating>Digite seu CPF</ion-label>
-          <ion-input type="tel" formControlName="cpf" [brmasker]="{mask:'000.000.000-00', len:14}" value=""
-            maxlength="14"></ion-input>
-        </ion-item>
-      </ion-row>
-      <ion-row>
         <ion-col col-12 margin-top>
           <ion-item class="bg-transparent size-dt" (tap)="onBirthday('data')" >
             <ion-input placeholder="Data de nascimento" [(ngModel)]="dtNascimento" formControlName="data"></ion-input>

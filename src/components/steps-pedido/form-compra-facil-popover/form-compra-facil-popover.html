@@ -11,25 +11,25 @@
     <ion-row>
       <ion-col col-12>
         <ion-item class="bg-transparent size">
-          <ion-input type="text" name="nome" style="height: 30px;" formControlName="nome" autocomplete="off"
+          <ion-input type="text" name="nome" style="height: 40px;margin-bottom: -10px;" formControlName="nome" autocomplete="off"
             placeholder="Nome completo" [value]="nomeCompleto"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col col-12>
         <ion-item class="bg-transparent size">
-          <ion-input type="text" name="cpf" style="height: 30px;" 
-          formControlName="cpf" autocomplete="off" placeholder="CPF" [value]="usuarioCPF"></ion-input>
+          <ion-input type="text" name="cpf" style="height: 40px;margin-bottom: -10px;" 
+          formControlName="cpf" autocomplete="off" placeholder="CPF" [brmasker]="{mask:'000.000.000-00', len:14}"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col col-12>
         <ion-item class="bg-transparent size">
-          <ion-input type="tel" name="celular" style="height: 30px;" formControlName="celular" autocomplete="off"
+          <ion-input type="tel" name="celular" style="height: 40px;margin-bottom: -10px;" formControlName="celular" autocomplete="off"
             placeholder="Celular" [brmasker]="{mask:'(00)00000-0000', len:14}" maxlength="14"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col col-12>
         <ion-item class="bg-transparent size">
-          <ion-input type="text" name="endereco" style="height: 30px;" formControlName="endereco" autocomplete="off"
+          <ion-input type="text" name="endereco" style="height: 40px;margin-bottom: -10px;" formControlName="endereco" autocomplete="off"
             placeholder="Endereço"></ion-input>
         </ion-item>
       </ion-col>
@@ -37,13 +37,13 @@
     <ion-row>
       <ion-col col-4>
         <ion-item class="bg-transparent size">
-          <ion-input type="text" name="numero" style="height: 30px;" formControlName="numero" autocomplete="off"
+          <ion-input type="text" name="numero" style="height: 40px;margin-bottom: -10px;" formControlName="numero" autocomplete="off"
             placeholder="Numero"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col col-8>
         <ion-item class="bg-transparent size">
-          <ion-input type="text" name="complemento" style="height: 30px;" formControlName="complemento" autocomplete="off"
+          <ion-input type="text" name="complemento" style="height: 40px;margin-bottom: -10px;" formControlName="complemento" autocomplete="off"
             placeholder="Complemento"></ion-input>
         </ion-item>
       </ion-col>
@@ -52,7 +52,7 @@
     <ion-row>
       <ion-col col-5>
         <ion-item class="bg-transparent size">
-          <ion-input type="text" name="bairro" style="height: 30px;" formControlName="bairro" autocomplete="off"
+          <ion-input type="text" name="bairro" style="height: 40px;margin-bottom: -10px;" formControlName="bairro" autocomplete="off"
             placeholder="Bairro" [value]="bairro"></ion-input>
         </ion-item>
       </ion-col>

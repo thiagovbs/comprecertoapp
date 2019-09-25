@@ -32,11 +32,6 @@
       </button>
     </ion-item>
     <ion-item class="bg-transparent size">
-      <ion-label floating>Digite seu CPF</ion-label>
-      <ion-input type="tel" formControlName="cpf" [brmasker]="{mask:'000.000.000-00', len:14}"
-        maxlength="14"></ion-input>
-    </ion-item>
-    <ion-item class="bg-transparent size">
       <ion-label floating>Digite seu E-mail</ion-label>
       <ion-input type="text" formControlName="email" (keyup)="changeInput($event)" autocapitalize="none"
         value="{{emailEditado}}" ></ion-input>

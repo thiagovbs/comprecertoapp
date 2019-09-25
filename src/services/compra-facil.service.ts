@@ -42,6 +42,7 @@ export class CompraFacilService {
             sacolaMercado.horarioMaximo = carrinho.produto.horarioMaximo;
             sacolaMercado.horarioMaximoEntrega = carrinho.produto.horarioMaximoEntrega;
             sacolaMercado.valorFrete = carrinho.produto.valorFrete;
+            sacolaMercado.enderecoMercado = carrinho.produto.endereco;
             sacolaMercado.valorMinimo = carrinho.produto.valorMinimo;
             sacolaMercado.entrega = carrinho.produto.entrega;
 

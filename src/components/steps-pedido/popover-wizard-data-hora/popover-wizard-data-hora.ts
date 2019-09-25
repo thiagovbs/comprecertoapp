@@ -6,6 +6,7 @@ import { SacolaMercados } from '../../../models/SacolaMercados.model';
 import { AlcanceService } from '../../../services/alcance.service';
 import { EnderecoLocalStorage } from '../../../models/endereco-localstorage';
 import { UsuarioService } from '../../../services/usuario.service';
+import { Usuario } from '../../../models/usuario';
 
 @Component({
   selector: 'popover-wizard-data-hora',
@@ -17,6 +18,7 @@ export class PopoverWizardDataHoraComponent {
   pedidoMercado: SacolaMercados = {} as SacolaMercados
   datas: Date[] = []
   usuarioCPF:any;
+  usuario:Usuario
 
   @Output() infoDataHoraPedido = new EventEmitter();
 
@@ -29,7 +31,7 @@ export class PopoverWizardDataHoraComponent {
 
     this.dataHoraform = this.formBuilder.group({
       dataHora: this.formBuilder.control('', [Validators.required]),
-      cpf: this.formBuilder.control({ value: this.usuarioCPF, disabled: true }, [Validators.required]),
+      cpf: this.formBuilder.control('', [Validators.required]),
       celular: this.formBuilder.control('', [Validators.required, Validators.minLength(14)]),
     })
 
@@ -37,14 +39,18 @@ export class PopoverWizardDataHoraComponent {
   }
 
   ionViewDidLoad() {
-    this.usuarioCPF = this.localUser.getLocalUser().cpf;
+    this.usuario = this.localUser.getLocalUser();
     this.pedidoMercado = this.navParams.get('pedidosMercado');
+    
     if (this.localAlcance.getLocalEndereco()) {
-      this.dataHoraform.get('celular').setValue(this.localAlcance.getLocalEndereco().celular);
+      this.dataHoraform.get('celular').setValue(this.localAlcance.getLocalEndereco().celular);  
     }
 
+    if (this.usuario.cpf) {
+      this.dataHoraform.get('cpf').setValue(this.usuario.cpf);
+    }
 
-    this.localAlcance.getLocalEndereco()
+    
     this.getDataHoraRetirada()
   }
 
@@ -114,6 +120,7 @@ export class PopoverWizardDataHoraComponent {
 
   dataHoraSubmit() {
     let celular = this.dataHoraform.controls['celular'].value;
+    let cpf = this.dataHoraform.controls['cpf'].value;
 
     if (this.localAlcance.getLocalEndereco()){
       let localEndereco: EnderecoLocalStorage = {
@@ -124,9 +131,12 @@ export class PopoverWizardDataHoraComponent {
       };
       this.localAlcance.setLocalEndereco(localEndereco);
     } else {
-      let localEndereco: EnderecoLocalStorage = { endereco: "", numero: "", complemento: "", celular: celular };
+      let localEndereco: EnderecoLocalStorage = { endereco: "", numero: "", complemento: "", celular: celular};
       this.localAlcance.setLocalEndereco(localEndereco);
     }
+
+    this.usuario.cpf = cpf;
+    this.localUser.setLocalUser(this.usuario);
 
     this.viewControl.dismiss(this.dataHoraform.value)
 

@@ -7,7 +7,7 @@ export class Usuario{
     senha?:string;
     dtNascimento?: number;
     sexo?:string;
-    cpf:any
+    cpf?:any
     permissoes?:Array<Permissao> = [];
 }
 

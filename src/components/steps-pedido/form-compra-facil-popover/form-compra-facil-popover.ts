@@ -6,6 +6,7 @@ import { UsuarioService } from '../../../services/usuario.service';
 import { AlcanceService } from '../../../services/alcance.service';
 import { SacolaMercados } from '../../../models/SacolaMercados.model';
 import { EnderecoLocalStorage } from '../../../models/endereco-localstorage';
+import { Usuario } from '../../../models/usuario';
 
 @Component({
   selector: 'form-compra-facil-popover',
@@ -14,9 +15,8 @@ import { EnderecoLocalStorage } from '../../../models/endereco-localstorage';
 export class FormCompraFacilPopoverComponent {
 
   enderecoForm: FormGroup
-  usuarioNome: string;
-  nomeCompleto:string;
-  usuarioCPF:any;
+  nomeCompleto: string;
+  usuario: Usuario;
   nomeCidade: string;
   pedidoMercado: SacolaMercados = {} as SacolaMercados
   nomeEstado: string;
@@ -31,8 +31,8 @@ export class FormCompraFacilPopoverComponent {
     private localAlcance: AlcanceService) {
 
     this.enderecoForm = new FormGroup({
-      nome: new FormControl({ value: this.usuarioNome, disabled: true }, [Validators.required]),
-      cpf: new FormControl({ value: this.usuarioCPF, disabled: true }, [Validators.required]),
+      nome: new FormControl({ value: this.nomeCompleto, disabled: true }, [Validators.required]),
+      cpf: new FormControl('', [Validators.required, Validators.minLength(14)]),
       celular: new FormControl('', [Validators.required, Validators.minLength(14)]),
       endereco: new FormControl('', [Validators.required, Validators.minLength(3)]),
       numero: new FormControl('', [Validators.required]),
@@ -49,13 +49,12 @@ export class FormCompraFacilPopoverComponent {
   }
 
   ionViewDidLoad() {
-    this.usuarioNome = this.localUser.getLocalUser().nome;
-    this.usuarioCPF = this.localUser.getLocalUser().cpf; 
-   
-    this.nomeCompleto = this.usuarioNome + " " + this.localUser.getLocalUser().sobrenome ;
-    
-     
+
+    this.usuario = this.localUser.getLocalUser();
+    this.nomeCompleto = this.usuario.nome + " " + this.usuario.sobrenome;
+
     this.pedidoMercado = this.navParams.get('pedidosMercado');
+
     if (this.localAlcance.getLocalEndereco()) {
       this.enderecoForm.get('endereco').setValue(this.localAlcance.getLocalEndereco().endereco);
       this.enderecoForm.get('numero').setValue(this.localAlcance.getLocalEndereco().numero);
@@ -63,21 +62,27 @@ export class FormCompraFacilPopoverComponent {
       this.enderecoForm.get('celular').setValue(this.localAlcance.getLocalEndereco().celular);
     }
 
-    /* 
-        this.pedidoMercado.sacolaMercado.horarioMaximoEntrega */
+    if (this.usuario.cpf) {
+      this.enderecoForm.get('cpf').setValue(this.usuario.cpf);
+    }
+
   }
 
   SubmitForm() {
-    let localEndereco:EnderecoLocalStorage;
-
+    let localEndereco: EnderecoLocalStorage;
+    let cpf = this.enderecoForm.controls['cpf'].value;
     let endereco = this.enderecoForm.controls['endereco'].value;
     let celular = this.enderecoForm.controls['celular'].value;
     let numero = this.enderecoForm.controls['numero'].value;
     let complemento = this.enderecoForm.controls['complemento'].value;
 
     localEndereco = { endereco: endereco, celular: celular, numero: numero, complemento: complemento };
-
     this.localAlcance.setLocalEndereco(localEndereco);
+    
+    this.usuario.cpf = cpf;
+    this.localUser.setLocalUser(this.usuario);
+
+    //this.localUser.setLocalUser()
     this.viewCtrl.dismiss(this.enderecoForm.value)
   }
 

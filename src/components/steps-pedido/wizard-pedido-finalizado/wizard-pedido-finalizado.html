@@ -1,4 +1,4 @@
-<ion-row style="    margin-top: -30px;">
+<ion-row style="margin-top: -30px;">
   <ion-col col-12 mt-10>
     <ion-thumbnail>
       <img class="thumb-image-finalizacao img-center" [src]="infoMercado.imagemMercado" alt="" height="30" />
@@ -21,64 +21,71 @@
     <ion-col col-10 text-left class="padding-left-column side"
       *ngIf="compraFacilService.getEntregaOuRetirada() === 'R'">
       <label for="Horario_entrega" class="text-inline">Local Retirada:</label>
-      <p class="text-inline">Rua Conde de Bonfim, 545 - 803</p>
+      <p class="text-inline">{{infoMercado.enderecoMercado}}</p>
     </ion-col>
     <!--FIM ITEMS DE RETIRADA -->
 
-     <!-- ITEMS DE ENTREGA EM DOMICILIO -->
-     <ion-col col-8 text-left class="padding-left-column side" *ngIf="compraFacilService.getEntregaOuRetirada() === 'E'">
-        <label for="endereco" class="text-inline">Endereco:</label>
-        <p class="text-inline">{{compraFacilService.getEnderecoPedidoUsuario().endereco}}</p>
-      </ion-col>
-      <ion-col col-4 text-right class="padding-right-column side"
-        *ngIf="compraFacilService.getEntregaOuRetirada() === 'E'">
-        <p class="text-inline">{{compraFacilService.getEnderecoPedidoUsuario().numero}} -
-          {{compraFacilService.getEnderecoPedidoUsuario().complemento}}</p>
-      </ion-col>
-      <ion-col col-10 text-left class="padding-left-column side"
-        *ngIf="compraFacilService.getEntregaOuRetirada() === 'E'">
-        <p class="text-inline">{{compraFacilService.getEnderecoPedidoUsuario().bairro}} ,</p>
-        <p class="text-inline">{{compraFacilService.getEnderecoPedidoUsuario().cidade}}</p>
-      </ion-col>
-      <ion-col col-2 text-right class="padding-right-column side"
-        *ngIf="compraFacilService.getEntregaOuRetirada() === 'E'">
-        <p class="text-inline">{{this.compraFacilService.getEnderecoPedidoUsuario().estado}}</p>
-      </ion-col>
-      <!-- FIM ITEMS DE ENTREGA EM DOMICILIO -->
+    <!-- ITEMS DE ENTREGA EM DOMICILIO -->
+    <ion-col col-8 text-left class="padding-left-column side" *ngIf="compraFacilService.getEntregaOuRetirada() === 'E'">
+      <label for="endereco" class="text-inline">Endereco:</label>
+      <p class="text-inline">{{compraFacilService.getEnderecoPedidoUsuario().endereco}}</p>
+    </ion-col>
+    <ion-col col-4 text-right class="padding-right-column side"
+      *ngIf="compraFacilService.getEntregaOuRetirada() === 'E'">
+      <p class="text-inline">{{compraFacilService.getEnderecoPedidoUsuario().numero}} -
+        {{compraFacilService.getEnderecoPedidoUsuario().complemento}}</p>
+    </ion-col>
+    <ion-col col-10 text-left class="padding-left-column side"
+      *ngIf="compraFacilService.getEntregaOuRetirada() === 'E'">
+      <p class="text-inline">{{compraFacilService.getEnderecoPedidoUsuario().bairro}} ,</p>
+      <p class="text-inline">{{compraFacilService.getEnderecoPedidoUsuario().cidade}}</p>
+    </ion-col>
+    <ion-col col-2 text-right class="padding-right-column side"
+      *ngIf="compraFacilService.getEntregaOuRetirada() === 'E'">
+      <p class="text-inline">{{this.compraFacilService.getEnderecoPedidoUsuario().estado}}</p>
+    </ion-col>
+    <!-- FIM ITEMS DE ENTREGA EM DOMICILIO -->
 
     <ion-col col-12 class="border-type img-center">
       <h2 class="subtitle">Informações Pessoais</h2>
     </ion-col>
     <ion-col col-12 text-left class="padding-left-column side" style="margin-top: -10px;">
       <label for="nome" class="text-inline">Nome:</label>
-      <p class="text-inline">{{usuarioService.getLocalUser().nome}}</p>
+      <p class="text-inline">
+        {{this.usuarioService.getLocalUser().nome + ' ' + this.usuarioService.getLocalUser().sobrenome}}</p>
     </ion-col>
     <ion-col col-6 text-left class="padding-left-column side">
       <label for="cpf" class="text-inline">CPF:</label>
-      <p class="text-inline">{{usuarioService.getLocalUser().cpf}}</p>
+      <p class="text-inline">{{this.usuarioService.getLocalUser().cpf}}</p>
     </ion-col>
     <ion-col col-6 text-right class="padding-right-column side">
       <label for="endereco" class="text-inline">Telefone:</label>
       <p class="text-inline">{{celular}}</p>
     </ion-col>
-    
-   
+
+
     <ion-col col-12 class="border-type img-center">
       <h2 class="subtitle">Informações de Compra</h2>
     </ion-col>
     <ion-scroll scrollY="true" class=" side-produto scroll-lista-produto">
       <div text-left *ngFor="let produto of produtos ; index as i">
         <p class="text-inline">{{i+ 1}} - {{getProdutoToCaptalized(produto.produto.nomeProduto)}},
-          {{getProdutoToCaptalized(oduto.produto.marcaProduto)}} - {{getProdutoToCaptalized(produto.produto.caracteristicaProduto)}},
-          {{produto.produto.quantidadeProduto}} - Quantidade: {{produto.quantidade}} - Valor total:
+          {{getProdutoToCaptalized(produto.produto.marcaProduto)}} -
+          {{getProdutoToCaptalized(produto.produto.caracteristicaProduto)}},
+          {{produto.produto.quantidadeProduto}} {{produto.produto.unidadeMedida}} - Quantidade: {{produto.quantidade}} -
+          Valor total:
           {{getValorTotalPorProduto(produto) | currency:'BRL'}}</p>
       </div>
     </ion-scroll>
     <ion-col col-12 class="border-type img-center" style="margin-top:-15px;">
       <h2 class="subtitle">Forma de Pagamento</h2>
     </ion-col>
-    <ion-col col-12 text-left class="padding-left-column side" >
+    <ion-col col-6 text-left class="padding-left-column side">
       <p class="text-inline" style="margin-top: 0px;">- {{tipoPagamento(compraFacilService.getPagamento().tipo)}}</p>
+    </ion-col>
+    <ion-col col-6 text-left class="padding-left-column side">
+      <p class="text-inline" style="margin-top: 0px;" *ngIf="compraFacilService.getPagamento().tipo == 'E'">
+        Troco - {{compraFacilService.getPagamento().troco | currency:'BRL'}}</p>
     </ion-col>
   </ion-row>
 

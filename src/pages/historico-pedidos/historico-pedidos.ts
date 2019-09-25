@@ -36,7 +36,7 @@ export class HistoricoPedidosPage {
       
     }, erro => {
       loading.dismiss();
-      console.log(erro)
+      
     })
     this.setTimePedido()
 

@@ -21,12 +21,24 @@ export class WizardTipoPagamentoComponent {
   tipoPagamentoEnum = PagamentoEnum
   isTroco: boolean = false;
   pagamento: { tipo: string, troco: number } = { tipo: undefined, troco: 0 }
-  stepCondition: any
+  stepCondition: any;
+  trocoList:Array<number> =[]
   constructor(private formBuilder: FormBuilder) {
 
     this.pagamentoForm = this.formBuilder.group({
       troco: this.formBuilder.control({ value: 0 })
     })
+    this.trocoList = [];
+    this.trocoList.push(10);
+    this.trocoList.push(20);
+    this.trocoList.push(30);
+    this.trocoList.push(40);
+    this.trocoList.push(50);
+    this.trocoList.push(60);
+    this.trocoList.push(70);
+    this.trocoList.push(80);
+    this.trocoList.push(90);
+    this.trocoList.push(100);
   }
 
   ionViewDidLoad() {
@@ -46,10 +58,13 @@ export class WizardTipoPagamentoComponent {
 
   getTroco(){
     this.pagamento.troco = this.pagamentoForm.controls['troco'].value
+    console.log(this.pagamento.troco)
     this.infoTipoPagamento.emit(this.pagamento);
   }
 
-
+  setTroco(valor){
+    return "R$ " + valor + "," + "00"; 
+  }
 
 }
 

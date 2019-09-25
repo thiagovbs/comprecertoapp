@@ -9,7 +9,7 @@
       <ion-col col-12>
         <ion-item class="bg-transparent size">
           <ion-input type="text" name="cpf" style="height: 30px;" formControlName="cpf" autocomplete="off"
-            placeholder="CPF" [value]="usuarioCPF"></ion-input>
+            placeholder="CPF" [brmasker]="{mask:'000.000.000-00', len:14}"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col col-12>

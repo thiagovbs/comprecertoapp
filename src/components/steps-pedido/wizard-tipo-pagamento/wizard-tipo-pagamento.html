@@ -25,7 +25,7 @@
           </ion-col>
           <ion-col col-8 text-left>
             <ion-item class="item-input">
-              
+
               <ion-input type="text" [value]="valorFrete || 0 | currency:'BRL'" disabled></ion-input>
             </ion-item>
           </ion-col>
@@ -34,11 +34,9 @@
       <ion-col col-12 style="margin-top: 30px;">
         <ion-list radio-group>
           <ion-row>
-            <ion-col col-4 text-center *ngFor="let tipo of getTipoPagamentoEnum()" >
+            <ion-col col-4 text-center *ngFor="let tipo of getTipoPagamentoEnum()">
               <ion-item class="item-md-no-border">
-                <ion-radio color="primary" 
-                           [value]="tipo" 
-                           (ionSelect)="tipoPagamento($event)">
+                <ion-radio color="primary" [value]="tipo" (ionSelect)="tipoPagamento($event)">
                 </ion-radio>
                 <ion-label>{{tipoPagamentoEnum[tipo]}}</ion-label>
               </ion-item>
@@ -52,9 +50,15 @@
             <label>Troco para:</label>
           </ion-col>
           <ion-col col-8 text-left>
-            <ion-item>
-              <ion-input type="number" autocomplete="off" formControlName="troco" (input)="getTroco()" placeholder="R$ 00,00"></ion-input>
-            </ion-item>
+           
+              <ion-select formControlName="troco" placeholder="Troco" class="troco-select" (ionChange)="getTroco()">
+                <ion-option *ngFor="let troco of trocoList" 
+                [value]="troco" >{{setTroco(troco)}}</ion-option>
+              </ion-select>
+             <!--  <ion-input type="number" autocomplete="off" formControlName="troco" (input)="getTroco()"
+                placeholder="R$ 00,00">
+              </ion-input> -->
+           
           </ion-col>
         </ion-row>
       </ion-col>

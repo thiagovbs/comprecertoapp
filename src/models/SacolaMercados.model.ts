@@ -17,6 +17,7 @@ export interface SacolaMercadoDTO {
     valorMinimo: number,
     horarioMaximo:any,
     entrega:any,
+    enderecoMercado:string,
     horarioMaximoEntrega?:any;
 
 }

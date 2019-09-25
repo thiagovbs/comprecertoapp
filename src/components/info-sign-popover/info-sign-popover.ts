@@ -49,8 +49,7 @@ export class InfoSignPopoverComponent {
 
     this.cadastroPopUpForm = new FormGroup({
       sexo: new FormControl('', [Validators.required]),
-      data: new FormControl({ value: '', disabled: true }, [Validators.required]),
-      cpf: new FormControl({ value: '' }, [Validators.required, Validators.minLength(14)]),
+      data: new FormControl({ value: '', disabled: true }, [Validators.required])
     })
 
     //Informação não nula
@@ -89,7 +88,7 @@ export class InfoSignPopoverComponent {
 
     let sexo_form = this.cadastroPopUpForm.controls['sexo'].value;
     let dtNascimento_form = this.cadastroPopUpForm.controls['data'].value;
-    let cpf_form = this.cadastroPopUpForm.controls['cpf'].value;
+    
     let dt_Nascimento = new Date(dtNascimento_form)
     var milliseconds = dt_Nascimento.getTime();
 
@@ -104,7 +103,6 @@ export class InfoSignPopoverComponent {
       sobrenome: this.faceSobrenome,
       email: this.faceEmail,
       login: this.faceEmail,
-      cpf: cpf_form,
       dtNascimento: milliseconds,
       senha: this.faceId,
       sexo: sexo_form,

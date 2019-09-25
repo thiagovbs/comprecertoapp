@@ -15,6 +15,7 @@ export class LoginPage {
 
   login: UserLogin = {} as UserLogin;
   emailEditado: string = "";
+  
   constructor(private navCtrl: NavController,
     private menu: MenuController,
     private authService: AuthService,

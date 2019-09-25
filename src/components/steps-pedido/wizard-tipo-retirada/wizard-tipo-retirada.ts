@@ -29,7 +29,6 @@ export class WizardTipoRetiradaComponent {
     public viewCtrl: ViewController,
     public events: Events) {
 
-    console.log(this.infoMercado)
   }
 
   ionViewDidLoad() {
