@@ -18,6 +18,15 @@ page-detalhe-pedido {
         font-size: 1.25rem;
         margin-bottom: 0px;
     }
+    .end-title{
+        font-size: 1.55rem;
+        margin-bottom: 0px;
+        text-align: center;
+        color: #242424;
+        font-weight: 400;
+        
+    }
+
     .padding-left-column{
         padding-left: 25px;  
         padding-right: 15px;
@@ -54,8 +63,8 @@ page-detalhe-pedido {
     .grid-tabel{
         width: 90% !important;
         border-radius: 10px;
-        -webkit-box-shadow: 0px 0px 21px -5px rgba(0,0,0,0.55);
-        -moz-box-shadow: 0px 0px 21px -5px rgba(0,0,0,0.55);
-        box-shadow: 0px 0px 21px -5px rgba(0,0,0,0.55);
+        -webkit-box-shadow: 0px 0px 21px 0px rgba(0,0,0,0.35);
+        -moz-box-shadow: 0px 0px 21px 0px rgba(0,0,0,0.35);
+        box-shadow: 0px 0px 21px -9px rgba(0,0,0,0.35);
     }
 }

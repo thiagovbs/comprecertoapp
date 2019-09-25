@@ -22,23 +22,15 @@ export class WizardTipoPagamentoComponent {
   isTroco: boolean = false;
   pagamento: { tipo: string, troco: number } = { tipo: undefined, troco: 0 }
   stepCondition: any;
-  trocoList:Array<number> =[]
+  trocoList: Array<number> = []
   constructor(private formBuilder: FormBuilder) {
 
     this.pagamentoForm = this.formBuilder.group({
       troco: this.formBuilder.control({ value: 0 })
     })
-    this.trocoList = [];
-    this.trocoList.push(10);
-    this.trocoList.push(20);
-    this.trocoList.push(30);
-    this.trocoList.push(40);
-    this.trocoList.push(50);
-    this.trocoList.push(60);
-    this.trocoList.push(70);
-    this.trocoList.push(80);
-    this.trocoList.push(90);
-    this.trocoList.push(100);
+
+
+
   }
 
   ionViewDidLoad() {
@@ -53,17 +45,53 @@ export class WizardTipoPagamentoComponent {
     evento === "E" ? this.isTroco = true : this.isTroco = false;
     this.pagamento.tipo = evento
     this.infoTipoPagamento.emit(this.pagamento);
+    let valorTotal: number = this.valorTotalPedido
+
+    this.montarTroco(valorTotal)
+  }
+
+  montarTroco(total: number) {
+
+    this.trocoList = [];
+
+    let totalSemDecimal = Math.trunc(total + 5);
+    totalSemDecimal = Math.round(totalSemDecimal / 10) * 10
+    
+    this.trocoList.push(totalSemDecimal);
+    
+      let i = 10;
+      if(totalSemDecimal < 50){
+        this.trocoList.push(50);
+        this.trocoList.push(100);
+      }
+      if(totalSemDecimal >= 50 && totalSemDecimal <100){
+        this.trocoList.push(100);
+      }
+      
+      do {
+        this.trocoList.push(i + totalSemDecimal);
+
+        this.trocoList = this.trocoList.filter((el, i, a) => i === a.indexOf(el));
+        
+        if (this.trocoList[this.trocoList.length - 1] > totalSemDecimal + 50) {
+          return;
+        }
+        i = i + 5;
+        this.trocoList.sort((n1,n2) => n1 - n2)
+
+      }
+      while (totalSemDecimal < this.trocoList[this.trocoList.length - 1]);
+
   }
 
 
-  getTroco(){
+  getTroco() {
     this.pagamento.troco = this.pagamentoForm.controls['troco'].value
-    console.log(this.pagamento.troco)
     this.infoTipoPagamento.emit(this.pagamento);
   }
 
-  setTroco(valor){
-    return "R$ " + valor + "," + "00"; 
+  setTroco(valor) {
+    return "R$ " + valor + "," + "00";
   }
 
 }

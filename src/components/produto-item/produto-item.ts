@@ -41,7 +41,7 @@ export class ProdutoItemComponent implements OnInit {
 
   //diminui a quantidade de cada produto
   diminuiQnt(item: MercadoProduto): void {
-    console.log(item)
+    
     this.carrinhoService.diminuiQnt(item);
   }
 
@@ -71,7 +71,7 @@ export class ProdutoItemComponent implements OnInit {
   }
 
   sendToMercado(mercadoProduto: MercadoProduto) {
-    console.log(mercadoProduto)
+    
     let sedMercado: { idMercado: number, nomeFantasia: string } = { idMercado: mercadoProduto.idMercado, nomeFantasia: mercadoProduto.nomeFantasiaMercado }
     this.navCtrl.push("SupermercadoDetalhePage", {
       mercado: sedMercado

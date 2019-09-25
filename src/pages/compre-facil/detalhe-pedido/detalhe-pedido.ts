@@ -27,7 +27,6 @@ export class DetalhePedidoPage {
   }
 
   ionViewDidLoad() {
-    console.log(this.produtos)
   }
 
   onClose() {

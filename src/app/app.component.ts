@@ -57,8 +57,6 @@ export class MyApp {
       { title: 'Cupons', component: 'PromocaoPage', icon: 'assets/icon/Cupons-Icon.svg' },
       { title: 'Localidade', component: 'Localidade', icon: 'assets/icon/Localidade_Prancheta.svg' },
       { title: 'Configurações', component: 'PoliticaPrivacidadePage', icon: 'assets/imgs/configuração_icon.svg' }
-
-
     ];
   }
 
@@ -102,7 +100,6 @@ export class MyApp {
       // we wouldn't want the back button to show in this scenario
       this.nav.setRoot(page.component);
     }
-
   }
 
   // view my profile

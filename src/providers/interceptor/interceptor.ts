@@ -45,7 +45,6 @@ export class InterceptorProvider implements HttpInterceptor {
   getNewAccessToken(req: HttpRequest<any>, next: HttpHandler): Observable<any> {
     return this.authService.getRefreshToken(localStorage.getItem('refresh_token')).switchMap((resp:any) => {
       localStorage.setItem('token',resp.access_token)
-      console.log(resp)
       return next.handle(req.clone({
         setHeaders: {
           Authorization: 'Bearer' + localStorage.getItem('token')
